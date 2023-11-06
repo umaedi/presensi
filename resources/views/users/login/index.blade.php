@@ -15,7 +15,7 @@
         @endif
 
         <div class="card card-primary">
-          <div class="card-header"><h4>{{ __('Silakah Masuks') }}</h4></div>
+          <div class="card-header"><h4>{{ __('Silakah Masuk') }}</h4></div>
           <div class="card-body">
             <form action="/login" method="POST">
                 @csrf

@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\Izin;
 
-class izinService
+class IzinService
 {
     public $izin;
     public function __construct(Izin $izin)

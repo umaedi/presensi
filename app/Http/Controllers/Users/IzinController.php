@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class IzinController extends Controller
 {
     public $izin;
-    public function __construct(izinService $izinService)
+    public function __construct(IzinService $izinService)
     {
         $this->izin = $izinService;
     }
