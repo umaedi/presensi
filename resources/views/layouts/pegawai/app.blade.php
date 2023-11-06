@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <link rel="stylesheet" href="{{ asset('assets/pegawai') }}/css/fakeLoader.min.css">
     <!-- PWA  -->
-    <link rel="apple-touch-icon" href="{{ asset('assets/icon/lc_icon_absent.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('assets/icon/lc_icon_presensi.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
     @vite([])
 </head>
