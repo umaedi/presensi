@@ -1,0 +1,18 @@
+{
+    "name": "SIAP TUBA",
+    "short_name": "SIAP TUBA",
+    "start_url": "/index.php",
+    "background_color": "#fff",
+    "description": "Absensi Berbasis Web",
+    "display": "standalone",
+    "orientation": "any",
+    "theme_color": "#6777ef",
+    "icons": [
+        {
+            "src": "assets/icon/lc_icon_absent.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
