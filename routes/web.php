@@ -16,7 +16,10 @@ Route::middleware('auth')->prefix('user')->group(function () {
     Route::post('/presensi/store_file', [Users\PersensiController::class, 'storeFile']);
     Route::post('/presensi/remove_file', [Users\PersensiController::class, 'removeFile']);
 
-    Route::get('izin', [Users\IzinController::class, 'index']);
+    Route::get('/izin', [Users\IzinController::class, 'index']);
+    Route::post('/izin/store', [Users\IzinController::class, 'store']);
+    Route::put('/izin/update', [Users\IzinController::class, 'update']);
+    Route::get('/izin/print', [Users\IzinController::class, 'print']);
 
     Route::get('/histories', [Users\HistoryController::class, 'index']);
     Route::get('/history/print', [Users\HistoryController::class, 'print']);

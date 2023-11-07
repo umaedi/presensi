@@ -2,24 +2,18 @@
     <thead class="thead-dark">
         <tr>
         <th scope="col">#</th>
-        <th scope="col">Tanggal</th>
-        <th scope="col">Absen Masuk</th>
-        <th scope="col">Absen Pulang</th>
         <th scope="col">Status</th>
+        <th scope="col">Tanggal Awal</th>
+        <th scope="col">Tanggal Akhir</th>
         </tr>
     </thead>
     <tbody>
         @forelse ($table as $key => $tb)
             <tr>
                 <th scope="row">{{ $table->firstItem() + $key }}</th>
-                <td>{{ date('d-m-Y', strtotime($tb->tanggal)) }}</td>
-                <td>{{ $tb->jam_masuk }}</td>
-                <td>{{ $tb->jam_pulang }}</td>
-                @if ($tb->jam_masuk > '10:00:00')
-                <td>Terlambat</td>
-                @else
-                <td>Tepat Waktu</td>
-                @endif
+                <td>{{ $tb->status }}</td>
+                <td>{{ $tb->tanggal_awal }}</td>
+                <td>{{ $tb->tanggal_akhir }}</td>
             </tr>
         @empty
             <tr>
@@ -36,11 +30,13 @@
                         </div>
                         <p class="empty-title">Tidak ada data yang tersedia</p>
                         <div class="empty-action">
-                            <button class="btn btn-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                                  </svg>
-                                Kembali
+                            <button onclick=" loadTable()" class="btn btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
+                                    <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
+                                 </svg>
+                                Reresh
                             </button>
                         </div>
                     </div>
@@ -49,5 +45,13 @@
         @endforelse
     </tbody>
 </table>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="dataTables_info" role="status" aria-live="polite">Showing {{ $table->firstItem() }} to {{ $table->lastItem() }} of {{ $table->total() }}entries</div>
+        </div>
+        {{ $table->links('vendor.pagination.index') }}
+    </div>
+</div>
 
 

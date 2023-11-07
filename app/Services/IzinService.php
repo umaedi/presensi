@@ -12,6 +12,18 @@ class IzinService
         $this->izin = $izin;
     }
 
+    public function store($data)
+    {
+        return $this->izin->create($data);
+    }
+
+    public function update($id, $data)
+    {
+        $model = $this->izin->find($id);
+        $model->update($data);
+        return $model;
+    }
+
     public function Query()
     {
         return $this->izin->query();

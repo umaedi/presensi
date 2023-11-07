@@ -14,7 +14,7 @@
             <div class="wallet-footer">
                 <div class="item"><a href="javascript:void()" data-toggle="modal" data-target="#modal-selfi">
                         <div class="icon-wrapper bg-primary"><ion-icon name="camera-outline"></ion-icon></div>
-                        <strong>Absen</strong>
+                        <strong>Presensi</strong>
                     </a></div>
                 <div class="item"><a href="/user/izin">
                         <div class="icon-wrapper bg-primary"><ion-icon name="calendar-outline"></ion-icon></div>
@@ -22,7 +22,7 @@
                     </a></div>
                 <div class="item"><a href="/user/histories">
                         <div class="icon-wrapper bg-success"><ion-icon name="document-text-outline"></ion-icon>
-                        </div><strong>History</strong>
+                        </div><strong>Riwayat</strong>
                     </a></div>
                 <div class="item"><a href="/user/profile">
                         <div class="icon-wrapper bg-warning"><ion-icon name="person-outline"></ion-icon></div>
@@ -37,16 +37,16 @@
             <div class="col-6">
                 {{-- <a href="/user/presensi"> --}}
                     <div class="stat-box bg-secondary">
-                        <div class="title text-white">Absen Masuk</div>
-                        <div class="value text-white">Belum absen</div>
+                        <div class="title text-white">Presensi Masuk</div>
+                        <div class="value text-white">Belum presensi</div>
                     </div>
                 {{-- </a> --}}
             </div>
             @else
             <div class="col-6">
                 <div class="stat-box bg-primary">
-                    <div class="title text-white">Absen Masuk</div>
-                    <div class="value text-white">Sudah absen</div>
+                    <div class="title text-white">Presensi Masuk</div>
+                    <div class="value text-white">Sudah presensi</div>
                 </div>
             </div>
             @endif
@@ -55,23 +55,23 @@
             <div class="col-6">
                 {{-- <a href="/user/presensi"> --}}
                     <div class="stat-box bg-secondary">
-                        <div class="title text-white">Absen Pulang</div>
-                        <div class="value text-white">Belum absen</div>
+                        <div class="title text-white">Presensi Pulang</div>
+                        <div class="value text-white">Belum presensi</div>
                     </div>
                 {{-- </a> --}}
             </div>
             @else
             <div class="col-6">
                 <div class="stat-box bg-primary">
-                    <div class="title text-white">Absen Pulang</div>
-                    <div class="value text-white">Sudah absen</div>
+                    <div class="title text-white">Presensi Pulang</div>
+                    <div class="value text-white">Sudah presensi</div>
                 </div>
             </div>
             @endif
         </div>
     </div>
     <div class="section mt-3">
-        <div class="section-title mb-1">Absensi Bulan
+        <div class="section-title mb-1">Presensi Bulan
             <select id="getBulan" class="select select-change text-primary" name="bulan" required>
                 <option value="01" {{ date('m') == '01' ? 'selected' : '' }}>Januari</option>
                 <option value="02" {{ date('m') == '02' ? 'selected' : '' }}>Februari</option>
@@ -110,7 +110,7 @@
                             <ion-icon name="sad" role="img" class="md hydrated" aria-label="sad"></ion-icon>
                         </div>
                         <div>
-                            <strong>Izin</strong>
+                            <strong>Cuty</strong>
                             <p># Hari</p>
                         </div>
                     </div>
@@ -130,21 +130,6 @@
                     </div>
                 </a>
             </div>
-            @if (auth()->guard('opd')->user())
-            <div class="col-6 col-md-3">
-                <a href="{{ route('opd.dashboard') }}" class="item">
-                    <div class="detail">
-                        <div class="icon-block text-success">
-                            <ion-icon name="person" role="img" class="md hydrated" aria-label="person"></ion-icon>
-                        </div>
-                        <div>
-                            <strong>Pegawai</strong>
-                            <p># Pegawai</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            @else
             <div class="col-6 col-md-3">
                 <a href="javascript:void(0)" class="item">
                     <div class="detail">
@@ -158,8 +143,7 @@
                     </div>
                 </a>
             </div>
-            @endif
-            </div>
+        </div>
         </div>
     </div>
     <div class="section-title mt-2">1 Minggu Terakhir</div>

@@ -41,6 +41,7 @@
     <div class="section mt-2">
         <div class="section-title">Data Izin</div>
         <div class="card">
+            @include('layouts.pegawai._loading')
             <div class="table-responsive" id="x-data-table">
                 
             </div>
@@ -57,7 +58,7 @@
                         <div class="form-group rounded">
                             <div class="input-wrapper">
                                 <label class="label">Nama</label>
-                                <input type="text" class="form-control" value="{{ auth()->user()->nama }}"  readonly="" required=""><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
+                                <input type="text" class="form-control" value="{{ auth()->user()->nama }}"  readonly=""><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
                             </div>
                         </div>
                         <div class="form-group">
@@ -65,8 +66,8 @@
                             <select class="form-control" id="status" name="status">
                               <option value="">--pilih--</option>
                               <option value="Sakit">Sakit</option>
-                              <option value="Cuti">Cuti</option>
                               <option value="DL">Cuti</option>
+                              <option value="DL">DL</option>
                               <option value="Lainnya">Lainya</option>
                             </select>
                           </div>
@@ -74,7 +75,7 @@
                             <div class="input-wrapper">
                                 <label class="label">Mulai Izin</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker" id="cutystart" name="tanggal_awal" placeholder="Pilih" value="" required>
+                                    <input type="text" class="form-control datepicker" id="cutystart" name="tanggal_awal" placeholder="Pilih" value="">
                                 </div>
                             </div>
                         </div>
@@ -82,7 +83,7 @@
                             <div class="input-wrapper">
                                 <label class="label">Berakhir Izin</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker" id="cutyend" name="tanggal_akhir" placeholder="Pilh" value="" required>
+                                    <input type="text" class="form-control datepicker" id="cutyend" name="tanggal_akhir" placeholder="Pilh" value="">
                                 </div>
                             </div>
                         </div>
@@ -90,30 +91,31 @@
                             <div class="input-wrapper">
                                 <label class="label">Tanggal Masuk Kerja</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker" name="tanggal_masuk" placeholder="Pilih" value="" required>
+                                    <input type="text" class="form-control datepicker" name="tanggal_masuk" placeholder="Pilih" value="">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group rounded">
                             <div class="input-wrapper">
                                 <label class="label">Jumlah Izin</label>
-                                <input type="number" class="form-control" name="jumlah_izin" value="" required=""><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
+                                <input type="number" class="form-control" name="jumlah_izin" value=""><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
                             </div>
                         </div>
                         <div class="form-group rounded">
                             <div class="input-wrapper">
                                 <label class="label">Keterangan</label>
-                                <textarea rows="2" class="form-control cuty_description" name="keterangan" required=""></textarea><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
+                                <textarea rows="2" class="form-control cuty_description" name="keterangan"></textarea><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
                             </div>
                         </div>
                         <div class="form-group rounded">
                             <div class="input-wrapper">
                                 <label class="label">Lampiran</label>
-                                <input type="file" class="form-control cuty_description" name="lampiran" required=""></input><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
+                                <input type="file" class="form-control cuty_description" name="lampiran"></input><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
                             </div>
                         </div>
                         <div class="form-group rounded">
-                            <button id="btn_simpan" type="submit" class="btn btn-primary btn-lg btn-block mt-2">KIRIM</button>
+                            @include('layouts.pegawai._loading_submit')
+                            <button id="btnSubmit" type="submit" class="btn btn-primary btn-lg btn-block mt-2">KIRIM</button>
                         </div>
                     </form>
                 </div>
@@ -127,63 +129,72 @@
                     <h5 class="modal-title">Edit Permohonan Izin</h5>
                     <a href="javascript:;" data-dismiss="modal">Close</a>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body rounded">
                     <form id="form-update-cuty" autocomplete="off">
+                        @method('PUT')
                         @csrf
-                        <div class="form-group basic">
+                        <div class="form-group">
                             <div class="input-wrapper">
                                 <label class="label">Nama</label>
-                                <input type="text" class="form-control" id="name" value="{{ auth()->user()->nama }}" required=""><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
+                                <input type="hidden" name="id" id="cuty-id">
+                                <input type="text" class="form-control" id="name" value="{{ auth()->user()->nama }}"><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="status_update" class="label my-2">Kategori Izin</label>
                             <select class="form-control" id="status_update" name="status">
-                              <option value="1">Sakit</option>
-                              <option value="2">Cuti</option>
-                              <option value="3">Lainya</option>
+                                <option value="">--pilih--</option>
+                                <option value="Sakit">Sakit</option>
+                                <option value="DL">Cuti</option>
+                                <option value="DL">DL</option>
+                                <option value="Lainnya">Lainya</option>
                             </select>
                           </div>
-                        <div class="form-group basic">
+                        <div class="form-group">
                             <div class="input-wrapper">
                                 <label class="label">Mulai Izin</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="awal-cuty" name="tanggal_awal" value="" required="" readonly><div class="input-group-addon"><ion-icon name="calendar-outline" role="img" class="md hydrated" aria-label="calendar outline"></ion-icon></div>
+                                    <input type="text" class="form-control" id="awal-cuty" name="tanggal_awal" value="">
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group basic">
+                        <div class="form-group">
                             <div class="input-wrapper">
                                 <label class="label">Berakhir Izin</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="akhir-cuty" name="tanggal_akhir" value="" required="" readonly><div class="input-group-addon"><ion-icon name="calendar-outline" role="img" class="md hydrated" aria-label="calendar outline"></ion-icon></div>
+                                    <input type="text" class="form-control" id="akhir-cuty" name="tanggal_akhir" value="">
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group basic">
+                        <div class="form-group">
                             <div class="input-wrapper">
                                 <label class="label">Tanggal Masuk Kerja</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="tanggal-masuk" name="tanggal_masuk" value="" required="" readonly>
-                                    <div class="input-group-addon"><ion-icon name="calendar-outline" role="img" class="md hydrated" aria-label="calendar outline"></ion-icon>
-                                    </div>
+                                    <input type="text" class="form-control" id="tanggal-masuk" name="tanggal_masuk" value="">
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group basic">
+                        <div class="form-group">
                             <div class="input-wrapper">
                                 <label class="label">Jumlah Cuti</label>
-                                <input type="number" class="form-control" name="jumlah_izin" id="jumlah-cuty" value="" required=""><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
+                                <input type="number" class="form-control" name="jumlah_izin" id="jumlah-cuty" value=""><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
                             </div>
                         </div>
-                        <div class="form-group basic">
+                        <div class="form-group">
                             <div class="input-wrapper">
                                 <label class="label">Keterangan</label>
-                                <textarea rows="2" class="form-control cuty_description" id="keterangan-cuty" name="keterangan" required=""></textarea><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
+                                <textarea rows="2" class="form-control cuty_description" id="keterangan-cuty" name="keterangan"></textarea><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
                             </div>
                         </div>
-                        <div class="form-group basic">
-                            <button id="btn_simpan" type="submit" class="btn btn-primary btn-block mt-2">KIRIM</button>
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <label class="label">Lampiran</label>
+                                <input type="file" class="form-control cuty_description" name="lampiran">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @include('layouts.pegawai._loading_update')
+                            <button id="btnUpdate" type="submit" class="btn btn-primary btn-lg btn-block mt-2">SIMPAN</button>
                         </div>
                     </form>
                 </div>
@@ -221,63 +232,76 @@
                 printPage();
             });
 
-            $('#tambahIzin').submit(function (e) {
-            e.preventDefault();
-            $('#btn_simpan').text('Proses...');
-                $.ajax({
-                    url:"/pegawai/izin/store",
-                    type: "POST",
+            $('#tambahIzin').submit(async function (e) {
+                e.preventDefault();
+                loadingsubmit(true);
+
+                var data = new FormData(this);
+                var param = {
+                    url: '/user/izin/store',
+                    method: 'POST',
                     data: new FormData(this),
                     processData: false,
                     contentType: false,
-                    cache: false,
-                    async: false,
-                    beforeSend: function () { 
-                        $('#btn_simpan').text('Proses...');
-                    },
-                    success: function (data) {
-                        if (data) {
-                            swal({title: 'Berhasil!', text: 'Permohonan Izin Berhasil Dibuat', icon: 'success', timer: 2000,});
-                            setTimeout(function(){ location.reload(); }, 2500);
-                        } else {
-                            swal({title: 'Oops!', text: data, icon: 'error', timer: 2000,});
-                    }
+                    cache: false
+                }
 
-                },
-                complete: function () {
-                    $('#btn_simpan').text('Simpan');
-                },
+                await transAjax(param).then((res) => {
+                    swal({text: res.message, icon: 'success', timer: 3000,}).then(() => {
+                    loadingsubmit(false);
+                    window.location.href = '/user/izin';
+                    });
+                }).catch((err) => {
+                    loadingsubmit(false);
+                        swal({text: err.responseJSON.message, icon: 'error', timer: 3000,}).then(() => {
+                    });
                 });
+
+                function loadingsubmit(state)
+                {
+                    if(state) {
+                        $('#btnSubmit').addClass('d-none');
+                        $('#loadingSubmit').removeClass('d-none');
+                    }else {
+                        $('#btnSubmit').removeClass('d-none');
+                        $('#loadingSubmit').addClass('d-none');
+                    }
+                }
             });
 
-            $('#form-update-cuty').submit(function(e) {
-                e.preventDefault();
-
-                $('#btn_simpan').text('Proses...');
-                $.ajax({
-                url:"/pegawai/izin/update",
-                type: "POST",
+        $('#form-update-cuty').submit(async function(e) {
+            e.preventDefault();
+            loadingsubmit(true);
+            var param = {
+                url: '/user/izin/update',
+                method: 'POST',
                 data: new FormData(this),
                 processData: false,
                 contentType: false,
                 cache: false,
-                async: false,
-                beforeSend: function () { 
-                    $('#btn_simpan').text('Proses...');
-                },
-                success: function (data) {
-                    if (data) {
-                        swal({title: 'Berhasil!', text: 'Permohonan Izin Berhasil Diperbaharui', icon: 'success', timer: 2000,});
-                        setTimeout(function(){ location.reload(); }, 2500);
-                    } else {
-                        swal({title: 'Oops!', text: data, icon: 'error', timer: 2000,});
-                }
+            }
 
-            },
-            complete: function () {
-                $('#btn_simpan').text('Simpan...');
-            },
+            await transAjax(param).then((res) => {
+                    swal({text: res.message, icon: 'success', timer: 3000,}).then(() => {
+                    loadingsubmit(false);
+                    window.location.href = '/user/izin';
+                });
+            }).catch((err) => {
+                loadingsubmit(false);
+                    swal({text: err.responseJSON.message, icon: 'error', timer: 3000,}).then(() => {
+                });
             });
+
+            function loadingsubmit(state)
+            {
+                if(state) {
+                    $('#btnUpdate').addClass('d-none');
+                    $('#loadingUpdate').removeClass('d-none');
+                }else {
+                    $('#btnUpdate').removeClass('d-none');
+                    $('#loadingUpdate').addClass('d-none');
+                }
+            }
         });          
 
         $(".datepicker").datepicker({
@@ -303,22 +327,34 @@
         }
 
         async function loadTable() {
-                var param = {
-                    method: 'GET',
-                    url: '{{ url()->current() }}',
-                    data: {
-                        load: 'table',
-                        page: page,
-                        tanggal_awal: tanggalAwal,
-                        tanggal_akhir: tanggalAkhir,
-                    }
+            var param = {
+                method: 'GET',
+                url: '{{ url()->current() }}',
+                data: {
+                    load: 'table',
+                    page: page,
+                    tanggal_awal: tanggalAwal,
+                    tanggal_akhir: tanggalAkhir,
                 }
-
+            }
+            
+                loading(true)
                 await transAjax(param).then((result) => {
+                    loading(false)
                     $('#x-data-table').html(result);
                 }).catch((err) => {
+                    loading(false)
                     console.log('err');
                 });
+
+                function loading(state)
+                {
+                    if(state) {
+                        $('#loading').removeClass('d-none');
+                    }else {
+                        $('#loading').addClass('d-none');
+                    }
+                }
             }
 
         function loadPaginate(to) {
@@ -329,7 +365,7 @@
         function printPage(){
             var tanggalAwal = $('#tanggalAwal').val();
             var tanggalAkhir = $('#tanggalAkhir').val();
-            window.location.href = "/pegawai/izin/print?tanggal_awal="+tanggalAwal+"&tanggal_akhir="+tanggalAkhir;
+            window.location.href = "/user/izin/print?tanggal_awal="+tanggalAwal+"&tanggal_akhir="+tanggalAkhir;
         }
     </script>
 @endpush
