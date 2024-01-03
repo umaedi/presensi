@@ -82,11 +82,11 @@
                     </div>
                 </div>
                 <hr>
-                <button id="btn_loading" class="btn btn-primary btn-lg btn-block d-none" type="button">
+                <button id="btn_loading_profile" class="btn btn-primary btn-lg btn-block d-none" type="button">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Tunggu sebentar yah...
                 </button>
-                <button id="btn_profile" type="submit" class="btn-submit btn btn-primary mr-1 btn-lg btn-block btn-profile">Simpan</button>
+                <button id="btn_profile" type="submit" onclick="loading('btn_loading_profile', 'btn_profile')" class="btn-submit btn btn-primary mr-1 btn-lg btn-block btn-profile">Simpan</button>
                 </div>
             </div>
         </div>
@@ -128,6 +128,10 @@
                     <hr>
                     <button id="btn_password" type="submit" class="btn-submit btn btn-primary mr-1 btn-lg btn-block">Simpan</button>
                 </form>
+                <form action="/logout" method="POST">
+                    @csrf
+                    <button id="btn_password" type="submit" class="btn-submit btn btn-warning mr-1 btn-lg btn-block mt-2">Keluar</button>
+                </form>
             </div>
         </div>
     </div>
@@ -138,54 +142,6 @@
 <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8y5ZQcuol7vxOkXii_wsHqYhCNL0uEM&libraries=geometry&callback"></script>
 <script type="text/javascript" src="{{ asset('assets/js/camera.js') }}"></script>
 <script type="text/javascript">
-$(document).ready(function() {
-
-
-   $('#btn_profile').on('submit', function() {
-        $('btn_loading').removeClass('d-none');
-   });
-
-    $('#update-password').submit(async function updatePassword(e) {
-        e.preventDefault();
-
-        var form 	= $(this)[0]; 
-		var data 	= new FormData(form);
-
-        var param = {
-            method: 'POST',
-            url: '/pegawai/profile/update/password',
-            data: data,
-            processData: false,
-            contentType: false,
-            cache: false,
-        }
-
-        loadingsubmit(true);
-        await transAjax(param).then((res) => {
-        swal({text: res.message, icon: 'success', timer: 3000,}).then(() => {
-            loadingsubmit(false);
-            window.location.href = '/pegawai/dashboard';
-        });
-    }).catch((err) => {
-        loadingsubmit(false);
-            swal({text: err, icon: 'error', timer: 3000,}).then(() => {
-            window.location.href = '/pegawai/profile';
-            });
-        });  
-    });
-
-    function loadingsubmit(state){
-        if(state) {
-            $('#btn_loading_password').removeClass('d-none');
-            $('#btn_password').addClass('d-none');
-        }else {
-            $('#btn_loading_password').addClass('d-none');
-            $('#btn_password').removeClass('d-none');
-        }
-    }  
- 
-});
-
 function previewImg(){
         const imgPreview = document.querySelector('#imgPrev');
         const image = document.querySelector('#image');

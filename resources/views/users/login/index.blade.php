@@ -8,34 +8,28 @@
           <img src="{{ asset('assets') }}/pegawai/img/logo.png" alt="logo" width="80">
         </div>
 
-        @if (session()->has('success'))
-          <div class="alert alert-success">{{ session('success') }}</div>
-        @elseif(session()->has('error'))
-          <div class="alert alert-warning">{{ session('error') }}</div>
+        @if ($errors->any())
+        <div class="alert alert-danger mb-2">Email atau Password Salah!</div>
         @endif
-
         <div class="card card-primary">
-          <div class="card-header"><h4>{{ __('Silakah Masuk') }}</h4></div>
+          <div class="card-header"><h4>{{ __('Silakan Masuk') }}</h4></div>
+          <form action="/login" method="POST">
           <div class="card-body">
-            <form action="/login" method="POST">
                 @csrf
                 <div class="form-group">
                   <label for="email">{{ __('Email') }}</label>
                   <input id="email" type="email" class="form-control x-email" name="email" tabindex="1" required autofocus>
                 </div>
-
                 <label for="password">{{ __('Password') }}</label>
                 <div class="input-group mb-3">
                   <input type="password" class="form-control x-password" id="password" name="password" required>
               </div>
-              <div class="form-group">
-                @include('layouts.pegawai._loading_submit')
-                <button type="submit" id="btn_login" class="btn btn-primary btn-block" tabindex="4">
-                    {{ __('Masuk') }}
-                </button>
-              </div>
-            </form>
-          </div>
+            </div>
+            <div class="form-button-group  transparent">
+              @include('layouts.pegawai._loading_submit')
+              <button type="submit" id="btn_login" class="btn btn-primary btn-block btn-lg">Masuk</button>
+            </div>
+          </form>
         </div>
         <div class="simple-footer text-center mt-3">
           {{ __('Copyright') }} &copy; {{ date('Y') }}
@@ -47,12 +41,12 @@
 @endsection
 @push('js')
     <script>
-      function loading()
-      {
-        $('#btn_login').addClass('d-none');
-        $('#loadingSubmit').show();
-      }
+      $('#btn_login').click(function() {
+        $('#btn_login').hide();
+        $('#loadingSubmit').removeClass('d-none');
+      });
     </script>
 @endpush
+
    
 

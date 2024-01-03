@@ -77,6 +77,12 @@ async function transAjax(data) {
         })
     return html
 }
+
+function loading(btn_submit, btn_loading)
+    {
+        $('#'+btn_submit).addClass('d-none');
+        $('#'+btn_loading).removeClass('d-none');
+    }
 </script>
 @stack('js')
 </body>
