@@ -6,7 +6,7 @@
     </a>
     <a href="/user/izin" class="item {{ Request::is('user/izin') ? 'active' : '' }}">
         <div class="col">
-            <ion-icon name="calendar-outline"></ion-icon><strong>Izin</strong>
+            <ion-icon name="calendar-outline"></ion-icon><strong>Cuty</strong>
         </div>
     </a>
     <a href="javascript:void()" data-toggle="modal" data-target="#modal-selfi"  class="item">

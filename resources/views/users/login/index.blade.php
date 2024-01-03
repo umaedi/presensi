@@ -29,7 +29,8 @@
                   <input type="password" class="form-control x-password" id="password" name="password" required>
               </div>
               <div class="form-group">
-                <button type="submit" id="btn-login" class="btn btn-primary btn-block" tabindex="4">
+                @include('layouts.pegawai._loading_submit')
+                <button type="submit" id="btn_login" class="btn btn-primary btn-block" tabindex="4">
                     {{ __('Masuk') }}
                 </button>
               </div>
@@ -44,5 +45,14 @@
   </div>
 </section>
 @endsection
+@push('js')
+    <script>
+      function loading()
+      {
+        $('#btn_login').addClass('d-none');
+        $('#loadingSubmit').show();
+      }
+    </script>
+@endpush
    
 

@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="section mt-2 mb-2">
-        @if (session('status'))
+      @if (session('status'))
         <div class="alert alert-success">
         @if (session('status')=='profile-information-updated')
         Profil berhasil diperbaharui.
@@ -42,7 +42,7 @@
                 <div class="form-group">
                     <div class="input-wrapper">
                         <label class="label" for="email4">Nama</label>
-                        <input type="text" class="form-control" id="name" value="{{ auth()->user()->nama }}">
+                        <input type="text" class="form-control" id="name" value="{{ auth()->user()->nama }}" name="nama">
                     </div>
                 </div>
                 <div class="form-group">

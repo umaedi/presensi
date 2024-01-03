@@ -23,7 +23,7 @@
     @yield('content')
   </div>
 </body>
-
+<script src="{{ asset('assets/pegawai') }}/js/lib/jquery-3.4.1.min.js"></script>
 <script src="{{ asset('/sw.js') }}"></script>
 <script>
     if (!navigator.serviceWorker.controller) {

@@ -12,26 +12,24 @@
         <div class="alert alert-danger mb-2">Email atau Password Salah!</div>
         @endif
         <div class="card card-primary">
-          <div class="card-header"><h4>{{ __('Silakah Masuk') }}</h4></div>
+          <div class="card-header"><h4>{{ __('Silakan Masuk') }}</h4></div>
+          <form action="/login" method="POST">
           <div class="card-body">
-            <form action="/login" method="POST">
                 @csrf
                 <div class="form-group">
                   <label for="email">{{ __('Email') }}</label>
                   <input id="email" type="email" class="form-control x-email" name="email" tabindex="1" required autofocus>
                 </div>
-
                 <label for="password">{{ __('Password') }}</label>
                 <div class="input-group mb-3">
                   <input type="password" class="form-control x-password" id="password" name="password" required>
               </div>
-              <div class="form-group">
-                <button type="submit" id="btn-login" class="btn btn-primary btn-block" tabindex="4">
-                    {{ __('Masuk') }}
-                </button>
-              </div>
-            </form>
-          </div>
+            </div>
+            <div class="form-button-group  transparent">
+              @include('layouts.pegawai._loading_submit')
+              <button type="submit" id="btn_login" class="btn btn-primary btn-block btn-lg">Masuk</button>
+            </div>
+          </form>
         </div>
         <div class="simple-footer text-center mt-3">
           {{ __('Copyright') }} &copy; {{ date('Y') }}
@@ -41,5 +39,14 @@
   </div>
 </section>
 @endsection
+@push('js')
+    <script>
+      $('#btn_login').click(function() {
+        $('#btn_login').hide();
+        $('#loadingSubmit').removeClass('d-none');
+      });
+    </script>
+@endpush
+
    
 

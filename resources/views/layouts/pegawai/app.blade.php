@@ -16,6 +16,7 @@
     <meta name="author" content="DISKOMINFO TUBA">
     <meta http-equiv="Copyright" content="DISKOMINFO TUBA">
     <meta name="copyright" content="DISKOMINFO TUBA">
+    
     <link rel="stylesheet" href="{{ asset('assets/pegawai') }}/css/style.css">
     <link rel="stylesheet" href="{{ asset('assets/pegawai') }}/css/sw-custom.css">
     <link rel="stylesheet" href="{{ asset('assets/pegawai') }}/js/plugins/magnific-popup/magnific-popup.css">
@@ -28,7 +29,6 @@
 </head>
 
 <body>
-<div class="fakeLoader"></div>
 <div class="x-container">
     @yield('content')
     @include('layouts.pegawai.navbar')
@@ -53,10 +53,6 @@
 {{-- <script src="{{ asset('assets/stap') }}/js/sw-script.js"></script> --}}
 <script type="text/javascript">
 $(document).ready(function loading() {
-    $.fakeLoader({
-        timeToHide:500,
-        spinner:"spinner7"
-    });
     sw();
 });
 

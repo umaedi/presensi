@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 
 //route login
-Route::get('/', Users\LoginController::class);
+Route::get('/', Users\LoginController::class)->middleware('guest');
 
 //route user 
 Route::middleware('auth')->prefix('user')->group(function () {
