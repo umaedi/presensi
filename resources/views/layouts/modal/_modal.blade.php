@@ -14,8 +14,8 @@
                                         <img class="img-fluid"src="{{ asset('assets') }}/pegawai/img/selfie.png" alt="" load="lazy">
                                     </div>
                                 </div>
-                                    <div class="form-group basic">
-                                        <button id="x-absent" class="btn btn-primary btn-lg btn-block" onclick="openCamera(0)">
+                                    <div class="basic form-button-group transparent">
+                                        <button id="x-absent" class="btn btn-primary btn-block btn-lg" onclick="openCamera(0)">
                                             Ambil photo selfi Anda
                                     </button>
                                 </div>
