@@ -44,10 +44,9 @@ class PersensiController extends Controller
 
             $presensiUpdate = $presensi->where('tanggal', $presensi->tanggal)->where('user_id', $user->id);
             $file = $request->file;
-            $decodedData = base64_decode($file, true);
-            if ($decodedData !== false) {
+            if (strlen($file) > 30) {
                 if (pathinfo($file, PATHINFO_EXTENSION) !== 'jpeg') {
-                    $img =  $request->image;
+                    $img =  $file;
                     $folderPath = "public/users/img/";
 
                     $image_parts = explode(";base64,", $img);
@@ -62,7 +61,7 @@ class PersensiController extends Controller
                     $photo_pulang = $fileName;
                 }
             } else {
-                $photo_pulang = $request->file;
+                $photo_pulang = $file;
             }
 
             $data['opd_id']     = $user->opd_id;
@@ -93,10 +92,9 @@ class PersensiController extends Controller
             $data['status'] = $status;
 
             $file = $request->file;
-            $decodedData = base64_decode($file, true);
-            if ($decodedData !== false) {
+            if (strlen($file) > 30) {
                 if (pathinfo($file, PATHINFO_EXTENSION) !== 'jpeg') {
-                    $img =  $request->image;
+                    $img =  $file;
                     $folderPath = "public/users/img/";
 
                     $image_parts = explode(";base64,", $img);
@@ -111,7 +109,7 @@ class PersensiController extends Controller
                     $photo_masuk = $fileName;
                 }
             } else {
-                $photo_masuk = $request->file;
+                $photo_masuk = $file;
             }
 
             $data['opd_id']     = $user->opd_id;

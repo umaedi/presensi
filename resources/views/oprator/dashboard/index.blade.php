@@ -69,7 +69,7 @@
       <!-- Total Revenue -->
       <div class="col-12 col-lg-12 order-2 order-md-3 order-lg-2 mb-4">
         <div class="card">
-          <h5 class="card-header">PRESENSI PEGAWAI HARI INI {{ $tanggal }}</h5>
+          <h5 class="card-header">PRESENSI PEGAWAI HARI INI <span class="text-uppercase">{{ $tanggal }}</span></h5>
           <div class="card-body">
             <div class="table-responsive text-nowrap">
               @include('layouts._loading')

@@ -28,7 +28,7 @@ class DashboardController extends Controller
         }
         $data['user'] =  $this->user->Query()->where('opd_id', Auth::user()->opd_id)->count();
         $data['presensi'] =  $this->presensi->Query()->where('opd_id', Auth::user()->opd_id)->where('tanggal', date('Y-m-d'))->count();
-        $data['tanggal'] = Carbon::now('D MMMM Y');
+        $data['tanggal'] = Carbon::now()->isoFormat('D MMMM Y');
         return view('oprator.dashboard.index', $data);
     }
 }
