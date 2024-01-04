@@ -52,7 +52,7 @@ function openCamera() {
     }
 
     // //radius
-    var currentLocation = { lat: -4.496692, lng: 105.2384188 };
+    var currentLocation = { lat: -4.5382826, lng: 105.2213528 };
     var radius = 100;
     function getCurrentPosition(position)
     {
@@ -67,7 +67,7 @@ function openCamera() {
         );
 
         setCamera();
-        // Jika jarak kurang dari radius
+        Jika jarak kurang dari radius
         if (distance < radius) {
             setCamera();
         } else {

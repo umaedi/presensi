@@ -207,7 +207,6 @@
 @push('js')
 <script type="text/javascript" src="{{ asset('assets/pegawai') }}/js/plugins/datepicker/bootstrap-datepicker.js"></script>
 <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8y5ZQcuol7vxOkXii_wsHqYhCNL0uEM&libraries=geometry&callback"></script>
-<script type="text/javascript" src="{{ asset('assets/js/camera.js') }}"></script>
     <script type="text/javascript">
         var page = 1;
         var tanggalAwal = '';

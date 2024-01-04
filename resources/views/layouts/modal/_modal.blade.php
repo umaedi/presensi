@@ -11,7 +11,7 @@
                             <div id="results" class="webcam-capture-body text-center mb-3">
                                 <div class="webcam-capture img-fluid">
                                     <div class="x-selfie-img container">
-                                        <img class="img-fluid"src="{{ asset('assets') }}/pegawai/img/selfie.png" alt="" load="lazy">
+                                        <img class="img-fluid"src="{{ asset('assets') }}/pegawai/img/selfie.png" alt="" load="lazy" width="100%">
                                     </div>
                                 </div>
                                     <div class="basic form-button-group transparent">
@@ -23,7 +23,7 @@
                             @include('layouts.pegawai._loading_submit')
                             <div id="x-action" class="row d-none">
                                 <div class="col-md-6">
-                                    <button class="btn btn-primary btn-lg btn-block mb-3" onclick="absenStore()">Isi Absen</button>
+                                    <button class="btn btn-primary btn-lg btn-block mb-3" onclick="absenStore()">Isi Presensi</button>
                                 </div>
                                 <div class="col-md-6">
                                     <button id="x-resetCamera" class="btn btn-warning btn-lg btn-block">Ganti Photo</button>
