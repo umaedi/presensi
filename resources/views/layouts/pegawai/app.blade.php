@@ -116,7 +116,7 @@ function openCamera() {
 
     // //radius
     var currentLocation = { lat: {{ auth()->user()->opd->lat }}, lng: {{ auth()->user()->opd->lat }} };
-    var radius = 100;
+    var radius = 300;
     function getCurrentPosition(position) {
         var userLocation = {
             lat: position.coords.latitude,
