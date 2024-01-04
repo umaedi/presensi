@@ -130,13 +130,13 @@ function openCamera() {
 
         // Jika jarak kurang dari radius
         setCamera();
-        // if (distance < radius) {
-        // } else {
-        //     swal({ title: 'Oops!', text: 'Mohon Maaf Sepertinya Anda Diluar Radius!', icon: 'error', timer: 3000, }).then(() => {
-        //         window.location.href = '/user/dashboard';
-        //     });
+        if (distance < radius) {
+        } else {
+            swal({ title: 'Oops!', text: 'Mohon Maaf Sepertinya Anda Diluar Radius!', icon: 'error', timer: 3000, }).then(() => {
+                window.location.href = '/user/dashboard';
+            });
 
-        // }
+        }
     }
 
     function setCamera() {
@@ -238,7 +238,7 @@ async function submitFile(file) {
     }
 
     await transAjax(param).then((res) => {
-        // return image = res.metadata;
+        return image = res.metadata;
     }).catch((err) => {
         console.log(err);
     });
