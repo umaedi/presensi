@@ -27,6 +27,12 @@ Route::middleware('auth')->prefix('user')->group(function () {
     Route::get('/profile', [Users\ProfileController::class, 'index']);
 });
 
+//route for oprator
+Route::middleware('auth')->prefix('oprator')->group(function () {
+    Route::get('/dashboard', [Oprator\DashboardController::class, 'index']);
+    Route::get('/pegawai', [Oprator\PegawaiController::class, 'index']);
+    Route::post('/pegawai/store', [Oprator\PegawaiController::class, 'store']);
+});
 
 // Route::get('opd/admin', function () {
 //     return view('opd.login.index');

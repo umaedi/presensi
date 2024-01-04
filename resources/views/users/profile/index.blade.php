@@ -126,8 +126,15 @@
                         @enderror
                       </div>
                     <hr>
-                    <button id="btn_password" type="submit" class="btn-submit btn btn-primary mr-1 btn-lg btn-block">Simpan</button>
+                    <button id="btn_password" type="submit" class="btn-submit btn btn-primary mr-1 btn-lg btn-block mb-2">Simpan</button>
                 </form>
+            </div>
+        </div>
+        <div class="card mt-2">
+            <div class="card-body">
+                @if (auth()->user()->role == 'admin')
+                <a href="/oprator/dashboard" class="btn-submit btn btn-primary mr-1 btn-lg btn-block">Kelola Pengguna</a>
+                @endif
                 <form action="/logout" method="POST">
                     @csrf
                     <button id="btn_password" type="submit" class="btn-submit btn btn-warning mr-1 btn-lg btn-block mt-2">Keluar</button>
