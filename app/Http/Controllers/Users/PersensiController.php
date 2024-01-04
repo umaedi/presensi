@@ -21,30 +21,31 @@ class PersensiController extends Controller
     public function index()
     {
         $data['title'] = 'Isi Presensi';
-        $data['nama'] = explode(" ", auth()->user()->nama);
+        $data['nama'] = explode(" ", Auth::user()->nama);
+        $data['lat'] = Auth::user()->opd->lat;
+        $data['long'] = Auth::user()->opd->long;
         return view('users.persensi.index', $data);
     }
 
     public function store(Request $request)
     {
         $user = Auth::user();
-        $presensi = $this->presensi->Query()->where('user_id', $user->id)->first();
+        $presensi = $this->presensi->Query()->where('user_id', $user->id)->latest()->first();
 
         if ($presensi && $presensi->tanggal == date('Y-m-d')) {
 
-            if (strtotime(date('H:i:s')) < strtotime('10:30:00')) {
-                return $this->error('Mohon Maaf Absen Sore Belum Dibuka!');
+            if (strtotime(date('H:i:s')) < strtotime(env('JAM_PULANG'))) {
+                return $this->error('Mohon Maaf Presensi Sore Belum Dibuka!');
             }
 
             if (isset($presensi->jam_pulang)) {
                 return $this->error('Hari Ini Anda Sudah Mengisi Presensi 2X!');
             }
 
-            $presensiUpdate = $presensi->where('tanggal', $presensi->tanggal)->where('user_id', $presensi->user_id);
+            $presensiUpdate = $presensi->where('tanggal', $presensi->tanggal)->where('user_id', $user->id);
             $file = $request->file;
             $decodedData = base64_decode($file, true);
             if ($decodedData !== false) {
-                // Jika berhasil, itu mungkin file base64
                 if (pathinfo($file, PATHINFO_EXTENSION) !== 'jpeg') {
                     $img =  $request->image;
                     $folderPath = "public/users/img/";
@@ -77,15 +78,15 @@ class PersensiController extends Controller
                 saveLogs($e->getMessage() . ' ' . 'presensi sore', 'error');
                 return $this->error($e->getMessage());
             }
-            return $this->success('OK', 'Anda Berhasil Mengisi Absen Sore');
+            return $this->success('OK', 'Anda Berhasil Mengisi Presensi Sore');
         } else {
-            if (strtotime(date('H:i:s')) > strtotime('13:00:00')) {
+            if (strtotime(date('H:i:s')) > strtotime(env('JAM_MASUK'))) {
                 $waktu_presensi = Carbon::now();
-                $jam_masuk = Carbon::parse('08:00:00');
+                $jam_masuk = Carbon::parse(env('JAM_MASUK'));
                 $telat = date_diff($waktu_presensi, $jam_masuk);
                 $status = $telat->h ? $telat->h . ':' . $telat->i . ':' . $telat->s : $telat->i . ':' . $telat->s;
             } else {
-                $status = "";
+                $status = NULL;
             };
 
             $data = $request->except('_token');
@@ -94,7 +95,6 @@ class PersensiController extends Controller
             $file = $request->file;
             $decodedData = base64_decode($file, true);
             if ($decodedData !== false) {
-                // Jika berhasil, itu mungkin file base64
                 if (pathinfo($file, PATHINFO_EXTENSION) !== 'jpeg') {
                     $img =  $request->image;
                     $folderPath = "public/users/img/";
@@ -113,7 +113,6 @@ class PersensiController extends Controller
             } else {
                 $photo_masuk = $request->file;
             }
-
 
             $data['opd_id']     = $user->opd_id;
             $data['user_id']    = $user->id;

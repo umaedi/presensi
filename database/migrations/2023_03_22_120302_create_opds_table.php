@@ -16,9 +16,8 @@ return new class extends Migration
         Schema::create('opds', function (Blueprint $table) {
             $table->id();
             $table->string('nama_opd');
-            $table->string('jam_masuk')->nullable();
-            $table->string('jam_pulang')->nullable();
-            $table->string('radius')->nullable();
+            $table->string('lat')->nullable();
+            $table->string('long')->nullable();
             $table->timestamps();
         });
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Persensi;
 use App\Services\PresensiService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {

@@ -28,7 +28,7 @@ function openCamera() {
     }
 
     // //radius
-    var currentLocation = { lat: -4.5382826, lng: 105.2213528 };
+    var currentLocation = { lat: -4.5284175, lng: 105.1522242 };
     var radius = 100;
     function getCurrentPosition(position) {
         var userLocation = {
@@ -41,16 +41,15 @@ function openCamera() {
             new google.maps.LatLng(userLocation)
         );
 
-        setCamera();
         // Jika jarak kurang dari radius
-        // if (distance < radius) {
-        //     setCamera();
-        // } else {
-        //     swal({title: 'Oops!', text:'Mohon Maaf Sepertinya Anda Diluar Radius!', icon: 'error', timer: 3000,}).then(() => {
-        //         window.location.href = '/user/presensi';
-        //     });
+        if (distance < radius) {
+            setCamera();
+        } else {
+            swal({ title: 'Oops!', text: 'Mohon Maaf Sepertinya Anda Diluar Radius!', icon: 'error', timer: 3000, }).then(() => {
+                window.location.href = '/user/dashboard';
+            });
 
-        // }
+        }
     }
 
     function setCamera() {

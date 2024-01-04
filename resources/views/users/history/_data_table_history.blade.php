@@ -6,7 +6,6 @@
         <th scope="col">Jam Masuk</th>
         <th scope="col">Jam Pulang</th>
         <th scope="col">Status</th>
-        {{-- <th scope="col">Aksi</th> --}}
         </tr>
     </thead>
     <tbody>
