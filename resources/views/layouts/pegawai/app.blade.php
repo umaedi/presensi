@@ -47,8 +47,10 @@
 <script src="{{ asset('assets/pegawai') }}/js/sweetalert.min.js"></script>
 <script src="{{ asset('assets/pegawai') }}/js/webcamjs/webcam.min.js"></script>
 <script src="{{ asset('assets/pegawai') }}/js/fakeLoader.min.js"></script>
+{{-- <script src="{{ asset('assets/pegawai') }}/js/plugins/magnific-popup/jquery.magnific-popup.min.js"></script> --}}
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPd9X55ZmEgE6R-T2mBiQVRGK1hjVNou8&libraries=places"></script>
+{{-- <script src="{{ asset('assets/stap') }}/js/sw-script.js"></script> --}}
 <script type="text/javascript">
 $(document).ready(function loading() {
     sw();
@@ -113,7 +115,7 @@ function openCamera() {
     }
 
     // //radius
-    var currentLocation = { lat: '{{ auth()->user()->opd->lat }}', lng: {{ auth()->user()->opd->long }} };
+    var currentLocation = { lat: {{ auth()->user()->opd->lat }}, lng: {{ auth()->user()->opd->lat }} };
     var radius = 100;
     function getCurrentPosition(position) {
         var userLocation = {
