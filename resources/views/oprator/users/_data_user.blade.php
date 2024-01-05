@@ -4,7 +4,7 @@
             <th>#</th>
             <th>Nama</th>
             <th>Email</th>
-            <th>Bagian</th>
+            <th>Organisasi</th>
             <th>Lihat</th>
         </tr>
     </thead>

@@ -67,7 +67,7 @@
     <div class="menu-inner-shadow"></div>
     <ul class="menu-inner py-1">
       <!-- Dashboard -->
-      <li class="menu-item active">
+      <li class="menu-item {{ Request::is('oprator/dashboard') ? 'active' : '' }}">
         <a href="/oprator/dashboard" class="menu-link">
           <i class="menu-icon tf-icons bx bx-home-circle"></i>
           <div data-i18n="Analytics">Dashboard</div>
@@ -75,7 +75,7 @@
       </li>
 
       <!-- Layouts -->
-      <li class="menu-item">
+      <li class="menu-item {{ Request::is('oprator/pegawai') ? 'active' : '' }}">
         <a href="/oprator/pegawai" class="menu-link">
           <i class="menu-icon tf-icons bx bx-user"></i>
           <div data-i18n="Boxicons">Master Pegawai</div>

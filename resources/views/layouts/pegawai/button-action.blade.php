@@ -9,7 +9,7 @@
             <ion-icon name="calendar-outline"></ion-icon><strong>Cuty</strong>
         </div>
     </a>
-    <a href="javascript:void()" data-toggle="modal" data-target="#modal-selfi"  class="item">
+    <a href="javascript:void()" onclick="openCamerax()"  class="item">
         <div class="col">
             <div class="action-button large">
                 <ion-icon name="finger-print-outline"></ion-icon>

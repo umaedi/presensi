@@ -18,7 +18,7 @@
                     </a></div>
                 <div class="item"><a href="/user/izin">
                         <div class="icon-wrapper bg-primary"><ion-icon name="calendar-outline"></ion-icon></div>
-                        <strong>Cuty</strong>
+                        <strong>Cuti</strong>
                     </a></div>
                 <div class="item"><a href="/user/histories">
                         <div class="icon-wrapper bg-success"><ion-icon name="document-text-outline"></ion-icon>
@@ -110,7 +110,7 @@
                             <ion-icon name="sad" role="img" class="md hydrated" aria-label="sad"></ion-icon>
                         </div>
                         <div>
-                            <strong>Cuty</strong>
+                            <strong>Cuti</strong>
                             <p># Hari</p>
                         </div>
                     </div>

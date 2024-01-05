@@ -28,8 +28,15 @@ Route::middleware('auth')->prefix('user')->group(function () {
 });
 
 //route for oprator
-Route::middleware('auth')->prefix('oprator')->group(function () {
+Route::middleware(['auth', 'oprator'])->prefix('oprator')->group(function () {
     Route::get('/dashboard', [Oprator\DashboardController::class, 'index']);
+    Route::get('/pegawai', [Oprator\PegawaiController::class, 'index']);
+    Route::post('/pegawai/store', [Oprator\PegawaiController::class, 'store']);
+});
+
+//route for admin
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [Admin\DashboardController::class, 'index']);
     Route::get('/pegawai', [Oprator\PegawaiController::class, 'index']);
     Route::post('/pegawai/store', [Oprator\PegawaiController::class, 'store']);
 });

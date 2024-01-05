@@ -89,8 +89,9 @@ var latLong = "";
 var image = "";
 var shutter = new Audio();
 
-function openCamera() {
-
+function openCamerax()
+{
+    //cek browser atau tidak
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
     } else {
@@ -113,8 +114,7 @@ function openCamera() {
             swal({ title: 'Oops!', text: 'Waktu percobaan habis sebelum bisa mendapatkan data lokasi.', icon: 'error', timer: 3000, });
         }
     }
-
-    // //radius
+    //cek radius
     var currentLocation = { lat: {{ auth()->user()->opd->lat }}, lng: {{ auth()->user()->opd->long }} };
     var radius = 300;
     function getCurrentPosition(position) {
@@ -139,12 +139,14 @@ function openCamera() {
         }
     }
 
-    function setCamera() {
-        //set camera
+    $('#modalSelfi').modal('show');
+    //set camera
+    function setCamera()
+    {
         Webcam.set({
-            width: 490, height: 450,
-            image_format: 'jpeg',
-            jpeg_quality: 90,
+        width: 490, height: 450,
+        image_format: 'jpeg',
+        jpeg_quality: 90,
         });
 
         var cameras = new Array();

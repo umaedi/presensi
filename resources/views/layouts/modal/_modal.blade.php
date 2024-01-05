@@ -1,4 +1,4 @@
-<div class="modal fade modalbox" id="modal-selfi" tabindex="-1" role="dialog">
+<div class="modal fade modalbox" id="modalSelfi" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header"><h5 class="modal-title">Ambil photo selfi Anda</h5><a href="javascript:;" onclick="resetCamera()" data-dismiss="modal">Close</a>

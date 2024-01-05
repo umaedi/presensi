@@ -133,7 +133,9 @@
         <div class="card mt-2">
             <div class="card-body">
                 @if (auth()->user()->role == 'admin')
-                <a href="/oprator/dashboard" class="btn-submit btn btn-primary mr-1 btn-lg btn-block">Kelola Pengguna</a>
+                <a href="/admin/dashboard" class="btn-submit btn btn-primary mr-1 btn-lg btn-block">Kelola Pegawai</a>
+                @else
+                <a href="/oprator/dashboard" class="btn-submit btn btn-primary mr-1 btn-lg btn-block">Kelola Pegawai</a>
                 @endif
                 <form action="/logout" method="POST">
                     @csrf
