@@ -35,7 +35,7 @@
                 <div class="card-title d-flex align-items-start justify-content-between">
                   <div class="avatar flex-shrink-0">
                     <img loading="lazy"
-                      src="{{ asset('img') }}/avatars/1.png"
+                      src="{{ asset('img') }}/icons/icon-fingerprint.png"
                       alt="chart success"
                       class="rounded"
                     />
@@ -52,7 +52,7 @@
                 <div class="card-title d-flex align-items-start justify-content-between">
                   <div class="avatar flex-shrink-0">
                     <img loading="lazy"
-                      src="{{ asset('img') }}/avatars/1.png"
+                      src="{{ asset('img') }}/icons/icon-fingerprint.png"
                       alt="chart success"
                       class="rounded"
                     />
