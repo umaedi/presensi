@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('nama');
             $table->string('nip');
             $table->string('jabatan');
-            $table->string('organisasi');
             $table->string('unit_organisasi');
             $table->string('email')->unique();
             $table->string('no_hp');

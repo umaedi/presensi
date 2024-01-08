@@ -203,7 +203,7 @@
           var form 	= $(this)[0]; 
           var data 	= new FormData(form);
           var param = {
-            url: '/oprator/pegawai/store',
+            url: '/admin/pegawai/store',
             method: 'POST',
             data: data,
             processData: false,

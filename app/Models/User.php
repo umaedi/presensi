@@ -27,12 +27,12 @@ class User extends Authenticatable
         'nip',
         'nama',
         'jabatan',
-        'organisasi',
         'unit_organisasi',
         'email',
         'password',
         'no_hp',
-        'photo'
+        'photo',
+        'role',
     ];
 
     /**

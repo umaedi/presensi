@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 @section('content')
 <div class="content-wrapper">
     <!-- Content -->
@@ -41,7 +41,7 @@
             <div class="col mb-3">
               <label for="nameWithTitle" class="form-label">Nama</label>
               <input
-                name="name"
+                name="nama"
                 type="text"
                 id="name"
                 class="form-control"
@@ -74,7 +74,10 @@
             <div class="col mb-3">
               <label for="password" class="form-label">Oprator Bagian</label>
               <select name="opd_id" id="opd" class="list_opd form-select">
-                  <option value="">--pilih bagian--</option>
+                <option value="">--pilih bagian--</option>
+                @foreach ($opds as $opd)
+                <option value="{{ $opd->id }}">{{ $opd->nama_opd }}</option>
+                @endforeach
               </select>
             </div>
               </div>
@@ -148,21 +151,6 @@
         filterTable()
         }
 
-        async function loadOpd()
-        {
-          var param = {
-            url: '/admin/dashboard',
-            method: 'GET',
-            data: {
-              load: 'opd',
-            }
-          }
-
-          await transAjax(param).then((result) => {
-            $('.list_opd').html(result);
-          });
-        }
-
         $('#storeOprator').on('submit', async function store(e) {
           e.preventDefault();
 
@@ -180,7 +168,7 @@
           action(true);
           await transAjax(param).then((result) => {
             action(false);
-            $('#notif').html(`<div class="alert alert-success">${result.data}</div>`);
+            $('#notif').html(`<div class="alert alert-success">${result.message}</div>`);
             loadTable();
           }).catch((err) => {
             action(false);

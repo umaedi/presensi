@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="row">
@@ -7,9 +7,9 @@
           <div class="d-flex align-items-end row">
             <div class="col-sm-8">
               <div class="card-body">
-                <h5 class="card-title text-primary">Selamat datang di dashboard SILALA 🎉</h5>
+                <h5 class="card-title text-primary">Selamat datang di dashboard SIAP TUBA</h5>
                 <p class="mb-4">
-                  Sistem Informasi Layanan Dinas PMPTSP Kabupaten Tulang Bawang
+                  Sistem Informasi Presensi Pegawai Kabupaten Tulang Bawang
                 </p>
               </div>
             </div>
@@ -35,14 +35,14 @@
                 <div class="card-title d-flex align-items-start justify-content-between">
                   <div class="avatar flex-shrink-0">
                     <img loading="lazy"
-                      src="{{ asset('img') }}/avatars/1.png"
+                      src="{{ asset('img') }}/icons/icon-fingerprint.png"
                       alt="chart success"
                       class="rounded"
                     />
                   </div>
                 </div>
-                <span class="fw-semibold d-block mb-1">Layanan</span>
-                <h3 class="card-title mb-2">{{ $layanan }}</h3>
+                <span class="fw-semibold d-block mb-1">OPD</span>
+                <h3 class="card-title mb-2">{{ $opd }}</h3>
               </div>
             </div>
           </div>
@@ -52,7 +52,7 @@
                 <div class="card-title d-flex align-items-start justify-content-between">
                   <div class="avatar flex-shrink-0">
                     <img loading="lazy"
-                      src="{{ asset('img') }}/avatars/1.png"
+                      src="{{ asset('img') }}/icons/icon-fingerprint.png"
                       alt="chart success"
                       class="rounded"
                     />
@@ -69,12 +69,33 @@
       <!-- Total Revenue -->
       <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
         <div class="card">
-          <h5 class="card-header">PELAYANAN HARI INI</h5>
+          <h5 class="card-header">LAPORAN REALTIME PRESENSI <span id="clock"></span></h5>
           <div class="card-body">
-            <div class="table-responsive text-nowrap">
-              @include('layouts._loading')
-              <div class="table-responsive text-nowrap" id="dataTable">
-                      
+            <div class="demo-vertical-spacing">
+              <div class="text-light small fw-semibold mb-1">Nama OPD</div>
+              <div class="progress mb-3">
+                <div
+                  class="progress-bar"
+                  role="progressbar"
+                  style="width: 50%"
+                  aria-valuenow="75"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                >
+                  50%
+                </div>
+              </div>
+              <div class="progress mb-3">
+                <div
+                  class="progress-bar"
+                  role="progressbar"
+                  style="width: 25%"
+                  aria-valuenow="25"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                >
+                  25%
+                </div>
               </div>
             </div>
           </div>
@@ -88,11 +109,11 @@
               <div class="card-body">
                 <div class="card-title d-flex align-items-start justify-content-between">
                   <div class="avatar flex-shrink-0">
-                    <img loading="lazy" src="{{ asset('img') }}/avatars/1.png" alt="Credit Card" class="rounded" />
+                    <img loading="lazy" src="{{ asset('img') }}/icons/icon-fingerprint.png" alt="Credit Card" class="rounded" />
                   </div>
                 </div>
-                <span class="d-block mb-1">Pelayanan hari ini</span>
-                <h3 class="card-title text-nowrap mb-2">{{ $pelayanan_hari_ini }}</h3>
+                <span class="d-block mb-1">Pegawai</span>
+                <h3 class="card-title text-nowrap mb-2">{{ $users }}</h3>
               </div>
             </div>
           </div>
@@ -101,11 +122,11 @@
               <div class="card-body">
                 <div class="card-title d-flex align-items-start justify-content-between">
                   <div class="avatar flex-shrink-0">
-                    <img loading="lazy" src="{{ asset('img') }}/avatars/1.png" alt="Credit Card" class="rounded" />
+                    <img loading="lazy" src="{{ asset('img') }}/icons/icon-fingerprint.png" alt="Credit Card" class="rounded" />
                   </div>
                 </div>
-                <span class="fw-semibold d-block mb-1">Total Pelayanan</span>
-                <h3 class="card-title mb-2">{{ $total_pelayanan }}</h3>
+                <span class="fw-semibold d-block mb-1">Laporan</span>
+                <h3 class="card-title mb-2">#</h3>
               </div>
             </div>
           </div>
@@ -154,5 +175,13 @@
           page = to;
           loadLaporan();
         }
+
+        jQuery(function($) {
+        setInterval(function() {
+            var date = new Date(),
+                time = date.toLocaleTimeString();
+            $("#clock").html(time);
+        }, 1000);
+    });
     </script>
 @endpush

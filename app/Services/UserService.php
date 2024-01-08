@@ -27,4 +27,10 @@ class UserService
     {
         return $this->user->create($data);
     }
+
+    public function update($id, $data)
+    {
+        $user = $this->user->where('id', $id)->update($data);
+        return $user;
+    }
 }

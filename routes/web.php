@@ -32,13 +32,25 @@ Route::middleware(['auth', 'oprator'])->prefix('oprator')->group(function () {
     Route::get('/dashboard', [Oprator\DashboardController::class, 'index']);
     Route::get('/pegawai', [Oprator\PegawaiController::class, 'index']);
     Route::post('/pegawai/store', [Oprator\PegawaiController::class, 'store']);
+    Route::get('/pegawai/show/{id}', [Oprator\PegawaiController::class, 'show']);
+    Route::put('/pegawai/update/{id}', [Oprator\PegawaiController::class, 'update']);
+
+    Route::get('profile', Oprator\ProfileController::class);
 });
 
 //route for admin
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [Admin\DashboardController::class, 'index']);
-    Route::get('/pegawai', [Oprator\PegawaiController::class, 'index']);
-    Route::post('/pegawai/store', [Oprator\PegawaiController::class, 'store']);
+
+    Route::get('/opd', [Admin\OpdController::class, 'index']);
+    Route::get('/opd/show/{id}', [Admin\OpdController::class, 'show']);
+    Route::put('/opd/update/{id}', [Admin\OpdController::class, 'update']);
+
+    Route::get('/pegawai', [Admin\UserController::class, 'index']);
+    Route::post('/pegawai/store', [Admin\UserController::class, 'store']);
+
+    Route::get('/oprator', [Admin\OpratorController::class, 'index']);
+    Route::post('/oprator/store', [Admin\OpratorController::class, 'store']);
 });
 
 // Route::get('opd/admin', function () {

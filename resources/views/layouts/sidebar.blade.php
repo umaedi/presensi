@@ -67,20 +67,46 @@
     <div class="menu-inner-shadow"></div>
     <ul class="menu-inner py-1">
       <!-- Dashboard -->
+      @if (auth()->user()->role == 'admin')
+      <li class="menu-item {{ Request::is('admin/dashboard') ? 'active' : '' }}">
+        <a href="/admin/dashboard" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <div data-i18n="Analytics">Dashboard</div>
+        </a>
+      </li>
+      <li class="menu-item {{ Request::is('admin/opd') ? 'active' : '' }}">
+        <a href="/admin/opd" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-data"></i>
+          <div data-i18n="Boxicons">Master OPD</div>
+        </a>
+      </li>
+      <li class="menu-item {{ Request::is('admin/oprator') ? 'active' : '' }}">
+        <a href="/admin/oprator" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-user"></i>
+          <div data-i18n="Boxicons">Master Oprator</div>
+        </a>
+      </li>
+      <li class="menu-item {{ Request::is('admin/pegawai') ? 'active' : '' }}">
+        <a href="/admin/pegawai" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-user"></i>
+          <div data-i18n="Boxicons">Master Pegawai</div>
+        </a>
+      </li>
+      @else
       <li class="menu-item {{ Request::is('oprator/dashboard') ? 'active' : '' }}">
         <a href="/oprator/dashboard" class="menu-link">
           <i class="menu-icon tf-icons bx bx-home-circle"></i>
           <div data-i18n="Analytics">Dashboard</div>
         </a>
       </li>
-
-      <!-- Layouts -->
-      <li class="menu-item {{ Request::is('oprator/pegawai') ? 'active' : '' }}">
+      <li class="menu-item {{ Request::is('oprator/pegawai*') ? 'active' : '' }}">
         <a href="/oprator/pegawai" class="menu-link">
           <i class="menu-icon tf-icons bx bx-user"></i>
           <div data-i18n="Boxicons">Master Pegawai</div>
         </a>
       </li>
+      @endif
+ 
 
       <!-- Components -->
       <li class="menu-header small text-uppercase"><span class="menu-header-text">Support</span></li>

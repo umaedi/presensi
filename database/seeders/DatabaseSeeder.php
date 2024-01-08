@@ -76,7 +76,6 @@ class DatabaseSeeder extends Seeder
             'nama'      => 'dev',
             'nip'       => '12345678910111213141516',
             'jabatan'   => 'Kepala Pengembang',
-            'organisasi'    => 'Tulang Bawang',
             'unit_organisasi'   => 'Bidang Pengembangan Teknologi',
             'email'     => 'devkh@gmail.com',
             'no_hp'     => '085741492045',

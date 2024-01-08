@@ -48,7 +48,7 @@
                 <div class="form-group">
                     <div class="input-wrapper">
                         <label class="label" for="password4">Organisasi</label>
-                        <input type="text" class="form-control" value="{{ auth()->user()->organisasi }}" name="organisasi">
+                        <input type="text" class="form-control" value="{{ auth()->user()->opd->nama_opd }}" name="organisasi">
                     </div>
                 </div>
                 <div class="form-group">
@@ -134,7 +134,7 @@
             <div class="card-body">
                 @if (auth()->user()->role == 'admin')
                 <a href="/admin/dashboard" class="btn-submit btn btn-primary mr-1 btn-lg btn-block">Kelola Pegawai</a>
-                @else
+                @elseif(auth()->user()->role == 'oprator')
                 <a href="/oprator/dashboard" class="btn-submit btn btn-primary mr-1 btn-lg btn-block">Kelola Pegawai</a>
                 @endif
                 <form action="/logout" method="POST">

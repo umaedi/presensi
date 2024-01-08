@@ -39,7 +39,7 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img loading="lazy" src="{{ asset('img') }}/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                              <img loading="lazy" src="{{ asset('img') }}/icons/icon-fingerprint.png" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">

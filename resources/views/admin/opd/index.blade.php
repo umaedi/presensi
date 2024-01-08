@@ -7,9 +7,9 @@
         <div class="row mb-4">
             <!-- Basic Alerts -->
             <div class="col-md mb-4 mb-md-0">
-                <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#opratorModal">Tambah Pegawai</button>
+                <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#opratorModal">Tambah OPD</button>
               <div class="card">
-                  <h5 class="card-header">Pegawai</h5>
+                  <h5 class="card-header">Data OPD</h5>
                   <div class="card-body">
                     @include('layouts._loading')
                     <div class="table-responsive text-nowrap" id="dataTable">
@@ -28,7 +28,7 @@
           <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="opratorModalTitle">Tambah Pegawai</h5>
+                <h5 class="modal-title" id="opratorModalTitle">Tambah OPD</h5>
                 <button
                   type="button"
                   class="btn-close"
@@ -78,8 +78,7 @@
                   type="text"
                   id="organisasi"
                   class="form-control"
-                  value="{{ auth()->user()->opd->nama_opd }}"
-                  readonly
+                  placeholder="Masukan organisasi"
                 />
               </div>
             </div>
@@ -225,6 +224,7 @@
 
         $('#name').on('click', function() {
           $('#notif').html('');
+          $('input').val('');
         });
 
         function action(state)
