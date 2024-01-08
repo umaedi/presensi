@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Oprator;
 
-use App\Http\Controllers\Controller;
-use App\Services\PresensiService;
-use App\Services\UserService;
 use Carbon\Carbon;
+use App\Models\Usercount;
 use Illuminate\Http\Request;
+use App\Services\UserService;
+use App\Services\PresensiService;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller

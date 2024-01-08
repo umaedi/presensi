@@ -54,6 +54,7 @@ class PegawaiController extends Controller
         $data['password'] = bcrypt(request()->password);
         try {
             $this->user->store($data);
+            Usercount();
         } catch (\Throwable $th) {
             return $this->error($th->getMessage());
         }
