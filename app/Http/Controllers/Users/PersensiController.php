@@ -83,7 +83,7 @@ class PersensiController extends Controller
             if (strtotime(date('H:i:s')) > strtotime(env('JAM_MASUK'))) {
                 $waktu_presensi = Carbon::now();
                 $jam_masuk = Carbon::parse(env('JAM_MASUK'));
-                $telat = date_diff($waktu_presensi, $jam_masuk);
+                $telat = $waktu_presensi->diff($jam_masuk);
                 $status = $telat->h ? $telat->h . ':' . $telat->i . ':' . $telat->s : $telat->i . ':' . $telat->s;
             } else {
                 $status = NULL;
