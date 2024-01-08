@@ -13,9 +13,9 @@
         <tr>
             <td>{{ $table->firstItem() + $key }}</td>
             <td>{{ $tb->user->nama }}</td>
-            <td><a href="#" onclick="showAbsen({{ $tb }}, 1)" data-toggle="modal" data-target="#modal-show" data-waktu="masuk">{{ $tb->jam_masuk }}</a></td>
+            <td><a href="#" onclick="showPresensi({{ $tb }}, 1)" data-bs-toggle="modal"  data-bs-target="#modal-show" data-waktu="masuk">{{ $tb->jam_masuk }}</a></td>
             @if ($tb->jam_pulang)
-            <td><a href="#" onclick="showAbsen({{ $tb }}, 2)" data-toggle="modal" data-target="#modal-show" data-waktu="pulang">{{ $tb->jam_pulang }}</a></td>
+            <td><a href="#" onclick="showPresensi({{ $tb }}, 2)" data-bs-toggle="modal"  data-bs-target="#modal-show" data-waktu="pulang">{{ $tb->jam_pulang }}</a></td>
             @else
             <td>Tdk/Blm Absen</td>
             @endif

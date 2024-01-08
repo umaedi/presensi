@@ -6,10 +6,10 @@
     </a>
     <a href="/user/izin" class="item {{ Request::is('user/izin') ? 'active' : '' }}">
         <div class="col">
-            <ion-icon name="calendar-outline"></ion-icon><strong>Cuty</strong>
+            <ion-icon name="calendar-outline"></ion-icon><strong>Cuti</strong>
         </div>
     </a>
-    <a href="javascript:void()" onclick="openCamerax()"  class="item">
+    <a href="javascript:void()" onclick="openCamera()"  class="item">
         <div class="col">
             <div class="action-button large">
                 <ion-icon name="finger-print-outline"></ion-icon>

@@ -22,7 +22,11 @@ class PegawaiController extends Controller
     public function index()
     {
         if (\request()->ajax()) {
-            $data['table'] = $this->user->Query()->where('opd_id', Auth::user()->opd_id)->paginate();
+            $users = $this->user->Query();
+            if (\request()->search) {
+                $users->where('nama', 'like', '%' . \request()->search . '%');
+            }
+            $data['table'] = $users->where('opd_id', Auth::user()->opd_id)->paginate();
             return view('oprator.users._data_user', $data);
         }
         return view('oprator.users.index');

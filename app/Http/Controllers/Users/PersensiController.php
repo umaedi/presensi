@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Services\PresensiService;
 use App\Http\Controllers\Controller;
+use App\Jobs\PresensiJob;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -120,7 +121,8 @@ class PersensiController extends Controller
             $data['photo_masuk']     = $photo_masuk;
 
             try {
-                $this->presensi->store($data);
+                dispatch(new PresensiJob($data));
+                // $this->presensi->store($data);
             } catch (Throwable $e) {
                 saveLogs($e->getMessage() . ' ' . 'presensi pagi', 'error');
                 return $this->error($e->getMessage());

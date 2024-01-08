@@ -131,9 +131,11 @@
         <div class="card">
           <h5 class="card-header">Riwayat Presensi</h5>
           <div class="table-responsive text-nowrap">
-            @include('layouts._loading')
-            <div class="table-responsive text-nowrap" id="dataTable">
-                    
+            <div class="card-body">
+              @include('layouts._loading')
+              <div class="table-responsive text-nowrap" id="dataTable">
+                      
+              </div>
             </div>
           </div>
         </div>

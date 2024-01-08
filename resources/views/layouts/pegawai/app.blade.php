@@ -89,7 +89,7 @@ var latLong = "";
 var image = "";
 var shutter = new Audio();
 
-function openCamerax()
+function openCamera()
 {
     //cek browser atau tidak
     if (navigator.geolocation) {
