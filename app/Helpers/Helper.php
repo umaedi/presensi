@@ -40,9 +40,9 @@ if (!function_exists('Presensicount')) {
         $presensiCount = Presensicount::where('opd_id', Auth::user()->opd_id)->where('updated_at', Carbon::now())->count();
         $incemrement = $presensiCount + 1;
         if ($presensiCount !== 0) {
-            Presensicount::where('opd_id', Auth::user()->opd_id)->forceFill(['total_presensi' => $incemrement]);
+            Presensicount::where('opd_id', Auth::user()->opd_id)->update(['total_presensi' => $incemrement]);
         } else {
-            Presensicount::where('opd_id', Auth::user()->opd_id)->forceFill(['total_presensi', 1]);
+            Presensicount::where('opd_id', Auth::user()->opd_id)->update(['total_presensi', 1]);
         }
     }
 }
