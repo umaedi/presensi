@@ -80,14 +80,25 @@ class PersensiController extends Controller
             }
             return $this->success('OK', 'Anda Berhasil Mengisi Presensi Sore');
         } else {
-            if (strtotime(date('H:i:s')) > strtotime(env('JAM_MASUK'))) {
-                $waktu_presensi = Carbon::now();
-                $jam_masuk = Carbon::parse(env('JAM_MASUK'));
-                $telat = $waktu_presensi->diff($jam_masuk);
-                $status = $telat->h ? $telat->h . ':' . $telat->i . ':' . $telat->s : $telat->i . ':' . $telat->s;
+            $currentTime = Carbon::now();
+            $jamMasuk = Carbon::parse(env('JAM_MASUK'));
+
+            if ($currentTime > $jamMasuk) {
+                $telat = $currentTime->diff($jamMasuk);
+                $status = $telat->format('%H:%I:%S');
             } else {
-                $status = NULL;
-            };
+                $status = null;
+            }
+
+
+            // if (strtotime(date('H:i:s')) > strtotime(env('JAM_MASUK'))) {
+            //     $waktu_presensi = Carbon::now();
+            //     $jam_masuk = Carbon::parse(env('JAM_MASUK'));
+            //     $telat = $waktu_presensi->diff($jam_masuk);
+            //     $status = $telat->h ? $telat->h . ':' . $telat->i . ':' . $telat->s : $telat->i . ':' . $telat->s;
+            // } else {
+            //     $status = NULL;
+            // };
 
             $data = $request->except('_token');
             $data['status'] = $status;
