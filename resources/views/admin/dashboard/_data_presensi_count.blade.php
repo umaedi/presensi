@@ -6,8 +6,8 @@
             <div
                 class="progress-bar"
                 role="progressbar"
-                style="width: {{ $tb->total_presensi / $tb->total_user * 100 }}%"
-                aria-valuenow="{{ $tb->total_presensi / $tb->total_user * 100 }}"
+                style="width: {{ round($tb->total_presensi / $tb->total_user * 100) }}%"
+                aria-valuenow="{{ round($tb->total_presensi / $tb->total_user * 100) }}"
                 aria-valuemin="0"
                 aria-valuemax="100"
             >
