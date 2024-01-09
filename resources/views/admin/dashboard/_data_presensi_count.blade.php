@@ -11,7 +11,7 @@
                 aria-valuemin="0"
                 aria-valuemax="100"
             >
-                {{ $tb->total_presensi / $tb->total_user * 100 }}%
+                {{ round($tb->total_presensi / $tb->total_user * 100) }}%
             </div>
         </div>
       </a>
