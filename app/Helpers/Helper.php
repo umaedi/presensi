@@ -37,7 +37,7 @@ if (!function_exists('Usercount')) {
 if (!function_exists('Presensicount')) {
     function Presensicount()
     {
-        $presensiCount = Presensicount::where('opd_id', Auth::user()->opd_id)->where('updated_at', Carbon::now())->count();
+        $presensiCount = Presensicount::where('opd_id', Auth::user()->opd_id)->whereDate('updated_at', Carbon::now()->toDateString())->count();
         $incemrement = $presensiCount + 1;
         if ($presensiCount !== 0) {
             Presensicount::where('opd_id', Auth::user()->opd_id)->update(['total_presensi' => $incemrement]);
