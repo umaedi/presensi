@@ -1,9 +1,8 @@
 <?php
 
-use Carbon\Carbon;
 use App\Models\Log;
-use App\Models\Usercount;
 use App\Models\Presensicount;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 if (!function_exists('saveLogs')) {
