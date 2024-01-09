@@ -134,18 +134,32 @@
 <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8y5ZQcuol7vxOkXii_wsHqYhCNL0uEM&libraries=geometry&callback"></script>
     <script type="text/javascript">
     var page = 1;
+    var search = '';
         $(document).ready(function() {
-          loadLaporan();
+          loadTable();
+
+          $('#search').on('keypress', function(e) {
+                if(e.which == 13) {
+                    filterTable();
+                    return false;
+                }
+            });
         });
 
-        async function loadLaporan()
+        function filterTable() {
+            search = $('#search').val();
+            loadTable();
+        }
+
+        async function loadTable()
         {
           var param = {
             url: '{{ url()->current() }}',
             method: 'GET',
             data: {
               load: 'table',
-              page: page
+              page: page,
+              search: search
             }
           }
           loading(true);

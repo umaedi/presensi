@@ -70,34 +70,8 @@
       <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
         <div class="card">
           <h5 class="card-header">LAPORAN REALTIME PRESENSI <span id="clock"></span></h5>
-          <div class="card-body">
-            <div class="demo-vertical-spacing">
-              <div class="text-light small fw-semibold mb-1">Nama OPD</div>
-              <div class="progress mb-3">
-                <div
-                  class="progress-bar"
-                  role="progressbar"
-                  style="width: 50%"
-                  aria-valuenow="75"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >
-                  50%
-                </div>
-              </div>
-              <div class="progress mb-3">
-                <div
-                  class="progress-bar"
-                  role="progressbar"
-                  style="width: 25%"
-                  aria-valuenow="25"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >
-                  25%
-                </div>
-              </div>
-            </div>
+          <div class="card-body" id="PresensiCount">
+ 
           </div>
         </div>
       </div>
@@ -139,13 +113,13 @@
     <script type="text/javascript">
     var page = 1;
         $(document).ready(function() {
-          loadLaporan();
+          loadPresensiCount();
         });
 
-        async function loadLaporan()
+        async function loadPresensiCount()
         {
           var param = {
-            url: '/admin/laporan',
+            url: '{{ url()->current() }}',
             method: 'GET',
             data: {
               load: 'table',
@@ -155,7 +129,7 @@
           loading(true);
           await transAjax(param).then((result) => {
             loading(false);
-            $('#dataTable').html(result);
+            $('#PresensiCount').html(result);
           }).catch((err) => {
             loading(false);
             console.log(err);
@@ -175,6 +149,10 @@
           page = to;
           loadLaporan();
         }
+
+        setInterval(() => {
+          loadPresensiCount();
+        }, 5000);
 
         jQuery(function($) {
         setInterval(function() {

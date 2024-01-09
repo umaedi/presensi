@@ -1,7 +1,9 @@
 <?php
 
+use Carbon\Carbon;
 use App\Models\Log;
 use App\Models\Usercount;
+use App\Models\Presensicount;
 use Illuminate\Support\Facades\Auth;
 
 if (!function_exists('saveLogs')) {
@@ -19,16 +21,29 @@ if (!function_exists('saveLogs')) {
 if (!function_exists('Usercount')) {
     function Usercount()
     {
-        $count_user = Usercount::where('opd_id', Auth::user()->opd_id)->count();
+        $count_user = Presensicount::where('opd_id', Auth::user()->opd_id)->count();
         $incemrement = $count_user + 1;
         if ($count_user !== 0) {
-            Usercount::where('opd_id', Auth::user()->opd_id)->update(['total_user' => $incemrement]);
+            Presensicount::where('opd_id', Auth::user()->opd_id)->update(['total_user' => $incemrement]);
         } else {
             $datauser = [
-                'opd_id' => Auth::user()->opd->id,
+                'opd_id' => Auth::user()->opd_id,
                 'total_user' => 1,
             ];
-            Usercount::create($datauser);
+            Presensicount::create($datauser);
+        }
+    }
+}
+
+if (!function_exists('Presensicount')) {
+    function Presensicount()
+    {
+        $presensiCount = Presensicount::where('opd_id', Auth::user()->opd_id)->where('updated_at', Carbon::now())->count();
+        $incemrement = $presensiCount + 1;
+        if ($presensiCount !== 0) {
+            Presensicount::where('opd_id', Auth::user()->opd_id)->update(['total_presensi' => $incemrement]);
+        } else {
+            Presensicount::where('opd_id', Auth::user()->opd_id)->update(['total_presensi', 1]);
         }
     }
 }

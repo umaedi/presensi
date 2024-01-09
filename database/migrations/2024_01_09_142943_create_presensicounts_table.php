@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('usercounts', function (Blueprint $table) {
+        Schema::create('presensicounts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('opd_id');
             $table->string('total_user');
-            $table->string('total_presensi')->nullable();
+            $table->string('total_presensi');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usercounts');
+        Schema::dropIfExists('presensicounts');
     }
 };

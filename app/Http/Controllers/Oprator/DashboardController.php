@@ -24,6 +24,11 @@ class DashboardController extends Controller
     {
         if (\request()->ajax()) {
             $presensi = $this->presensi->Query();
+            if (\request()->search) {
+                $presensi->whereHas('user', function ($query) {
+                    $query->where('nama', 'like', '%' . \request()->search . '%');
+                });
+            }
             $data['table'] = $presensi->where('opd_id', Auth::user()->opd_id)->where('tanggal', date('Y-m-d'))->paginate();
             return view('oprator.presensi._data_presensi', $data);
         }

@@ -46,6 +46,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/opd/show/{id}', [Admin\OpdController::class, 'show']);
     Route::put('/opd/update/{id}', [Admin\OpdController::class, 'update']);
 
+    Route::get('/presensi/opd/show/{id}', [Admin\PresensiopdController::class, 'show']);
+
     Route::get('/pegawai', [Admin\UserController::class, 'index']);
     Route::post('/pegawai/store', [Admin\UserController::class, 'store']);
 

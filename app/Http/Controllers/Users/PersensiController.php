@@ -128,6 +128,7 @@ class PersensiController extends Controller
                 saveLogs($e->getMessage() . ' ' . 'presensi pagi', 'error');
                 return $this->error($e->getMessage());
             }
+            Presensicount();
             return $this->success($data, 'Anda Berhasil Mengisi Presensi Pagi');
         }
     }

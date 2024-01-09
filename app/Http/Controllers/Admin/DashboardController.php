@@ -5,21 +5,26 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Opd;
 use App\Models\User;
-use App\Services\OpdService;
+use App\Services\PresensicountService;
 use App\Services\UserService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     protected $user;
-    protected $opd;
-    public function __construct(UserService $userService, OpdService $opdService)
+    protected $presensiCount;
+    public function __construct(UserService $userService, PresensicountService $presensicountService)
     {
         $this->user = $userService;
-        $this->opd = $opdService;
+        $this->presensiCount = $presensicountService;
     }
     public function index()
     {
+        if (\request()->ajax()) {
+            $data['table'] = $this->presensiCount->Query()->whereDate('updated_at', Carbon::now())->with('opd')->paginate();
+            return view('admin.dashboard._data_presensi_count', $data);
+        }
         $data['title'] = 'Dashboard Admin';
         $data['opd'] = Opd::count();
         $data['oprator'] = $this->user->Query()->where('role', 'oprator')->count();

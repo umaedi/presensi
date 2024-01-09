@@ -19,4 +19,9 @@ class Opd extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function presensicount()
+    {
+        return $this->hasMany(Presensicount::class);
+    }
 }
