@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('opd_id');
             $table->string('total_user');
-            $table->string('total_presensi');
+            $table->string('total_presensi')->nullable();
             $table->timestamps();
         });
     }
