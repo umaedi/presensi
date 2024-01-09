@@ -42,7 +42,7 @@ if (!function_exists('Presensicount')) {
         if ($presensiCount !== 0) {
             Presensicount::where('opd_id', Auth::user()->opd_id)->update(['total_presensi' => $incemrement]);
         } else {
-            Presensicount::where('opd_id', Auth::user()->opd_id)->update(['total_presensi', 1]);
+            Presensicount::where('opd_id', Auth::user()->opd_id)->update(['total_presensi' => 1]);
         }
     }
 }
