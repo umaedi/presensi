@@ -37,7 +37,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
 
         if (isset($input['photo'])) {
             $photo = Storage::putFile('public/img', $input['photo']);
-            if ($input['photo'] != 'avatar.png') {
+            if ($user->photo !== 'avatar.png') {
                 Storage::delete($user->photo);
             }
         } else {

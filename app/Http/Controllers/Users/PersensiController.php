@@ -90,16 +90,6 @@ class PersensiController extends Controller
                 $status = null;
             }
 
-
-            // if (strtotime(date('H:i:s')) > strtotime(env('JAM_MASUK'))) {
-            //     $waktu_presensi = Carbon::now();
-            //     $jam_masuk = Carbon::parse(env('JAM_MASUK'));
-            //     $telat = $waktu_presensi->diff($jam_masuk);
-            //     $status = $telat->h ? $telat->h . ':' . $telat->i . ':' . $telat->s : $telat->i . ':' . $telat->s;
-            // } else {
-            //     $status = NULL;
-            // };
-
             $data = $request->except('_token');
             $data['status'] = $status;
 
@@ -132,8 +122,8 @@ class PersensiController extends Controller
             $data['photo_masuk']     = $photo_masuk;
 
             try {
-                dispatch(new PresensiJob($data));
-                // $this->presensi->store($data);
+                // dispatch(new PresensiJob($data));
+                $this->presensi->store($data);
             } catch (Throwable $e) {
                 saveLogs($e->getMessage() . ' ' . 'presensi pagi', 'error');
                 return $this->error($e->getMessage());
