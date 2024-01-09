@@ -22,7 +22,7 @@ class DashboardController extends Controller
     public function index()
     {
         if (\request()->ajax()) {
-            $data['table'] = $this->presensiCount->Query()->whereDate('updated_at', Carbon::now())->with('opd')->paginate();
+            $data['table'] = $this->presensiCount->Query()->whereDate('updated_at', Carbon::now()->toDateString())->with('opd')->paginate();
             return view('admin.dashboard._data_presensi_count', $data);
         }
         $data['title'] = 'Dashboard Admin';
