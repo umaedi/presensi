@@ -222,6 +222,13 @@ function openCamera()
             window.location.href = '/user/dashboard';
         });
     }
+
+    // Fungsi untuk memberhentikan pemantauan lokasi jika diperlukan
+    function stopWatching() {
+        if (watchId) {
+            navigator.geolocation.clearWatch(watchId);
+        }
+    }
     //development end
 
     $('#modalSelfi').modal('show');
