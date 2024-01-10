@@ -310,6 +310,7 @@ async function absenStore() {
     }).catch((err) => {
         loadingsubmit(false);
         swal({ text: err.responseJSON.message, icon: 'error', timer: 3000, }).then(() => {
+            window.location.href = '/user/dashboard';
         });
     });
 }
