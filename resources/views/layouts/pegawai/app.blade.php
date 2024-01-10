@@ -91,7 +91,8 @@ var shutter = new Audio();
 
 function openCamera()
 {
-    //cek browser atau tidak productoion
+    //cek browser atau tidak 
+    //productoion
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
     } else {
