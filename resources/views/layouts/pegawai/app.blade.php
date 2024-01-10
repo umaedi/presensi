@@ -224,11 +224,11 @@ function openCamera()
     }
 
     // Fungsi untuk memberhentikan pemantauan lokasi jika diperlukan
-    function stopWatching() {
-        if (watchId) {
-            navigator.geolocation.clearWatch(watchId);
-        }
-    }
+    // function stopWatching() {
+    //     if (watchId) {
+    //         navigator.geolocation.clearWatch(watchId);
+    //     }
+    // }
     //development end
 
     $('#modalSelfi').modal('show');
