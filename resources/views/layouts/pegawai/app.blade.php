@@ -217,7 +217,6 @@ function openCamera()
 
     // Fungsi untuk mengatasi deteksi fake GPS
     function handleFakeGPSDetection() {
-        stopWatching();
         // Tindakan yang diambil jika terdeteksi fake GPS
         swal({ title: 'Oops!', text: 'Penggunaan Fake GPS Terdeteksi!', icon: 'error', timer: 3000 }).then(() => {
             window.location.href = '/user/dashboard';
