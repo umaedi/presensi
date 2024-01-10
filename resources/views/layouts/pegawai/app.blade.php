@@ -178,7 +178,7 @@ function openCamera()
             // Contoh: Batasi kecepatan maksimum
             if (speed > 30) {
                 handleFakeGPSDetection();
-                return;
+                // return;
             }
         }
 
