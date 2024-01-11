@@ -27,6 +27,7 @@ if (!function_exists('Usercount')) {
             $datauser = [
                 'opd_id' => Auth::user()->opd_id,
                 'total_user' => 1,
+                'total_presensi' => 0,
             ];
             Presensicount::create($datauser);
         }
