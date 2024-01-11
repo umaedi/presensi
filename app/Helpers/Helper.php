@@ -37,12 +37,19 @@ if (!function_exists('Usercount')) {
 if (!function_exists('Presensicount')) {
     function Presensicount()
     {
-        $presensiCount = Presensicount::where('opd_id', Auth::user()->opd_id)->whereDate('updated_at', Carbon::now()->toDateString())->count();
-        $incemrement = $presensiCount + 1;
+        $presensiCount = Presensicount::where('opd_id', Auth::user()->opd_id)
+            ->whereDate('updated_at', Carbon::now()->toDateString())
+            ->count();
+
         if ($presensiCount !== 0) {
-            Presensicount::where('opd_id', Auth::user()->opd_id)->update(['total_presensi' => $incemrement]);
+            Presensicount::where('opd_id', Auth::user()->opd_id)
+                ->whereDate('updated_at', Carbon::now()->toDateString())
+                ->increment('total_presensi');
         } else {
-            Presensicount::where('opd_id', Auth::user()->opd_id)->update(['total_presensi' => 1]);
+            Presensicount::create([
+                'opd_id' => Auth::user()->opd_id,
+                'total_presensi' => 1,
+            ]);
         }
     }
 }
