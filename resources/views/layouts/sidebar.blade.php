@@ -74,7 +74,7 @@
           <div data-i18n="Analytics">Dashboard</div>
         </a>
       </li>
-      <li class="menu-item {{ Request::is('admin/opd') ? 'active' : '' }}">
+      <li class="menu-item {{ Request::is('admin/opd*') ? 'active' : '' }}">
         <a href="/admin/opd" class="menu-link">
           <i class="menu-icon tf-icons bx bx-data"></i>
           <div data-i18n="Boxicons">Master OPD</div>
@@ -86,7 +86,7 @@
           <div data-i18n="Boxicons">Master Oprator</div>
         </a>
       </li>
-      <li class="menu-item {{ Request::is('admin/pegawai') ? 'active' : '' }}">
+      <li class="menu-item {{ Request::is('admin/pegawai*') ? 'active' : '' }}">
         <a href="/admin/pegawai" class="menu-link">
           <i class="menu-icon tf-icons bx bx-user"></i>
           <div data-i18n="Boxicons">Master Pegawai</div>

@@ -50,6 +50,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     Route::get('/pegawai', [Admin\UserController::class, 'index']);
     Route::post('/pegawai/store', [Admin\UserController::class, 'store']);
+    Route::get('/pegawai/show/{id}', [Admin\UserController::class, 'show']);
 
     Route::get('/oprator', [Admin\OpratorController::class, 'index']);
     Route::post('/oprator/store', [Admin\OpratorController::class, 'store']);
