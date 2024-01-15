@@ -114,6 +114,7 @@ class PersensiController extends Controller
                 $photo_masuk = $file;
             }
 
+            $data['opd_id']     = $user->opd_id;
             $data['user_id']    = $user->id;
             $data['tanggal']    = date('Y-m-d');
             $data['jam_masuk']  = date('H:i:s');
