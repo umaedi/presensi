@@ -172,15 +172,6 @@
           });
         }
 
-        function loading(state)
-        {
-          if(state) {
-            $('#loading').removeClass('d-none');
-          } else {
-            $('#loading').addClass('d-none');
-          }
-        }
-
         function loadPaginate(to) {
           page = to;
           loadLaporan();

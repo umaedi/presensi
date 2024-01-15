@@ -148,7 +148,6 @@
 </div>
 @endsection
 @push('js')
-<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8y5ZQcuol7vxOkXii_wsHqYhCNL0uEM&libraries=geometry&callback"></script>
 <script type="text/javascript">
 function previewImg(){
         const imgPreview = document.querySelector('#imgPrev');

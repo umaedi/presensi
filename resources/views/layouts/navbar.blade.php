@@ -52,7 +52,7 @@
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
-                    @if (auth()->user()->level == 'admin')
+                    @if (auth()->user()->role == 'admin')
                     <li>
                       <a class="dropdown-item" href="/admin/profile">
                         <i class="bx bx-user me-2"></i>

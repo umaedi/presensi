@@ -28,6 +28,33 @@ class OpdController extends Controller
         return view('admin.opd.index');
     }
 
+    public function create()
+    {
+        $data['title'] = 'Tambah data OPD';
+        return view('admin.opd.create', $data);
+    }
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama_opd' => 'required|string|max:100',
+            'lat'      => 'required|string|max:50',
+            'long'     => 'required|string|max:50'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->error($validator->errors());
+        }
+
+        $data = $request->except('_token');
+        try {
+            $this->opd->store($data);
+        } catch (\Throwable $th) {
+            return $this->error($th->getMessage());
+        }
+        return $this->success('OK', 'Data berhasil ditambahkan');
+    }
+
     public function show($id)
     {
         $data['title'] = 'Detail OPD';

@@ -4,16 +4,13 @@ namespace App\Http\Controllers\Users;
 
 use Throwable;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use App\Services\PresensiService;
 use App\Http\Controllers\Controller;
-use App\Jobs\PresensiJob;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class PersensiController extends Controller
+class DlController extends Controller
 {
-
     protected $presensi;
     public function __construct(PresensiService $presensiService)
     {
@@ -21,11 +18,7 @@ class PersensiController extends Controller
     }
     public function index()
     {
-        $data['title'] = 'Isi Presensi';
-        $data['nama'] = explode(" ", Auth::user()->nama);
-        $data['lat'] = Auth::user()->opd->lat;
-        $data['long'] = Auth::user()->opd->long;
-        return view('users.persensi.index', $data);
+        return view('users.dl.index');
     }
 
     public function store(Request $request)
@@ -80,18 +73,9 @@ class PersensiController extends Controller
             }
             return $this->success('OK', 'Anda Berhasil Mengisi Presensi Sore');
         } else {
-            $currentTime = Carbon::now();
-            $jamMasuk = Carbon::parse(env('JAM_MASUK'));
-
-            if ($currentTime > $jamMasuk) {
-                $telat = $currentTime->diff($jamMasuk);
-                $status = $telat->format('%H:%I:%S');
-            } else {
-                $status = null;
-            }
 
             $data = $request->except('_token');
-            $data['status'] = $status;
+            $data['status'] = 'DL';
 
             $file = $request->file;
             if (strlen($file) > 30) {
@@ -114,12 +98,17 @@ class PersensiController extends Controller
                 $photo_masuk = $file;
             }
 
+            if ($request->hasFile('spt')) {
+                $data['spt'] = $request->file('spt')->store('public/spt');
+            }
+
             $data['user_id']    = $user->id;
             $data['tanggal']    = date('Y-m-d');
             $data['jam_masuk']  = date('H:i:s');
             $data['lat_long_masuk']  = $request->latLong;
             $data['photo_masuk']     = $photo_masuk;
 
+            dd($request->all());
             try {
                 // dispatch(new PresensiJob($data));
                 $this->presensi->store($data);
@@ -130,28 +119,5 @@ class PersensiController extends Controller
             Presensicount();
             return $this->success($data, 'Anda Berhasil Mengisi Presensi Pagi');
         }
-    }
-
-    public function storeFile(Request $request)
-    {
-        $img =  $request->image;
-        $folderPath = "public/users/img/";
-
-        $image_parts = explode(";base64,", $img);
-        $image_type_aux = explode("image/", $image_parts[0]);
-        $image_type = $image_type_aux[1];
-
-        $image_base64 = base64_decode($image_parts[1]);
-        $fileName = uniqid() . '.jpeg';
-
-        $file = $folderPath . $fileName;
-        Storage::put($file, $image_base64);
-        return $this->success($fileName);
-    }
-
-    public function removeFile(Request $request)
-    {
-        Storage::delete('users/img/' . $request->file);
-        return $this->success('ok', 'photo berhasil di hapus');
     }
 }

@@ -21,6 +21,9 @@ Route::middleware('auth')->prefix('user')->group(function () {
     Route::put('/izin/update', [Users\IzinController::class, 'update']);
     Route::get('/izin/print', [Users\IzinController::class, 'print']);
 
+    Route::get('/dl', [Users\DlController::class, 'index']);
+    Route::post('/presensi_dl/store', [Users\DlController::class, 'store']);
+
     Route::get('/histories', [Users\HistoryController::class, 'index']);
     Route::get('/history/print', [Users\HistoryController::class, 'print']);
 
@@ -35,6 +38,9 @@ Route::middleware(['auth', 'oprator'])->prefix('oprator')->group(function () {
     Route::get('/pegawai/show/{id}', [Oprator\PegawaiController::class, 'show']);
     Route::put('/pegawai/update/{id}', [Oprator\PegawaiController::class, 'update']);
 
+    //import pegawai
+    Route::post('/importuser', ImportuserController::class);
+
     Route::get('profile', Oprator\ProfileController::class);
 });
 
@@ -43,6 +49,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [Admin\DashboardController::class, 'index']);
 
     Route::get('/opd', [Admin\OpdController::class, 'index']);
+    Route::get('/opd/create', [Admin\OpdController::class, 'create']);
+    Route::post('/opd/store', [Admin\OpdController::class, 'store']);
     Route::get('/opd/show/{id}', [Admin\OpdController::class, 'show']);
     Route::put('/opd/update/{id}', [Admin\OpdController::class, 'update']);
 
@@ -54,6 +62,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     Route::get('/oprator', [Admin\OpratorController::class, 'index']);
     Route::post('/oprator/store', [Admin\OpratorController::class, 'store']);
+
+    //import pegawai
+    Route::post('/importuser', ImportuserController::class);
 });
 
 // Route::get('opd/admin', function () {

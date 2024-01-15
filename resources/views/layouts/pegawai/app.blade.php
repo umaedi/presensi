@@ -49,7 +49,8 @@
 <script src="{{ asset('assets/pegawai') }}/js/fakeLoader.min.js"></script>
 {{-- <script src="{{ asset('assets/pegawai') }}/js/plugins/magnific-popup/jquery.magnific-popup.min.js"></script> --}}
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPd9X55ZmEgE6R-T2mBiQVRGK1hjVNou8&libraries=places"></script>
+{{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPd9X55ZmEgE6R-T2mBiQVRGK1hjVNou8&libraries=places"></script> --}}
+<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8y5ZQcuol7vxOkXii_wsHqYhCNL0uEM&libraries=geometry&callback&places"></script>
 {{-- <script src="{{ asset('assets/stap') }}/js/sw-script.js"></script> --}}
 <script type="text/javascript">
 $(document).ready(function loading() {
@@ -87,11 +88,11 @@ function loading(btn_submit, btn_loading)
 //camera
 var latLong = "";
 var image = "";
+var status = "";
 var shutter = new Audio();
 
-function openCamera()
+function openCamera(status)
 {
-    //cek browser atau tidak 
     //productoion
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
@@ -115,28 +116,32 @@ function openCamera()
             swal({ title: 'Oops!', text: 'Waktu percobaan habis sebelum bisa mendapatkan data lokasi.', icon: 'error', timer: 3000, });
         }
     }
-    //cek radius
-    var currentLocation = { lat: {{ auth()->user()->opd->lat }}, lng: {{ auth()->user()->opd->long }} };
-    var radius = 300;
-    function getCurrentPosition(position) {
-        var userLocation = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-        };
 
-        var distance = google.maps.geometry.spherical.computeDistanceBetween(
-            new google.maps.LatLng(currentLocation),
-            new google.maps.LatLng(userLocation)
-        );
+    if(status == 1) {
+        setCamera();
+        this.status = status;
+    }else {
+        var currentLocation = { lat: {{ auth()->user()->opd->lat }}, lng: {{ auth()->user()->opd->long }} };
+        var radius = 300;
+        function getCurrentPosition(position) {
+            var userLocation = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
 
-        // Jika jarak kurang dari radius
-        if (distance < radius) {
-            setCamera();
-        } else {
-            swal({ title: 'Oops!', text: 'Mohon Maaf Sepertinya Anda Diluar Radius!', icon: 'error', timer: 3000, }).then(() => {
-                window.location.href = '/user/dashboard';
-            });
+            var distance = google.maps.geometry.spherical.computeDistanceBetween(
+                new google.maps.LatLng(currentLocation),
+                new google.maps.LatLng(userLocation)
+            );
 
+            if (distance < radius) {
+                setCamera();
+            } else {
+                swal({ title: 'Oops!', text: 'Mohon Maaf Sepertinya Anda Diluar Radius!', icon: 'error', timer: 3000, }).then(() => {
+                    window.location.href = '/user/dashboard';
+                });
+
+            }
         }
     }
     //production end
@@ -287,7 +292,6 @@ function captureimage() {
 
 function resetCamera() {
     removeFile(image);
-    window.location.reload('/user/presensi');
 }
 
 async function absenStore() {
@@ -350,9 +354,11 @@ async function removeFile(file) {
     }
 
     await transAjax(param).then((res) => {
-        console.log(res);
+        console.log(res.message);
+        window.location.reload('/user/presensi');
     }).catch((err) => {
         console.log(err);
+        window.location.reload('/user/presensi');
     });
 }
 </script>

@@ -10,9 +10,8 @@ class Opd extends Model
     use HasFactory;
     protected $fillable = [
         'nama_opd',
-        'jam_masuk',
-        'jam_pulang',
-        'radius'
+        'lat',
+        'long',
     ];
 
     public function user()

@@ -8,6 +8,7 @@
             <!-- Basic Alerts -->
             <div class="col-md mb-4 mb-md-0">
                 <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#opratorModal">Tambah Pegawai</button>
+                <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#importPegawai">Import Pegawai</button>
               <div class="card">
                   <h5 class="card-header">Pegawai</h5>
                   <div class="card-body">
@@ -139,10 +140,53 @@
           </div>
         </form>
       </div>
+
+      <div class="modal fade" id="importPegawai" tabindex="-1" aria-hidden="true">
+        <form id="import">
+          @csrf
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="opratorModalTitle">Tambah Pegawai</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+            <span id="notif"></span>
+            <div class="row g-2">
+              <div class="col mb-3">
+                <label for="nameWithTitle" class="form-label">File Excel</label>
+                <input
+                  name="file_excel"
+                  type="file"
+                  id="name"
+                  class="form-control"
+                />
+              </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                  Tutup
+                </button>
+                <button id="btn_loading_import" class="btn_loading btn btn-primary d-none" type="button" disabled>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Loading...
+                </button>
+                <button id="btn_submit_import" type="submit" class="btn btn-primary">Simpan</button>
+              </div>
+            </div>
+          </div>
+        </form>
+    </div>
     <div class="content-backdrop fade"></div>
   </div>
 @endsection
 @push('js')
+<script type="text/javascript" src="{{ asset('js/sweetalert.min.js') }}"></script>
     <script>
         var search = '';
         var page = 1;
@@ -184,14 +228,6 @@
             })
         }
 
-        function loading(state) {
-            if(state) {
-                $('#loading').removeClass('d-none');
-            } else {
-                $('#loading').addClass('d-none');
-            }
-        }
-
         function loadPaginate(to) {
         page = to
         filterTable()
@@ -225,6 +261,33 @@
 
         $('#name').on('click', function() {
           $('#notif').html('');
+        });
+
+        $('#import').on('submit', async function store(e) {
+          e.preventDefault();
+
+          var form 	= $(this)[0]; 
+          var data 	= new FormData(form);
+          var param = {
+              url: '/oprator/importuser',
+              method: 'POST',
+              data: data,
+              processData: false,
+              contentType: false,
+              cache: false,
+          }
+
+          loadingBtn(true,'btn_submit_import', 'btn_loading_import');
+          await transAjax(param).then((result) => {
+            loadingBtn(false,'btn_submit_import', 'btn_loading_import');
+            swal({ title: 'Berhasil', text: result.message, icon: 'success', timer: 3000, });
+            $('#importPegawai').modal('hide');
+            loadTable();
+          }).catch((err) => {
+            $('#importPegawai').modal('hide');
+            loadingBtn(false,'btn_submit_import', 'btn_loading_import');
+            swal({ title: 'Oops!', text: err.responseJSON.message, icon: 'error', timer: 3000, });
+          });
         });
 
         function action(state)

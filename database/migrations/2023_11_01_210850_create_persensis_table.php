@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('photo_pulang')->nullable();
             $table->string('status')->nullable();
             $table->string('warning')->nullable();
+            $table->string('spt')->nullable();
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

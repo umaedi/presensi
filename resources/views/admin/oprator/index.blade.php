@@ -101,7 +101,6 @@
         var page = 1;
         $(document).ready(function() {
             loadTable();
-            loadOpd();
 
             $('#search').on('keypress', function(e) {
                 if(e.which == 13) {

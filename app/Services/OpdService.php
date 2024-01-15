@@ -12,6 +12,11 @@ class OpdService
         $this->opd = $opd;
     }
 
+    public function store($data)
+    {
+        return $this->opd->create($data);
+    }
+
     public function Query()
     {
         return $this->opd->query();

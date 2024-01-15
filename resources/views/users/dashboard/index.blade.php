@@ -20,13 +20,13 @@
                         <div class="icon-wrapper bg-primary"><ion-icon name="calendar-outline"></ion-icon></div>
                         <strong>Cuti</strong>
                     </a></div>
-                <div class="item"><a href="/user/histories">
-                        <div class="icon-wrapper bg-success"><ion-icon name="document-text-outline"></ion-icon>
-                        </div><strong>Riwayat</strong>
+                <div class="item"><a href="/user/dl">
+                        <div class="icon-wrapper bg-warning"><ion-icon name="paper-plane-outline"></ion-icon>
+                        </div><strong>DL</strong>
                     </a></div>
                 <div class="item"><a href="/user/profile">
-                        <div class="icon-wrapper bg-warning"><ion-icon name="person-outline"></ion-icon></div>
-                        <strong>Profil</strong>
+                        <div class="icon-wrapper bg-success"><ion-icon name="qr-code-outline"></ion-icon></div>
+                        <strong>Scanner</strong>
                     </a></div>
             </div>
         </div>
@@ -134,7 +134,7 @@
                 <a href="javascript:void(0)" class="item">
                     <div class="detail">
                         <div class="icon-block text-secondary">
-                           <ion-icon name="sad" role="img" class="md hydrated" aria-label="sad"></ion-icon>
+                            <ion-icon name="exit-outline"></ion-icon>
                         </div>
                         <div>
                             <strong>DL</strong>
@@ -201,7 +201,6 @@
 </div>
 @endsection
 @push('js')
-<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8y5ZQcuol7vxOkXii_wsHqYhCNL0uEM&libraries=geometry&callback"></script>
     <script type="text/javascript">
         var bulan = '';
         $(document).ready(function() {

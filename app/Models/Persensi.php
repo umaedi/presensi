@@ -23,6 +23,9 @@ class Persensi extends Model
         'photo_masuk',
         'photo_pulang',
         'status',
+        'warning',
+        'spt',
+        'keterangan'
     ];
 
     protected static function booted()

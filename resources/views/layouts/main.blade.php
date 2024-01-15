@@ -118,6 +118,24 @@
               })
           return html
       }
+
+      function loadingBtn(state, btn_submit, btn_loading) {
+          if(state) {
+              $('#'+btn_submit).hide();
+              $('#'+btn_loading).removeClass('d-none');
+            } else {
+              $('#'+btn_submit).show();
+              $('#'+btn_loading).addClass('d-none');
+          }
+        }
+        
+        function loading(state) {
+            if(state) {
+                $('#loading').removeClass('d-none');
+            } else {
+                $('#loading').addClass('d-none');
+            }
+        }
       </script>
       @stack('js')
   </body>
