@@ -6,7 +6,7 @@
         <div class="splash-page mt-5 mb-5">
             <div class="mb-3">
                 {{-- <img src="assets/img/sample/qr.png" alt="QR Code" class="imaged square w140"> --}}
-                <canvas class="w-60 rounded" id="qr-canvas"></canvas>
+                <canvas class="img-fluid rounded" id="qr-canvas"></canvas>
                 <span id="outputData"></span>
             </div>
             <a href="#" class="btn btn-primary btn-lg" id="openLink" style="display: none">Kunjungi Link</a>
