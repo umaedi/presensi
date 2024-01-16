@@ -101,8 +101,13 @@ function openCamera(status)
     }
 
     function successCallback(position) {
-        getCurrentPosition(position);
-        return latLong = "" + position.coords.latitude + "," + position.coords.longitude + "";
+        if(status == 1) {
+            setCamera();
+            return latLong = "" + position.coords.latitude + "," + position.coords.longitude + "";
+        }else {
+            getCurrentPosition(position);
+            return latLong = "" + position.coords.latitude + "," + position.coords.longitude + "";
+        }
     }
 
     function errorCallback(error) {
@@ -117,31 +122,26 @@ function openCamera(status)
         }
     }
 
-    if(status == 1) {
-        setCamera();
-        this.status = status;
-    }else {
-        var currentLocation = { lat: {{ auth()->user()->opd->lat }}, lng: {{ auth()->user()->opd->long }} };
-        var radius = 300;
-        function getCurrentPosition(position) {
-            var userLocation = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
+    var currentLocation = { lat: {{ auth()->user()->opd->lat }}, lng: {{ auth()->user()->opd->long }} };
+    var radius = 300;
+    function getCurrentPosition(position) {
+        var userLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
 
-            var distance = google.maps.geometry.spherical.computeDistanceBetween(
-                new google.maps.LatLng(currentLocation),
-                new google.maps.LatLng(userLocation)
-            );
+        var distance = google.maps.geometry.spherical.computeDistanceBetween(
+            new google.maps.LatLng(currentLocation),
+            new google.maps.LatLng(userLocation)
+        );
 
+        if (distance < radius) {
             setCamera();
-            // if (distance < radius) {
-            // } else {
-            //     swal({ title: 'Oops!', text: 'Mohon Maaf Sepertinya Anda Diluar Radius!', icon: 'error', timer: 3000, }).then(() => {
-            //         window.location.href = '/user/dashboard';
-            //     });
+        } else {
+            swal({ title: 'Oops!', text: 'Mohon Maaf Sepertinya Anda Diluar Radius!', icon: 'error', timer: 3000, }).then(() => {
+                window.location.href = '/user/dashboard';
+            });
 
-            // }
         }
     }
     //production end

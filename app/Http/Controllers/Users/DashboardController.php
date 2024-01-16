@@ -36,8 +36,10 @@ class DashboardController extends Controller
         }
         $data['nama'] = explode(" ", auth()->user()->nama);
         $data['absen'] = Persensi::where('user_id', auth()->user()->id)->where('tanggal', date('Y-m-d'))->first();
+        $data['cuti'] = Persensi::where('user_id', auth()->user()->id)->where('status', 'cuti')->count();
         $data['hadir'] = Persensi::where('user_id', auth()->user()->id)->whereMonth('tanggal', date('m'))->count();
-        $data['terlambat'] = Persensi::where('user_id', auth()->user()->id)->whereMonth('tanggal', date('m'))->WhereNotNull('status')->count();
+        $data['terlambat'] = $this->presensi->Query()->where('user_id', Auth::user()->id)->whereMonth('tanggal', date('m'))->WhereNotNull('status')->where('status', '!=', 'dl')->count();
+        $data['dl'] = Persensi::where('user_id', auth()->user()->id)->where('status', 'dl')->count();
         return view('users.dashboard.index', $data);
     }
 }

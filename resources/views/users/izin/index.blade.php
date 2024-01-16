@@ -32,7 +32,7 @@
                         <button id="printPage" class="btn btn-warning mt-1"><ion-icon name="print-outline" role="img" class="md hydrated" aria-label="print outline"></ion-icon> Cetak</button>
                         <button type="button" data-toggle="modal" data-target="#modal-add" class="btn btn-success mt-1 btn-clear"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                          </svg> Tambah Izin</button>
+                          </svg> Tambah Cuti</button>
                     </div>  
                 </div>
             </div>
@@ -61,19 +61,9 @@
                                 <input type="text" class="form-control" value="{{ auth()->user()->nama }}"  readonly=""><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="status" class="label my-2">Kategori</label>
-                            <select class="form-control" id="status" name="status">
-                              <option value="">--pilih--</option>
-                              <option value="Sakit">Sakit</option>
-                              <option value="DL">Cuti</option>
-                              <option value="DL">DL</option>
-                              <option value="Lainnya">Lainya</option>
-                            </select>
-                          </div>
                         <div class="form-group rounded">
                             <div class="input-wrapper">
-                                <label class="label">Mulai Izin</label>
+                                <label class="label">Mulai Cuti</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control datepicker" id="cutystart" name="tanggal_awal" placeholder="Pilih" value="">
                                 </div>
@@ -81,7 +71,7 @@
                         </div>
                         <div class="form-group rounded">
                             <div class="input-wrapper">
-                                <label class="label">Berakhir Izin</label>
+                                <label class="label">Berakhir Cuti</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control datepicker" id="cutyend" name="tanggal_akhir" placeholder="Pilh" value="">
                                 </div>
@@ -97,7 +87,7 @@
                         </div>
                         <div class="form-group rounded">
                             <div class="input-wrapper">
-                                <label class="label">Jumlah Izin</label>
+                                <label class="label">Jumlah Cuti</label>
                                 <input type="number" class="form-control" name="jumlah_izin" value=""><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
                             </div>
                         </div>
@@ -126,7 +116,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Permohonan Izin</h5>
+                    <h5 class="modal-title">Edit Permohonan Cuti</h5>
                     <a href="javascript:;" data-dismiss="modal">Close</a>
                 </div>
                 <div class="modal-body rounded">
@@ -141,18 +131,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="status_update" class="label my-2">Kategori Izin</label>
-                            <select class="form-control" id="status_update" name="status">
-                                <option value="">--pilih--</option>
-                                <option value="Sakit">Sakit</option>
-                                <option value="DL">Cuti</option>
-                                <option value="DL">DL</option>
-                                <option value="Lainnya">Lainya</option>
-                            </select>
-                          </div>
-                        <div class="form-group">
                             <div class="input-wrapper">
-                                <label class="label">Mulai Izin</label>
+                                <label class="label">Mulai Cuti</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="awal-cuty" name="tanggal_awal" value="">
                                 </div>
@@ -160,7 +140,7 @@
                         </div>
                         <div class="form-group">
                             <div class="input-wrapper">
-                                <label class="label">Berakhir Izin</label>
+                                <label class="label">Berakhir Cuti</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="akhir-cuty" name="tanggal_akhir" value="">
                                 </div>

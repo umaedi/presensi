@@ -77,7 +77,7 @@ class DlController extends Controller
             $data = $request->except('_token');
             $data['status'] = 'DL';
 
-            $file = $request->file;
+            $file = $request->img;
             if (strlen($file) > 30) {
                 if (pathinfo($file, PATHINFO_EXTENSION) !== 'jpeg') {
                     $img =  $file;
@@ -102,13 +102,13 @@ class DlController extends Controller
                 $data['spt'] = $request->file('spt')->store('public/spt');
             }
 
+            $data['opd_id']    = $user->opd_id;
             $data['user_id']    = $user->id;
             $data['tanggal']    = date('Y-m-d');
             $data['jam_masuk']  = date('H:i:s');
             $data['lat_long_masuk']  = $request->latLong;
             $data['photo_masuk']     = $photo_masuk;
 
-            dd($request->all());
             try {
                 // dispatch(new PresensiJob($data));
                 $this->presensi->store($data);

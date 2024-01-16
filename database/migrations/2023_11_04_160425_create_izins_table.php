@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('jumlah_izin');
             $table->string('keterangan')->nullable();
             $table->string('lampiran')->nullable();
-            $table->string('izin');
             $table->string('status')->nullable();
             $table->timestamps();
         });

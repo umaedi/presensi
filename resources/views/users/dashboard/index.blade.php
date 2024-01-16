@@ -111,7 +111,7 @@
                         </div>
                         <div>
                             <strong>Cuti</strong>
-                            <p># Hari</p>
+                            <p>{{ $cuti }} Hari</p>
                         </div>
                     </div>
                 </a>
@@ -138,7 +138,7 @@
                         </div>
                         <div>
                             <strong>DL</strong>
-                            <p># Hari</p>
+                            <p>{{ $dl }} Hari</p>
                         </div>
                     </div>
                 </a>

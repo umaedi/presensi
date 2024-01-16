@@ -19,12 +19,13 @@
                 @else
                 <td>Tdk/Blm Absen</td>
                 @endif
-                @if (isset($tb->status))
+                @if ($tb->status == 'DL')
+                <td class="text-warning">{{ $tb->status }}</td>
+                @elseif($tb->status !== 'DL' && $tb->status !== NULL)
                 <td class="text-danger">Telat {{ $tb->status }}</td>
                 @else
-                <td class="text-success">Tepat Waktu</td>
+               <td class="text-success">Tepat Waktu</td>
                 @endif
-            
             </tr>
         @empty
             <tr>

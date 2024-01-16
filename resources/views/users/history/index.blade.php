@@ -59,11 +59,11 @@
   </div>
 
   <div class="col-md-3">
-    <p>Sakit : <span class="badge badge-warning">#</span></p>
+    <p>DL : <span class="badge badge-warning">{{ $dl }}</span></p>
   </div>
 
   <div class="col-md-3">
-    <p>Izin : <span class="badge badge-info">#</span></p>
+    <p>Cuti : <span class="badge badge-info">{{ $cuti }}</span></p>
   </div>
 </div>
 

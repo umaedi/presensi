@@ -22,7 +22,6 @@
                             </div>
                             @include('layouts.pegawai._loading_submit')
                         </div>
-       
                     </div>
                 </div>
                 <form id="formDl" enctype="multipart/form-data">
@@ -53,7 +52,7 @@
                         </div>
                     </form>
                     <div class="col-md-6">
-                        <button id="x-resetCamera" class="btn btn-warning btn-lg btn-block">Ganti Photo</button>
+                        <a href="javascript:void()" id="x-resetCamera" class="btn btn-warning btn-lg btn-block">Ganti Photo</a>
                     </div>
                 </div>
             </div>

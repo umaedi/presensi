@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Users;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Izin;
 use App\Models\Persensi;
 use App\Services\PresensiService;
+use Illuminate\Support\Facades\Auth;
 
 class HistoryController extends Controller
 {
@@ -36,8 +38,8 @@ class HistoryController extends Controller
         $data['tanggal'] = Carbon::now()->format('d M Y');
         $data['hadir'] = Persensi::where('user_id', auth()->user()->id)->count();
         $data['terlambat'] = Persensi::where('user_id', auth()->user()->id)->whereNotNull('status')->count();
-        // $data['sakit'] = $cuty->where('pegawai_id', $pegawai_id)->where('status', '2')->count();
-        // $data['cuty'] = $cuty->where('pegawai_id', $pegawai_id)->where('status', '3')->count();
+        $data['dl'] = $this->presensi->Query()->where('user_id', Auth::user()->id)->where('status', 'dl')->count();
+        $data['cuti'] = Izin::where('user_id', Auth::user()->id)->count();
         $data['title'] = 'Data History Absensi';
 
         return view('users.history.index', $data);

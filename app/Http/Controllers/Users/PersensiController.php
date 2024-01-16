@@ -19,6 +19,7 @@ class PersensiController extends Controller
     {
         $this->presensi = $presensiService;
     }
+
     public function index()
     {
         $data['title'] = 'Isi Presensi';
