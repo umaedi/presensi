@@ -28,6 +28,7 @@ Route::middleware('auth')->prefix('user')->group(function () {
     Route::get('/history/print', [Users\HistoryController::class, 'print']);
 
     Route::get('/profile', [Users\ProfileController::class, 'index']);
+    Route::get('/scan', Users\ScanController::class);
 });
 
 //route for oprator

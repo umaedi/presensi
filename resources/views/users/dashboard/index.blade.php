@@ -24,7 +24,7 @@
                         <div class="icon-wrapper bg-warning"><ion-icon name="paper-plane-outline"></ion-icon>
                         </div><strong>DL</strong>
                     </a></div>
-                <div class="item"><a href="/user/profile">
+                <div class="item"><a href="/user/scan">
                         <div class="icon-wrapper bg-success"><ion-icon name="qr-code-outline"></ion-icon></div>
                         <strong>Scanner</strong>
                     </a></div>
