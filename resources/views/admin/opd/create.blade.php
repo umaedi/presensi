@@ -67,7 +67,7 @@
 </div>
 @endsection
 @push('js')
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPd9X55ZmEgE6R-T2mBiQVRGK1hjVNou8&libraries=places"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdrcR4AiS_NF-9lL3I0_wBqZ8VroWpA50&libraries=places"></script>
 <script src="{{ asset('assets/pegawai') }}/js/sweetalert.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
