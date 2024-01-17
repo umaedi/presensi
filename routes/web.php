@@ -66,6 +66,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     //import pegawai
     Route::post('/importuser', ImportuserController::class);
+
+    //report
+    Route::get('/laporan', [Admin\LaporanController::class, 'index']);
 });
 
 // Route::get('opd/admin', function () {

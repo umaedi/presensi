@@ -30,6 +30,7 @@
       <div class="col-lg-4 col-md-4 order-1">
         <div class="row">
           <div class="col-lg-6 col-md-12 col-6 mb-4">
+            <a href="/admin/opd">
             <div class="card">
               <div class="card-body">
                 <div class="card-title d-flex align-items-start justify-content-between">
@@ -45,8 +46,10 @@
                 <h3 class="card-title mb-2">{{ $opd }}</h3>
               </div>
             </div>
+          </a>
           </div>
           <div class="col-lg-6 col-md-12 col-6 mb-4">
+            <a href="/admin/oprator">
             <div class="card">
               <div class="card-body">
                 <div class="card-title d-flex align-items-start justify-content-between">
@@ -62,8 +65,8 @@
                 <h3 class="card-title mb-2">{{ $oprator }}</h3>
               </div>
             </div>
+          </a>
           </div>
-     
         </div>
       </div>
       <!-- Total Revenue -->
@@ -79,6 +82,7 @@
       <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
         <div class="row">
           <div class="col-6 mb-4">
+            <a href="/admin/pegawai">
             <div class="card">
               <div class="card-body">
                 <div class="card-title d-flex align-items-start justify-content-between">
@@ -90,6 +94,7 @@
                 <h3 class="card-title text-nowrap mb-2">{{ $users }}</h3>
               </div>
             </div>
+          </a>
           </div>
           <div class="col-6 mb-4">
             <div class="card">
@@ -152,7 +157,7 @@
 
         setInterval(() => {
           loadPresensiCount();
-        }, 5000);
+        }, 10000);
 
         jQuery(function($) {
         setInterval(function() {

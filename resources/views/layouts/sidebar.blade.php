@@ -92,6 +92,12 @@
           <div data-i18n="Boxicons">Master Pegawai</div>
         </a>
       </li>
+      <li class="menu-item {{ Request::is('admin/laporan*') ? 'active' : '' }}">
+        <a href="/admin/laporan" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-data"></i>
+          <div data-i18n="Boxicons">Master Laporan</div>
+        </a>
+      </li>
       @else
       <li class="menu-item {{ Request::is('oprator/dashboard') ? 'active' : '' }}">
         <a href="/oprator/dashboard" class="menu-link">
@@ -103,6 +109,12 @@
         <a href="/oprator/pegawai" class="menu-link">
           <i class="menu-icon tf-icons bx bx-user"></i>
           <div data-i18n="Boxicons">Master Pegawai</div>
+        </a>
+      </li>
+      <li class="menu-item {{ Request::is('oprator/laporan*') ? 'active' : '' }}">
+        <a href="/oprator/pegawai" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-user"></i>
+          <div data-i18n="Boxicons">Master Laporan</div>
         </a>
       </li>
       @endif
