@@ -54,7 +54,7 @@
                     <div class="mb-3">
                         <label for="text" class="form-label">Cari Lokasi</label>
                         <input
-                          type="email"
+                          type="text"
                           id="start-search"
                           class="form-control"
                         />
