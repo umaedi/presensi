@@ -75,21 +75,18 @@
     });
     function initialize() {
 
-    let mapOptions, map, marker, searchBox, city,
+        let mapOptions, map, marker, searchBox, city,
         infoWindow = '',
         addressEl = document.querySelector('#start-search'),
-        // latEl = document.querySelector('.latitude'),
-        // longEl = document.querySelector('.longitude'),
+        latEl = document.querySelector('.latitude'),
+        longEl = document.querySelector('.longitude'),
         element = document.getElementById('map');
-    latLong = document.querySelector('.latlong');
-    // city = document.querySelector('.reg-input-city');
-    posCode = document.querySelector('.pos-code');
 
     mapOptions = {
         // How far the maps zooms in.
         zoom: 8,
         // Current Lat and Long position of the pin/
-        center: new google.maps.LatLng(-5.450000, 105.266670),
+        center: new google.maps.LatLng(-4.4966928, 105.1585917),
         // center : {
         // 	lat: -34.397,
         // 	lng: 150.644
@@ -147,9 +144,8 @@
 
         lat = marker.getPosition().lat();
         long = marker.getPosition().lng();
-        // latEl.value = lat;
-        // longEl.value = long;
-        latLong.value = lat + ',' + long;
+        latEl.value = lat;
+        longEl.value = long;
 
         let geocoder = new google.maps.Geocoder();
         geocoder.geocode({ latLng: marker.getPosition() }, function (results, status) {
@@ -162,11 +158,8 @@
                         ].long_name;
                 }
                 addressEl.value = address;
-                // latEl.value = lat;
-                // longEl.value = long;
-                latLong.value = lat + ',' + long;
-                posCode.value = pin
-
+                latEl.value = lat;
+                longEl.value = long;
             } else {
                 console.log('Geocode was not successful for the following reason: ' + status);
             }
@@ -209,10 +202,8 @@
                         ].long_name;
                 }
                 addressEl.value = address;
-                // latEl.value = lat;
-                // longEl.value = long;
-                latLong.value = lat + ',' + long;
-                posCode.value = pin
+                latEl.value = lat;
+                longEl.value = long;
 
             } else {
                 console.log('Geocode was not successful for the following reason: ' + status);
