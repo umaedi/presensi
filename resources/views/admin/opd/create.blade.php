@@ -23,7 +23,6 @@
                               type="text"
                               id="nama_opd"
                               class="form-control"
-                              value="{{ $opd->nama_opd }}"
                             />
                         </div>
                         <div class="col-md-3 mb-3">
@@ -33,7 +32,6 @@
                               type="text"
                               id="lat"
                               class="form-control latitude"
-                              value="{{ $opd->lat }}"
                             />
                         </div>
                         <div class="col-md-3 mb-3">
@@ -43,7 +41,6 @@
                               type="text"
                               id="long"
                               class="form-control longitude"
-                              value="{{ $opd->long }}"
                             />
                         </div>
                     </div>
