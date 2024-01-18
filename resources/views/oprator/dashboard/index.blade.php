@@ -174,7 +174,7 @@
 
         function loadPaginate(to) {
           page = to;
-          loadLaporan();
+          loadTable();
         }
 
     function showPresensi(data, waktu)

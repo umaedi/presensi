@@ -37,6 +37,7 @@ class IzinController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         $validator = Validator::make($request->all(), [
             'tanggal_awal'  => 'required|max:255',
             'tanggal_akhir' => 'required|max:255',

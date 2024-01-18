@@ -112,7 +112,7 @@
         </a>
       </li>
       <li class="menu-item {{ Request::is('oprator/laporan*') ? 'active' : '' }}">
-        <a href="/oprator/pegawai" class="menu-link">
+        <a href="javascript:void()" onclick="return confirm('Mohon maaf. Sedang dalam pengembangan!')" class="menu-link">
           <i class="menu-icon tf-icons bx bx-user"></i>
           <div data-i18n="Boxicons">Master Laporan</div>
         </a>
