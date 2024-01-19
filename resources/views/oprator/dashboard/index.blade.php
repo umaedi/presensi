@@ -104,7 +104,7 @@
                   <div class="col col-md-8 mb-0">
                     <div class="form-group mb-3">
                       <label for="dobExLarge" class="form-label">Nama</label>
-                      <input type="text" id="dobExLarge" class="form-control" value="{{ auth()->user()->nama }}" />
+                      <input type="text" id="dobExLarge" class="form-control" name="nama" />
                     </div>
                     <div class="form-group mb-3">
                       <label for="dobExLarge" class="form-label">Tanggal</label>
@@ -182,12 +182,14 @@
         if(waktu === 1) {
             $('.modal-title').html('Detail Presensi Pagi');
             $('#photoAbsen').attr('src', "{{ asset('storage/users/img') }}/"+ data.photo_masuk);
+            $('input[name=nama]').val(data.user.nama);
             $('input[name=tanggal]').val(data.tanggal);
             $('input[name=jam_masuk]').val(data.jam_masuk);
             $('input[name=latlong]').val(data.lat_long_masuk);
         }else {
             $('.modal-title').html('Detail Presensi Sore');
             $('#photoAbsen').attr('src', "{{ asset('storage/users/img') }}/"+ data.photo_pulang);
+            $('input[name=nama]').val(data.user.nama);
             $('input[name=tanggal]').val(data.tanggal);
             $('input[name=jam_masuk]').val(data.jam_pulang);
             $('input[name=latlong]').val(data.lat_long_pulang);

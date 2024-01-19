@@ -37,13 +37,13 @@ class IzinController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
         $validator = Validator::make($request->all(), [
             'tanggal_awal'  => 'required|max:255',
             'tanggal_akhir' => 'required|max:255',
             'tanggal_masuk' => 'required|max:255',
             'jumlah_izin' => 'required|max:255',
-            'lampiran'  => 'file|mimes:pdf,docx|max:2048'
+            'keterangan'    => 'string|max:255',
+            'lampiran'  => 'file|mimes:jpg,jpeg,png,pdf,docx|max:2048'
         ]);
 
         if ($validator->fails()) {
