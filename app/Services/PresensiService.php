@@ -18,6 +18,11 @@ class PresensiService
         return  $this->presensi->create($data);
     }
 
+    public function find($id)
+    {
+        return $this->presensi->find($id);
+    }
+
     public function update($presensi, $data)
     {
         return $presensi->update($data);

@@ -71,4 +71,20 @@ class UserController extends Controller
         $data['pegawai'] = $this->user->show($id);
         return view('admin.users.show', $data);
     }
+
+    public function destroy($id)
+    {
+        try {
+            $this->user->destroy($id);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+
+        $presensi = $this->presensi->find($id);
+        if ($presensi) {
+            $presensi->destroy();
+        }
+
+        return redirect('/admin/pegawai')->with('msg_delete', 'Pegawai berhasil dihapus');
+    }
 }

@@ -55,15 +55,15 @@
   </div>
 
   <div class="col-md-3">
-    <p>Terlambat : <span class="label badge badge-danger">{{ $terlambat }}</span></p>
+    <p id="terlambat">Terlambat : <span class="label badge badge-danger">{{ $terlambat }}</span></p>
   </div>
 
   <div class="col-md-3">
-    <p>DL : <span class="badge badge-warning">{{ $dl }}</span></p>
+    <p id="dl">DL : <span class="badge badge-warning">{{ $dl }}</span></p>
   </div>
 
   <div class="col-md-3">
-    <p>Cuti : <span class="badge badge-info">{{ $cuti }}</span></p>
+    <p id="cuti">Cuti : <span class="badge badge-info">{{ $cuti }}</span></p>
   </div>
 </div>
 
@@ -120,10 +120,25 @@
     var page  = 1;
     var tanggalAwal = '';
     var tanggalAkhir = '';
+    var terlambat = '';
+    var dl = '';
+    var cuti = '';
 
     $(document).ready(function() {
         loadData();
         $('#tampilkan').click(function() {
+            filterData();
+        });
+
+        $('#terlambat').click(function() {
+            filterData();
+        });
+
+        $('#dl').click(function() {
+            filterData();
+        });
+
+        $('#cuti').click(function() {
             filterData();
         });
 
@@ -140,6 +155,7 @@
     function filterData(){
        tanggalAwal = $('#tanggalAwal').val();
        tanggalAkhir =  $('#tanggalAkhir').val();
+       terlambat = 'terlambat';
        loadData();
     }
 

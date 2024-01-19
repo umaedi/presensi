@@ -58,6 +58,7 @@ class IzinController extends Controller
         }
 
         $data['user_id'] = Auth::user()->id;
+        $data['opd_id'] = Auth::user()->opd_id;
 
         try {
             $this->izin->store($data);

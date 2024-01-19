@@ -28,7 +28,7 @@ class HistoryController extends Controller
                 $presensi->whereBetween('created_at', [$tgl_awal, $tgl_akhir]);
             }
 
-            $data['table'] = $presensi->where('user_id', auth()->user()->id)->latest()->paginate(12);
+            $data['table'] = $presensi->where('user_id', auth()->user()->id)->latest()->paginate(15);
             return view('users.history._data_table_history', $data);
         }
 
@@ -37,7 +37,7 @@ class HistoryController extends Controller
 
         $data['tanggal'] = Carbon::now()->format('d M Y');
         $data['hadir'] = Persensi::where('user_id', auth()->user()->id)->count();
-        $data['terlambat'] = Persensi::where('user_id', auth()->user()->id)->whereNotNull('status')->count();
+        $data['terlambat'] = Persensi::where('user_id', auth()->user()->id)->whereNotNull('status')->where('status', '!=', 'DL')->count();
         $data['dl'] = $this->presensi->Query()->where('user_id', Auth::user()->id)->where('status', 'dl')->count();
         $data['cuti'] = Izin::where('user_id', Auth::user()->id)->count();
         $data['title'] = 'Data History Absensi';

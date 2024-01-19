@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Admin\OpratorController;
 use Illuminate\Support\Facades\Route;
 
 //route login
@@ -39,6 +40,8 @@ Route::middleware(['auth', 'oprator'])->prefix('oprator')->group(function () {
     Route::get('/pegawai/show/{id}', [Oprator\PegawaiController::class, 'show']);
     Route::put('/pegawai/update/{id}', [Oprator\PegawaiController::class, 'update']);
 
+    Route::get('/cuti', [Oprator\CutiController::class, 'index']);
+
     //import pegawai
     Route::post('/importuser', ImportuserController::class);
 
@@ -60,6 +63,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/pegawai', [Admin\UserController::class, 'index']);
     Route::post('/pegawai/store', [Admin\UserController::class, 'store']);
     Route::get('/pegawai/show/{id}', [Admin\UserController::class, 'show']);
+    Route::get('/user/destroy/{id}', [Admin\UserController::class, 'destroy']);
 
     Route::get('/oprator', [Admin\OpratorController::class, 'index']);
     Route::post('/oprator/store', [Admin\OpratorController::class, 'store']);

@@ -14,6 +14,7 @@ class Izin extends Model
     protected $keyType = 'string';
     protected $fillable = [
         'user_id',
+        'opd_id',
         'tanggal_awal',
         'tanggal_akhir',
         'tanggal_masuk',

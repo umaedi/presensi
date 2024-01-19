@@ -119,6 +119,7 @@
                   Loading...
                 </button>
                 <button id="btn_update" type="submit" class="btn btn-primary me-2">Simpan Perubahan</button>
+                <a href="/admin/user/destroy/{{ $pegawai->id }}" onclick="return confirm('Yakin hapus pegawai ini')" type="submit" class="btn btn-warning me-2">Hapus Pegawai</a>
               </div>
             </form>
           </div>

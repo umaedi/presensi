@@ -33,4 +33,10 @@ class UserService
         $user = $this->user->where('id', $id)->update($data);
         return $user;
     }
+
+    public function destroy($id)
+    {
+        $user = $this->user->destroy($id);
+        return $user;
+    }
 }
