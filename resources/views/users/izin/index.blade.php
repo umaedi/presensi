@@ -168,8 +168,15 @@
                         </div>
                         <div class="form-group">
                             <div class="input-wrapper">
+                                <label class="label">Lampiran yang di unggah</label>
+                                <textarea rows="2" class="form-control cuty_description" id="keterangan-cuty" name="keterangan"></textarea><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-wrapper">
                                 <label class="label">Lampiran</label>
                                 <input type="file" class="form-control cuty_description" name="lampiran">
+                                <a id="lampiran" href="">Lampiran yang sudah di upload lihat disini</a>
                             </div>
                         </div>
                         <div class="form-group">
@@ -296,6 +303,7 @@
             $('#tanggal-masuk').val(data.tanggal_masuk);
             $('#jumlah-cuty').val(data.jumlah_izin);
             $('#keterangan-cuty').val(data.keterangan);
+            $('#lampiran').attr('href', "{{ asset('storage/lampiran') }}/"+ data.lampiran);
         }
 
         function filterTable() {

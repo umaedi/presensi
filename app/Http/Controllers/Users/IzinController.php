@@ -52,7 +52,9 @@ class IzinController extends Controller
 
         $data = $request->except('_token');
         if ($request->lampiran) {
-            $data['lampiran'] = $request->file('lampiran')->store('public/lampiran');
+            $lampiran = $request->file('lampiran');
+            $lampiran->storeAs('public/lampiran', $lampiran->hashName());
+            $data['lampiran'] = $lampiran->hashName();
         }
 
         $data['user_id'] = Auth::user()->id;
@@ -83,7 +85,9 @@ class IzinController extends Controller
 
         $data = $request->except('_token');
         if ($request->lampiran) {
-            $data['lampiran'] = $request->file('lampiran')->store('public/lampiran');
+            $lampiran = $request->file('lampiran');
+            $lampiran->storeAs('public/lampiran', $lampiran->hashName());
+            $data['lampiran'] = $lampiran->hashName();
         }
 
         $id = $request->id;
