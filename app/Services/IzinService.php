@@ -17,6 +17,11 @@ class IzinService
         return $this->izin->create($data);
     }
 
+    public function find($id)
+    {
+        $cuti = $this->izin->find($id);
+        return $cuti;
+    }
     public function update($id, $data)
     {
         $model = $this->izin->find($id);

@@ -24,4 +24,11 @@ class CutiController extends Controller
         $data['title'] = 'Data cuti';
         return view('oprator.cuti.index', $data);
     }
+
+    public function show($id)
+    {
+        $data['title'] = 'Detail cuti';
+        $data['cuti'] = $this->cuti->find($id);
+        return view('oprator.cuti.show', $data);
+    }
 }

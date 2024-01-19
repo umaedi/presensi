@@ -73,4 +73,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Opd::class);
     }
+
+    public function izin()
+    {
+        return $this->hasMany(Izin::class);
+    }
 }

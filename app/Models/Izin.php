@@ -30,4 +30,9 @@ class Izin extends Model
             $model->id  = Uuid::uuid4()->toString();
         });
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

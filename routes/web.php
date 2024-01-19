@@ -41,6 +41,7 @@ Route::middleware(['auth', 'oprator'])->prefix('oprator')->group(function () {
     Route::put('/pegawai/update/{id}', [Oprator\PegawaiController::class, 'update']);
 
     Route::get('/cuti', [Oprator\CutiController::class, 'index']);
+    Route::get('/cuti/show/{id}', [Oprator\CutiController::class, 'show']);
 
     //import pegawai
     Route::post('/importuser', ImportuserController::class);
