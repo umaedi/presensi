@@ -14,7 +14,7 @@
                             <h2 class="text-center">Petunjuk</h2>
                             <p>1. Menu DL (Dinas Luar) hanya boleh digunakan jika Anda sedang tidak berada dikantor tempat Anda bekerja</p>
                             <p>2. Aktifkan kamera dengan menekan icon finger print</p>
-                            <p>3. Upload SPT Jikada ada</p>
+                            <p>3. Upload SPT Jika ada</p>
                             <p>4. Isi keterangan</p>
                             <p>5. Isi presensi</p>
                         </div>
