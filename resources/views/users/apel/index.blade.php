@@ -6,15 +6,14 @@
                     <div class="card">
                         <div class="card-body pt-3 pb-3 text-center">
                             <img src="{{ asset('assets/img') }}/vector1.png" alt="image" class="imaged w-50 ">
-                            <h2 class="mt-2">Dinas Luar</h2>
+                            <h2 class="mt-2">Apel</h2>
                         </div>
                     </div>
                     <div class="card mt-2">
                         <div class="card-body">
                             <h2 class="text-center">Petunjuk</h2>
-                            <p>1. Menu DL (Dinas Luar) hanya boleh digunakan jika Anda sedang tidak berada dikantor tempat Anda bekerja</p>
+                            <p>1. Menu Apel dapat Anda gunakan ketika ada kegiatan apel pagi disekitaran pemda lama</p>
                             <p>2. Aktifkan kamera dengan menekan icon finger print</p>
-                            <p>3. Upload SPT Jikada ada</p>
                             <p>4. Isi keterangan</p>
                             <p>5. Isi presensi</p>
                         </div>
@@ -22,11 +21,11 @@
                 </div>
             </div>
         </div>
-    @include('layouts.modal._modal_dl')
+    @include('layouts.modal._modal_apel')
 @endsection
 @push('js')
     <script type="text/javascript">
-    $('#formDl').submit(async function(e) {
+    $('#formApel').submit(async function(e) {
         e.preventDefault();
         $('#x-action').addClass('d-none');
     
@@ -35,7 +34,7 @@
         data.append('latLong', latLong);
         var param = {
             method: 'POST',
-            url: '/user/presensi_dl/store',
+            url: '/user/presensi_apel/store',
             data: data,
             processData:false,
             contentType: false,

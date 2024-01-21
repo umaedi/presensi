@@ -122,7 +122,12 @@ function openCamera(status)
         }
     }
 
-    var currentLocation = { lat: {{ auth()->user()->opd->lat }}, lng: {{ auth()->user()->opd->long }} };
+    if(status == 2) {
+        console.log('ok');
+        var currentLocation = {lat: -4.4951736, lng: 105.2203752};
+    }else {
+        var currentLocation = { lat: {{ auth()->user()->opd->lat }}, lng: {{ auth()->user()->opd->long }} };
+    }
     var radius = 300;
     function getCurrentPosition(position) {
         var userLocation = {

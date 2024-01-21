@@ -12,20 +12,20 @@
                 </div>
             </div>
             <div class="wallet-footer">
-                <div class="item"><a href="javascript:void()" data-toggle="modal" data-target="#modal-selfi">
-                        <div class="icon-wrapper bg-primary"><ion-icon name="camera-outline"></ion-icon></div>
-                        <strong>Presensi</strong>
+                <div class="item"><a href="/user/apel">
+                        <div class="icon-wrapper bg-danger"><ion-icon name="golf-outline"></ion-icon></div>
+                        <strong>Apel</strong>
                     </a></div>
                 <div class="item"><a href="/user/izin">
-                        <div class="icon-wrapper bg-primary"><ion-icon name="calendar-outline"></ion-icon></div>
+                        <div class="icon-wrapper bg-warning"><ion-icon name="calendar-outline"></ion-icon></div>
                         <strong>Cuti</strong>
                     </a></div>
                 <div class="item"><a href="/user/dl">
-                        <div class="icon-wrapper bg-warning"><ion-icon name="paper-plane-outline"></ion-icon>
+                        <div class="icon-wrapper bg-success"><ion-icon name="paper-plane-outline"></ion-icon>
                         </div><strong>DL</strong>
                     </a></div>
                 <div class="item"><a href="/user/scan">
-                        <div class="icon-wrapper bg-success"><ion-icon name="qr-code-outline"></ion-icon></div>
+                        <div class="icon-wrapper bg-primary"><ion-icon name="qr-code-outline"></ion-icon></div>
                         <strong>Scanner</strong>
                     </a></div>
             </div>

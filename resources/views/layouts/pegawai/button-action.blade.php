@@ -9,13 +9,32 @@
             <ion-icon name="calendar-outline"></ion-icon><strong>Cuti</strong>
         </div>
     </a>
-    <a href="javascript:void()" onclick="openCamera({{ Request::is('user/dl') ? '1' : '' }})"  class="item">
+    @if (Request::is('user/dl'))
+    <a href="javascript:void()" onclick="openCamera('1')"  class="item">
         <div class="col">
             <div class="action-button large">
                 <ion-icon name="finger-print-outline"></ion-icon>
             </div>
         </div>
     </a>
+    @elseif(Request::is('user/apel'))
+    <a href="javascript:void()" onclick="openCamera('2')"  class="item">
+        <div class="col">
+            <div class="action-button large">
+                <ion-icon name="finger-print-outline"></ion-icon>
+            </div>
+        </div>
+    </a>
+    @else
+    <a href="javascript:void()" onclick="openCamera()"  class="item">
+        <div class="col">
+            <div class="action-button large">
+                <ion-icon name="finger-print-outline"></ion-icon>
+            </div>
+        </div>
+    </a>
+    @endif
+
     <a href="/user/histories" class="item {{ Request::is('user/histories') ? 'active' : '' }}">
         <div class="col">
             <ion-icon name="document-text-outline"></ion-icon><strong>Riwayat</strong>

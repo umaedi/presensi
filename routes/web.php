@@ -25,6 +25,9 @@ Route::middleware('auth')->prefix('user')->group(function () {
     Route::get('/dl', [Users\DlController::class, 'index']);
     Route::post('/presensi_dl/store', [Users\DlController::class, 'store']);
 
+    Route::get('/apel', [Users\ApelController::class, 'index']);
+    Route::post('/presensi_apel/store', [Users\ApelController::class, 'store']);
+
     Route::get('/histories', [Users\HistoryController::class, 'index']);
     Route::get('/history/print', [Users\HistoryController::class, 'print']);
 
