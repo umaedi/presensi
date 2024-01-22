@@ -47,7 +47,6 @@
 <script src="{{ asset('assets/pegawai') }}/js/sweetalert.min.js"></script>
 <script src="{{ asset('assets/pegawai') }}/js/webcamjs/webcam.min.js"></script>
 <script src="{{ asset('assets/pegawai') }}/js/fakeLoader.min.js"></script>
-{{-- <script src="{{ asset('assets/pegawai') }}/js/plugins/magnific-popup/jquery.magnific-popup.min.js"></script> --}}
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPd9X55ZmEgE6R-T2mBiQVRGK1hjVNou8&libraries=places"></script> --}}
 <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8y5ZQcuol7vxOkXii_wsHqYhCNL0uEM&libraries=geometry&callback&places"></script>
@@ -94,127 +93,22 @@ var shutter = new Audio();
 function openCamera(status)
 {
     //productoion
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-    } else {
-        swal({ title: 'Oops!', text: 'Maaf, browser Anda tidak mendukung geolokasi HTML5.', icon: 'error', timer: 3000, });
-    }
-
-    function successCallback(position) {
-        if(status == 1) {
-            setCamera();
-            return latLong = "" + position.coords.latitude + "," + position.coords.longitude + "";
-        }else {
-            getCurrentPosition(position);
-            return latLong = "" + position.coords.latitude + "," + position.coords.longitude + "";
-        }
-    }
-
-    function errorCallback(error) {
-        if (error.code == 1) {
-            swal({ title: 'Oops!', text: 'Mohon untuk mengaktifkan lokasi Anda', icon: 'error', timer: 3000, });
-        } else if (error.code == 2) {
-            swal({ title: 'Oops!', text: 'Jaringan tidak aktif atau layanan penentuan posisi tidak dapat dijangkau.', icon: 'error', timer: 3000, });
-        } else if (error.code == 3) {
-            swal({ title: 'Oops!', text: 'Waktu percobaan habis sebelum bisa mendapatkan data lokasi.', icon: 'error', timer: 3000, });
-        } else {
-            swal({ title: 'Oops!', text: 'Waktu percobaan habis sebelum bisa mendapatkan data lokasi.', icon: 'error', timer: 3000, });
-        }
-    }
-
-    if(status == 2) {
-        var currentLocation = {lat: -4.4950449, lng: 105.2206886};
-        var radius = 500;
-    }else {
-        var currentLocation = { lat: {{ auth()->user()->opd->lat }}, lng: {{ auth()->user()->opd->long }} };
-        var radius = 300;
-    }
-    function getCurrentPosition(position) {
-        var userLocation = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-        };
-
-        var distance = google.maps.geometry.spherical.computeDistanceBetween(
-            new google.maps.LatLng(currentLocation),
-            new google.maps.LatLng(userLocation)
-        );
-
-        if (distance < radius) {
-            setCamera();
-        } else {
-            removeFile(image);
-            swal({ title: 'Oops!', text: 'Mohon Maaf Sepertinya Anda Diluar Radius!', icon: 'error', timer: 3000, }).then(() => {
-                window.location.href = '/user/dashboard';
-            });
-
-        }
-    }
-    //production end
-
-    //development
-    // var currentLocation = { lat: {{ auth()->user()->opd->lat }}, lng: {{ auth()->user()->opd->long }} };
-    // var radius = 300;
-    // var watchId;
-    // var lastLocation;
-    // var lastTimestamp;
-
-    // Cek browser atau tidak
     // if (navigator.geolocation) {
-    //     // Memantau perubahan lokasi
-    //     watchId = navigator.geolocation.watchPosition(successCallback, errorCallback, { enableHighAccuracy: true });
+    //     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
     // } else {
-    //     swal({ title: 'Oops!', text: 'Maaf, browser Anda tidak mendukung geolokasi HTML5.', icon: 'error', timer: 3000 });
+    //     swal({ title: 'Oops!', text: 'Maaf, browser Anda tidak mendukung geolokasi HTML5.', icon: 'error', timer: 3000, });
     // }
 
-    // Fungsi callback untuk perubahan lokasi
     // function successCallback(position) {
-    //     var userLocation = {
-    //         lat: position.coords.latitude,
-    //         lng: position.coords.longitude
-    //     };
-
-    //     // Strategi-deteksi: Bandingkan perubahan lokasi dengan waktu sebelumnya
-    //     if (lastLocation) {
-    //         var distance = google.maps.geometry.spherical.computeDistanceBetween(
-    //             new google.maps.LatLng(lastLocation),
-    //             new google.maps.LatLng(userLocation)
-    //         );
-    //         var timeDifference = position.timestamp - lastTimestamp;
-
-    //         // Bandingkan kecepatan dengan jarak dan waktu
-    //         var speed = distance / timeDifference;
-
-    //         // Tambahkan strategi-deteksi lain sesuai kebutuhan
-
-    //         // Contoh: Batasi kecepatan maksimum
-    //         if (speed > 30) {
-    //             handleFakeGPSDetection();
-    //             return;
-    //         }
-    //     }
-
-    //     // Strategi-deteksi lain dapat ditambahkan di sini
-
-    //     lastLocation = userLocation;
-    //     lastTimestamp = position.timestamp;
-
-    //     var distance = google.maps.geometry.spherical.computeDistanceBetween(
-    //         new google.maps.LatLng(currentLocation),
-    //         new google.maps.LatLng(userLocation)
-    //     );
-
-    //     // Jika jarak kurang dari radius
-    //     if (distance < radius) {
+    //     if(status == 1) {
     //         setCamera();
-    //     } else {
-    //         swal({ title: 'Oops!', text: 'Mohon Maaf Sepertinya Anda Diluar Radius!', icon: 'error', timer: 3000 }).then(() => {
-    //             window.location.href = '/user/dashboard';
-    //         });
+    //         return latLong = "" + position.coords.latitude + "," + position.coords.longitude + "";
+    //     }else {
+    //         getCurrentPosition(position);
+    //         return latLong = "" + position.coords.latitude + "," + position.coords.longitude + "";
     //     }
     // }
 
-    // // Fungsi callback untuk error
     // function errorCallback(error) {
     //     if (error.code == 1) {
     //         swal({ title: 'Oops!', text: 'Mohon untuk mengaktifkan lokasi Anda', icon: 'error', timer: 3000, });
@@ -227,20 +121,124 @@ function openCamera(status)
     //     }
     // }
 
-    // // Fungsi untuk mengatasi deteksi fake GPS
-    // function handleFakeGPSDetection() {
-    //     // Tindakan yang diambil jika terdeteksi fake GPS
-    //     swal({ title: 'Oops!', text: 'Penggunaan Fake GPS Terdeteksi!', icon: 'error', timer: 3000 }).then(() => {
-    //         window.location.href = '/user/dashboard';
-    //     });
+    // if(status == 2) {
+    //     var currentLocation = {lat: -4.4950449, lng: 105.2206886};
+    //     var radius = 500;
+    // }else {
+    //     var currentLocation = { lat: {{ auth()->user()->opd->lat }}, lng: {{ auth()->user()->opd->long }} };
+    //     var radius = 300;
     // }
+    // function getCurrentPosition(position) {
+    //     var userLocation = {
+    //         lat: position.coords.latitude,
+    //         lng: position.coords.longitude
+    //     };
 
-    // Fungsi untuk memberhentikan pemantauan lokasi jika diperlukan
-    // function stopWatching() {
-    //     if (watchId) {
-    //         navigator.geolocation.clearWatch(watchId);
+    //     var distance = google.maps.geometry.spherical.computeDistanceBetween(
+    //         new google.maps.LatLng(currentLocation),
+    //         new google.maps.LatLng(userLocation)
+    //     );
+
+    //     if (distance < radius) {
+    //         setCamera();
+    //     } else {
+    //         removeFile(image);
+    //         swal({ title: 'Oops!', text: 'Mohon Maaf Sepertinya Anda Diluar Radius!', icon: 'error', timer: 3000, }).then(() => {
+    //             window.location.href = '/user/dashboard';
+    //         });
+
     //     }
     // }
+    //production end
+
+    //development
+    var currentLocation = { lat: {{ auth()->user()->opd->lat }}, lng: {{ auth()->user()->opd->long }} };
+    var radius = 300;
+    var watchId;
+    var lastLocation;
+    var lastTimestamp;
+
+    if (navigator.geolocation) {
+        // Memantau perubahan lokasi
+        watchId = navigator.geolocation.watchPosition(successCallback, errorCallback, { enableHighAccuracy: true });
+    } else {
+        swal({ title: 'Oops!', text: 'Maaf, browser Anda tidak mendukung geolokasi HTML5.', icon: 'error', timer: 3000 });
+    }
+
+    //Fungsi callback untuk perubahan lokasi
+    function successCallback(position) {
+        var userLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+
+        // Strategi-deteksi: Bandingkan perubahan lokasi dengan waktu sebelumnya
+        if (lastLocation) {
+            var distance = google.maps.geometry.spherical.computeDistanceBetween(
+                new google.maps.LatLng(lastLocation),
+                new google.maps.LatLng(userLocation)
+            );
+            var timeDifference = position.timestamp - lastTimestamp;
+
+            // Bandingkan kecepatan dengan jarak dan waktu
+            var speed = distance / timeDifference;
+
+            // Tambahkan strategi-deteksi lain sesuai kebutuhan
+
+            // Contoh: Batasi kecepatan maksimum
+            if (speed > 30) {
+                handleFakeGPSDetection();
+                return;
+            }
+        }
+
+        // Strategi-deteksi lain dapat ditambahkan di sini
+
+        lastLocation = userLocation;
+        lastTimestamp = position.timestamp;
+
+        var distance = google.maps.geometry.spherical.computeDistanceBetween(
+            new google.maps.LatLng(currentLocation),
+            new google.maps.LatLng(userLocation)
+        );
+
+        // Jika jarak kurang dari radius
+        if (distance < radius) {
+            setCamera();
+        } else {
+            swal({ title: 'Oops!', text: 'Mohon Maaf Sepertinya Anda Diluar Radius!', icon: 'error', timer: 3000 }).then(() => {
+                window.location.href = '/user/dashboard';
+            });
+        }
+    }
+
+    // Fungsi callback untuk error
+    function errorCallback(error) {
+        if (error.code == 1) {
+            swal({ title: 'Oops!', text: 'Mohon untuk mengaktifkan lokasi Anda', icon: 'error', timer: 3000, });
+        } else if (error.code == 2) {
+            swal({ title: 'Oops!', text: 'Jaringan tidak aktif atau layanan penentuan posisi tidak dapat dijangkau.', icon: 'error', timer: 3000, });
+        } else if (error.code == 3) {
+            swal({ title: 'Oops!', text: 'Waktu percobaan habis sebelum bisa mendapatkan data lokasi.', icon: 'error', timer: 3000, });
+        } else {
+            swal({ title: 'Oops!', text: 'Waktu percobaan habis sebelum bisa mendapatkan data lokasi.', icon: 'error', timer: 3000, });
+        }
+    }
+
+    // Fungsi untuk mengatasi deteksi fake GPS
+    function handleFakeGPSDetection() {
+        // Tindakan yang diambil jika terdeteksi fake GPS
+        swal({ title: 'Oops!', text: 'Penggunaan Fake GPS Terdeteksi!', icon: 'error', timer: 3000 }).then(() => {
+            window.location.href = '/user/dashboard';
+        });
+    }
+
+    //Fungsi untuk memberhentikan pemantauan lokasi jika diperlukan
+    function stopWatching() {
+        if (watchId) {
+            navigator.geolocation.clearWatch(watchId);
+        }
+    }
     //development end
 
     $('#modalSelfi').modal('show');
