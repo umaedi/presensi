@@ -124,11 +124,12 @@ function openCamera(status)
 
     if(status == 2) {
         console.log('ok');
-        var currentLocation = {lat: -4.4951736, lng: 105.2203752};
+        var currentLocation = {lat: -4.4950449, lng: 105.2206886};
+        var radius = 500;
     }else {
         var currentLocation = { lat: {{ auth()->user()->opd->lat }}, lng: {{ auth()->user()->opd->long }} };
+        var radius = 300;
     }
-    var radius = 300;
     function getCurrentPosition(position) {
         var userLocation = {
             lat: position.coords.latitude,
@@ -143,6 +144,7 @@ function openCamera(status)
         if (distance < radius) {
             setCamera();
         } else {
+            removeFile(image);
             swal({ title: 'Oops!', text: 'Mohon Maaf Sepertinya Anda Diluar Radius!', icon: 'error', timer: 3000, }).then(() => {
                 window.location.href = '/user/dashboard';
             });
