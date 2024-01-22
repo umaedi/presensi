@@ -123,7 +123,6 @@ function openCamera(status)
     }
 
     if(status == 2) {
-        console.log('ok');
         var currentLocation = {lat: -4.4950449, lng: 105.2206886};
         var radius = 500;
     }else {

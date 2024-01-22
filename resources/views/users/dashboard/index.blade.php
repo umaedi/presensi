@@ -233,13 +233,13 @@
         });
     }
 
-    jQuery(function($) {
-        setInterval(function() {
-            var date = new Date(),
-                time = date.toLocaleTimeString();
-            $(".clock").html(time);
-        }, 1000);
-    });
+    // jQuery(function($) {
+    //     setInterval(function() {
+    //         var date = new Date(),
+    //             time = date.toLocaleTimeString();
+    //         $(".clock").html(time);
+    //     }, 1000);
+    // });
     
     function showAbsen(data, waktu)
     {
