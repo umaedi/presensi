@@ -38,7 +38,7 @@ class DashboardController extends Controller
         $data['absen'] = Persensi::where('user_id', auth()->user()->id)->where('tanggal', date('Y-m-d'))->first();
         $data['cuti'] = Persensi::where('user_id', auth()->user()->id)->where('status', 'cuti')->count();
         $data['hadir'] = Persensi::where('user_id', auth()->user()->id)->whereMonth('tanggal', date('m'))->count();
-        $data['terlambat'] = $this->presensi->Query()->where('user_id', Auth::user()->id)->whereMonth('tanggal', date('m'))->WhereNotNull('status')->where('status', '!=', 'dl')->count();
+        $data['terlambat'] = $this->presensi->Query()->where('user_id', Auth::user()->id)->whereMonth('tanggal', date('m'))->WhereNotNull('status')->where('status', '!=', 'DL')->where('status', '!=', 'Apel')->count();
         $data['dl'] = Persensi::where('user_id', auth()->user()->id)->where('status', 'dl')->count();
         return view('users.dashboard.index', $data);
     }
