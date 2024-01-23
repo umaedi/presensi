@@ -187,6 +187,12 @@
                         </div>
                         <div class="form-group basic">
                             <div class="input-wrapper">
+                                <label class="label">Keterangan</label>
+                                <input name="keterangan" type="text" class="form-control" value="" readonly><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
+                            </div>
+                        </div>
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
                                 <label class="label">Lokasi Saat Presensi</label>
                                 <input name="latlong" type="text" class="form-control" value="" readonly><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
                             </div>
@@ -248,12 +254,14 @@
             $('#photoAbsen').attr('src', "{{ asset('storage/users/img') }}/"+ data.photo_masuk);
             $('input[name=tanggal]').val(data.tanggal);
             $('input[name=jam_masuk]').val(data.jam_masuk);
+            $('input[name=keterangan]').val(data.keterangan);
             $('input[name=latlong]').val(data.lat_long_masuk);
         }else {
             $('.modal-title').html('Detail Absen Sore');
             $('#photoAbsen').attr('src', "{{ asset('storage/users/img') }}/"+ data.photo_pulang);
             $('input[name=tanggal]').val(data.tanggal);
             $('input[name=jam_masuk]').val(data.jam_pulang);
+            $('input[name=keterangan]').val(data.keterangan);
             $('input[name=latlong]').val(data.lat_long_pulang);
         };
 

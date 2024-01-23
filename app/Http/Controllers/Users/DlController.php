@@ -37,7 +37,7 @@ class DlController extends Controller
             }
 
             $presensiUpdate = $presensi->where('tanggal', $presensi->tanggal)->where('user_id', $user->id);
-            $file = $request->file;
+            $file = $request->img;
             if (strlen($file) > 30) {
                 if (pathinfo($file, PATHINFO_EXTENSION) !== 'jpeg') {
                     $img =  $file;
