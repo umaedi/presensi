@@ -8,7 +8,6 @@
             <div class="col-md mb-4 mb-md-0">
               <div class="card">
                   <div class="card-body">
-                    <div class="container">
                         <div class="row text-center">
                           <div class="col col-md-2">
                             <input id="tanggalAwal" type="text" class="form-control datepicker start_date" name="tanggal_awal" placeholder="Tanggal Awal">
@@ -31,7 +30,6 @@
                             <button id="export" class="form-control btn-primary">EXPORT</button>
                           </div>
                         </div>
-                      </div>
                 </div>
               </div>
             </div>
