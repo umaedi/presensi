@@ -46,8 +46,14 @@ Route::middleware(['auth', 'oprator'])->prefix('oprator')->group(function () {
     Route::get('/cuti', [Oprator\CutiController::class, 'index']);
     Route::get('/cuti/show/{id}', [Oprator\CutiController::class, 'show']);
 
+    //mster presensi
+    Route::get('/presensi', [Oprator\PresensiController::class, 'index']);
+
     //import pegawai
     Route::post('/importuser', ImportuserController::class);
+
+    //export presensi
+    Route::get('/presensi/export', Oprator\ExportpresensiController::class);
 
     Route::get('profile', Oprator\ProfileController::class);
 });

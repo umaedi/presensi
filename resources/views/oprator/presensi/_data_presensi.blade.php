@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>#</th>
+            <th>Tgl</th>
             <th>Nama</th>
             <th>Jam Masuk</th>
             <th>Jam Pulang</th>
@@ -12,6 +13,7 @@
         @forelse ($table as $key => $tb)
         <tr>
             <td>{{ $table->firstItem() + $key }}</td>
+            <td>{{  date('d-m-Y', strtotime($tb->created_at)) }}</td>
             <td>{{ $tb->user->nama }}</td>
             <td><a href="#" onclick="showPresensi({{ $tb }}, 1)" data-bs-toggle="modal"  data-bs-target="#modal-show" data-waktu="masuk">{{ $tb->jam_masuk }}</a></td>
             @if ($tb->jam_pulang)
@@ -19,12 +21,12 @@
             @else
             <td>Tdk/Blm Absen</td>
             @endif
-            @if ($tb->status == 'DL' || $tb->status == 'Apel')
+            @if ($tb->status == 'Tepat waktu')
+            <td class="text-danger">{{ $tb->status }}</td>
+            @elseif($tb->status == 'DL' || $tb->status == 'Apel')
             <td class="text-warning">{{ $tb->status }}</td>
-            @elseif($tb->status !== 'DL' && $tb->status !== NULL)
-            <td class="text-danger">Terlambat {{ $tb->status }}</td>
             @else
-            <td class="text-success">Tepat Waktu</td>
+            <td class="text-danger">{{ $tb->status }}</td>
             @endif
         </tr>
         @empty

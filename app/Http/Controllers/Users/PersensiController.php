@@ -86,9 +86,9 @@ class PersensiController extends Controller
 
             if ($currentTime > $jamMasuk) {
                 $telat = $currentTime->diff($jamMasuk);
-                $status = $telat->format('%H:%I:%S');
+                $status = 'Terlambat ' . $telat->format('%H:%I:%S');
             } else {
-                $status = null;
+                $status = 'Tepat waktu';
             }
 
             $data = $request->except('_token');

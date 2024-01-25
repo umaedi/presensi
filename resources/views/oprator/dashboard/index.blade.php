@@ -68,6 +68,12 @@
       </div>
       <!-- Total Revenue -->
       <div class="col-12 col-lg-12 order-2 order-md-3 order-lg-2 mb-4">
+        <button type="button" class="btn btn-primary mb-3" id="sudahPresensi">
+          Pegawai yang sudah melakukan presensi <span class="badge bg-warning">{{ $sudahPresensi }}</span>
+        </button>
+        <button type="button" class="btn btn-primary mb-3" id="belumPresensi">
+          Pegawai yang belum melakukan presensi <span class="badge bg-warning">{{ $belumPresensi }}</span>
+        </button>
         <div class="card">
           <h5 class="card-header">PRESENSI PEGAWAI <span class="text-uppercase">{{ $tanggal }}</span></h5>
           <div class="card-body">
@@ -134,6 +140,8 @@
 <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8y5ZQcuol7vxOkXii_wsHqYhCNL0uEM&libraries=geometry&callback"></script>
     <script type="text/javascript">
     var page = 1;
+    var sudahPresensi = '';
+    var belumPresensi = '';
     var search = '';
         $(document).ready(function() {
           loadTable();
@@ -144,10 +152,22 @@
                     return false;
                 }
             });
+
+          $('#sudahPresensi').click(function() {
+            filterTable('sudah_presensi');
+          });
+
+          $('#belumPresensi').click(function() {
+            filterTable('belum_presensi');
+          });
+
         });
 
-        function filterTable() {
+        function filterTable(value) {
+          console.log(value);
             search = $('#search').val();
+            sudahPresensi = value;
+            belumPresensi = value;
             loadTable();
         }
 
@@ -158,6 +178,8 @@
             method: 'GET',
             data: {
               load: 'table',
+              sudah_presensi:  sudahPresensi,
+              belum_presensi:  belumPresensi,
               page: page,
               search: search
             }

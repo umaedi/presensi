@@ -32,14 +32,11 @@ class HistoryController extends Controller
             return view('users.history._data_table_history', $data);
         }
 
-        // $absent = Absent::query();
-        // $cuty = Cuty::query();
-
         $data['tanggal'] = Carbon::now()->format('d M Y');
         $data['hadir'] = Persensi::where('user_id', auth()->user()->id)->count();
-        $data['terlambat'] = Persensi::where('user_id', auth()->user()->id)->whereNotNull('status')->where('status', '!=', 'DL')->count();
-        $data['dl'] = $this->presensi->Query()->where('user_id', Auth::user()->id)->where('status', 'dl')->count();
-        $data['cuti'] = Izin::where('user_id', Auth::user()->id)->count();
+        $data['terlambat'] = $this->presensi->Query()->where('user_id', Auth::user()->id)->where('status', 'like', '%' . 'Terlambat' . '%')->count();
+        $data['dl'] = $this->presensi->Query()->where('user_id', Auth::user()->id)->where('status', 'DL')->count();
+        $data['apel'] = $this->presensi->Query()->where('user_id', Auth::user()->id)->where('status', 'Apel')->count();
         $data['title'] = 'Data History Absensi';
 
         return view('users.history.index', $data);

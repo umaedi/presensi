@@ -63,7 +63,7 @@
   </div>
 
   <div class="col-md-3">
-    <p id="cuti">Cuti : <span class="badge badge-info">{{ $cuti }}</span></p>
+    <p id="cuti">Apel : <span class="badge badge-info">{{ $apel }}</span></p>
   </div>
 </div>
 
@@ -98,6 +98,12 @@
                         <div class="input-wrapper">
                             <label class="label">Waktu Presensi</label>
                             <input name="jam_masuk" type="text" class="form-control" value="" readonly><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
+                        </div>
+                    </div>
+                    <div class="form-group basic">
+                        <div class="input-wrapper">
+                            <label class="label">Keterangan</label>
+                            <input name="status" type="text" class="form-control" value="" readonly><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
                         </div>
                     </div>
                     <div class="form-group basic">
@@ -212,12 +218,14 @@
             $('#photoAbsen').attr('src', "{{ asset('storage/users/img') }}/"+ data.photo_masuk);
             $('input[name=tanggal]').val(data.tanggal);
             $('input[name=jam_masuk]').val(data.jam_masuk);
+            $('input[name=status]').val(data.status);
             $('input[name=latlong]').val(data.lat_long_masuk);
         }else {
             $('.modal-title').html('Detail Absen Sore');
             $('#photoAbsen').attr('src', "{{ asset('storage/users/img') }}/"+ data.photo_pulang);
             $('input[name=tanggal]').val(data.tanggal);
             $('input[name=jam_masuk]').val(data.jam_pulang);
+            $('input[name=status]').val(data.status);
             $('input[name=latlong]').val(data.lat_long_pulang);
         };
 

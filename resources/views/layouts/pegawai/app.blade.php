@@ -139,15 +139,15 @@ function openCamera(status)
             new google.maps.LatLng(userLocation)
         );
 
-        if (distance < radius) {
-            setCamera();
-        } else {
-            removeFile(image);
-            swal({ title: 'Oops!', text: 'Mohon Maaf Sepertinya Anda Diluar Radius!', icon: 'error', timer: 3000, }).then(() => {
-                window.location.href = '/user/dashboard';
-            });
+        setCamera();
+        // if (distance < radius) {
+        // } else {
+        //     removeFile(image);
+        //     swal({ title: 'Oops!', text: 'Mohon Maaf Sepertinya Anda Diluar Radius!', icon: 'error', timer: 3000, }).then(() => {
+        //         window.location.href = '/user/dashboard';
+        //     });
 
-        }
+        // }
     }
     //production end
 

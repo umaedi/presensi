@@ -111,8 +111,8 @@
           <div data-i18n="Boxicons">Master Pegawai</div>
         </a>
       </li>
-      <li class="menu-item {{ Request::is('oprator/laporan*') ? 'active' : '' }}">
-        <a href="javascript:void()" onclick="return confirm('Mohon maaf. Sedang dalam pengembangan!')" class="menu-link">
+      <li class="menu-item {{ Request::is('oprator/presensi*') ? 'active' : '' }}">
+        <a href="/oprator/presensi" class="menu-link">
           <i class="menu-icon tf-icons bx bx-user"></i>
           <div data-i18n="Boxicons">Master Presensi</div>
         </a>
