@@ -113,13 +113,13 @@
       </li>
       <li class="menu-item {{ Request::is('oprator/presensi*') ? 'active' : '' }}">
         <a href="/oprator/presensi" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-user"></i>
+          <i class="menu-icon tf-icons bx bx-sync"></i>
           <div data-i18n="Boxicons">Master Presensi</div>
         </a>
       </li>
       <li class="menu-item {{ Request::is('oprator/cuti*') ? 'active' : '' }}">
         <a href="/oprator/cuti" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-user"></i>
+          <i class="menu-icon tf-icons bx bx-confused"></i>
           <div data-i18n="Boxicons">Master Cuti</div>
         </a>
       </li>
