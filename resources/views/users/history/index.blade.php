@@ -221,7 +221,7 @@
             $('#photoAbsen').attr('src', "{{ asset('storage/users/img') }}/"+ data.photo_pulang);
             $('input[name=tanggal]').val(data.tanggal);
             $('input[name=jam_masuk]').val(data.jam_pulang);
-            $('input[name=status]').val(data.status);
+            $('input[name=status]').val(data.status_pulang);
             $('input[name=latlong]').val(data.lat_long_pulang);
         };
 

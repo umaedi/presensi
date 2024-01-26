@@ -1,7 +1,7 @@
 @forelse ($table as $key => $tb)
 <a href="javascript:void(0)" class="item">
     <div class="detail">
-        <img src="{{ asset('storage/users/img') }}/{{ $tb->photo_masuk }}" alt="img" class="image-block imaged w75">
+        <img src="{{ asset('storage/users/img') }}/{{ $tb->photo_masuk }}" alt="img" class="image-block imaged" style="width: 75px">
         <div>
             <strong>Tanggal: {{ date('d-m-Y', strtotime($tb->tanggal)) }}</strong>
             <p>Jam masuk : <span onclick="showAbsen({{ $tb }}, 1)" data-toggle="modal" data-target="#modal-show" data-waktu="masuk" class="badge bg-primary mb-1">{{ $tb->jam_masuk }}</span></p>
