@@ -104,10 +104,10 @@
             </div>
               <div class="modal-body">
                 <div class="row g-2">
-                  <div class="col col-md-4 mb-0">
+                  <div class="col-12 col-md-4 mb-0">
                     <img id="photoAbsen" class="img-fluid rounded" src="" alt="">
                   </div>
-                  <div class="col col-md-8 mb-0">
+                  <div class="col-12 col-md-8 mb-0">
                     <div class="form-group mb-3">
                       <label for="dobExLarge" class="form-label">Nama</label>
                       <input type="text" id="dobExLarge" class="form-control" name="nama" />
