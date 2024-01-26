@@ -148,7 +148,10 @@
     </div>
     <div class="section-title mt-2">1 Minggu Terakhir</div>
         <div class="transactions" id="x-data-table">
-            
+            <button class="btn btn-primary btn-block btn-lg" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Tunggu sebentar yaa...
+            </button>
         </div>
     </div>
     {{-- modal --}}
