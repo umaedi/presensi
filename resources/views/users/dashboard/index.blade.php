@@ -147,10 +147,8 @@
         </div>
     </div>
     <div class="section-title mt-2">1 Minggu Terakhir</div>
-        <div class="card">
-            <div class="table-responsive" id="x-data-table">
-                
-            </div>
+        <div class="transactions" id="x-data-table">
+            
         </div>
     </div>
     {{-- modal --}}
