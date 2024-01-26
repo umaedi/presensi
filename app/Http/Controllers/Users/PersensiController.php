@@ -84,6 +84,13 @@ class PersensiController extends Controller
             $currentTime = Carbon::now();
             $jamMasuk = Carbon::parse(env('JAM_MASUK'));
 
+            $jamMulai = Carbon::createFromTime(6, 0, 0); // Jam 6 pagi
+            $jamSelesai = Carbon::createFromTime(12, 0, 0); // Jam 12 siang
+
+            if (!$currentTime->between($jamMulai, $jamSelesai)) {
+                return $this->error('Presensi pagi dimulai dari jam 6 sampai jam 12 Siang!');
+            }
+
             if ($currentTime > $jamMasuk) {
                 $telat = $currentTime->diff($jamMasuk);
                 $status = 'Terlambat ' . $telat->format('%H:%I:%S');
