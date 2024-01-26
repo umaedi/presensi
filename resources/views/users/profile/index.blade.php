@@ -82,11 +82,11 @@
                     </div>
                 </div>
                 <hr>
-                <button id="btn_loading_profile" class="btn btn-primary btn-lg btn-block d-none" type="button">
+                <button id="btn_loading_profile" class="btn btn-primary btn-lg btn-block d-none" disabled type="button">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Tunggu sebentar yah...
                 </button>
-                <button id="btn_profile" type="submit" onclick="loading('btn_loading_profile', 'btn_profile')" class="btn-submit btn btn-primary mr-1 btn-lg btn-block btn-profile">Simpan</button>
+                <button id="btn_profile" type="submit" class="btn-submit btn btn-primary mr-1 btn-lg btn-block btn-profile">Simpan</button>
                 </div>
             </div>
         </div>
@@ -126,6 +126,10 @@
                         @enderror
                       </div>
                     <hr>
+                    <button id="btn_loading_password" class="btn btn-primary btn-lg btn-block d-none" disabled type="button">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Tunggu sebentar yah...
+                    </button>
                     <button id="btn_password" type="submit" class="btn-submit btn btn-primary mr-1 btn-lg btn-block mb-2">Simpan</button>
                 </form>
             </div>
@@ -155,5 +159,15 @@ function previewImg(){
         const blob = URL.createObjectURL(image.files[0]);
         imgPreview.src = blob; 
     }
+
+    $('#btn_profile').click(function() {
+        $('#btn_profile').hide();
+        $('#btn_loading_profile').removeClass('d-none');
+    });
+
+    $('#btn_password').click(function() {
+        $('#btn_password').hide();
+        $('#btn_loading_password').removeClass('d-none');
+    });
 </script>
 @endpush

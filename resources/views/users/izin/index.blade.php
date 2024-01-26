@@ -38,13 +38,11 @@
             </div>
         </div>
     </div>
-    <div class="section mt-2">
+    <div class="section my-3">
         <div class="section-title">Data Izin</div>
-        <div class="card">
-            @include('layouts.pegawai._loading')
-            <div class="table-responsive" id="x-data-table">
-                
-            </div>
+        @include('layouts.pegawai._loading')
+        <div class="cuti" id="x-data-table">
+
         </div>
     </div>
     <div class="modal fade modalbox" id="modal-add" tabindex="-1" role="dialog">
@@ -168,7 +166,7 @@
                         </div>
                         <div class="form-group">
                             <div class="input-wrapper">
-                                <label class="label">Lampiran yang di unggah</label>
+                                <label class="label">Keterangan</label>
                                 <textarea rows="2" class="form-control cuty_description" id="keterangan-cuty" name="keterangan"></textarea><i class="clear-input"><ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon></i>
                             </div>
                         </div>
