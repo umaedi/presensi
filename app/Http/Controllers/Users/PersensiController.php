@@ -36,12 +36,16 @@ class PersensiController extends Controller
 
         if ($presensi && $presensi->tanggal == date('Y-m-d')) {
 
-            if (strtotime(date('H:i:s')) < strtotime(env('JAM_PULANG'))) {
-                return $this->error('Mohon Maaf Presensi Sore Belum Dibuka!');
-            }
-
             if (isset($presensi->jam_pulang)) {
                 return $this->error('Hari Ini Anda Sudah Mengisi Presensi 2X!');
+            }
+
+            $currentTime = Carbon::now();
+            $jamMulai = Carbon::createFromTime(14, 0, 0); // Jam 6 pagi
+            $jamSelesai = Carbon::createFromTime(18, 0, 0); // Jam 12 siang
+
+            if (!$currentTime->between($jamMulai, $jamSelesai)) {
+                return $this->error('Presensi sore dimulai dari jam 14.00 sampai jam 18.00 sore!');
             }
 
             $presensiUpdate = $presensi->where('tanggal', $presensi->tanggal)->where('user_id', $user->id);
@@ -66,12 +70,25 @@ class PersensiController extends Controller
                 $photo_pulang = $file;
             }
 
+            // Membuat objek Carbon untuk pukul 15:30:00
+            $batasWaktu = Carbon::createFromTime(15, 29, 0);
+
+            // Memeriksa apakah waktu saat ini lebih kecil dari $batasWaktu
+            if ($currentTime->lessThan($batasWaktu)) {
+                // Kondisi jika waktu saat ini lebih kecil dari 15:30:00
+                $statusPulang = 'Lebih awal ' . date('H:i:s');
+            } else {
+                // Kondisi jika waktu saat ini sama atau lebih besar dari 15:30:00
+                $statusPulang = 'Tepat waktu';
+            }
+
             $data['opd_id']     = $user->opd_id;
             $data['user_id']    = $user->id;
             $data['tanggal']    = date('Y-m-d');
             $data['jam_pulang']  = date('H:i:s');
             $data['lat_long_pulang']  = $request->latLong;
             $data['photo_pulang']     = $photo_pulang;
+            $data['status_pulang']     = $statusPulang;
 
             try {
                 $this->presensi->update($presensiUpdate, $data);
@@ -88,7 +105,7 @@ class PersensiController extends Controller
             $jamSelesai = Carbon::createFromTime(12, 0, 0); // Jam 12 siang
 
             if (!$currentTime->between($jamMulai, $jamSelesai)) {
-                return $this->error('Presensi pagi dimulai dari jam 6 sampai jam 12 Siang!');
+                return $this->error('Presensi pagi dimulai dari jam 6.00 sampai jam 12.00 Siang!');
             }
 
             if ($currentTime > $jamMasuk) {

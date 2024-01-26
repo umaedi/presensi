@@ -8319,6 +8319,8 @@ b {
     width: 36px !important; }
   .imaged.w48 {
     width: 48px !important; }
+  .imaged.w75 {
+    width: 75px !important; }
   .imaged.w64 {
     width: 64px !important; }
   .imaged.w76 {
@@ -10516,7 +10518,7 @@ a.text-dark {
   background: #ffffff;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.09);
   border-radius: 10px;
-  padding: 20px 24px;
+  padding: 15px 10px;
   margin-bottom: 10px;
   display: flex;
   align-items: center;

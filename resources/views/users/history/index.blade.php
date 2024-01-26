@@ -39,13 +39,9 @@
     </div>
 <div class="section mt-2">
     <div class="section-title">Data Presensi</div>
-    <div class="card">
-        <div class="card">
-            @include('layouts.pegawai._loading')
-            <div class="table-responsive" id="x-data-table">
-                
-            </div>
-        </div>
+    @include('layouts.pegawai._loading')
+    <div class="transactions" id="x-data-table">
+   
     </div>
 </div>
 <div class="container mt-3">

@@ -25,7 +25,8 @@ class Persensi extends Model
         'status',
         'warning',
         'spt',
-        'keterangan'
+        'keterangan',
+        'status_pulang'
     ];
 
     protected static function booted()
