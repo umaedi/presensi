@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="right">
-        <div class="text-primary"><button class="btn btn-sm btn-primary" onclick="showAbsen({{ $tb }}, 1)" data-toggle="modal" data-target="#modal-show" data-masuk="masuk">IN</button> <button class="btn btn-sm btn-primary" {{ $tb->jam_pulang ? '' : 'disabled' }} onclick="showAbsen({{ $tb }}, 2)" data-toggle="modal" data-target="#modal-show" data-waktu="pulang">OUT</button></div>
+        <div class="text-primary"><button class="btn btn-sm btn-primary" onclick="showAbsen({{ $tb }}, 1)" data-toggle="modal" data-target="#modal-show" data-masuk="masuk">masuk</button> <button class="btn btn-sm btn-primary" {{ $tb->jam_pulang ? '' : 'disabled' }} onclick="showAbsen({{ $tb }}, 2)" data-toggle="modal" data-target="#modal-show" data-waktu="pulang">pulang</button></div>
     </div>
 </a>
 @empty

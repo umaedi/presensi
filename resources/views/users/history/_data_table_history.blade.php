@@ -6,7 +6,7 @@
             <strong>Tanggal: {{ date('d-m-Y', strtotime($tb->tanggal)) }}</strong>
             <p>Jam masuk : <span onclick="showAbsen({{ $tb }}, 1)" data-toggle="modal" data-target="#modal-show" data-waktu="masuk" class="badge bg-primary mb-1">{{ $tb->jam_masuk }}</span></p>
             <p>Jam pulang : <span onclick="showAbsen({{ $tb }}, 2)" data-toggle="modal" data-target="#modal-show" data-waktu="pulang" class="badge bg-primary mb-1">{{ $tb->jam_pulang ?? '-' }}</span></p>
-            <p>Status masuk: <span class="badge {{ $tb->status == 'Tepat waktu' ? 'bg-primary' : 'bg-danger' }}  mb-1">{{ $tb->status }}</span></p>
+            <p>Status masuk: <span class="badge {{ $tb->status == 'Tepat waktu' ? 'bg-success' : 'bg-danger' }}  mb-1">{{ $tb->status }}</span></p>
             <p>Status Pulang:  <span class="badge {{ $tb->status == 'Tepat waktu' ? 'bg-primary' : 'bg-danger' }} mb-1">{{ $tb->status_pulang }}</span></p>
         </div>
     </div>

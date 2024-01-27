@@ -95,7 +95,7 @@
       <li class="menu-item {{ Request::is('admin/laporan*') ? 'active' : '' }}">
         <a href="/admin/laporan" class="menu-link">
           <i class="menu-icon tf-icons bx bx-data"></i>
-          <div data-i18n="Boxicons">Master Laporan</div>
+          <div data-i18n="Boxicons">Master Presensi</div>
         </a>
       </li>
       @else
