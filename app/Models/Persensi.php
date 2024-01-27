@@ -40,4 +40,9 @@ class Persensi extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function opd()
+    {
+        return $this->belongsTo(Opd::class);
+    }
 }

@@ -82,7 +82,8 @@
       </li>
       <li class="menu-item {{ Request::is('admin/oprator') ? 'active' : '' }}">
         <a href="/admin/oprator" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-user"></i>
+          <i class="menu-icon tf-icons bx bx-user-voice"></i>
+          <box-icon name='user-voice'></box-icon>
           <div data-i18n="Boxicons">Master Oprator</div>
         </a>
       </li>
@@ -92,9 +93,9 @@
           <div data-i18n="Boxicons">Master Pegawai</div>
         </a>
       </li>
-      <li class="menu-item {{ Request::is('admin/laporan*') ? 'active' : '' }}">
-        <a href="/admin/laporan" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-data"></i>
+      <li class="menu-item {{ Request::is('admin/presensi*') ? 'active' : '' }}">
+        <a href="/admin/presensi" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
           <div data-i18n="Boxicons">Master Presensi</div>
         </a>
       </li>
@@ -113,7 +114,7 @@
       </li>
       <li class="menu-item {{ Request::is('oprator/presensi*') ? 'active' : '' }}">
         <a href="/oprator/presensi" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-sync"></i>
+          <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
           <div data-i18n="Boxicons">Master Presensi</div>
         </a>
       </li>

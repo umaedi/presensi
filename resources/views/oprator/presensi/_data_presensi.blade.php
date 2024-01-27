@@ -22,7 +22,7 @@
             <td>Tdk/Blm Absen</td>
             @endif
             @if ($tb->status == 'Tepat waktu')
-            <td class="text-danger">{{ $tb->status }}</td>
+            <td class="text-success">{{ $tb->status }}</td>
             @elseif($tb->status == 'DL' || $tb->status == 'Apel')
             <td class="text-warning">{{ $tb->status }}</td>
             @else

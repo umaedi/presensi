@@ -25,7 +25,7 @@
                 @method('PUT')
                 @csrf
                 <div class="row g-2">
-                    <div class="col mb-3">
+                    <div class="col-12 col-md-6">
                       <label for="nameWithTitle" class="form-label">Nama</label>
                       <input
                         name="nama"
@@ -35,7 +35,7 @@
                         value="{{ $pegawai->nama }}"
                       />
                     </div>
-                    <div class="col mb-3">
+                    <div class="col-12 col-md-6">
                       <label for="nameWithTitle" class="form-label">NIP</label>
                       <input
                         name="nip"
@@ -46,8 +46,8 @@
                       />
                     </div>
                   </div>
-                  <div class="row g-2">
-                    <div class="col mb-3">
+                  <div class="row g-2 mt-1">
+                    <div class="col-12 col-md-6">
                       <label for="nameWithTitle" class="form-label">Jabatan</label>
                       <input
                         name="jabatan"
@@ -57,7 +57,7 @@
                         value="{{ $pegawai->jabatan }}"
                       />
                     </div>
-                    <div class="col mb-3">
+                    <div class="col-12 col-md-6">
                       <label for="nameWithTitle" class="form-label">Organisasi</label>
                       <input
                         name="opd_id"
@@ -69,8 +69,8 @@
                       />
                     </div>
                   </div>
-                  <div class="row g-2">
-                    <div class="col mb-3">
+                  <div class="row g-2 mt-1">
+                    <div class="col-12 col-md-6">
                       <label for="nameWithTitle" class="form-label">Unit Organisasi</label>
                       <input
                         name="unit_organisasi"
@@ -80,7 +80,7 @@
                         value="{{ $pegawai->unit_organisasi }}"
                       />
                     </div>
-                    <div class="col mb-3">
+                    <div class="col-12 col-md-6">
                       <label for="nameWithTitle" class="form-label">No Tlp/WhatsApp</label>
                       <input
                         name="no_hp"
@@ -91,8 +91,8 @@
                       />
                     </div>
                   </div>
-                  <div class="row g-2">
-                    <div class="col mb-3">
+                  <div class="row g-2 mt-1">
+                    <div class="col-12 col-md-6">
                       <label for="email" class="form-label">Email</label>
                       <input
                         name="email"
@@ -102,7 +102,7 @@
                         value="{{ $pegawai->email }}"
                       />
                     </div>
-                    <div class="col mb-3">
+                    <div class="col-12 col-md-6">
                       <label for="password" class="form-label">Password</label>
                       <input
                         name="password"

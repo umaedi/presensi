@@ -17,7 +17,7 @@
                     name="search"
                     type="text"
                     class="form-control border-0 shadow-none"
-                    placeholder="Search..."
+                    placeholder="Cari nama atau NIP"
                     aria-label="Search..."
                   />
                 </div>

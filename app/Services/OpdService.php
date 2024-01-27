@@ -12,6 +12,11 @@ class OpdService
         $this->opd = $opd;
     }
 
+    public function getAll()
+    {
+        return $this->opd->get();
+    }
+
     public function store($data)
     {
         return $this->opd->create($data);

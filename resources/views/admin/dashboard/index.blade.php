@@ -72,7 +72,8 @@
       <!-- Total Revenue -->
       <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
         <div class="card">
-          <h5 class="card-header">LAPORAN REALTIME PRESENSI <span id="clock"></span></h5>
+          <h5 class="card-header">LAPORAN REALTIME PRESENSI <span id="clock" class="badge bg-info">...</span> <button id="tertinggi" class="btn btn-primary btn-sm">TERTINGGI</button>
+            <button id="terendah" class="btn btn-danger btn-sm">TERENDAH</button></h5>
           <div class="card-body" id="PresensiCount">
  
           </div>
@@ -104,7 +105,7 @@
                     <img loading="lazy" src="{{ asset('img') }}/icons/icon-fingerprint.png" alt="Credit Card" class="rounded" />
                   </div>
                 </div>
-                <span class="fw-semibold d-block mb-1">Laporan</span>
+                <span class="fw-semibold d-block mb-1">Kinerja</span>
                 <h3 class="card-title mb-2">#</h3>
               </div>
             </div>
@@ -117,10 +118,20 @@
 @push('js')
     <script type="text/javascript">
     var page = 1;
+    var rank = 'desc';
         $(document).ready(function() {
           loadPresensiCount();
         });
 
+        $('#tertinggi').click(function() {
+          rank = 'desc';
+          loadPresensiCount();
+        });
+
+        $('#terendah').click(function() {
+          rank = 'ASC';
+          loadPresensiCount();
+        });
         async function loadPresensiCount()
         {
           var param = {
@@ -128,6 +139,7 @@
             method: 'GET',
             data: {
               load: 'table',
+              rank: rank,
               page: page
             }
           }

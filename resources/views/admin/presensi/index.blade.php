@@ -9,18 +9,27 @@
               <div class="card">
                   <div class="card-body">
                         <div class="row text-center g-2">
-                          <div class="col-12 col-md-3">
-                            <input id="tanggalAwal" type="text" class="form-control datepicker start_date" name="tanggal_awal" placeholder="Tanggal Awal">
-                          </div>
-                          <div class="col-12 col-md-3">
-                            <input id="tanggalAkhir" type="text" name="tanggal_akhir" placeholder="Tanggal Akhir" class="form-control datepicker end_date">
+                          <div class="col-12 col-md-6">
+                            <select id="opd" class="form-select" aria-label="Default select example">
+                                <option value="">OPD</option>
+                                @foreach ($opds as $opd)
+                                <option value="{{ $opd->id }}">{{ $opd->nama_opd }}</option>
+                                @endforeach
+                              </select>
                           </div>
                           <div class="col-12 col-md-2">
+                            <input id="tanggalAwal" type="text" class="form-control datepicker start_date" name="tanggal_awal" placeholder="TANGGAL AWAL">
+                          </div>
+                          <div class="col-12 col-md-2">
+                            <input id="tanggalAkhir" type="text" name="tanggal_akhir" placeholder="TANGGAL AKHIR" class="form-control datepicker end_date">
+                          </div>
+                          <div class="col-12 col-md-2 mb-2">
                             <select id="status" class="form-select" aria-label="Default select example">
-                                <option value="">Status</option>
+                                <option value="">STATUS</option>
                                 <option value="DL">DL</option>
                                 <option value="Apel">Apel</option>
                                 <option value="Terlambat">Terlambat</option>
+                                <option value="Tepat waktu">Tepat waktu</option>
                               </select>
                           </div>
                           <div class="col-12 col-md-2">
@@ -104,6 +113,7 @@
         var tanggalAwal = '';
         var tanggalAkhir = '';
         var status = '';
+        var opd = '';
         var page = 1;
         $(document).ready(function() {
             loadTable();
@@ -113,6 +123,10 @@
                     filterTable();
                     return false;
                 }
+            });
+
+            $('#opd').change(function() {
+                filterTable();
             });
 
             $('#tampilkan').click(function() {
@@ -130,6 +144,7 @@
 
         function filterTable() {
             search = $('#search').val();
+            opd = $('#opd').val();
             tanggalAwal = $('#tanggalAwal').val();
             tanggalAkhir =  $('#tanggalAkhir').val();
             status = $('#status').val();
@@ -144,6 +159,7 @@
                 data: {
                     load: 'table',
                     search: search,
+                    opd: opd,
                     tanggal_awal: tanggalAwal,
                     tanggal_akhir: tanggalAkhir,
                     status: status,
@@ -180,51 +196,51 @@
         });
 
         function showPresensi(data, waktu)
-    {
-        if(waktu === 1) {
-            $('.modal-title').html('Detail Presensi Pagi');
-            $('#photoAbsen').attr('src', "{{ asset('storage/users/img') }}/"+ data.photo_masuk);
-            $('input[name=nama]').val(data.user.nama);
-            $('input[name=tanggal]').val(data.tanggal);
-            $('input[name=jam_masuk]').val(data.jam_masuk);
-            $('input[name=latlong]').val(data.lat_long_masuk);
-        }else {
-            $('.modal-title').html('Detail Presensi Sore');
-            $('#photoAbsen').attr('src', "{{ asset('storage/users/img') }}/"+ data.photo_pulang);
-            $('input[name=nama]').val(data.user.nama);
-            $('input[name=tanggal]').val(data.tanggal);
-            $('input[name=jam_masuk]').val(data.jam_pulang);
-            $('input[name=latlong]').val(data.lat_long_pulang);
-        };
+        {
+            if(waktu === 1) {
+                $('.modal-title').html('Detail Presensi Pagi');
+                $('#photoAbsen').attr('src', "{{ asset('storage/users/img') }}/"+ data.photo_masuk);
+                $('input[name=nama]').val(data.user.nama);
+                $('input[name=tanggal]').val(data.tanggal);
+                $('input[name=jam_masuk]').val(data.jam_masuk);
+                $('input[name=latlong]').val(data.lat_long_masuk);
+            }else {
+                $('.modal-title').html('Detail Presensi Sore');
+                $('#photoAbsen').attr('src', "{{ asset('storage/users/img') }}/"+ data.photo_pulang);
+                $('input[name=nama]').val(data.user.nama);
+                $('input[name=tanggal]').val(data.tanggal);
+                $('input[name=jam_masuk]').val(data.jam_pulang);
+                $('input[name=latlong]').val(data.lat_long_pulang);
+            };
 
-        const lat = data.lat_long_masuk.substring(10, '');
-        const long = data.lat_long_masuk.substring(11);
+            const lat = data.lat_long_masuk.substring(10, '');
+            const long = data.lat_long_masuk.substring(11);
 
-        let mapOptions, map, marker;
-        infoWindow = '';
+            let mapOptions, map, marker;
+            infoWindow = '';
 
-        element = document.getElementById('map');
+            element = document.getElementById('map');
 
-        mapOptions = {
-            zoom: 16,
-            center: {
-                lat: parseFloat(lat),
-                lng: parseFloat(long),
-            },
-            disableDefaultUI: false,
-            scrollWheel: true, 
-            draggable: false, 
-        };
+            mapOptions = {
+                zoom: 16,
+                center: {
+                    lat: parseFloat(lat),
+                    lng: parseFloat(long),
+                },
+                disableDefaultUI: false,
+                scrollWheel: true, 
+                draggable: false, 
+            };
 
-        map = new google.maps.Map(element, mapOptions);
+            map = new google.maps.Map(element, mapOptions);
 
-        marker = new google.maps.Marker({
-        position: mapOptions.center,
-        map: map,
-        // icon: 'http://pngimages.net/sites/default/files/google-maps-png-image-70164.png',
-        draggable: true
-        });
-      }
+            marker = new google.maps.Marker({
+            position: mapOptions.center,
+            map: map,
+            // icon: 'http://pngimages.net/sites/default/files/google-maps-png-image-70164.png',
+            draggable: true
+            });
+        }
     </script>
 @endpush
 

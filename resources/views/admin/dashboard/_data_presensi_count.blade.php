@@ -1,7 +1,7 @@
 @forelse ($table as $tb)
 <div class="demo-vertical-spacing">
   <a href="/admin/presensi/opd/show/{{ $tb->opd_id }}">
-    <div class="text-light small fw-semibold mb-1">{{ $tb->opd->nama_opd }}. Total Pegawai: {{ $tb->total_user }} Orang</div>
+    <div class="mb-1">{{ $tb->opd->nama_opd }}. Total Pegawai: {{ $tb->total_user }} Orang</div>
     <div class="progress mb-3">
         <div
             class="progress-bar"
@@ -30,5 +30,6 @@
   <p class="empty-title">Tidak ada data ditemukan!</p>
 </div>
 @endforelse
+{{ $table->links('vendor.pagination.sneat') }}
 
 
