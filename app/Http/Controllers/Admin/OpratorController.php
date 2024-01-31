@@ -20,7 +20,11 @@ class OpratorController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $data['table'] = $this->user->Query()->where('role', 'oprator')->paginate();
+            $user = $this->user->Query();
+            if (request()->search) {
+                $user->where('nama', 'like', '%' . \request()->search . '%')->orWhere('nip', \request()->search);
+            }
+            $data['table'] = $user->where('role', 'oprator')->paginate();
             return view('admin.oprator._data_oprator', $data);
         }
         $data['title'] = 'Data Oprator OPD';

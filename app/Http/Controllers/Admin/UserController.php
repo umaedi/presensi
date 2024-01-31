@@ -27,7 +27,7 @@ class UserController extends Controller
         if (\request()->ajax()) {
             $user = $this->user->Query();
             if (request()->search) {
-                $user->where('nama', 'like', '%' . \request()->search . '%');
+                $user->where('nama', 'like', '%' . \request()->search . '%')->orWhere('nip', \request()->search);
             }
             $data['table'] = $user->with('opd')->paginate();
             return view('admin.users._data_user', $data);
