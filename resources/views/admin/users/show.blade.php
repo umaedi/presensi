@@ -59,14 +59,12 @@
                     </div>
                     <div class="col mb-3">
                       <label for="nameWithTitle" class="form-label">Organisasi</label>
-                      <input
-                        name="opd_id"
-                        type="text"
-                        id="organisasi"
-                        class="form-control"
-                        value="{{ $pegawai->opd->nama_opd }}"
-                        readonly
-                      />
+                      <select class="form-select" name="opd_id" aria-label="Default select example">
+                        <option value="{{ $pegawai->opd->id }}">{{ $pegawai->opd->nama_opd }}</option>
+                        @foreach ($opds as $opd)
+                        <option value="{{ $opd->id }}">{{ $opd->nama_opd }}</option>
+                        @endforeach
+                      </select>
                     </div>
                   </div>
                   <div class="row g-2">
