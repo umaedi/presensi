@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use Throwable;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Services\PresensiService;
 use App\Http\Controllers\Controller;
@@ -64,6 +65,7 @@ class DlController extends Controller
             $data['jam_pulang']  = date('H:i:s');
             $data['lat_long_pulang']  = $request->latLong;
             $data['photo_pulang']     = $photo_pulang;
+            $data['status_pulang']     = 'DL ' . date('H:i:s');
 
             try {
                 $this->presensi->update($presensiUpdate, $data);
@@ -75,7 +77,7 @@ class DlController extends Controller
         } else {
 
             $data = $request->except('_token');
-            $data['status'] = 'DL';
+            $data['status'] = 'DL ' . date('H:i:s');
 
             $file = $request->img;
             if (strlen($file) > 30) {
