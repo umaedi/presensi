@@ -47,7 +47,7 @@ class PresensiController extends Controller
                 }
             }
 
-            $data['table'] = $presensi->with('opd')->paginate();
+            $data['table'] = $presensi->with('opd')->latest()->paginate();
             return view('admin.presensi._data_presensi_opd', $data);
         }
         $data['title'] = 'Laporan presensi pegawai';
