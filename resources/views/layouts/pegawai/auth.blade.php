@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <meta name="google-site-verification" content="qdOll0iF13CtpwnNdwScX0qfM9AhPr_e8m8uUAaeBYQ" />
+  <meta name="google-site-verification" content="JNUql3k5Q0B10HhKDHMUZRMQb9Z23lLwY3oLqiCAJH0" />
   <title>{{ $title ?? 'Login' }}</title>
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="theme-color" content="#6777ef"/>
