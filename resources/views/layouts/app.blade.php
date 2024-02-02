@@ -32,9 +32,8 @@
 <body>
     <div class="x-container">
         @yield('content')
-        @include('layouts.pegawai.navbar')
-        @include('layouts.pegawai.button-action')
-        @include('layouts.pegawai.footer')
+        @livewire('layouts.pegawai.navbar')
+        @livewire('layouts.pegawai.button-action')
     </div>
 
 

@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Admin\OpratorController;
+use App\Http\Livewire\Users\Dashboard\Index;
+use App\Http\Livewire\Users\History\Index as HistoryIndex;
+use App\Http\Livewire\Users\Izin\Index as IzinIndex;
+use App\Http\Livewire\Users\Profile\Index as ProfileIndex;
 use Illuminate\Support\Facades\Route;
 
 //route login
 Route::get('/', Users\LoginController::class)->middleware('guest');
 
-//route user 
+//route user
 Route::middleware('auth')->prefix('user')->group(function () {
     Route::get('/dashboard', Users\DashboardController::class);
 
