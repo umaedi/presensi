@@ -229,11 +229,8 @@
                 </div>
             </div>
             <div class="section-title mt-2">1 Minggu Terakhir</div>
-            <div class="transactions" id="x-data-table">
-                <button class="btn btn-primary btn-block btn-lg" type="button" disabled>
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    Tunggu sebentar yaa...
-                </button>
+            <div class="transactions" id="dataTable">
+ 
             </div>
         </div>
         {{-- modal --}}
@@ -302,6 +299,7 @@
 @endsection
 @push('js')
     <script type="text/javascript">
+        $('#dataTable').html(make_skeleton());
         var bulan = '';
         $(document).ready(function() {
             loadData();
@@ -326,11 +324,23 @@
                 }
             }
             await transAjax(param).then((result) => {
-                $('#x-data-table').html(result)
+                $('#dataTable').html(result)
 
             }).catch((err) => {
                 console.log('error');
             });
+        }
+
+        function make_skeleton() {
+            var output = '';
+            for (var count = 0; count < 3; count++) {
+                output += '<div class="col-12">';
+                output += '<div class="ph-item">';
+                output += '<div class="ph-picture"></div>';
+                output += '</div>';
+                output += '</div>';
+            }
+            return output;
         }
 
         jQuery(function($) {

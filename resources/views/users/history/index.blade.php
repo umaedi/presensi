@@ -203,8 +203,8 @@
             var dl = '';
             var cuti = '';
 
+            $('#dataTable').html(make_skeleton());
             $(document).ready(function() {
-                $('#dataTable').html(make_skeleton());
                 loadData();
                 $('#tampilkan').click(function() {
                     filterData();
@@ -251,12 +251,9 @@
                     }
                 }
 
-                loading(true);
                 await transAjax(param).then(function(result) {
-                    loading(false)
                     $('#dataTable').html(result)
                 }).catch((err) => {
-                    loading(false)
                     console.log('Internal Server Error!');
                 });
             }
