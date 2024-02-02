@@ -103,8 +103,7 @@
         </div>
         <div class="section my-3">
             <div class="section-title">Data Izin</div>
-            @include('layouts.pegawai._loading')
-            <div class="cuti" id="x-data-table">
+            <div class="cuti" id="dataTable">
 
             </div>
         </div>
@@ -284,6 +283,7 @@
         var tanggalAwal = '';
         var tanggalAkhir = '';
 
+        $('#dataTable').html(make_skeleton());
         $(document).ready(function() {
             loadTable();
 
@@ -424,7 +424,7 @@
             loading(true)
             await transAjax(param).then((result) => {
                 loading(false)
-                $('#x-data-table').html(result);
+                $('#dataTable').html(result);
             }).catch((err) => {
                 loading(false)
                 console.log('err');
@@ -437,6 +437,18 @@
                     $('#loading').addClass('d-none');
                 }
             }
+        }
+
+        function make_skeleton() {
+            var output = '';
+            for (var count = 0; count < 3; count++) {
+                output += '<div class="col-12">';
+                output += '<div class="ph-item">';
+                output += '<div class="ph-picture"></div>';
+                output += '</div>';
+                output += '</div>';
+            }
+            return output;
         }
 
         function loadPaginate(to) {
