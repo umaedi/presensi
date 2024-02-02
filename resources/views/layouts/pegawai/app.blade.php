@@ -25,7 +25,7 @@
     <!-- PWA  -->
     <link rel="apple-touch-icon" href="{{ asset('assets/icon/lc_icon_presensi.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
-    @livewireStyles
+    {{-- @livewireStyles --}}
 
 </head>
 

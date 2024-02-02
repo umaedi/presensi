@@ -318,7 +318,7 @@
     </script>
     @stack('js')
 
-    @livewireScripts
+    {{-- @livewireScripts --}}
     <script type="module">
         import hotwiredTurbo from 'https://cdn.skypack.dev/@hotwired/turbo';
     </script>
