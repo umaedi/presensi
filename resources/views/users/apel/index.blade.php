@@ -6,16 +6,27 @@
                     <div class="card">
                         <div class="card-body pt-3 pb-3 text-center">
                             <img src="{{ asset('assets/img') }}/vector1.png" alt="image" class="imaged w-50 ">
-                            <h2 class="mt-2">Apel</h2>
+                            <h2 class="text-center">Silakan pilih titik lokasi kumpul dibawah ini</h2>
                         </div>
                     </div>
                     <div class="card mt-2">
                         <div class="card-body">
-                            <h2 class="text-center">Petunjuk</h2>
-                            <p>1. Menu Apel dapat Anda gunakan ketika ada kegiatan apel pagi disekitaran pemda lama</p>
-                            <p>2. Aktifkan kamera dengan menekan icon finger print</p>
-                            <p>4. Isi keterangan</p>
-                            <p>5. Isi presensi</p>
+                            <p>1. Lapangan pemda</p>
+                        </div>
+                    </div>
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <p>2. Lapangan sport center</p>
+                        </div>
+                    </div>
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <p>3. Islamic center</p>
+                        </div>
+                    </div>
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <p>4. Terminal</p>
                         </div>
                     </div>
                 </div>

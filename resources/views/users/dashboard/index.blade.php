@@ -23,7 +23,7 @@
                                         fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" />
                                 </svg>
                             </div>
-                            <strong>Apel</strong>
+                            <strong>Titik Kumpul</strong>
                         </a></div>
                     <div class="item"><a href="/user/izin">
                             <div class="icon-wrapper bg-warning">
