@@ -52,7 +52,7 @@ class HistoryController extends Controller
                 $presensi->whereBetween('created_at', [$tgl_awal, $tgl_akhir]);
             }
 
-            $data['table'] = $presensi->where('user_id', auth()->user()->id)->paginate();
+            $data['table'] = $presensi->where('user_id', auth()->user()->id)->latest()->paginate();
 
             return view('users.history._data_table_print', $data);
         }
