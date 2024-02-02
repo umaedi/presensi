@@ -20,6 +20,7 @@
 
     <link rel="stylesheet" href="{{ asset('assets/pegawai') }}/css/style.css">
     <link rel="stylesheet" href="{{ asset('assets/pegawai') }}/css/sw-custom.css">
+    <link rel="stylesheet" href="{{ asset('css') }}/placeholder-loading.min.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <!-- PWA  -->
@@ -40,7 +41,7 @@
 
     <script src="{{ asset('assets/pegawai') }}/js/lib/jquery-3.4.1.min.js"></script>
     <!-- Ionicons -->
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    {{-- <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script> --}}
     <script src="https://kit.fontawesome.com/0ccb04165b.js" crossorigin="anonymous"></script>
     <!-- Base Js File -->
     <script src="{{ asset('assets/pegawai') }}/js/sweetalert.min.js"></script>
@@ -318,13 +319,9 @@
         }
     </script>
     @stack('js')
-
-    @livewireScripts
     <script type="module">
-        import hotwiredTurbo from 'https://cdn.skypack.dev/@hotwired/turbo';
+        import hotwiredTurbo from 'https://cdn.skypack.dev/pin/@hotwired/turbo@v7.3.0-44BiCcz1UaBhgMf1MCRj/mode=imports,min/optimized/@hotwired/turbo.js';
     </script>
-    <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js"
-        data-turbolinks-eval="false" data-turbo-eval="false"></script>
 </body>
 
 </html>

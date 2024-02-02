@@ -137,9 +137,9 @@
         <div class="card mt-2">
             <div class="card-body">
                 @if (auth()->user()->role == 'admin')
-                <a href="/admin/dashboard" class="btn-submit btn btn-primary mr-1 btn-lg btn-block">Kelola Pegawai</a>
+                <button onclick="redirect('/admin')" class="btn-submit btn btn-primary mr-1 btn-lg btn-block">Kelola Pegawai</button>
                 @elseif(auth()->user()->role == 'oprator')
-                <a href="/oprator/dashboard" class="btn-submit btn btn-primary mr-1 btn-lg btn-block">Kelola Pegawai</a>
+                <button onclick="redirect('/oprator')" class="btn-submit btn btn-primary mr-1 btn-lg btn-block">Kelola Pegawai</button>
                 @endif
                 <form action="/logout" method="POST">
                     @csrf
@@ -169,5 +169,9 @@ function previewImg(){
         $('#btn_password').hide();
         $('#btn_loading_password').removeClass('d-none');
     });
+
+    function redirect(url) {
+        window.location.href = url+'/dashboard'
+    }
 </script>
 @endpush

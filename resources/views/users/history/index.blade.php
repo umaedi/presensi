@@ -105,8 +105,8 @@
         </div>
         <div class="section mt-2">
             <div class="section-title">Data Presensi</div>
-            @include('layouts.pegawai._loading')
-            <div class="transactions" id="x-data-table">
+            {{-- @include('layouts.pegawai._loading') --}}
+            <div class="transactions" id="dataTable">
 
             </div>
         </div>
@@ -204,6 +204,7 @@
             var cuti = '';
 
             $(document).ready(function() {
+                $('#dataTable').html(make_skeleton());
                 loadData();
                 $('#tampilkan').click(function() {
                     filterData();
@@ -253,19 +254,23 @@
                 loading(true);
                 await transAjax(param).then(function(result) {
                     loading(false)
-                    $('#x-data-table').html(result)
+                    $('#dataTable').html(result)
                 }).catch((err) => {
                     loading(false)
                     console.log('Internal Server Error!');
                 });
             }
 
-            function loading(state) {
-                if (state) {
-                    $('#loading').removeClass('d-none');
-                } else {
-                    $('#loading').addClass('d-none');
-                }
+            function make_skeleton() {
+            var output = '';
+            for (var count = 0; count < 3; count++) {
+                output += '<div class="col-12">';
+                output += '<div class="ph-item">';
+                output += '<div class="ph-picture"></div>';
+                output += '</div>';
+                output += '</div>';
+            }
+            return output;
             }
 
             function loadPaginate(to) {
