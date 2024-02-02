@@ -22,8 +22,12 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         if (\request()->ajax()) {
-            $data['table'] = $this->presensiCount->Query()->whereDate('updated_at', Carbon::now()->toDateString())->with('opd')
-                ->orderBy('total_presensi', $request->rank)->paginate();
+            $data['table'] = $this->presensiCount
+                ->Query()
+                ->whereDate('updated_at', Carbon::now()->toDateString())
+                ->with('opd')
+                ->orderByRaw('(total_presensi / total_user)' . $request->rank . ', total_presensi ' .  $request->rank)
+                ->paginate();
             return view('admin.dashboard._data_presensi_count', $data);
         }
         $data['title'] = 'Dashboard Admin';
