@@ -3,9 +3,10 @@
         <tr>
         <th scope="col">#</th>
         <th scope="col">Tanggal</th>
-        <th scope="col">Absen Masuk</th>
-        <th scope="col">Absen Pulang</th>
-        <th scope="col">Status</th>
+        <th scope="col">Presensi Masuk</th>
+        <th scope="col">Presensi Pulang</th>
+        <th scope="col">Status Masuk</th>
+        <th scope="col">Status Pulang</th>
         </tr>
     </thead>
     <tbody>
@@ -15,11 +16,14 @@
                 <td>{{ date('d-m-Y', strtotime($tb->tanggal)) }}</td>
                 <td>{{ $tb->jam_masuk }}</td>
                 <td>{{ $tb->jam_pulang }}</td>
-                @if (isset($tb->status))
-                <td>Telat {{ $tb->status }}</td>
+                @if ($tb->status == 'Tepat waktu')
+                <td class="text-success">{{ $tb->status }}</td>
+                @elseif($tb->status == 'DL' || $tb->status == 'Apel')
+                <td class="text-warning">{{ $tb->status }}</td>
                 @else
-                <td>Tepat Waktu</td>
+                <td class="text-danger">{{ $tb->status }}</td>
                 @endif
+                <td class="text-danger">{{ $tb->status_pulang }}</td>
             </tr>
         @empty
             <tr>
