@@ -7,7 +7,7 @@
     <div class="section mt-3 text-center">
         <div class="avatar-section">
             <input type="file" onchange="previewImg()" id="image"  class="upload" name="photo" id="avatar" accept=".jpeg, .jpg, .png">
-            <img  id="imgPrev" src="{{ \Illuminate\Support\Facades\Storage::url(auth()->user()->photo) }}" alt="image" class="imaged w100 rounded"><span class="button"><ion-icon name="camera-outline" role="img" class="md hydrated" aria-label="camera outline"></ion-icon></span>
+            <img  id="imgPrev" src="{{ \Illuminate\Support\Facades\Storage::url(auth()->user()->photo) }}" alt="image" class="imaged w100 rounded">
         </div>
     </div>
     <div class="section mt-2 mb-2">
