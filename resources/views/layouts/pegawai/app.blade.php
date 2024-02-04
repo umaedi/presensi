@@ -90,7 +90,7 @@
         var status = "";
         var shutter = new Audio();
 
-        function openCamera(status) {
+        function openCamera(status, lat, long) {
             //productoion
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
@@ -146,19 +146,38 @@
             }
 
             if (status == 2) {
+                swal({
+                title: 'Oops!',
+                text: 'Silakan pilih salah satu lokasi diatas!',
+                icon: 'error',
+                timer: 5000,
+                });
+                return;
+            }
+
+            if(status == 3) {
+                swal({
+                title: 'Oops!',
+                text: 'Lokasi kegiatan tidak aktif!',
+                icon: 'error',
+                timer: 5000,
+                });
+                return;
+            }
+
+            if(status == 4) {
                 var currentLocation = {
-                    lat: -4.4950449,
-                    lng: 105.2206886
+                    lat: parseInt(lat),
+                    lng: parseInt(long),
                 };
-                var radius = 500;
-            } else {
+            }else {
                 var currentLocation = {
                     lat: {{ auth()->user()->opd->lat }},
                     lng: {{ auth()->user()->opd->long }}
                 };
-                var radius = 300;
             }
-
+            
+            var radius = 300;
             function getCurrentPosition(position) {
                 var userLocation = {
                     lat: position.coords.latitude,

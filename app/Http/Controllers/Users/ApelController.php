@@ -19,7 +19,7 @@ class ApelController extends Controller
 
     public function index()
     {
-        $data['title'] = 'Apel';
+        $data['title'] = 'Titik Kumpul';
         return view('users.apel.index', $data);
     }
 

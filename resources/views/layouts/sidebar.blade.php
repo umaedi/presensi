@@ -99,6 +99,12 @@
           <div data-i18n="Boxicons">Master Presensi</div>
         </a>
       </li>
+      {{-- <li class="menu-item {{ Request::is('admin/lokasi*') ? 'active' : '' }}">
+        <a href="/admin/presensi" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
+          <div data-i18n="Boxicons">Titik Kumpul</div>
+        </a>
+      </li> --}}
       @else
       <li class="menu-item {{ Request::is('oprator/dashboard') ? 'active' : '' }}">
         <a href="/oprator/dashboard" class="menu-link">

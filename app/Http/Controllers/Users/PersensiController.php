@@ -41,8 +41,8 @@ class PersensiController extends Controller
             }
 
             $currentTime = Carbon::now();
-            $jamMulai = Carbon::createFromTime(14, 0, 0); // Jam 6 pagi
-            $jamSelesai = Carbon::createFromTime(18, 0, 0); // Jam 12 siang
+            $jamMulai = Carbon::createFromTime(14, 0, 0); // Jam 14 pagi
+            $jamSelesai = Carbon::createFromTime(18, 0, 0); // Jam 16 siang
 
             if (!$currentTime->between($jamMulai, $jamSelesai)) {
                 return $this->error('Presensi sore dimulai dari jam 14.00 sampai jam 18.00 sore!');
@@ -70,8 +70,14 @@ class PersensiController extends Controller
                 $photo_pulang = $file;
             }
 
+            $hari = $currentTime->format('l');
+            if ($hari === 'Friday') {
+                $waktuPulang =  Carbon::createFromTime(16, 29, 0);
+            } else {
+                $waktuPulang = Carbon::createFromTime(15, 29, 0);
+            }
             // Membuat objek Carbon untuk pukul 15:30:00
-            $batasWaktu = Carbon::createFromTime(15, 29, 0);
+            $batasWaktu = $waktuPulang;
 
             // Memeriksa apakah waktu saat ini lebih kecil dari $batasWaktu
             if ($currentTime->lessThan($batasWaktu)) {

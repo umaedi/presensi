@@ -10,24 +10,67 @@
                         </div>
                     </div>
                     <div class="card mt-2">
+                        <a href="javacsript:void(0)" onclick="openCamera('4', '-4.4950449', '105.2206886')">
                         <div class="card-body">
                             <p>1. Lapangan pemda</p>
                         </div>
+                        </a>
                     </div>
                     <div class="card mt-2">
+                        <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
                         <div class="card-body">
                             <p>2. Lapangan sport center</p>
                         </div>
+                        </a>
                     </div>
                     <div class="card mt-2">
+                        <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
                         <div class="card-body">
                             <p>3. Islamic center</p>
                         </div>
+                        </a>
                     </div>
                     <div class="card mt-2">
+                        <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
                         <div class="card-body">
                             <p>4. Terminal</p>
                         </div>
+                        </a>
+                    </div>
+                    <div class="card mt-2">
+                        <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
+                        <div class="card-body">
+                            <p>5. Cakat Nyeyek</p>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="card mt-2">
+                        <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
+                        <div class="card-body">
+                            <p>6. Pasar Putri Agung</p>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="card mt-2">
+                        <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
+                        <div class="card-body">
+                            <p>7. Gedung Dekranasda</p>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="card mt-2">
+                        <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
+                        <div class="card-body">
+                            <p>8. Gedung Kartini</p>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="card mt-2">
+                        <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
+                        <div class="card-body">
+                            <p>9. Sesat Agung</p>
+                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
