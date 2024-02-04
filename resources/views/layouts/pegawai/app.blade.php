@@ -160,7 +160,7 @@
                 title: 'Oops!',
                 text: 'Lokasi kegiatan tidak aktif!',
                 icon: 'error',
-                // timer: 5000,
+                timer: 3000,
                 });
                 return;
             }
@@ -197,7 +197,7 @@
                         title: 'Oops!',
                         text: 'Mohon Maaf Sepertinya Anda Diluar Radius!',
                         icon: 'error',
-                        timer: 5000,
+                        timer: 3000,
                     }).then(() => {
                         window.location.href = '/user/dashboard';
                     });
