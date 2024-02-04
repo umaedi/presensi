@@ -160,7 +160,7 @@
                 title: 'Oops!',
                 text: 'Lokasi kegiatan tidak aktif!',
                 icon: 'error',
-                timer: 5000,
+                // timer: 5000,
                 });
                 return;
             }
