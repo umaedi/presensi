@@ -12,28 +12,28 @@
                     <div class="card mt-2">
                         <a href="javacsript:void(0)" onclick="openCamera('4', '-4.4950449', '105.2206886')">
                         <div class="card-body">
-                            <p>1. Lapangan pemda</p>
+                            <p>1. Lapangan Upacara Pemda Tulang Bawang</p>
                         </div>
                         </a>
                     </div>
                     <div class="card mt-2">
                         <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
                         <div class="card-body">
-                            <p>2. Lapangan sport center</p>
+                            <p>2. Lapangan Sport Center Menggala</p>
                         </div>
                         </a>
                     </div>
                     <div class="card mt-2">
                         <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
                         <div class="card-body">
-                            <p>3. Islamic center</p>
+                            <p>3. Islamic Center Tulang Bawang</p>
                         </div>
                         </a>
                     </div>
                     <div class="card mt-2">
                         <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
                         <div class="card-body">
-                            <p>4. Terminal</p>
+                            <p>4. Terminal Menggala</p>
                         </div>
                         </a>
                     </div>
