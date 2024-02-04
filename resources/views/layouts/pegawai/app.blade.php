@@ -144,7 +144,9 @@
                     });
                 }
             }
-
+            
+            var radius = 300;
+            function getCurrentPosition(position) {
             if (status == 2) {
                 swal({
                 title: 'Oops!',
@@ -177,8 +179,6 @@
                 };
             }
             
-            var radius = 300;
-            function getCurrentPosition(position) {
                 var userLocation = {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
@@ -192,22 +192,21 @@
                 if (distance < radius) {
                     setCamera();
                 } else {
-                    removeFile(image);
                     swal({
                         title: 'Oops!',
                         text: 'Mohon Maaf Sepertinya Anda Diluar Radius!',
                         icon: 'error',
-                        timer: 3000,
+                        timer: 5000,
                     }).then(() => {
-                        window.location.href = '/user/dashboard';
+                        window.location.href = '{{ url()->current() }}';
                     });
                 }
             }
             //production end
 
-            $('#modalSelfi').modal('show');
             //set camera
             function setCamera() {
+                $('#modalSelfi').modal('show');
                 Webcam.set({
                     width: 490,
                     height: 450,
@@ -331,9 +330,9 @@
             }
 
             await transAjax(param).then((res) => {
-                window.location.reload('/user/presensi');
+                window.location.href = '{{ url()->current() }}';
             }).catch((err) => {
-                window.location.reload('/user/presensi');
+                window.location.href = '{{ url()->current() }}';
             });
         }
     </script>
