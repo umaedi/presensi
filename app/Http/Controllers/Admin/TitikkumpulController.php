@@ -89,4 +89,22 @@ class TitikkumpulController extends Controller
 
         return $this->success('OK', 'Titik Kumpul berhasil diperbaharui');
     }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $dataCheck = $this->titikkumpul->find($id);
+        if ($dataCheck['status'] == "false") {
+            $data['status'] = "true";
+        } else {
+            $data['status'] = "false";
+        }
+        try {
+            $this->titikkumpul->update($id, $data);
+        } catch (\Throwable $th) {
+            saveLogs($th->getMessage(), 'Error ketika update titik kumpul!', 'erorr');
+            return $this->error($th->getMessage());
+        }
+
+        return $this->success('OK', 'Status Titik Kumpul berhasil diperbaharui');
+    }
 }

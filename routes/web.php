@@ -89,6 +89,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/titik_kumpul/store', [Admin\TitikkumpulController::class, 'store']);
     Route::get('/titik_kumpul/show/{id}', [Admin\TitikkumpulController::class, 'show']);
     Route::put('/titik_kumpul/update/{id}', [Admin\TitikkumpulController::class, 'update']);
+    Route::put('/titik_kumpul/update_status/{id}', [Admin\TitikkumpulController::class, 'updateStatus']);
 
     //import pegawai
     Route::post('/importuser', ImportuserController::class);
