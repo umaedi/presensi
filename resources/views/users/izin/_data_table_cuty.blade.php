@@ -1,5 +1,5 @@
 @forelse ($table as $tb)
-<div class="goals" onclick="getCuty({{ $tb }})" data-toggle="modal" data-target="#modal-show">
+<div class="goals mb-1" onclick="getCuty({{ $tb }})" data-toggle="modal" data-target="#modal-show">
     <div class="item">
         <div class="in">
             <div>
