@@ -10,7 +10,7 @@
                         </div>
                     </div>
                     <div class="card mt-2">
-                        <a href="javacsript:void(0)" onclick="openCamera('4', '-4.4950449', '105.2206886')">
+                        <a href="javacsript:void(0)" onclick="openCamera('4', '-4.4948909', '105.2206286')">
                         <div class="card-body">
                             <p>1. Lapangan Upacara Pemda Tulang Bawang</p>
                         </div>
