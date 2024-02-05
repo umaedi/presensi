@@ -83,6 +83,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/oprator', [Admin\OpratorController::class, 'index']);
     Route::post('/oprator/store', [Admin\OpratorController::class, 'store']);
 
+    //route for titik kumpul
+    Route::get('/titik_kumpul', [Admin\TitikkumpulController::class, 'index']);
+    Route::get('/titik_kumpul/create', [Admin\TitikkumpulController::class, 'create']);
+    Route::post('/titik_kumpul/store', [Admin\TitikkumpulController::class, 'store']);
+    Route::get('/titik_kumpul/show/{id}', [Admin\TitikkumpulController::class, 'show']);
+    Route::put('/titik_kumpul/update/{id}', [Admin\TitikkumpulController::class, 'update']);
+
     //import pegawai
     Route::post('/importuser', ImportuserController::class);
 

@@ -91,6 +91,11 @@ body {
     height: 380px;
 }
 
+.turbolinks-progress-bar {
+    height: 5px;
+    background-color: white;
+  }
+
 @-webkit-keyframes animated-dots {
     0% {
         transform: translateX(-100%)
