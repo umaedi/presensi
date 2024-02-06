@@ -23,7 +23,7 @@
                 @else
                 <td class="text-danger">{{ $tb->status }}</td>
                 @endif
-                <td class="text-danger">{{ $tb->status_pulang }}</td>
+                <td class="{{ $tb->status_pulang == 'Tepat waktu' ? 'text-sucess' : 'text-danger' }}">{{ $tb->status_pulang }}</td>
             </tr>
         @empty
             <tr>
