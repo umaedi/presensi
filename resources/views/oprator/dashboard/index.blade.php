@@ -63,7 +63,7 @@
               </div>
             </div>
           </div>
-     
+
         </div>
       </div>
       <!-- Total Revenue -->
@@ -80,7 +80,7 @@
             <div class="table-responsive text-nowrap">
               @include('layouts._loading')
               <div class="table-responsive text-nowrap" id="dataTable">
-                      
+
               </div>
             </div>
           </div>
@@ -232,8 +232,8 @@
                 lng: parseFloat(long),
             },
             disableDefaultUI: false,
-            scrollWheel: true, 
-            draggable: false, 
+            scrollWheel: true,
+            draggable: false,
         };
 
         map = new google.maps.Map(element, mapOptions);

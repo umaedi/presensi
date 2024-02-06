@@ -145,7 +145,7 @@
                     });
                 }
             }
-            
+
             function getCurrentPosition(position) {
                 if (status == 2) {
                     swal({
@@ -166,7 +166,7 @@
             });
             return;
         }
-        
+
         if(status == 4) {
             var currentLocation = {
                 lat: parseInt(lat),
@@ -178,18 +178,18 @@
                 lng: {{ auth()->user()->opd->long }}
             };
         }
-        
+
         var userLocation = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
         };
-        
+
         var radius = 300;
         var distance = google.maps.geometry.spherical.computeDistanceBetween(
             new google.maps.LatLng(currentLocation),
             new google.maps.LatLng(userLocation)
             );
-            
+
             if (distance < radius) {
                 setCamera();
             } else {
