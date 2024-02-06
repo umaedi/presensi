@@ -4,9 +4,10 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <div class="row mb-4">
+        <div class="row">
             <!-- Basic Alerts -->
-            <div class="col-md mb-4 mb-md-0">
+            <div class="col-md mb-md-0">
+              <a href="/oprator/export/cuti" class="btn btn-primary mb-2">EXPORT</a>
               <div class="card">
                   <h5 class="card-header">Data Cuti</h5>
                   <div class="card-body">

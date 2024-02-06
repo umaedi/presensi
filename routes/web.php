@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 //route login
 Route::get('/', Users\LoginController::class)->middleware('guest');
-
+Route::get('/privacy-policy', PrivacyController::class);
 //route user
 Route::middleware('auth')->prefix('user')->group(function () {
     Route::get('/dashboard', Users\DashboardController::class);
@@ -58,6 +58,7 @@ Route::middleware(['auth', 'oprator'])->prefix('oprator')->group(function () {
 
     //export presensi
     Route::get('/presensi/export', Oprator\ExportpresensiController::class);
+    Route::get('/export/cuti', Oprator\ExportcutiController::class);
 
     Route::get('profile', Oprator\ProfileController::class);
 });
