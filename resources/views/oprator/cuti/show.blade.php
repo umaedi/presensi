@@ -51,6 +51,10 @@
                         <input type="text" class="form-control" value="{{ $cuti->jumlah_izin }} Hari">
                     </div>
                     <div class="form-group mb-3">
+                        <label for="">Keterangan</label>
+                        <textarea type="text" class="form-control">{{ $cuti->keterangan }}</textarea>
+                    </div>
+                    <div class="form-group mb-3">
                         <a href="{{ asset('storage/lampiran') }}/{{ $cuti->lampiran }}" type="text" class="btn btn-primary btn-block">Lihat Lampiran</a>
                     </div>
                 </div>
