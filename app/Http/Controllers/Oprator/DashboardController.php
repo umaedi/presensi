@@ -32,12 +32,15 @@ class DashboardController extends Controller
 
             if (\request()->belum_presensi == "belum_presensi") {
                 $user = $this->user->Query();
-                $data['table'] = $user->leftJoin('persensis', 'users.id', '=', 'persensis.user_id')
-                    ->whereNull('persensis.user_id')
-                    ->where('users.opd_id', Auth::user()->opd_id)
-                    ->join('opds', 'users.opd_id', '=', 'opds.id')
-                    ->selectRaw('users.nama,users.no_hp, users.email, opds.nama_opd')
-                    ->paginate();
+                $data['table'] = $user->whereNotIn('users.id', function ($query) {
+                            $query->select('user_id')
+                                ->from('persensis')
+                                ->whereDate('tanggal', Carbon::now()->toDateString());
+                        })
+                        ->where('users.opd_id', Auth::user()->opd_id)
+                        ->join('opds', 'users.opd_id', '=', 'opds.id')
+                        ->selectRaw('users.nama,users.no_hp, users.email, opds.nama_opd')
+                        ->paginate();
 
                 return view('oprator.presensi._data_belum_presensi', $data);
             }
