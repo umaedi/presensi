@@ -4,6 +4,7 @@
             <th>#</th>
             <th>Nama</th>
             <th>Email</th>
+            <th>No Telp</th>
             <th>Organisasi</th>
         </tr>
     </thead>
@@ -13,6 +14,7 @@
                 <td>{{ $table->firstItem() + $key }}</td>
                 <td>{{ $tb->nama }}</td>
                 <td>{{ $tb->email }}</td>
+                <td>{{ $tb->no_hp }}</td>
                 <td>{{ $tb->nama_opd }}</td>
             </tr>
         @empty
