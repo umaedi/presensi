@@ -6,19 +6,26 @@ use Throwable;
 use Illuminate\Http\Request;
 use App\Services\PresensiService;
 use App\Http\Controllers\Controller;
+use App\Services\TitikkumpulService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ApelController extends Controller
 {
     protected $presensi;
-    public function __construct(PresensiService $presensiService)
+    protected $titikkumpul;
+    public function __construct(PresensiService $presensiService, TitikkumpulService $titikkumpulService)
     {
         $this->presensi = $presensiService;
+        $this->titikkumpul = $titikkumpulService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            $data['table'] = $this->titikkumpul->Query()->paginate();
+            return view('users.apel._data_table_apel', $data);
+        }
         $data['title'] = 'Titik Kumpul';
         return view('users.apel.index', $data);
     }

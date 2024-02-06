@@ -1,121 +1,70 @@
 @extends('layouts.pegawai.app')
 @section('content')
-        <div id="appCapsule">
-            <div class="section my-3">
-                <div class="section mt-2">
-                    <div class="card">
-                        <div class="card-body pt-3 pb-3 text-center">
-                            <img src="{{ asset('assets/img') }}/vector1.png" alt="image" class="imaged w-50 ">
-                            <h2 class="text-center">Silakan pilih titik lokasi kumpul dibawah ini</h2>
-                        </div>
+    <div id="appCapsule">
+        <div class="section my-3">
+            <div class="section mt-2">
+                <div class="card">
+                    <div class="card-body pt-3 pb-3 text-center">
+                        <img src="{{ asset('assets/img') }}/vector1.png" alt="image" class="imaged w-50 ">
+                        <h2 class="text-center">Silakan pilih titik lokasi kumpul dibawah ini</h2>
                     </div>
-                    <div class="card mt-2">
-                        <a href="javacsript:void(0)" onclick="openCamera('3', '-4.4948909', '105.2206286')">
-                        <div class="card-body">
-                            <p>1. Lapangan Upacara Pemda Tulang Bawang</p>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="card mt-2">
-                        <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
-                        <div class="card-body">
-                            <p>2. Lapangan Sport Center Menggala</p>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="card mt-2">
-                        <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
-                        <div class="card-body">
-                            <p>3. Islamic Center Tulang Bawang</p>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="card mt-2">
-                        <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
-                        <div class="card-body">
-                            <p>4. Terminal Menggala</p>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="card mt-2">
-                        <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
-                        <div class="card-body">
-                            <p>5. Cakat Nyeyek</p>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="card mt-2">
-                        <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
-                        <div class="card-body">
-                            <p>6. Pasar Putri Agung</p>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="card mt-2">
-                        <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
-                        <div class="card-body">
-                            <p>7. Gedung Dekranasda</p>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="card mt-2">
-                        <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
-                        <div class="card-body">
-                            <p>8. Gedung Kartini</p>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="card mt-2">
-                        <a href="javacsript:void(0)" onclick="openCamera('3', 'lat', 'long')">
-                        <div class="card-body">
-                            <p>9. Sesat Agung</p>
-                        </div>
-                        </a>
-                    </div>
+                </div>
+                <div id="dataTable">
                 </div>
             </div>
         </div>
+    </div>
     @include('layouts.modal._modal_apel')
 @endsection
 @push('js')
     <script type="text/javascript">
-    $('#formApel').submit(async function(e) {
-        e.preventDefault();
-        $('#x-action').addClass('d-none');
-    
-        var data = new FormData(this);
-        data.append('img', image);
-        data.append('latLong', latLong);
-        var param = {
-            method: 'POST',
-            url: '/user/presensi_apel/store',
-            data: data,
-            processData:false,
-            contentType: false,
-            cache: false,
+        var page = 1;
+        async function transAjax(data) {
+            html = null;
+            data.headers = {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+            await $.ajax(data).done(function(res) {
+                    html = res;
+                })
+                .fail(function() {
+                    return false;
+                })
+            return html
         }
 
-        loadingsubmit(true);
-        await transAjax(param).then((res) => {
-            loadingsubmit(false);
-            swal({ text: res.message, icon: 'success', timer: 3000, }).then(() => {
-                window.location.href = '/user/dashboard';
-            });
-        }).catch((err) => {
-            loadingsubmit(false);
-            swal({ text: err.responseJSON.message, icon: 'error', timer: 3000, }).then(() => {
-                window.location.href = '/user/dashboard';
-            });
+        $('#dataTable').html(make_skeleton());
+        $(document).ready(function() {
+            loadData();
         });
 
-        function loadingsubmit(state) {
-        if (state) {
-            $('#loadingSubmit').removeClass('d-none');
-        } else {
-            $('#loadingSubmit').addClass('d-none');
-            $('#x-action').removeClass('d-none');
+        async function loadData() {
+            var param = {
+                method: 'GET',
+                url: '{{ url()->current() }}',
+                data: {
+                    load: 'table',
+                    page: page,
+                }
+            }
+
+            await transAjax(param).then(function(result) {
+                $('#dataTable').html(result)
+            }).catch((err) => {
+                console.log('Internal Server Error!');
+            });
         }
-    }
-    });
+
+        function make_skeleton() {
+            var output = '';
+            for (var count = 0; count < 3; count++) {
+                output += '<div class="col-12">';
+                output += '<div class="ph-item">';
+                output += '<div class="ph-picture"></div>';
+                output += '</div>';
+                output += '</div>';
+            }
+            return output;
+        }
     </script>
 @endpush
