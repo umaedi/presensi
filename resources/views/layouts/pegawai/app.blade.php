@@ -262,11 +262,16 @@
             removeFile(image);
         }
 
+        if("{{ auth()->user()->opd_id == '49' }}") {
+            var _url = '/user/presensi/rsud/store';
+        }else {
+            var _url = '/user/presensi/store';
+        }
         async function absenStore() {
             $('#x-action').addClass('d-none');
             var param = {
                 method: 'POST',
-                url: '/user/presensi/store',
+                url: _url,
                 data: {
                     latLong: latLong,
                     file: image,
@@ -285,13 +290,12 @@
                 });
             }).catch((err) => {
                 loadingsubmit(false);
-                removeFile(image);
                 swal({
                     text: err.responseJSON.message,
                     icon: 'error',
                     timer: 3000,
                 }).then(() => {
-                    window.location.href = '/user/dashboard';
+                    removeFile(image);
                 });
             });
         }
