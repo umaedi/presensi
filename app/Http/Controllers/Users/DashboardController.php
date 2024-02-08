@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use App\Models\Persensi;
 use App\Services\PresensiService;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,6 +34,7 @@ class DashboardController extends Controller
             $data['table'] =  $presensi->where('user_id', auth()->user()->id)->latest()->limit(5)->get();
             return view('users.dashboard._data_table_absensi', $data);
         }
+
         $data['nama'] = explode(" ", auth()->user()->nama);
         $data['absen'] = Persensi::where('user_id', auth()->user()->id)->where('tanggal', date('Y-m-d'))->first();
         $data['cuti'] = Persensi::where('user_id', auth()->user()->id)->where('status', 'cuti')->count();

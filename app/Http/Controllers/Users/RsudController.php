@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Users;
 use Throwable;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Services\RsudService;
 use App\Http\Controllers\Controller;
 use App\Services\PresensiService;
 use Illuminate\Support\Facades\Auth;
@@ -96,7 +95,7 @@ class RsudController extends Controller
                 saveLogs($e->getMessage() . ' ' . 'presensi sore', 'error');
                 return $this->error($e->getMessage());
             }
-            return $this->success('OK', 'Anda Berhasil Mengisi Presensi Pulang ' . $pesan);
+            return $this->success('OK', 'Anda Berhasil Mengisi Presensi Pulang');
         } else {
             $currentTime = Carbon::now();
 
@@ -165,7 +164,7 @@ class RsudController extends Controller
                 return $this->error($e->getMessage());
             }
             Presensicount();
-            return $this->success($data, 'Anda Berhasil Mengisi Presensi Masuk ' . $pesan);
+            return $this->success($data, 'Anda Berhasil Mengisi Presensi Masuk');
         }
     }
 }

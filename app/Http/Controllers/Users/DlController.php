@@ -28,11 +28,6 @@ class DlController extends Controller
         $presensi = $this->presensi->Query()->where('user_id', $user->id)->latest()->first();
 
         if ($presensi && $presensi->tanggal == date('Y-m-d')) {
-
-            if (strtotime(date('H:i:s')) < strtotime(env('JAM_PULANG'))) {
-                return $this->error('Mohon Maaf Presensi Sore Belum Dibuka!');
-            }
-
             if (isset($presensi->jam_pulang)) {
                 return $this->error('Hari Ini Anda Sudah Mengisi Presensi 2X!');
             }

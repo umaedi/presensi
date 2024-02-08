@@ -130,7 +130,7 @@
                                     <label class="label">Mulai Cuti</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control datepicker" id="cutystart"
-                                            name="tanggal_awal" placeholder="Pilih" value="">
+                                            name="tanggal_awal" placeholder="Pilih" value="" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                                     <label class="label">Berakhir Cuti</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control datepicker" id="cutyend"
-                                            name="tanggal_akhir" placeholder="Pilh" value="">
+                                            name="tanggal_akhir" placeholder="Pilh" value="" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -148,7 +148,7 @@
                                     <label class="label">Tanggal Masuk Kerja</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control datepicker" name="tanggal_masuk"
-                                            placeholder="Pilih" value="">
+                                            placeholder="Pilih" value="" readonly>
                                     </div>
                                 </div>
                             </div>
