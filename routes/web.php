@@ -47,6 +47,12 @@ Route::middleware(['auth', 'oprator'])->prefix('oprator')->group(function () {
     Route::get('/pegawai/show/{id}', [Oprator\PegawaiController::class, 'show']);
     Route::put('/pegawai/update/{id}', [Oprator\PegawaiController::class, 'update']);
 
+    Route::prefix('sub')->group(function () {
+        Route::get('/pegawai', [Oprator\SubPegawaiController::class, 'index']);
+        Route::put('/pegawai/update/{id}', [Oprator\SubPegawaiController::class, 'update']);
+        Route::post('/pegawai/store', [Oprator\SubPegawaiController::class, 'store']);
+    });
+
     Route::get('/cuti', [Oprator\CutiController::class, 'index']);
     Route::get('/cuti/show/{id}', [Oprator\CutiController::class, 'show']);
 
@@ -72,6 +78,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/opd/store', [Admin\OpdController::class, 'store']);
     Route::get('/opd/show/{id}', [Admin\OpdController::class, 'show']);
     Route::put('/opd/update/{id}', [Admin\OpdController::class, 'update']);
+
+    Route::get('/subopd/get/{id}', [Admin\SubOpdController::class, 'index']);
+    Route::get('/subopd/create/{id}', [Admin\SubOpdController::class, 'create']);
+    Route::post('/subopd/store', [Admin\SubOpdController::class, 'store']);
+    Route::get('/subopd/show/{id}', [Admin\SubOpdController::class, 'show']);
+    Route::put('/subopd/update/{id}', [Admin\SubOpdController::class, 'update']);
 
     Route::get('/presensi/opd/show/{id}', [Admin\PresensiopdController::class, 'show']);
 

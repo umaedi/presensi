@@ -2,9 +2,9 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>Nama OPD</th>
-            <th>Lat</th>
-            <th>Long</th>
+            <th>Nama</th>
+            <th>Email</th>
+            <th>Sub Organisasi</th>
             <th>Lihat</th>
         </tr>
     </thead>
@@ -12,12 +12,13 @@
         @forelse ($table as $key => $tb)
             <tr>
                 <td>{{ $table->firstItem() + $key }}</td>
-                <td>{{ $tb->nama_opd }}</td>
-                <td>{{ $tb->lat ?? '-' }}</td>
-                <td>{{ $tb->long ?? '-' }}</td>
+                <td>{{ $tb->nama }}</td>
+                <td>{{ $tb->email }}</td>
+                <td>{{ $tb->subopd->nama_sub_opd }}</td>
                 <td>
-                    <a href="/admin/opd/show/{{ $tb->id }}" class="btn btn-primary btn-sm">Lihat</a>
-                    <a href="/admin/subopd/get/{{ $tb->id }}" class="btn btn-info btn-sm">Sub OPD</a>
+                    <a href="/oprator/pegawai/show/{{ $tb->id }}" class="btn btn-primary btn-sm">Lihat</a>
+                    <button onclick="hapusSubPegawai({{ $tb->id }}, event);"
+                        class="btn btn-danger btn-sm">Hapus</button>
                 </td>
             </tr>
         @empty

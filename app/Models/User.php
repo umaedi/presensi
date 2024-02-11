@@ -74,6 +74,11 @@ class User extends Authenticatable
         return $this->belongsTo(Opd::class);
     }
 
+    public function subopd()
+    {
+        return $this->belongsTo(SubOpd::class, 'sub_opd_id');
+    }
+
     public function izin()
     {
         return $this->hasMany(Izin::class);
