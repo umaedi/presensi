@@ -37,6 +37,9 @@ Route::middleware('auth')->prefix('user')->group(function () {
 
     Route::get('/profile', [Users\ProfileController::class, 'index']);
     Route::get('/scan', Users\ScanController::class);
+
+    //route for rsud
+    Route::post('/presensi/rsud/store', [Users\RsudController::class, 'store']);
 });
 
 //route for oprator
