@@ -22,10 +22,10 @@ class ApelController extends Controller
 
     public function index(Request $request)
     {
-        // if ($request->ajax()) {
-        //     return view('users.apel._data_table_apel', $data);
-        // }
-        $data['table'] = $this->titikkumpul->Query()->paginate();
+        if ($request->ajax()) {
+            $data['table'] = $this->titikkumpul->Query()->paginate();
+            return view('users.apel._data_table_apel', $data);
+        }
         $data['title'] = 'Titik Kumpul';
         return view('users.apel.index', $data);
     }
