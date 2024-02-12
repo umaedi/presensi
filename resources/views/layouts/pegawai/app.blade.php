@@ -169,8 +169,8 @@
 
         if(status == 4) {
             var currentLocation = {
-                lat: parseInt(lat),
-                lng: parseInt(long),
+                lat: lat,
+                lng: long,
             };
         }else {
             var currentLocation = {
