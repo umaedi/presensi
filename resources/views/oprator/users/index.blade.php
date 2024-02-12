@@ -11,7 +11,9 @@
                         Pegawai</button>
                     <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#importPegawai">Import
                         Pegawai</button>
+                    @isset(auth()->user()->sub_opd_id)
                     <a class="btn btn-primary mb-3" href="sub/pegawai">Pegawai Sub OPD</a>
+                    @endisset
                     <div class="card">
                         <h5 class="card-header">Pegawai</h5>
                         <div class="card-body">
