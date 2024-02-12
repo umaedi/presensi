@@ -167,19 +167,18 @@
                     return;
                 }
 
-<<<<<<< HEAD
-        if(status == 4) {
-            var currentLocation = {
-                lat: lat,
-                lng: long,
-            };
-        }else {
-            var currentLocation = {
-                lat: {{ auth()->user()->opd->lat }},
-                lng: {{ auth()->user()->opd->long }}
-            };
-        }
-=======
+                if(status == 4) {
+                    var currentLocation = {
+                        lat: lat,
+                        lng: long,
+                    };
+                }else {
+                    var currentLocation = {
+                        lat: {{ auth()->user()->opd->lat }},
+                        lng: {{ auth()->user()->opd->long }}
+                    };
+                }
+                
                 if (status == 4) {
                     var currentLocation = {
                         lat: parseInt(lat),
@@ -192,7 +191,6 @@
                         lng: {{ auth()->user()->sub_opd_id == null ? auth()->user()->opd->long : auth()->user()->subopd->long }}
                     };
                 }
->>>>>>> 6fa4ee80668ce46a7e678e14692b308e393d610a
 
                 var userLocation = {
                     lat: position.coords.latitude,
