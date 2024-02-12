@@ -12,20 +12,19 @@
         @forelse ($table as $key => $tb)
             <tr>
                 <td>{{ $table->firstItem() + $key }}</td>
-                <td>{{ $tb->nama_opd }}</td>
+                <td>{{ $tb->nama_sub_opd }}</td>
                 <td>{{ $tb->lat ?? '-' }}</td>
                 <td>{{ $tb->long ?? '-' }}</td>
                 <td>
                     <a href="/admin/opd/show/{{ $tb->id }}" class="btn btn-primary btn-sm">Lihat</a>
-                    <a href="/admin/subopd/get/{{ $tb->id }}" class="btn btn-info btn-sm">Sub OPD</a>
                 </td>
             </tr>
         @empty
             <div class="col text-center">
                 <div class="empty-img">
                     <svg style="width: 96px; height: 96px" xmlns="http://www.w3.org/2000/svg"
-                        class="icon icon-tabler icon-tabler-database-off" width="24" height="24"
-                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        class="icon icon-tabler icon-tabler-database-off" width="24" height="24" viewBox="0 0 24 24"
+                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path

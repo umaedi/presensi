@@ -9,30 +9,28 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-            <form id="updateOpd">
+            <form id="form">
                 @csrf
-                @method('PUT')
                 <div class="row mb-4">
                     <!-- Basic Alerts -->
                     <div class="col-md mb-4 mb-md-0">
                         <div class="card mb-3">
                             <span id="notif"></span>
                             <div class="card-body">
+                                <input name="opd_id" type="number" value="{{ $data['opd_id'] }}" id="opd_id" hidden />
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="nama_opd" class="form-label">Nama OPD</label>
-                                        <input name="nama_opd" type="text" id="nama_opd" class="form-control"
-                                            value="{{ $opd->nama_opd }}" />
+                                        <label for="nama_opd" class="form-label">Nama Sub OPD</label>
+                                        <input name="nama_sub_opd" type="text" id="nama_sub_opd" class="form-control" />
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="lat" class="form-label">Lat</label>
-                                        <input name="lat" type="text" id="lat" class="form-control latitude"
-                                            value="{{ $opd->lat }}" />
+                                        <input name="lat" type="text" id="lat" class="form-control latitude" />
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="long" class="form-label">Long</label>
-                                        <input name="long" type="text" id="long" class="form-control longitude"
-                                            value="{{ $opd->long }}" />
+                                        <input name="long" type="text" id="long"
+                                            class="form-control longitude" />
                                     </div>
                                 </div>
                             </div>
@@ -52,84 +50,11 @@
         </div>
     </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="opratorModal" tabindex="-1" aria-hidden="true">
-        <form id="storeOprator">
-            @csrf
-            <div class="modal-dialog modal-xl" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="opratorModalTitle">Tambah OPD</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <span id="notif"></span>
-                        <div class="row g-2">
-                            <div class="col mb-3">
-                                <label for="nameWithTitle" class="form-label">Nama</label>
-                                <input name="nama" type="text" id="name" class="form-control"
-                                    placeholder="Masukan nama lengkap" />
-                            </div>
-                            <div class="col mb-3">
-                                <label for="nameWithTitle" class="form-label">NIP</label>
-                                <input name="nip" type="text" id="nip" class="form-control"
-                                    placeholder="Masukan NIP" />
-                            </div>
-                        </div>
-                        <div class="row g-2">
-                            <div class="col mb-3">
-                                <label for="nameWithTitle" class="form-label">Jabatan</label>
-                                <input name="jabatan" type="text" id="jabatan" class="form-control"
-                                    placeholder="Masukan Jabatan" />
-                            </div>
-                            <div class="col mb-3">
-                                <label for="nameWithTitle" class="form-label">Organisasi</label>
-                                <input name="organisasi" type="text" id="organisasi" class="form-control"
-                                    placeholder="Masukan organisasi" />
-                            </div>
-                        </div>
-                        <div class="row g-2">
-                            <div class="col mb-3">
-                                <label for="nameWithTitle" class="form-label">Unit Organisasi</label>
-                                <input name="unit_organisasi" type="text" id="unit_organisasi" class="form-control"
-                                    placeholder="Masukan unit organisasi" />
-                            </div>
-                            <div class="col mb-3">
-                                <label for="nameWithTitle" class="form-label">No Tlp/WhatsApp</label>
-                                <input name="no_hp" type="text" id="no_hp" class="form-control"
-                                    placeholder="Masukan no tlp" />
-                            </div>
-                        </div>
-                        <div class="row g-2">
-                            <div class="col mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input name="email" type="email" id="email" class="form-control"
-                                    placeholder="Masukan email" />
-                            </div>
-                            <div class="col mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input name="password" type="text" id="password" class="form-control"
-                                    placeholder="Masukan password" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                            Tutup
-                        </button>
-                        @include('layouts._button')
-                        <button id="btn_submit" type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="content-backdrop fade"></div>
-    </div>
 @endsection
 @push('js')
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdrcR4AiS_NF-9lL3I0_wBqZ8VroWpA50&libraries=places">
     </script>
+    <script src="{{ asset('assets/pegawai') }}/js/sweetalert.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             initialize();
@@ -214,7 +139,8 @@
                     latLng: marker.getPosition()
                 }, function(results, status) {
                     if (status == google.maps.GeocoderStatus
-                        .OK) { // This line can also be written like if ( status == google.maps.GeocoderStatus.OK ) {
+                        .OK
+                    ) { // This line can also be written like if ( status == google.maps.GeocoderStatus.OK ) {
                         if (results[0]) {
                             var address = results[0].formatted_address;
                             var pin =
@@ -261,7 +187,8 @@
                     latLng: marker.getPosition()
                 }, function(results, status) {
                     if (status == google.maps.GeocoderStatus
-                        .OK) { // This line can also be written like if ( status == google.maps.GeocoderStatus.OK ) {
+                        .OK
+                    ) { // This line can also be written like if ( status == google.maps.GeocoderStatus.OK ) {
                         if (results[0]) {
                             var address = results[0].formatted_address;
                             var pin =
@@ -294,13 +221,13 @@
             });
         }
 
-        $('#updateOpd').on('submit', async function store(e) {
+        $('#form').on('submit', async function store(e) {
             e.preventDefault();
 
             var form = $(this)[0];
             var data = new FormData(form);
             var param = {
-                url: '/admin/opd/update/{{ $opd->id }}',
+                url: '/admin/subopd/store',
                 method: 'POST',
                 data: data,
                 processData: false,
@@ -309,14 +236,22 @@
             }
 
             action(true);
-            await transAjax(param).then((result) => {
-                action(false);
-                $('#notif').html(`<div class="alert alert-success">${result.message}</div>`);
-                loadTable();
+            await transAjax(param).then((res) => {
+                swal({
+                    text: res.message,
+                    icon: 'success',
+                    timer: 3000,
+                }).then(() => {
+                    action(false);
+                    window.location.href = '/admin/subopd/get/{{ $data['opd_id'] }}';
+                });
             }).catch((err) => {
                 action(false);
-                console.log(err);
-                $('#notif').html(`<div class="alert alert-warning">${err.responseJSON.message}</div>`);
+                swal({
+                    text: err.responseJSON.message,
+                    icon: 'error',
+                    timer: 3000,
+                });
             });
         });
 

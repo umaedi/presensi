@@ -153,20 +153,21 @@
                         text: 'Silakan pilih salah satu lokasi diatas!',
                         icon: 'error',
                         timer: 5000,
-                });
-                return;
-            }
+                    });
+                    return;
+                }
 
-            if(status == 3) {
-                swal({
-                title: 'Oops!',
-                text: 'Lokasi kegiatan tidak aktif!',
-                icon: 'error',
-                timer: 3000,
-            });
-            return;
-        }
+                if (status == 3) {
+                    swal({
+                        title: 'Oops!',
+                        text: 'Lokasi kegiatan tidak aktif!',
+                        icon: 'error',
+                        timer: 3000,
+                    });
+                    return;
+                }
 
+<<<<<<< HEAD
         if(status == 4) {
             var currentLocation = {
                 lat: lat,
@@ -178,21 +179,35 @@
                 lng: {{ auth()->user()->opd->long }}
             };
         }
+=======
+                if (status == 4) {
+                    var currentLocation = {
+                        lat: parseInt(lat),
+                        lng: parseInt(long),
+                    };
+                } else {
+                    var currentLocation = {
+                        // lokasi baru
+                        lat: {{ auth()->user()->sub_opd_id == null ? auth()->user()->opd->lat : auth()->user()->subopd->lat }},
+                        lng: {{ auth()->user()->sub_opd_id == null ? auth()->user()->opd->long : auth()->user()->subopd->long }}
+                    };
+                }
+>>>>>>> 6fa4ee80668ce46a7e678e14692b308e393d610a
 
-        var userLocation = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-        };
+                var userLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
 
-        var radius = 300;
-        var distance = google.maps.geometry.spherical.computeDistanceBetween(
-            new google.maps.LatLng(currentLocation),
-            new google.maps.LatLng(userLocation)
-            );
+                var radius = 300;
+                var distance = google.maps.geometry.spherical.computeDistanceBetween(
+                    new google.maps.LatLng(currentLocation),
+                    new google.maps.LatLng(userLocation)
+                );
 
-            if (distance < radius) {
-                setCamera();
-            } else {
+                if (distance < radius) {
+                    setCamera();
+                } else {
                     swal({
                         title: 'Oops!',
                         text: 'Mohon Maaf Sepertinya Anda Diluar Radius!',

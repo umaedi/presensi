@@ -19,6 +19,11 @@ class Opd extends Model
         return $this->hasMany(User::class);
     }
 
+    public function subopd()
+    {
+        return $this->hasMany(Subopd::class);
+    }
+
     public function presensi()
     {
         return $this->hasMany(Persensi::class);
