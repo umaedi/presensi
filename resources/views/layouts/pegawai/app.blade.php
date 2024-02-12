@@ -179,19 +179,6 @@
                     };
                 }
                 
-                if (status == 4) {
-                    var currentLocation = {
-                        lat: parseInt(lat),
-                        lng: parseInt(long),
-                    };
-                } else {
-                    var currentLocation = {
-                        // lokasi baru
-                        lat: {{ auth()->user()->sub_opd_id == null ? auth()->user()->opd->lat : auth()->user()->subopd->lat }},
-                        lng: {{ auth()->user()->sub_opd_id == null ? auth()->user()->opd->long : auth()->user()->subopd->long }}
-                    };
-                }
-
                 var userLocation = {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
