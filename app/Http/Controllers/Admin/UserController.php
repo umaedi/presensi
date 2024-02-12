@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Http\Controllers\Controller;
+use App\Services\IzinService;
 use App\Services\OpdService;
 use App\Services\PresensiService;
 use Illuminate\Support\Facades\Auth;
@@ -15,11 +16,13 @@ class UserController extends Controller
     protected $user;
     protected $presensi;
     protected $opd;
-    public function __construct(UserService $userService, PresensiService $presensiService, OpdService $opdService)
+    protected $izin;
+    public function __construct(UserService $userService, PresensiService $presensiService, OpdService $opdService, IzinService $izinService)
     {
         $this->user = $userService;
         $this->presensi = $presensiService;
         $this->opd = $opdService;
+        $this->izin = $izinService;
     }
 
     public function index()
@@ -114,12 +117,17 @@ class UserController extends Controller
         try {
             $this->user->destroy($id);
         } catch (\Throwable $th) {
-            throw $th;
+            return $this->error($th->getMessage());
         }
 
         $presensi = $this->presensi->find($id);
         if ($presensi) {
             $presensi->destroy();
+        }
+
+        $izin = $this->izin->find($id);
+        if ($izin) {
+            $izin->destroy();
         }
 
         return redirect('/admin/pegawai')->with('msg_delete', 'Pegawai berhasil dihapus');
