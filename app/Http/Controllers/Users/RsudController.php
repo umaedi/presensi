@@ -27,25 +27,23 @@ class RsudController extends Controller
 
             $currentTime = Carbon::now();
 
-            $masukShiftPagi = Carbon::createFromTime(8, 00, 0);
-            $pulangShiftPagi = Carbon::createFromTime(14, 00, 0);
+            $masukShiftPagi = Carbon::createFromTime(8, 0, 0);
+            $pulangShiftPagi = Carbon::createFromTime(14, 0, 0);
 
-            $masukShiftSiang = Carbon::createFromTime(14, 00, 0);
-            $pulangShiftSiang = Carbon::createFromTime(20, 00, 0);
+            $masukShiftSiang = Carbon::createFromTime(14, 0, 0);
+            $pulangShiftSiang = Carbon::createFromTime(20, 0, 0);
 
-            $masukShiftMalam = Carbon::createFromTime(20, 00, 0);
-            $pulangShiftMalam = Carbon::createFromTime(8, 00, 0);
+            $masukShiftMalam = Carbon::createFromTime(20, 0, 0);
+            $pulangShiftMalam = Carbon::createFromTime(8, 0, 0)->addDay(); // Tambahkan 1 hari untuk shift malam
 
             if ($currentTime->between($masukShiftPagi, $pulangShiftPagi)) {
-                $jamPulang = $pulangShiftPagi;
-                $pesan = 'Shift Pagi';
+                $expectedTime = $pulangShiftPagi;
             } elseif ($currentTime->between($masukShiftSiang, $pulangShiftSiang)) {
-                $jamPulang =   $pulangShiftSiang;
-                $pesan = 'Shift Siang';
-            } elseif ($currentTime->between($masukShiftMalam, $pulangShiftMalam)) {
-                $jamPulang =  $pulangShiftMalam;
-                $pesan = 'Shift Malam';
+                $expectedTime = $pulangShiftSiang;
+            } else {
+                $expectedTime = $pulangShiftMalam;
             }
+
 
             $presensiUpdate = $presensi->where('tanggal', $presensi->tanggal)->where('user_id', $user->id);
             $file = $request->file;
@@ -69,16 +67,16 @@ class RsudController extends Controller
                 $photo_pulang = $file;
             }
 
-            // Membuat objek Carbon untuk pukul 15:30:00
-            $batasWaktu = $jamPulang;
+            // Membuat objek Carbon untuk batas waktu pulang
+            $batasWaktu = $expectedTime;
 
-            // Memeriksa apakah waktu saat ini lebih kecil dari $batasWaktu
-            if ($currentTime->lessThan($batasWaktu)) {
-                // Kondisi jika waktu saat ini lebih kecil dari 15:30:00
-                $statusPulang = 'Lebih awal ' . date('H:i:s');
-            } else {
-                // Kondisi jika waktu saat ini sama atau lebih besar dari 15:30:00
+            // Memeriksa apakah waktu saat ini lebih besar atau sama dengan batas waktu yang diharapkan untuk pulang
+            if ($currentTime->greaterThanOrEqualTo($batasWaktu)) {
+                // Kondisi jika waktu saat ini sama atau lebih besar dari waktu yang diharapkan untuk pulang
                 $statusPulang = 'Tepat waktu';
+            } else {
+                // Kondisi jika waktu saat ini lebih kecil dari waktu yang diharapkan untuk pulang
+                $statusPulang = 'Lebih awal ' . $currentTime->format('H:i:s');
             }
 
             $data['opd_id']     = $user->opd_id;
@@ -110,13 +108,10 @@ class RsudController extends Controller
 
             if ($currentTime->between($masukShiftPagi, $pulangShiftPagi)) {
                 $jamMasuk = $masukShiftPagi;
-                $pesan = 'Shift Pagi';
             } elseif ($currentTime->between($masukShiftSiang, $pulangShiftSiang)) {
                 $jamMasuk =  $masukShiftSiang;
-                $pesan = 'Shift Siang';
             } elseif ($currentTime->between($masukShiftMalam, $pulangShiftMalam)) {
                 $jamMasuk =  $masukShiftMalam;
-                $pesan = 'Shift Malam';
             }
 
             if ($currentTime > $jamMasuk) {
