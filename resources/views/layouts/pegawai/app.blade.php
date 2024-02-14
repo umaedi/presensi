@@ -168,7 +168,6 @@
                 }
 
                 if(status === 4) {
-                    console.log('ok');
                     var currentLocation = {
                         lat: lat,
                         lng: long,
