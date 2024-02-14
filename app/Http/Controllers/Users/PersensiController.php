@@ -183,7 +183,13 @@ class PersensiController extends Controller
 
     public function removeFile(Request $request)
     {
-        Storage::delete('users/img/' . $request->file);
-        return $this->success('ok', 'photo berhasil di hapus');
+        $filePath = storage_path('app/public/users/img/') . $request->file;
+
+        if (file_exists($filePath)) {
+            unlink($filePath);
+            return $this->success('ok', 'photo berhasil dihapus');
+        } else {
+            return $this->error('not_found', 'photo tidak ditemukan');
+        }
     }
 }

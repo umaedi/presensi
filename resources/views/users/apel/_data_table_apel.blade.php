@@ -1,6 +1,6 @@
 @forelse ($table as $key => $tb)
     <div class="card mt-2">
-        <a href="javacsript:void(0)"
+        <a href="javascript:void(0)"
             onclick="openCamera({{ $tb->status == 'true' ? 4 : 3 }}, {{ $tb->lat }}, {{ $tb->long }})">
             <div class="card-body">
                 <p>{{ $key + 1 . '. ' . $tb->nama_lokasi }}</p>

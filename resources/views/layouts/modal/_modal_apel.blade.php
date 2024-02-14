@@ -21,29 +21,15 @@
                                 </div>
                             </div>
                             @include('layouts.pegawai._loading_submit')
-                        </div>
-                    </div>
-                </div>
-                <form id="formApel">
-                    @csrf
-                    <div id="x-action" class="row d-none">
-                        <div class="col-md-6">
-                            <div class="form-group boxed">
-                                <div class="input-wrapper">
-                                    <label class="label" for="keterangan">Keterangan</label>
-                                    <textarea type="text" class="form-control" id="keterangan" name="keterangan"></textarea>
-                                    <i class="clear-input">
-                                        <ion-icon name="close-circle"></ion-icon>
-                                    </i>
+                            <div id="x-action" class="row d-none">
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary btn-lg btn-block mb-3" onclick="absenStore()">Isi Presensi</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button id="x-resetCamera" class="btn btn-warning btn-lg btn-block">Ganti Photo</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 mt-2">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block mb-3">Isi Presensi</button>
-                        </div>
-                    </form>
-                    <div class="col-md-6">
-                        <a href="javascript:void()" id="x-resetCamera" class="btn btn-warning btn-lg btn-block">Ganti Photo</a>
                     </div>
                 </div>
             </div>
