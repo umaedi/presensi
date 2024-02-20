@@ -16,7 +16,12 @@ class LogController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $log = Log::latest()->paginate();
-        return view('admin.log');
+        if (\request()->ajax()) {
+            $log = Log::query();
+            $page = request('pagination', 15);
+            $data['table'] = $log->latest()->paginate($page);
+            return view('admin.log._data_log', $data);
+        }
+        return view('admin.log.index');
     }
 }
