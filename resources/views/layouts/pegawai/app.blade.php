@@ -193,15 +193,14 @@
                 if (distance < radius) {
                     setCamera();
                 } else {
-                    setCamera();
-                    // swal({
-                    //     title: 'Oops!',
-                    //     text: 'Mohon Maaf Sepertinya Anda Diluar Radius!',
-                    //     icon: 'error',
-                    //     timer: 5000,
-                    // }).then(() => {
-                    //     window.location.href = '{{ url()->current() }}';
-                    // });
+                    swal({
+                        title: 'Oops!',
+                        text: 'Mohon Maaf Sepertinya Anda Diluar Radius!',
+                        icon: 'error',
+                        timer: 5000,
+                    }).then(() => {
+                        window.location.href = '{{ url()->current() }}';
+                    });
                 }
             }
             //production end
