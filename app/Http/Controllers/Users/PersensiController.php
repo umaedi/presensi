@@ -150,7 +150,7 @@ class PersensiController extends Controller
             $data['tanggal']    = date('Y-m-d');
             $data['jam_masuk']  = date('H:i:s');
             $data['lat_long_masuk']  = $request->latLong;
-            // $data['photo_masuk']     = $photo_masuk;
+            $data['photo_masuk']     = $photo_masuk;
 
             try {
                 // dispatch(new PresensiJob($data));
