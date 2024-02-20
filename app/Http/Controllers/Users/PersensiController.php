@@ -150,13 +150,13 @@ class PersensiController extends Controller
             $data['tanggal']    = date('Y-m-d');
             $data['jam_masuk']  = date('H:i:s');
             $data['lat_long_masuk']  = $request->latLong;
-            $data['photo_masuk']     = $photo_masuk;
+            // $data['photo_masuk']     = $photo_masuk;
 
             try {
                 // dispatch(new PresensiJob($data));
                 $this->presensi->store($data);
             } catch (Throwable $e) {
-                saveLogs($e->getMessage() . ' ' . 'presensi pagi', 'error');
+                saveLogs($e->getPrevious()->getMessage() . ' ' . 'presensi pagi', 'error');
                 return $this->error($e->getMessage());
             }
             Presensicount();
