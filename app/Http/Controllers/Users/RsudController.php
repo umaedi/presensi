@@ -44,6 +44,17 @@ class RsudController extends Controller
                 $expectedTime = $pulangShiftMalam;
             }
 
+            // Membuat objek Carbon untuk batas waktu pulang
+            $batasWaktu = $expectedTime;
+
+            // Memeriksa apakah waktu saat ini lebih besar atau sama dengan batas waktu yang diharapkan untuk pulang
+            if ($currentTime->greaterThanOrEqualTo($batasWaktu)) {
+                // Kondisi jika waktu saat ini sama atau lebih besar dari waktu yang diharapkan untuk pulang
+                $statusPulang = 'Tepat waktu';
+            } else {
+                // Kondisi jika waktu saat ini lebih kecil dari waktu yang diharapkan untuk pulang
+                $statusPulang = 'RSUD Menggala ' . $currentTime->format('H:i:s');
+            }
 
             $presensiUpdate = $presensi->where('tanggal', $presensi->tanggal)->where('user_id', $user->id);
             $file = $request->file;
@@ -76,7 +87,7 @@ class RsudController extends Controller
                 $statusPulang = 'Tepat waktu';
             } else {
                 // Kondisi jika waktu saat ini lebih kecil dari waktu yang diharapkan untuk pulang
-                $statusPulang = 'Lebih awal ' . $currentTime->format('H:i:s');
+                $statusPulang = 'RSUD Menggala ' . $currentTime->format('H:i:s');
             }
 
             $data['opd_id']     = $user->opd_id;
@@ -152,7 +163,6 @@ class RsudController extends Controller
             $data['status'] = $status;
 
             try {
-                // dispatch(new PresensiJob($data));
                 $this->presensi->store($data);
             } catch (Throwable $e) {
                 saveLogs($e->getMessage() . ' ' . 'presensi pagi', 'error');

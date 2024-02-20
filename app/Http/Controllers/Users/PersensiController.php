@@ -72,7 +72,7 @@ class PersensiController extends Controller
 
             $hari = $currentTime->format('l');
             if ($hari === 'Friday') {
-                $waktuPulang =  Carbon::createFromTime(16, 29, 0);
+                $waktuPulang =  Carbon::createFromTime(16, 30, 0);
             } else {
                 $waktuPulang = Carbon::createFromTime(16, 00, 0);
             }

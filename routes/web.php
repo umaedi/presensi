@@ -2,11 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Admin\OpratorController;
-use App\Http\Livewire\Users\Dashboard\Index;
-use App\Http\Livewire\Users\History\Index as HistoryIndex;
-use App\Http\Livewire\Users\Izin\Index as IzinIndex;
-use App\Http\Livewire\Users\Profile\Index as ProfileIndex;
 use Illuminate\Support\Facades\Route;
 
 //route login
@@ -112,4 +107,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     //report
     Route::get('/presensi', [Admin\PresensiController::class, 'index']);
+
+    //log
+    Route::get('/log', Admin\LogController::class);
 });

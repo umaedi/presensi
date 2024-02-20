@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->string('warning')->nullable();
             $table->string('spt')->nullable();
-            $table->string('keterangan')->nullable();
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }

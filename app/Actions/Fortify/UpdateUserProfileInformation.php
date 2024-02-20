@@ -25,7 +25,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'jabatan' =>  ['required', 'string', 'max:255'],
             'unit_organisasi' =>  ['required', 'string', 'max:255'],
             'no_hp' =>  ['required', 'string', 'max:255'],
-            'photo' => ['image', 'max:2048', 'mimes:jpg,jpeg,png'],
+            'photo' => ['image', 'max:3048', 'mimes:jpg,jpeg,png'],
             'email' => [
                 'required',
                 'string',

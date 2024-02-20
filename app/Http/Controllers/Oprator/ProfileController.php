@@ -28,7 +28,7 @@ class ProfileController extends Controller
         $id = Auth::user()->id;
         if (\request()->ajax()) {
             $presensi = $this->presensi->Query();
-            $data['table'] = $presensi->where('user_id', $id)->paginate();
+            $data['table'] = $presensi->where('user_id', $id)->latest()->paginate();
             return view('oprator.presensi._data_presensi', $data);
         }
 
