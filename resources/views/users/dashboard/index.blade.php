@@ -96,6 +96,15 @@
             </div>
         </div>
         <div class="section">
+            <div class="transactions">
+                <!-- item -->
+                <a href="#" class="item mt-2">
+                    <div class="detail">
+                        <div>
+                            <strong class="text-danger">Aplikasi SIAP TUBA kini dapat di download di google plystore. <button class="btn btn-primary btn-sm">Download disini</button></strong>
+                        </div>
+                    </div>
+                </a>
             <div class="row mt-2">
                 @if (empty($absen->jam_masuk))
                     <div class="col-6">
