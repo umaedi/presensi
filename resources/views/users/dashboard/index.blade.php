@@ -112,50 +112,43 @@
         </div>
         <div class="section">
             <div class="transactions">
-                <!-- item -->
-                {{-- <a href="#" class="item mt-2">
-                    <div class="detail">
-                        <div>
-                            <strong class="text-danger">Aplikasi SIAP TUBA kini dapat di download di google plystore. <button class="btn btn-primary btn-sm">Download disini</button></strong>
+                <div class="row mt-2">
+                    @if (empty($absen->jam_masuk))
+                        <div class="col-6">
+                            {{-- <a href="/user/presensi"> --}}
+                            <div class="stat-box bg-secondary">
+                                <div class="title text-white">Presensi Masuk</div>
+                                <div class="value text-white">Belum presensi</div>
+                            </div>
+                            {{-- </a> --}}
                         </div>
-                    </div>
-                </a> --}}
-            <div class="row mt-2">
-                @if (empty($absen->jam_masuk))
-                    <div class="col-6">
-                        {{-- <a href="/user/presensi"> --}}
-                        <div class="stat-box bg-secondary">
-                            <div class="title text-white">Presensi Masuk</div>
-                            <div class="value text-white">Belum presensi</div>
+                    @else
+                        <div class="col-6">
+                            <div class="stat-box bg-primary">
+                                <div class="title text-white">Presensi Masuk</div>
+                                <div class="value text-white">Sudah presensi</div>
+                            </div>
                         </div>
-                        {{-- </a> --}}
-                    </div>
-                @else
-                    <div class="col-6">
-                        <div class="stat-box bg-primary">
-                            <div class="title text-white">Presensi Masuk</div>
-                            <div class="value text-white">Sudah presensi</div>
-                        </div>
-                    </div>
-                @endif
+                    @endif
 
-                @if (empty($absen->jam_pulang))
-                    <div class="col-6">
-                        {{-- <a href="/user/presensi"> --}}
-                        <div class="stat-box bg-secondary">
-                            <div class="title text-white">Presensi Pulang</div>
-                            <div class="value text-white">Belum presensi</div>
+                    @if (empty($absen->jam_pulang))
+                        <div class="col-6">
+                            {{-- <a href="/user/presensi"> --}}
+                            <div class="stat-box bg-secondary">
+                                <div class="title text-white">Presensi Pulang</div>
+                                <div class="value text-white">Belum presensi</div>
+                            </div>
+                            {{-- </a> --}}
                         </div>
-                        {{-- </a> --}}
-                    </div>
-                @else
-                    <div class="col-6">
-                        <div class="stat-box bg-primary">
-                            <div class="title text-white">Presensi Pulang</div>
-                            <div class="value text-white">Sudah presensi</div>
+                    @else
+                        <div class="col-6">
+                            <div class="stat-box bg-primary">
+                                <div class="title text-white">Presensi Pulang</div>
+                                <div class="value text-white">Sudah presensi</div>
+                            </div>
                         </div>
-                    </div>
-                @endif
+                    @endif
+                </div>
             </div>
         </div>
         <div class="section mt-3">
