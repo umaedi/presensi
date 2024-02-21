@@ -11,7 +11,7 @@
         <a href="javascript:void(0)"
             onclick="openCamera(4, -5,3770441, 105,2789157)">
             <div class="card-body">
-                <p>2. MPP Mini Tulang Bawang</p>
+                <p>2. Anjungan Tulang Bawang</p>
             </div>
         </a>
     </div>
