@@ -34,7 +34,7 @@ Route::middleware('auth')->prefix('user')->group(function () {
     Route::get('/scan', Users\ScanController::class);
 
     //sub opd
-    Route::get('subopd', [Users\SubOpdController::class, 'index']);
+    Route::get('subopd', [Users\SubopdController::class, 'index']);
 
     //route for rsud
     Route::post('/presensi/rsud/store', [Users\RsudController::class, 'store']);
