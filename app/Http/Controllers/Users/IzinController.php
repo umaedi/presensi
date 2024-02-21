@@ -43,7 +43,7 @@ class IzinController extends Controller
             'tanggal_masuk' => 'required|max:255',
             'jumlah_izin' => 'required|max:255',
             'keterangan'    => 'string|max:255',
-            'lampiran'  => 'file|mimes:jpg,jpeg,png,pdf,docx|max:2048'
+            'lampiran'  => 'file|mimes:jpg,jpeg,png,pdf,docx|max:4048'
         ]);
 
         if ($validator->fails()) {

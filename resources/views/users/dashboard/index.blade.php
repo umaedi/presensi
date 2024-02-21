@@ -59,7 +59,21 @@
                                 </svg>
                             </div><strong>DL</strong>
                         </a></div>
-                    <div class="item"><a href="/user/scan">
+                        @if (auth()->user()->opd->id == '19')
+                        <div class="item"><a href="/user/subopd">
+                            <div class="icon-wrapper bg-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 512 512">
+                                    <path fill="#fff" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="32" d="M256 400V32l176 80-176 80" />
+                                    <path
+                                        d="M256 336c-87 0-175.3 43.2-191.64 124.74C62.39 470.57 68.57 480 80 480h352c11.44 0 17.62-9.43 15.65-19.26C431.3 379.2 343 336 256 336z"
+                                        fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" />
+                                </svg>
+                            </div>
+                            <strong>Titik Tugas</strong>
+                        </a></div>
+                        @else
+                        <div class="item"><a href="/user/scan">
                             <div class="icon-wrapper bg-primary">
                                 <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" class="ionicon"
                                     viewBox="0 0 512 512">
@@ -92,19 +106,20 @@
                             </div>
                             <strong>Scanner</strong>
                         </a></div>
+                        @endif
                 </div>
             </div>
         </div>
         <div class="section">
             <div class="transactions">
                 <!-- item -->
-                <a href="#" class="item mt-2">
+                {{-- <a href="#" class="item mt-2">
                     <div class="detail">
                         <div>
                             <strong class="text-danger">Aplikasi SIAP TUBA kini dapat di download di google plystore. <button class="btn btn-primary btn-sm">Download disini</button></strong>
                         </div>
                     </div>
-                </a>
+                </a> --}}
             <div class="row mt-2">
                 @if (empty($absen->jam_masuk))
                     <div class="col-6">
