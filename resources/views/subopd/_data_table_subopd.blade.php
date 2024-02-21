@@ -1,14 +1,28 @@
-@forelse ($table as $key => $tb)
+{{-- @forelse ($table as $key => $tb) --}}
     <div class="card mt-2">
         <a href="javascript:void(0)"
+        onclick="openCamera(4, -4,3012357, 105,2199979)">
+        <div class="card-body">
+            <p>1. MPP Mini Tulang Bawang</p>
+        </div>
+    </a>
+</div>
+    <div class="card mt-2">
+        <a href="javascript:void(0)"
+            onclick="openCamera(4, -5,3770441, 105,2789157)">
+            <div class="card-body">
+                <p>2. MPP Mini Tulang Bawang</p>
+            </div>
+        </a>
+    </div>
+        {{-- <a href="javascript:void(0)"
             onclick="openCamera(4, {{ $tb->lat }}, {{ $tb->long }})">
             <div class="card-body">
                 <p>{{ $key + 1 . '. ' . $tb->nama_sub_opd }}</p>
             </div>
-        </a>
-    </div>
-@empty
-    <div class="mt-2 text-center">
+        </a> --}}
+{{-- @empty --}}
+    {{-- <div class="mt-2 text-center">
         <div class="card">
             <div class="card-body pt-3 pb-3">
                 <div class="empty">
@@ -45,4 +59,4 @@
             </div>
         </div>
     </div>
-@endforelse
+@endforelse --}}
