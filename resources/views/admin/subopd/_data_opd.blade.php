@@ -3,8 +3,7 @@
         <tr>
             <th>#</th>
             <th>Nama OPD</th>
-            <th>Lat</th>
-            <th>Long</th>
+            <th>Nama Sub OPD</th>
             <th>Lihat</th>
         </tr>
     </thead>
@@ -12,11 +11,10 @@
         @forelse ($table as $key => $tb)
             <tr>
                 <td>{{ $table->firstItem() + $key }}</td>
+                <td>{{ $tb->opd->nama_opd }}</td>
                 <td>{{ $tb->nama_sub_opd }}</td>
-                <td>{{ $tb->lat ?? '-' }}</td>
-                <td>{{ $tb->long ?? '-' }}</td>
                 <td>
-                    <a href="/admin/opd/show/{{ $tb->id }}" class="btn btn-primary btn-sm">Lihat</a>
+                    <a href="/admin/subopd/show/{{ $tb->id }}" class="btn btn-primary btn-sm">Lihat</a>
                 </td>
             </tr>
         @empty

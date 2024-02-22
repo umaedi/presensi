@@ -17,39 +17,31 @@ class SubOpdController extends Controller
         $this->subopd = $subOpdService;
         $this->opd = $opdService;
     }
-    public function index($id)
+
+    public function index()
     {
         if (request()->ajax()) {
             $subopd = $this->subopd->Query();
             if (\request()->search) {
                 $subopd->where('nama_opd', 'like', '%' . \request()->search . '%');
             }
-            $data['table'] = $subopd->where('opd_id', $id)->paginate();
+            $data['table'] = $subopd->paginate();
             return view('admin.subopd._data_opd', $data);
         }
-        $data['title'] = 'Admin OPD';
-        $opd = $this->opd->show($id);
-        $data = [
-            'nama_opd' => $opd->nama_opd,
-            'opd_id' => $opd->id
-        ];
-        return view('admin.subopd.index', compact('data'));
+        return view('admin.subopd.index');
     }
 
-    public function create($id)
+    public function create()
     {
         $data['title'] = 'Tambah data Sub OPD';
-        $data = [
-            'opd_id' => $id
-        ];
-        return view('admin.subopd.create', compact('data'));
+        $data['opd'] = $this->opd->getAll();
+        return view('admin.subopd.create', $data);
     }
 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'nama_sub_opd' => 'required|string|max:100',
-            'opd_id' => 'required',
             'lat'      => 'required|string|max:50',
             'long'     => 'required|string|max:50'
         ]);
@@ -70,14 +62,15 @@ class SubOpdController extends Controller
     public function show($id)
     {
         $data['title'] = 'Detail OPD';
-        $data['opd'] = $this->opd->show($id);
+        $data['subopd'] = $this->subopd->show($id);
+        $data['opd'] = $this->opd->getAll();
         return view('admin.opd.show', $data);
     }
 
     public function update($id)
     {
         $validator = Validator::make(request()->all(), [
-            'nama_opd'  => 'required|string|max:255',
+            'nama_sub_opd'  => 'required|string|max:255',
             'lat'       => 'required|string|max:100',
             'long'       => 'required|string|max:100',
         ]);
@@ -88,7 +81,7 @@ class SubOpdController extends Controller
 
         $data = request()->except('_token', '_method');
         try {
-            $this->opd->update($id, $data);
+            $this->subopd->update($id, $data);
         } catch (\Throwable $th) {
             return $this->error($th->getMessage());
         }

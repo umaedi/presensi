@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SubOpd extends Model
+class Subopd extends Model
 {
     use HasFactory;
 
@@ -23,6 +23,6 @@ class SubOpd extends Model
 
     public function opd()
     {
-        return $this->belongsTo(Opd::class);
+        return $this->belongsTo(Opd::class, 'opd_id');
     }
 }

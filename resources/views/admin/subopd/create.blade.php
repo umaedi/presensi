@@ -17,17 +17,25 @@
                         <div class="card mb-3">
                             <span id="notif"></span>
                             <div class="card-body">
-                                <input name="opd_id" type="number" value="{{ $data['opd_id'] }}" id="opd_id" hidden />
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="nama_opd" class="form-label">Nama Sub OPD</label>
                                         <input name="nama_sub_opd" type="text" id="nama_sub_opd" class="form-control" />
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="opd_id" class="form-label">Nama OPD</label>
+                                        <select name="opd_id" type="text" id="opd_id" class="form-control">
+                                            <option value="">Pilih OPD</option>
+                                            @foreach ($opd as $o)
+                                            <option value="{{ $o->id }}">{{ $o->nama_opd }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
                                         <label for="lat" class="form-label">Lat</label>
                                         <input name="lat" type="text" id="lat" class="form-control latitude" />
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label for="long" class="form-label">Long</label>
                                         <input name="long" type="text" id="long"
                                             class="form-control longitude" />
@@ -243,7 +251,7 @@
                     timer: 3000,
                 }).then(() => {
                     action(false);
-                    window.location.href = '/admin/subopd/get/{{ $data['opd_id'] }}';
+                    window.location.href = '/admin/subopd';
                 });
             }).catch((err) => {
                 action(false);

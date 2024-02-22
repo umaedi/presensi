@@ -7,7 +7,6 @@
     </style>
     <div class="content-wrapper">
         <!-- Content -->
-
         <div class="container-xxl flex-grow-1 container-p-y">
             <form id="updateOpd">
                 @csrf
@@ -20,19 +19,27 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="nama_opd" class="form-label">Nama OPD</label>
-                                        <input name="nama_opd" type="text" id="nama_opd" class="form-control"
-                                            value="{{ $opd->nama_opd }}" />
+                                        <label for="nama_sub_opd" class="form-label">Nama Sub OPD</label>
+                                        <input name="nama_sub_opd" type="text" id="nama_sub_opd" class="form-control"
+                                            value="{{ $subopd->nama_sub_opd }}" />
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="opd_id" class="form-label">Nama OPD</label>
+                                        <select name="opd_id" id="opd_id" class="form-control">
+                                            @foreach ($opd as $op)
+                                            <option value="{{ $op->id }}" {{ $op->id == $subopd->opd->id ? 'selected' : '' }}>{{ $op->nama_opd }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
                                         <label for="lat" class="form-label">Lat</label>
                                         <input name="lat" type="text" id="lat" class="form-control latitude"
-                                            value="{{ $opd->lat }}" />
+                                            value="{{ $subopd->lat }}" />
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label for="long" class="form-label">Long</label>
                                         <input name="long" type="text" id="long" class="form-control longitude"
-                                            value="{{ $opd->long }}" />
+                                            value="{{ $subopd->long }}" />
                                     </div>
                                 </div>
                             </div>
@@ -50,81 +57,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="opratorModal" tabindex="-1" aria-hidden="true">
-        <form id="storeOprator">
-            @csrf
-            <div class="modal-dialog modal-xl" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="opratorModalTitle">Tambah OPD</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <span id="notif"></span>
-                        <div class="row g-2">
-                            <div class="col mb-3">
-                                <label for="nameWithTitle" class="form-label">Nama</label>
-                                <input name="nama" type="text" id="name" class="form-control"
-                                    placeholder="Masukan nama lengkap" />
-                            </div>
-                            <div class="col mb-3">
-                                <label for="nameWithTitle" class="form-label">NIP</label>
-                                <input name="nip" type="text" id="nip" class="form-control"
-                                    placeholder="Masukan NIP" />
-                            </div>
-                        </div>
-                        <div class="row g-2">
-                            <div class="col mb-3">
-                                <label for="nameWithTitle" class="form-label">Jabatan</label>
-                                <input name="jabatan" type="text" id="jabatan" class="form-control"
-                                    placeholder="Masukan Jabatan" />
-                            </div>
-                            <div class="col mb-3">
-                                <label for="nameWithTitle" class="form-label">Organisasi</label>
-                                <input name="organisasi" type="text" id="organisasi" class="form-control"
-                                    placeholder="Masukan organisasi" />
-                            </div>
-                        </div>
-                        <div class="row g-2">
-                            <div class="col mb-3">
-                                <label for="nameWithTitle" class="form-label">Unit Organisasi</label>
-                                <input name="unit_organisasi" type="text" id="unit_organisasi" class="form-control"
-                                    placeholder="Masukan unit organisasi" />
-                            </div>
-                            <div class="col mb-3">
-                                <label for="nameWithTitle" class="form-label">No Tlp/WhatsApp</label>
-                                <input name="no_hp" type="text" id="no_hp" class="form-control"
-                                    placeholder="Masukan no tlp" />
-                            </div>
-                        </div>
-                        <div class="row g-2">
-                            <div class="col mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input name="email" type="email" id="email" class="form-control"
-                                    placeholder="Masukan email" />
-                            </div>
-                            <div class="col mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input name="password" type="text" id="password" class="form-control"
-                                    placeholder="Masukan password" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                            Tutup
-                        </button>
-                        @include('layouts._button')
-                        <button id="btn_submit" type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="content-backdrop fade"></div>
     </div>
 @endsection
 @push('js')
@@ -300,7 +232,7 @@
             var form = $(this)[0];
             var data = new FormData(form);
             var param = {
-                url: '/admin/opd/update/{{ $opd->id }}',
+                url: '/admin/subopd/update/{{ $subopd->id }}',
                 method: 'POST',
                 data: data,
                 processData: false,

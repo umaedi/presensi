@@ -17,7 +17,6 @@
                 <td>{{ $tb->long ?? '-' }}</td>
                 <td>
                     <a href="/admin/opd/show/{{ $tb->id }}" class="btn btn-primary btn-sm">Lihat</a>
-                    <a href="/admin/subopd/get/{{ $tb->id }}" class="btn btn-info btn-sm">Sub OPD</a>
                 </td>
             </tr>
         @empty
