@@ -59,7 +59,41 @@
                                 </svg>
                             </div><strong>DL</strong>
                         </a></div>
-                        @if (auth()->user()->opd->id == '19')
+                    @if(count(auth()->user()->opd->subopd) === 0)
+                    <div class="item"><a href="/user/scan">
+                        <div class="icon-wrapper bg-primary">
+                            <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" class="ionicon"
+                                viewBox="0 0 512 512">
+                                <rect x="336" y="336" fill="#fff" width="80" height="80" rx="8"
+                                    ry="8" />
+                                <rect x="272" y="272" fill="#fff" width="64" height="64" rx="8"
+                                    ry="8" />
+                                <rect x="416" y="416" fill="#fff" width="64" height="64" rx="8"
+                                    ry="8" />
+                                <rect x="432" y="272" fill="#fff" width="48" height="48" rx="8"
+                                    ry="8" />
+                                <rect x="272" y="432" fill="#fff" width="48" height="48" rx="8"
+                                    ry="8" />
+                                <rect x="336" y="96" fill="#fff" width="80" height="80" rx="8"
+                                    ry="8" />
+                                <rect x="288" y="48" width="176" height="176" rx="16" ry="16"
+                                    fill="none" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="32" />
+                                <rect x="96" y="96" fill="#fff"width="80" height="80" rx="8"
+                                    ry="8" />
+                                <rect x="48" y="48" width="176" height="176" rx="16" ry="16"
+                                    fill="none" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="32" />
+                                <rect x="96" y="336" fill="#fff" width="80" height="80" rx="8"
+                                    ry="8" />
+                                <rect x="48" y="288" width="176" height="176" rx="16" ry="16"
+                                    fill="none" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="32" />
+                            </svg>
+                        </div>
+                        <strong>Scanner</strong>
+                        </a></div>
+                        @else
                         <div class="item"><a href="/user/subopd">
                             <div class="icon-wrapper bg-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 512 512">
@@ -72,41 +106,7 @@
                             </div>
                             <strong>Titik Tugas</strong>
                         </a></div>
-                        @else
-                        <div class="item"><a href="/user/scan">
-                            <div class="icon-wrapper bg-primary">
-                                <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" class="ionicon"
-                                    viewBox="0 0 512 512">
-                                    <rect x="336" y="336" fill="#fff" width="80" height="80" rx="8"
-                                        ry="8" />
-                                    <rect x="272" y="272" fill="#fff" width="64" height="64" rx="8"
-                                        ry="8" />
-                                    <rect x="416" y="416" fill="#fff" width="64" height="64" rx="8"
-                                        ry="8" />
-                                    <rect x="432" y="272" fill="#fff" width="48" height="48" rx="8"
-                                        ry="8" />
-                                    <rect x="272" y="432" fill="#fff" width="48" height="48" rx="8"
-                                        ry="8" />
-                                    <rect x="336" y="96" fill="#fff" width="80" height="80" rx="8"
-                                        ry="8" />
-                                    <rect x="288" y="48" width="176" height="176" rx="16" ry="16"
-                                        fill="none" stroke="currentColor" stroke-linecap="round"
-                                        stroke-linejoin="round" stroke-width="32" />
-                                    <rect x="96" y="96" fill="#fff"width="80" height="80" rx="8"
-                                        ry="8" />
-                                    <rect x="48" y="48" width="176" height="176" rx="16" ry="16"
-                                        fill="none" stroke="currentColor" stroke-linecap="round"
-                                        stroke-linejoin="round" stroke-width="32" />
-                                    <rect x="96" y="336" fill="#fff" width="80" height="80" rx="8"
-                                        ry="8" />
-                                    <rect x="48" y="288" width="176" height="176" rx="16" ry="16"
-                                        fill="none" stroke="currentColor" stroke-linecap="round"
-                                        stroke-linejoin="round" stroke-width="32" />
-                                </svg>
-                            </div>
-                            <strong>Scanner</strong>
-                        </a></div>
-                        @endif
+                        @endisset
                 </div>
             </div>
         </div>
