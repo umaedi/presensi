@@ -21,7 +21,7 @@ class Opd extends Model
 
     public function subopd()
     {
-        return $this->hasMany(Subopd::class);
+        return $this->hasMany(SubOpd::class);
     }
 
     public function presensi()
