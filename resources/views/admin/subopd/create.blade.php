@@ -251,7 +251,7 @@
                     timer: 3000,
                 }).then(() => {
                     action(false);
-                    window.location.href = '/admin/subopd';
+                    // window.location.href = '/admin/subopd';
                 });
             }).catch((err) => {
                 action(false);
