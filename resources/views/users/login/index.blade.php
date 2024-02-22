@@ -147,7 +147,7 @@
                     name="email"
                     placeholder="Enter your email or username"
                     autofocus
-                    value="devkh@gmail.com"
+                    autocomplete="off"
                   />
                 </div>
                 <div class="mb-3 form-password-toggle">
@@ -162,7 +162,7 @@
                       name="password"
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password"
-                      value="devkh123"
+                      autocomplete="off"
                     />
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                   </div>
