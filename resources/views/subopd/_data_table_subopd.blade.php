@@ -1,7 +1,7 @@
 {{-- @forelse ($table as $key => $tb) --}}
     <div class="card mt-2">
         <a href="javascript:void(0)"
-        onclick="openCamera(4, -4,3012357, 105,2199979)">
+        onclick="openCamera(4, -4.3011819, 105.2201634)">
         <div class="card-body">
             <p>1. MPP Mini Tulang Bawang</p>
         </div>
