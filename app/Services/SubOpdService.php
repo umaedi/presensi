@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use App\Models\Subopd;
+use App\Models\SubOpd;
 
 class SubOpdService
 {
     protected $subopd;
-    public function __construct(Subopd $subopd)
+    public function __construct(SubOpd $subopd)
     {
         $this->subopd = $subopd;
     }
