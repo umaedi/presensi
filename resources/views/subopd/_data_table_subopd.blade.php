@@ -1,10 +1,12 @@
 @forelse ($table as $key => $tb)
-        <a href="javascript:void(0)"
-            onclick="openCamera(4, {{ $tb->lat }}, {{ $tb->long }})">
-            <div class="card-body">
-                <p>{{ $key + 1 . '. ' . $tb->nama_sub_opd }}</p>
-            </div>
-        </a>
+<div class="card mt-2">
+    <a href="javascript:void(0)"
+        onclick="openCamera(4, {{ $tb->lat }}, {{ $tb->long }})">
+        <div class="card-body">
+            <p>{{ $key + 1 . '. ' . $tb->nama_sub_opd }}</p>
+        </div>
+    </a>
+</div>
 @empty
     <div class="mt-2 text-center">
         <div class="card">
