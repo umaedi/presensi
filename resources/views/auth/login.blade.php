@@ -18,11 +18,11 @@
                 @csrf
                 <div class="form-group">
                   <label for="email">{{ __('Email') }}</label>
-                  <input id="email" type="email" class="form-control x-email" name="email" tabindex="1" required autofocus>
+                  <input id="email" type="email" class="form-control x-email" name="email" tabindex="1" required autofocus autocomplete="off">
                 </div>
                 <label for="password">{{ __('Password') }}</label>
                 <div class="input-group mb-3">
-                  <input type="password" class="form-control x-password" id="password" name="password" required>
+                  <input type="password" class="form-control x-password" id="password" name="password" required autocomplete="off">
               </div>
             </div>
             <div class="form-button-group  transparent">
