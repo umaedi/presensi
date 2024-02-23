@@ -48,7 +48,7 @@
                 </div>
             </div>
         </a>
-    @elseif(Request::is('user/apel') || Request::is('user/subopd'))
+    @elseif(Request::is('user/apel') || Request::is('user/subopd') || Request::is('user/shift'))
         <a href="javascript:void()" onclick="openCamera('2')" class="item">
             <div class="col">
                 <div class="action-button large">

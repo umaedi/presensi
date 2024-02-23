@@ -90,7 +90,6 @@
         var image = "";
         var status = "";
         var shutter = new Audio();
-        var _url = ''
 
         function openCamera(status, lat, long) {
             //productoion
@@ -151,7 +150,7 @@
                 if (status == 2) {
                     swal({
                         title: 'Oops!',
-                        text: 'Silakan pilih salah satu lokasi diatas!',
+                        text: 'Silakan pilih salah satu lokasi/shift diatas!',
                         icon: 'error',
                         timer: 5000,
                     });

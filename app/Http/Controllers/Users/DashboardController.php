@@ -24,6 +24,8 @@ class DashboardController extends Controller
 
     public function __invoke(Request $request)
     {
+        $userAgent = $request->header('User-agent');
+        dd($userAgent);
         if (request()->ajax()) {
             $presensi = $this->presensi->Query();
 
