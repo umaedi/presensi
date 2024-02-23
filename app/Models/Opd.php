@@ -29,6 +29,11 @@ class Opd extends Model
         return $this->hasMany(Persensi::class);
     }
 
+    public function shift()
+    {
+        return $this->hasMany(Shift::class);
+    }
+
     public function presensicount()
     {
         return $this->hasMany(Presensicount::class);

@@ -25,4 +25,9 @@ class SubOpd extends Model
     {
         return $this->belongsTo(Opd::class, 'opd_id');
     }
+
+    public function shift()
+    {
+        return $this->hasMany(Shift::class);
+    }
 }

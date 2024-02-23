@@ -59,7 +59,29 @@
                                 </svg>
                             </div><strong>DL</strong>
                         </a></div>
-                    @if(count(auth()->user()->opd->subopd) === 0)
+                    @if(count(auth()->user()->opd->subopd) > 0)
+                    <div class="item"><a href="/user/subopd">
+                        <div class="icon-wrapper bg-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 512 512">
+                                <path fill="#fff" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="32" d="M256 400V32l176 80-176 80" />
+                                <path
+                                    d="M256 336c-87 0-175.3 43.2-191.64 124.74C62.39 470.57 68.57 480 80 480h352c11.44 0 17.62-9.43 15.65-19.26C431.3 379.2 343 336 256 336z"
+                                    fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" />
+                            </svg>
+                        </div>
+                        <strong>Titik Tugas</strong>
+                    </a>
+                    </div>
+                    @elseif(count(auth()->user()->opd->shift) > 0)
+                    <div class="item"><a href="/user/shift">
+                        <div class="icon-wrapper bg-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgb(243, 237, 237);transform: ;msFilter:;"><path d="M19.924 10.383a1 1 0 0 0-.217-1.09l-5-5-1.414 1.414L16.586 9H4v2h15a1 1 0 0 0 .924-.617zM4.076 13.617a1 1 0 0 0 .217 1.09l5 5 1.414-1.414L7.414 15H20v-2H5a.999.999 0 0 0-.924.617z"></path></svg>
+                        </div>
+                        <strong>Shift</strong>
+                    </a>
+                    </div>
+                    @else
                     <div class="item"><a href="/user/scan">
                         <div class="icon-wrapper bg-primary">
                             <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" class="ionicon"
@@ -92,21 +114,9 @@
                             </svg>
                         </div>
                         <strong>Scanner</strong>
-                        </a></div>
-                        @else
-                        <div class="item"><a href="/user/subopd">
-                            <div class="icon-wrapper bg-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 512 512">
-                                    <path fill="#fff" stroke="currentColor" stroke-linecap="round"
-                                        stroke-linejoin="round" stroke-width="32" d="M256 400V32l176 80-176 80" />
-                                    <path
-                                        d="M256 336c-87 0-175.3 43.2-191.64 124.74C62.39 470.57 68.57 480 80 480h352c11.44 0 17.62-9.43 15.65-19.26C431.3 379.2 343 336 256 336z"
-                                        fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" />
-                                </svg>
-                            </div>
-                            <strong>Titik Tugas</strong>
-                        </a></div>
-                        @endisset
+                        </a>
+                    </div>
+                    @endisset
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rsud;
 use Illuminate\Support\Facades\Route;
 
 //route login
@@ -38,6 +39,9 @@ Route::middleware('auth')->prefix('user')->group(function () {
 
     //route for rsud
     Route::post('/presensi/rsud/store', [Users\RsudController::class, 'store']);
+
+    //route for shift
+    Route::get('/shift', [Users\ShiftController::class, 'index']);
 });
 
 //route for oprator

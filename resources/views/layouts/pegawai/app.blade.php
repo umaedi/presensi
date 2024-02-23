@@ -90,6 +90,7 @@
         var image = "";
         var status = "";
         var shutter = new Audio();
+        var _url = ''
 
         function openCamera(status, lat, long) {
             //productoion
