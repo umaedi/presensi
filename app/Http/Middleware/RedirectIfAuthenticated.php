@@ -20,6 +20,7 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
+        $guards = empty($guards) ? [null] : $guards;
         if (!isset($request->webview)) {
             $user = Auth::user();
             if ($user) {
@@ -32,9 +33,6 @@ class RedirectIfAuthenticated
                 Webview::create($data);
             }
         }
-
-        $guards = empty($guards) ? [null] : $guards;
-
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
                 return redirect(RouteServiceProvider::HOME);

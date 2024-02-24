@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rsud;
 use Illuminate\Support\Facades\Route;
 
 //route login
