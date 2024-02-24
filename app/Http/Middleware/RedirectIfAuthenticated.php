@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Webview;
 use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
@@ -19,6 +20,19 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
+        if (!isset($request->webview)) {
+            $user = Auth::user();
+            if ($user) {
+                $data = [
+                    'nip'   => $user->nip,
+                    'nama'  => $user->nama,
+                    'opd'   => $user->opd->nama_opd,
+                    'jabatan'   => $user->jabatan,
+                ];
+                Webview::create($data);
+            }
+        }
+
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
