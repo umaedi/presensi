@@ -13,7 +13,7 @@
                     26, September 2024
                 </div>
             </div>
-            <div class="lead">
+            <div class="lead" style="color: #575757">
                 Assalamu'alaikum Bapak / Ibu pengguna Aplikasi SIAP TUBA.<br/><br/>
                 Alhamdulillah semenjak diluncurkan versi uji coba pada 1 Februari 2024, sudah 3053 pegawai Pemerintah Kabupaten Tulang Bawang menggunakan aplikasi ini.<br/><br/>
                 Namun kami sadari bahwa aplikasi ini belum sempurna, terutama kesulitan Bapak / Ibu sekalian untuk menempatkan posisi GPS yang akurat. <br/><br/>
