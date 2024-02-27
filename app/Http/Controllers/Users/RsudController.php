@@ -107,7 +107,7 @@ class RsudController extends Controller
             return $this->success('OK', 'Anda Berhasil Mengisi Presensi Pulang');
         } else {
             $currentTime = Carbon::now();
-            $jamMasuk = Carbon::parse(env('JAM_MASUK'));
+            $waktuMasuk = Carbon::parse(env('JAM_MASUK'));
 
             $masukShiftPagi = Carbon::createFromTime(8, 00, 0);
             $pulangShiftPagi = Carbon::createFromTime(14, 00, 0);
@@ -125,7 +125,7 @@ class RsudController extends Controller
             } elseif ($currentTime->between($masukShiftMalam, $pulangShiftMalam)) {
                 $jamMasuk =  $masukShiftMalam;
             } else {
-                $jamMasuk = $jamMasuk;
+                $jamMasuk = $waktuMasuk;
             }
 
             if ($currentTime > $jamMasuk) {
