@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\PresensiService;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class PegawaiController extends Controller
@@ -21,12 +22,15 @@ class PegawaiController extends Controller
     public function index()
     {
         if (\request()->ajax()) {
-            $users = $this->user->Query();
-            if (\request()->search) {
-                $users->where('nama', 'like', '%' . \request()->search . '%');
-            }
-            $data['table'] = $users->where('opd_id', Auth::user()->opd_id)->paginate();
-            return view('oprator.users._data_user', $data);
+            $table = Cache::remember('pegawai', now()->addMonths(1), function () {
+                $users = $this->user->Query();
+                if (\request()->search) {
+                    $users->where('nama', 'like', '%' . \request()->search . '%');
+                }
+                return $users->with('opd')->where('opd_id', Auth::user()->opd_id)->paginate();
+            });
+
+            return view('oprator.users._data_user', compact('table'));
         }
         return view('oprator.users.index');
     }
@@ -54,6 +58,7 @@ class PegawaiController extends Controller
         try {
             $this->user->store($data);
             Usercount();
+            Cache::forget('pegawai');
         } catch (\Throwable $th) {
             return $this->error($th->getMessage());
         }
@@ -100,6 +105,7 @@ class PegawaiController extends Controller
 
         try {
             $this->user->update($id, $data);
+            Cache::forget('pegawai');
         } catch (\Throwable $th) {
             saveLogs($th->getMessage(), 'Error update profile user');
             return $this->error($th->getMessage());
