@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Services\PresensiService;
 use App\Http\Controllers\Controller;
-use App\Jobs\PresensiJob;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
