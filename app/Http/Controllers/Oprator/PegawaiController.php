@@ -22,7 +22,7 @@ class PegawaiController extends Controller
     public function index()
     {
         if (\request()->ajax()) {
-            $table = Cache::remember('pegawai', now()->addMonths(1), function () {
+            $table = Cache::remember('operatorPegawai', now()->addMonths(1), function () {
                 $users = $this->user->Query();
                 if (\request()->search) {
                     $users->where('nama', 'like', '%' . \request()->search . '%');
@@ -58,7 +58,7 @@ class PegawaiController extends Controller
         try {
             $this->user->store($data);
             Usercount();
-            Cache::forget('pegawai');
+            Cache::forget('operatorPegawai');
         } catch (\Throwable $th) {
             return $this->error($th->getMessage());
         }
@@ -105,7 +105,7 @@ class PegawaiController extends Controller
 
         try {
             $this->user->update($id, $data);
-            Cache::forget('pegawai');
+            Cache::forget('operatorPegawai');
         } catch (\Throwable $th) {
             saveLogs($th->getMessage(), 'Error update profile user');
             return $this->error($th->getMessage());

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Services\OpdService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class OpdController extends Controller
@@ -17,12 +18,14 @@ class OpdController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $opd = $this->opd->Query();
-            if (\request()->search) {
-                $opd->where('nama_opd', 'like', '%' . \request()->search . '%');
-            }
-            $data['table'] = $opd->paginate();
-            return view('admin.opd._data_opd', $data);
+            $table = Cache::remember('adminOpd', now()->addMonths(1), function () {
+                $opd = $this->opd->Query();
+                if (\request()->search) {
+                    $opd->where('nama_opd', 'like', '%' . \request()->search . '%');
+                }
+                return $opd->paginate();
+            });
+            return view('admin.opd._data_opd', compact('table'));
         }
         $data['title'] = 'Admin OPD';
         return view('admin.opd.index');
@@ -49,6 +52,7 @@ class OpdController extends Controller
         $data = $request->except('_token');
         try {
             $this->opd->store($data);
+            Cache::forget('adminOpd');
         } catch (\Throwable $th) {
             return $this->error($th->getMessage());
         }
@@ -77,6 +81,7 @@ class OpdController extends Controller
         $data = request()->except('_token', '_method');
         try {
             $this->opd->update($id, $data);
+            Cache::forget('adminOpd');
         } catch (\Throwable $th) {
             return $this->error($th->getMessage());
         }
