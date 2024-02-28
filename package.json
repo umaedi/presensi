@@ -12,6 +12,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "firebase": "^10.8.0",
         "turbolinks": "^5.2.0"
     }
 }

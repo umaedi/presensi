@@ -53,6 +53,7 @@
     <script defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8y5ZQcuol7vxOkXii_wsHqYhCNL0uEM&libraries=geometry&callback&places">
     </script>
+    @vite(['resources/js/app.js'])
     <script type="text/javascript">
         $(document).ready(function loading() {
             sw();
