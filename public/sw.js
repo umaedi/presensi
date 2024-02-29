@@ -33,16 +33,14 @@ const addToCache = async function (request) {
     return await cache.put(request, response);
 };
 
-const returnFromCache = function (request) {
-    return caches.open("offline").then(function (cache) {
-        return cache.match(request).then(function (matching) {
-            if (!matching || matching.status === 404) {
-                return cache.match("offline.html");
-            } else {
-                return matching;
-            }
-        });
-    });
+const returnFromCache = async function (request) {
+    const cache = await caches.open("offline");
+    const matching = await cache.match(request);
+    if (!matching || matching.status === 404) {
+        return cache.match("offline.html");
+    } else {
+        return matching;
+    }
 };
 
 self.addEventListener("fetch", function (event) {

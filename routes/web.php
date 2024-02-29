@@ -42,6 +42,9 @@ Route::middleware('auth')->prefix('user')->group(function () {
 
     //route for shift
     Route::get('/shift', [Users\ShiftController::class, 'index']);
+
+    //web push notification
+    Route::post('sent_token_to_server', Users\WebpushController::class);
 });
 
 //route for oprator

@@ -23,14 +23,12 @@ const messaging = getMessaging(app);
 
 onMessage(messaging, (payload) => {
     console.log('Message received. ', payload);
-    alert('Ada notifikasi baru');
+    alert(payload.notification.body);
 });
 
 getToken(messaging, { vapidKey: 'BIB8s5jzKfGBLsfXq59El4x-E5ffXa1K_auTrOIPKTQxBNqpdjjz0OR8hSGe-TQDC3y8RBxjksVDZSNS14IPMfU' }).then((currentToken) => {
     if (currentToken) {
-        // Send the token to your server and update the UI if necessary
-        // ...
-        console.log(currentToken);
+        localStorage.setItem('web_token', currentToken);
     } else {
         // Show permission request UI
         requestPermision();
@@ -52,3 +50,4 @@ function requestPermision() {
         }
     });
 }
+

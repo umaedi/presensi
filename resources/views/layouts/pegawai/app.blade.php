@@ -57,6 +57,7 @@
     <script type="text/javascript">
         $(document).ready(function loading() {
             sw();
+            sentTokenToServer();
         });
 
         function sw() {
@@ -341,6 +342,31 @@
                 window.location.href = '{{ url()->current() }}';
             });
         }
+
+        async function sentTokenToServer()
+        {
+            var getToken = localStorage.getItem('web_token');
+            if(getToken) {
+                var webToken = getToken;
+            }else {
+                var webToken = '';
+            }
+
+            var param = {
+                method: 'POST',
+                url: '/user/sent_token_to_server',
+                data: {
+                    web_token: webToken,
+                }
+            }
+
+            await transAjax(param).then((res) => {
+                console.log(res);
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
+        
     </script>
     @stack('js')
     <script type="module">
