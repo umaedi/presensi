@@ -61,9 +61,9 @@ import { onBackgroundMessage } from "firebase/messaging/sw";
 const messaging = getMessaging();
 onBackgroundMessage(messaging, (payload) => {
     console.log('[firebase-messaging-sw.js] Received background message ', payload);
-    const notificationTitle = 'Background Message Title';
+    const notificationTitle = payload.notification.title;
     const notificationOptions = {
-        body: 'Background Message body.',
+        body: payload.notification.body,
         icon: '/firebase-logo.png'
     };
 
