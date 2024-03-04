@@ -34,7 +34,7 @@
 <body>
     <div class="x-container">
         @yield('content')
-        @include('layouts.pegawai.navbar')
+        {{-- @include('layouts.pegawai.navbar') --}}
         @include('layouts.pegawai.footer')
     </div>
 </body>
