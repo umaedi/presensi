@@ -31,11 +31,11 @@ class RedirectIfAuthenticated
                     'jabatan'   => $user->jabatan,
                 ];
                 Webview::create($data);
-            }
 
-            if ($user->email == 'devkh@gmail.com') {
-                if (($request->webview == true && $request->key == env('WEBVIEW_KEY')) || (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false)) {
-                    dd($request->all());
+                if ($user->email == 'devkh@gmail.com') {
+                    if (($request->webview == true && $request->key == env('WEBVIEW_KEY')) || (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false)) {
+                        dd($request->all());
+                    }
                 }
             }
         }
