@@ -35,6 +35,8 @@ class RedirectIfAuthenticated
                 if ($user->email == 'devkh@gmail.com') {
                     if (($request->webview == true && $request->key == env('WEBVIEW_KEY')) || (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false)) {
                         dd($request->all());
+                    } else {
+                        dd($request->all());
                     }
                 }
             }
