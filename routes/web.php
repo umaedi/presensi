@@ -9,7 +9,7 @@ Route::get('/', Users\LoginController::class)->middleware('guest');
 Route::get('/privacy-policy', PrivacyController::class);
 Route::get('/notifikasi', Pages\NotifikasiController::class);
 //route user
-Route::middleware(['auth', 'webview'])->prefix('user')->group(function () {
+Route::middleware('auth')->prefix('user')->group(function () {
     Route::get('/dashboard', Users\DashboardController::class);
 
     Route::get('/presensi', [Users\PersensiController::class, 'index']);
