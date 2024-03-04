@@ -34,7 +34,7 @@
                     stroke-linecap="round" d="M128 48v32M384 48v32" />
                 <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32" d="M464 160H48" />
             </svg>
-            <strong>Cuti</strong>
+            <strong>Cuty</strong>
         </div>
     </a>
     @if (Request::is('user/dl'))

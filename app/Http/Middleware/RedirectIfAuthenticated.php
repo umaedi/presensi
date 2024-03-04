@@ -20,7 +20,6 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        $userAgent = $request->header('User-Agent');
         if (!isset($request->webview)) {
             $user = Auth::user();
             if ($user) {
@@ -31,14 +30,6 @@ class RedirectIfAuthenticated
                     'jabatan'   => $user->jabatan,
                 ];
                 Webview::create($data);
-
-                if ($user->email == 'devkh@gmail.com') {
-                    if (($request->webview == true && $request->key == env('WEBVIEW_KEY')) || (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false)) {
-                        dd($request->all());
-                    } else {
-                        dd($request->all());
-                    }
-                }
             }
         }
         $guards = empty($guards) ? [null] : $guards;

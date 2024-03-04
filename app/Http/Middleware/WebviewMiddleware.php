@@ -18,6 +18,7 @@ class WebviewMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        dd('ok');
         $userAgent = $request->header('User-Agent');
         if (($request->webview == true && $request->key == env('WEBVIEW_KEY')) || (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false)) {
             return $next($request);
