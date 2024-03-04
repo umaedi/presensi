@@ -20,6 +20,9 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
+        if (Auth::user()->email == 'devkh@gmail.com') {
+            dd($request->all());
+        }
         if (!isset($request->webview)) {
             $user = Auth::user();
             if ($user) {
