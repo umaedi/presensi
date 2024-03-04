@@ -276,8 +276,6 @@
     </div>
 @endsection
 @push('js')
-    <script type="text/javascript" src="{{ asset('assets/pegawai') }}/js/plugins/datepicker/bootstrap-datepicker.js">
-    </script>
     <script type="text/javascript">
         var page = 1;
         var tanggalAwal = '';
@@ -385,11 +383,6 @@
                         $('#loadingUpdate').addClass('d-none');
                     }
                 }
-            });
-
-            $(".datepicker").datepicker({
-                format: "dd-mm-yyyy",
-                "autoclose": true
             });
         });
 

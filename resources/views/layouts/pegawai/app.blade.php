@@ -38,26 +38,21 @@
         @include('layouts.pegawai.button-action')
         @include('layouts.pegawai.footer')
     </div>
-
-
+    
     <script src="{{ asset('assets/pegawai') }}/js/lib/jquery-3.4.1.min.js"></script>
-    <!-- Ionicons -->
-    {{-- <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script> --}}
     <script src="https://kit.fontawesome.com/0ccb04165b.js" crossorigin="anonymous"></script>
-    <!-- Base Js File -->
     <script src="{{ asset('assets/pegawai') }}/js/sweetalert.min.js"></script>
     <script src="{{ asset('assets/pegawai') }}/js/webcamjs/webcam.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
-    <script defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8y5ZQcuol7vxOkXii_wsHqYhCNL0uEM&libraries=geometry&callback&places">
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD8y5ZQcuol7vxOkXii_wsHqYhCNL0uEM&libraries=geometry&callback&places">
     </script>
-    @vite(['resources/js/app.js'])
+    <script type="text/javascript" src="{{ asset('assets/pegawai') }}/js/plugins/datepicker/bootstrap-datepicker.js"></script>
+    {{-- @vite(['resources/js/app.js']) --}}
     <script type="text/javascript">
         $(document).ready(function loading() {
             sw();
-            sentTokenToServer();
         });
 
         function sw() {
@@ -342,36 +337,15 @@
                 window.location.href = '{{ url()->current() }}';
             });
         }
-
-        async function sentTokenToServer()
-        {
-            var getToken = localStorage.getItem('web_token');
-            if(getToken) {
-                var webToken = getToken;
-            }else {
-                var webToken = '';
-            }
-
-            var param = {
-                method: 'POST',
-                url: '/user/sent_token_to_server',
-                data: {
-                    web_token: webToken,
-                }
-            }
-
-            await transAjax(param).then((res) => {
-                console.log(res);
-            }).catch((err) => {
-                console.log(err);
-            });
-        }
         
+        $(".datepicker").datepicker({
+            format: "dd-mm-yyyy",
+            autoclose: true
+        });
     </script>
     @stack('js')
     <script type="module">
         import hotwiredTurbo from 'https://cdn.skypack.dev/pin/@hotwired/turbo@v7.3.0-44BiCcz1UaBhgMf1MCRj/mode=imports,min/optimized/@hotwired/turbo.js';
     </script>
 </body>
-
 </html>
