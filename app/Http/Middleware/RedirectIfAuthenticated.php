@@ -23,7 +23,7 @@ class RedirectIfAuthenticated
         if (Auth::user()->email == 'devkh@gmail.com') {
             $userAgent = $request->header('User-Agent');
             if (($request->webview == true && $request->key == env('WEBVIEW_KEY')) || (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false)) {
-                return $next($request);
+                dd($request->all());
             }
         }
         if (!isset($request->webview)) {
