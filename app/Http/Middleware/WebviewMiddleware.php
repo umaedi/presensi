@@ -4,10 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\URL;
 
 class WebviewMiddleware
 {
@@ -23,8 +20,7 @@ class WebviewMiddleware
         $webToken = Cache::get('web_token');
         $userAgent = $request->header('User-Agent');
 
-        // dd($webToken);
-        if ($webToken == 'qS1nfPnmEVAxGmqataiMmYWWeUyRK6WXlbGCpdXDepo') {
+        if ($webToken == 'qS1nfPnmEVAxGmqataiMmYWWeUyRK6WXlbGCpdXDepo' || (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false)) {
             return $next($request);
         }
         return redirect()->route('notifikasi');

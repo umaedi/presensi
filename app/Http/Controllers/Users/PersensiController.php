@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Users;
 
 use Throwable;
+use App\Jobs\PresensiJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Services\PresensiService;
 use App\Http\Controllers\Controller;
+use App\Jobs\PresensiupdateJob;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -96,7 +98,8 @@ class PersensiController extends Controller
             $data['status_pulang']     = $statusPulang;
 
             try {
-                $this->presensi->update($presensiUpdate, $data);
+                dispatch(new PresensiupdateJob($presensiUpdate, $data));
+                // $this->presensi->update($presensiUpdate, $data);
             } catch (Throwable $e) {
                 saveLogs($e->getMessage() . ' ' . 'presensi sore', 'error');
                 return $this->error($e->getMessage());
