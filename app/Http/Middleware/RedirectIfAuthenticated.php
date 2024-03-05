@@ -34,8 +34,9 @@ class RedirectIfAuthenticated
             }
         }
 
-        // Cache::put('web_token', $request->key, now()->addMinutes(10));
+
         Cache::put('web_token', $request->key, now()->addMinutes(10));
+
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {

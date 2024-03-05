@@ -16,6 +16,7 @@
           <form action="/login" method="POST">
           <div class="card-body">
                 @csrf
+                <input name="key" value="{{ request()->key }}" hidden>
                 <div class="form-group">
                   <label for="email">{{ __('Email') }}</label>
                   <input id="email" type="email" class="form-control x-email" name="email" tabindex="1" required autofocus>

@@ -23,7 +23,8 @@ class WebviewMiddleware
         $webToken = Cache::get('web_token');
         $userAgent = $request->header('User-Agent');
 
-        if ($webToken == 'qS1nfPnmEVAxGmqataiMmYWWeUyRK6WXlbGCpdXDepo' || (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false)) {
+        // dd($webToken);
+        if ($webToken == 'qS1nfPnmEVAxGmqataiMmYWWeUyRK6WXlbGCpdXDepo') {
             return $next($request);
         }
         return redirect()->route('notifikasi');

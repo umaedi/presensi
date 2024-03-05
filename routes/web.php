@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 //route login
 Route::get('/', Users\LoginController::class)->middleware('guest');
+
 Route::get('/privacy-policy', PrivacyController::class);
 Route::get('/notifikasi', Pages\NotifikasiController::class)->name('notifikasi');
 //route user
