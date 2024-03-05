@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class RedirectIfAuthenticated
 {
@@ -32,6 +33,9 @@ class RedirectIfAuthenticated
                 Webview::create($data);
             }
         }
+
+        // Cache::put('web_token', $request->key, now()->addMinutes(10));
+        Cache::put('web_token', $request->key, now()->addMinutes(10));
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {

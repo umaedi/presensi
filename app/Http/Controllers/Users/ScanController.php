@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class ScanController extends Controller
 {
@@ -15,6 +16,7 @@ class ScanController extends Controller
      */
     public function __invoke(Request $request)
     {
+        dd(Cache::get('web_token'));
         return view('users.qr.index');
     }
 }
