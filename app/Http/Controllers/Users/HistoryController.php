@@ -22,12 +22,17 @@ class HistoryController extends Controller
     {
         $minutes = now()->addDays(1)->diffInMinutes(now());
         if (\request()->ajax()) {
-            if (\request()->page == "2" || (\request()->tanggal_awal && \request()->tanggal_akhir)) {
+            if (request()->page == "2") {
+                $presensi = $this->presensi->Query();
+                $data['table'] = $presensi->where('user_id', auth()->user()->id)->latest()->paginate(15);
+                return view('users.history._data_table_history', $data);
+            }
+
+            if (\request()->tanggal_awal && \request()->tanggal_akhir) {
                 $presensi = $this->presensi->Query();
                 $tgl_awal = Carbon::parse(\request()->tanggal_awal)->toDateTimeString();
                 $tgl_akhir = Carbon::parse(\request()->tanggal_akhir)->toDateTimeString();
-                $presensi->whereBetween('created_at', [$tgl_awal, $tgl_akhir]);
-                $data['table'] = $presensi->where('user_id', auth()->user()->id)->latest()->paginate(15);
+                $data['table'] = $presensi->whereBetween('created_at', [$tgl_awal, $tgl_akhir])->latest()->paginate(15);
                 return view('users.history._data_table_history', $data);
             }
             $data['table'] = Cache::remember('history_' . Auth::user()->id, $minutes, function () {
