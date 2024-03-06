@@ -42,16 +42,16 @@ class HistoryController extends Controller
         }
 
         $data['tanggal'] = Carbon::now()->format('d M Y');
-        $data['hadir'] = Cache::remember('hadir_' . Auth::user()->id, $minutes, function () {
+        $data['hadir'] = Cache::remember('history_hadir_' . Auth::user()->id, $minutes, function () {
             return Persensi::where('user_id', auth()->user()->id)->count();
         });
-        $data['terlambat'] = Cache::remember('terlambat_' . Auth::user()->id, $minutes, function () {
+        $data['terlambat'] = Cache::remember('history_terlambat_' . Auth::user()->id, $minutes, function () {
             return Persensi::where('user_id', Auth::user()->id)->where('status', 'like', '%' . 'Terlambat' . '%')->count();
         });
-        $data['dl'] = Cache::remember('dl_' . Auth::user()->id, $minutes, function () {
+        $data['dl'] = Cache::remember('history_dl_' . Auth::user()->id, $minutes, function () {
             return Persensi::where('user_id', Auth::user()->id)->where('status', 'DL')->count();
         });
-        $data['apel'] = Cache::remember('apel_' . Auth::user()->id, $minutes, function () {
+        $data['apel'] = Cache::remember('history_apel_' . Auth::user()->id, $minutes, function () {
             return Persensi::where('user_id', Auth::user()->id)->where('status', 'Apel')->count();
         });
         $data['title'] = 'Data History Absensi';
