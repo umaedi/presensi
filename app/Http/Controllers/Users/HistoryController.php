@@ -22,7 +22,7 @@ class HistoryController extends Controller
     {
         $minutes = now()->addDays(1)->diffInMinutes(now());
         if (\request()->ajax()) {
-            if (request()->page == "2") {
+            if (request()->page > "1") {
                 $presensi = $this->presensi->Query();
                 $data['table'] = $presensi->where('user_id', auth()->user()->id)->latest()->paginate(15);
                 return view('users.history._data_table_history', $data);
