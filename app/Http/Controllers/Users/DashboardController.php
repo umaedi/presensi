@@ -26,13 +26,19 @@ class DashboardController extends Controller
     public function __invoke(Request $request)
     {
         if (request()->ajax()) {
-            $presensi = $this->presensi->Query();
+            //save cache
+            $minutes = now()->addDays(1)->diffInMinutes(now());
 
             if (request()->bulan) {
+                $presensi = $this->presensi->Query();
                 $presensi->whereMonth('tanggal', request()->bulan);
+                $data['table'] =  $presensi->where('user_id', auth()->user()->id)->latest()->limit(5)->get();
+                return view('users.dashboard._data_table_absensi', $data);
             }
 
-            $data['table'] =  $presensi->where('user_id', auth()->user()->id)->latest()->limit(5)->get();
+            $data['table'] = Cache::remember('table_dashboard_' . Auth::user()->id, $minutes, function () {
+                return Persensi::where('user_id', Auth::user()->id)->latest()->limit(5)->get();
+            });
             return view('users.dashboard._data_table_absensi', $data);
         }
 
