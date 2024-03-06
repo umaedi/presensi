@@ -45,9 +45,9 @@ class PersensiController extends Controller
             $jamMulai = Carbon::createFromTime(14, 0, 0); // Jam 14 pagi
             $jamSelesai = Carbon::createFromTime(18, 0, 0); // Jam 16 siang
 
-            // if (!$currentTime->between($jamMulai, $jamSelesai)) {
-            //     return $this->error('Presensi sore dimulai dari jam 14.00 sampai jam 18.00 sore!');
-            // }
+            if (!$currentTime->between($jamMulai, $jamSelesai)) {
+                return $this->error('Presensi sore dimulai dari jam 14.00 sampai jam 18.00 sore!');
+            }
 
             $presensiUpdate = $presensi->where('tanggal', $presensi->tanggal)->where('user_id', $user->id)->first();
             $file = $request->file;
@@ -112,9 +112,9 @@ class PersensiController extends Controller
             $jamMulai = Carbon::createFromTime(6, 0, 0); // Jam 6 pagi
             $jamSelesai = Carbon::createFromTime(12, 0, 0); // Jam 12 siang
 
-            // if (!$currentTime->between($jamMulai, $jamSelesai)) {
-            //     return $this->error('Presensi pagi dimulai dari jam 6.00 sampai jam 12.00 Siang!');
-            // }
+            if (!$currentTime->between($jamMulai, $jamSelesai)) {
+                return $this->error('Presensi pagi dimulai dari jam 6.00 sampai jam 12.00 Siang!');
+            }
 
             if ($currentTime > $jamMasuk) {
                 $telat = $currentTime->diff($jamMasuk);
