@@ -22,8 +22,7 @@ class HistoryController extends Controller
     {
         $minutes = now()->addDays(1)->diffInMinutes(now());
         if (\request()->ajax()) {
-            if (\request()->tanggal_awal && \request()->tanggal_akhir) {
-                dd(request()->get('paginate'), request()->page);
+            if (\request()->page == "2" || (\request()->tanggal_awal && \request()->tanggal_akhir)) {
                 $presensi = $this->presensi->Query();
                 $tgl_awal = Carbon::parse(\request()->tanggal_awal)->toDateTimeString();
                 $tgl_akhir = Carbon::parse(\request()->tanggal_akhir)->toDateTimeString();
