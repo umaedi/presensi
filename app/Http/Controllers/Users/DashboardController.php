@@ -27,7 +27,7 @@ class DashboardController extends Controller
     {
         if (request()->ajax()) {
             //save cache
-            $minutes = now()->addDays(1)->diffInMinutes(now());
+            $minutes = 720;
 
             if (request()->bulan) {
                 $presensi = $this->presensi->Query();
@@ -50,7 +50,7 @@ class DashboardController extends Controller
         // $data['dl'] = Persensi::where('user_id', auth()->user()->id)->where('status', 'DL')->count();
 
         //save cache
-        $minutes = now()->addDays(1)->diffInMinutes(now());
+        $minutes = 720;
 
         $data['nama'] = explode(" ", auth()->user()->nama);
         $data['absen'] = Cache::remember('absen_' . auth()->user()->id, $minutes, function () {

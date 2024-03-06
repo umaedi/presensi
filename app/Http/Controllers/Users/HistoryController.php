@@ -20,7 +20,7 @@ class HistoryController extends Controller
     }
     public function index()
     {
-        $minutes = now()->addDays(1)->diffInMinutes(now());
+        $minutes = 720;
         if (\request()->ajax()) {
             if (request()->page > "1") {
                 $presensi = $this->presensi->Query();
