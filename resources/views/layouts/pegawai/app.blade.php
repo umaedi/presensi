@@ -278,6 +278,13 @@
             loadingsubmit(true);
             await transAjax(param).then((res) => {
                 loadingsubmit(false);
+
+                if(res.metadata == 'presensi_pagi') {
+                    localStorage.removeItem('info_proses');
+                }else {
+                    localStorage.setItem('info_proses', 'presensi sore sedang diproses');
+                }
+
                 swal({
                     text: res.message,
                     icon: 'success',
@@ -290,7 +297,7 @@
                 swal({
                     text: err.responseJSON.message,
                     icon: 'error',
-                    timer: 3000,
+                    timer: 5000,
                 }).then(() => {
                     removeFile(image);
                 });

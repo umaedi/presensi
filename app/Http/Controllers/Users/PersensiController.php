@@ -49,7 +49,7 @@ class PersensiController extends Controller
                 return $this->error('Presensi sore dimulai dari jam 14.00 sampai jam 18.00 sore!');
             }
 
-            $presensiUpdate = $presensi->where('tanggal', $presensi->tanggal)->where('user_id', $user->id);
+            $presensiUpdate = $presensi->where('tanggal', $presensi->tanggal)->where('user_id', $user->id)->first();
             $file = $request->file;
             if (strlen($file) > 30) {
                 if (pathinfo($file, PATHINFO_EXTENSION) !== 'jpeg') {
@@ -104,7 +104,7 @@ class PersensiController extends Controller
                 saveLogs($e->getMessage() . ' ' . 'presensi sore', 'error');
                 return $this->error($e->getMessage());
             }
-            return $this->success('OK', 'Anda Berhasil Mengisi Presensi Sore');
+            return $this->success('presensi_sore', 'Anda Berhasil Mengisi Presensi Sore');
         } else {
             $currentTime = Carbon::now();
             $jamMasuk = Carbon::parse(env('JAM_MASUK'));
@@ -162,7 +162,7 @@ class PersensiController extends Controller
                 return $this->error($e->getMessage());
             }
             Presensicount();
-            return $this->success($data, 'Anda Berhasil Mengisi Presensi Pagi');
+            return $this->success('presensi_pagi', 'Anda Berhasil Mengisi Presensi Pagi');
         }
     }
 

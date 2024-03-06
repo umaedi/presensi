@@ -265,7 +265,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">...</h5>
+                        <h5 class="modal-title" id="modalTitle">...</h5>
                         <a href="javascript:;" data-dismiss="modal">Close</a>
                     </div>
                     <div class="modal-body">
@@ -320,8 +320,33 @@
                 </div>
             </div>
         </div>
+
+        <!-- DialogIconedInfo -->
+        <div class="modal fade dialogbox" id="DialogIconedInfo" data-bs-backdrop="static" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-icon">
+                        <ion-icon name="card-outline"></ion-icon>
+                    </div>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="titleProses">...</h5>
+                    </div>
+                    <div class="modal-body" id="modalProses">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-inline">
+                            <a href="#" class="btn" data-dismiss="modal">TUTUP</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- * DialogIconedInfo -->
+
         {{-- modal selfi --}}
         @include('layouts.modal._modal')
+    
     </div>
 @endsection
 @push('js')
@@ -380,14 +405,14 @@
 
         function showAbsen(data, waktu) {
             if (waktu === 1) {
-                $('.modal-title').html('Detail Absen Pagi');
+                $('#modalTitle').html('Detail Absen Pagi');
                 $('#photoAbsen').attr('src', "{{ asset('storage/users/img') }}/" + data.photo_masuk);
                 $('input[name=tanggal]').val(data.tanggal);
                 $('input[name=jam_masuk]').val(data.jam_masuk);
                 $('input[name=status]').val(data.status);
                 $('input[name=latlong]').val(data.lat_long_masuk);
             } else {
-                $('.modal-title').html('Detail Absen Sore');
+                $('#modalTitle').html('Detail Absen Sore');
                 $('#photoAbsen').attr('src', "{{ asset('storage/users/img') }}/" + data.photo_pulang);
                 $('input[name=tanggal]').val(data.tanggal);
                 $('input[name=jam_masuk]').val(data.jam_pulang);
@@ -423,5 +448,19 @@
                 draggable: true
             });
         }
+
+        var info_proses = localStorage.getItem('info_proses');
+        function showProses()
+        {
+            if(info_proses) {
+                $('#titleProses').html('Sedang diproses')
+                $('#modalProses').html('Data Anda sedang diproses')
+            }else{
+                $('#titleProses').html('Mohon maaf')
+                $('#modalProses').html('Anda belum/tidak melakukan presensi sore!')
+            }
+            
+        }
+
     </script>
 @endpush
