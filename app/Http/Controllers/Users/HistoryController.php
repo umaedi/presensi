@@ -9,6 +9,7 @@ use App\Models\Izin;
 use App\Models\Persensi;
 use App\Services\PresensiService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class HistoryController extends Controller
 {
@@ -19,24 +20,35 @@ class HistoryController extends Controller
     }
     public function index()
     {
+        $minutes = now()->addDays(1)->diffInMinutes(now());
         if (\request()->ajax()) {
-            $presensi = $this->presensi->Query();
-
             if (\request()->tanggal_awal && \request()->tanggal_akhir) {
+                $presensi = $this->presensi->Query();
                 $tgl_awal = Carbon::parse(\request()->tanggal_awal)->toDateTimeString();
                 $tgl_akhir = Carbon::parse(\request()->tanggal_akhir)->toDateTimeString();
                 $presensi->whereBetween('created_at', [$tgl_awal, $tgl_akhir]);
+                $data['table'] = $presensi->where('user_id', auth()->user()->id)->latest()->paginate();
+                return view('users.history._data_table_history', $data);
             }
-
-            $data['table'] = $presensi->where('user_id', auth()->user()->id)->latest()->paginate(15);
+            $data['table'] = Cache::remember('history_' . Auth::user()->id, $minutes, function () {
+                return Persensi::where('user_id', Auth::user()->id)->latest()->paginate();
+            });
             return view('users.history._data_table_history', $data);
         }
 
         $data['tanggal'] = Carbon::now()->format('d M Y');
-        $data['hadir'] = Persensi::where('user_id', auth()->user()->id)->count();
-        $data['terlambat'] = $this->presensi->Query()->where('user_id', Auth::user()->id)->where('status', 'like', '%' . 'Terlambat' . '%')->count();
-        $data['dl'] = $this->presensi->Query()->where('user_id', Auth::user()->id)->where('status', 'DL')->count();
-        $data['apel'] = $this->presensi->Query()->where('user_id', Auth::user()->id)->where('status', 'Apel')->count();
+        $data['hadir'] = Cache::remember('hadir_' . Auth::user()->id, $minutes, function () {
+            return Persensi::where('user_id', auth()->user()->id)->count();
+        });
+        $data['terlambat'] = Cache::remember('terlambat_' . Auth::user()->id, $minutes, function () {
+            return Persensi::where('user_id', Auth::user()->id)->where('status', 'like', '%' . 'Terlambat' . '%')->count();
+        });
+        $data['dl'] = Cache::remember('dl_' . Auth::user()->id, $minutes, function () {
+            return Persensi::where('user_id', Auth::user()->id)->where('status', 'DL')->count();
+        });
+        $data['apel'] = Cache::remember('apel_' . Auth::user()->id, $minutes, function () {
+            return Persensi::where('user_id', Auth::user()->id)->where('status', 'Apel')->count();
+        });
         $data['title'] = 'Data History Absensi';
 
         return view('users.history.index', $data);
