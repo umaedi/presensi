@@ -23,15 +23,16 @@ class HistoryController extends Controller
         $minutes = now()->addDays(1)->diffInMinutes(now());
         if (\request()->ajax()) {
             if (\request()->tanggal_awal && \request()->tanggal_akhir) {
+                dd(request()->get('paginate'), request()->page);
                 $presensi = $this->presensi->Query();
                 $tgl_awal = Carbon::parse(\request()->tanggal_awal)->toDateTimeString();
                 $tgl_akhir = Carbon::parse(\request()->tanggal_akhir)->toDateTimeString();
                 $presensi->whereBetween('created_at', [$tgl_awal, $tgl_akhir]);
-                $data['table'] = $presensi->where('user_id', auth()->user()->id)->latest()->paginate();
+                $data['table'] = $presensi->where('user_id', auth()->user()->id)->latest()->paginate(15);
                 return view('users.history._data_table_history', $data);
             }
             $data['table'] = Cache::remember('history_' . Auth::user()->id, $minutes, function () {
-                return Persensi::where('user_id', Auth::user()->id)->latest()->paginate();
+                return Persensi::where('user_id', Auth::user()->id)->latest()->paginate(15);
             });
             return view('users.history._data_table_history', $data);
         }
@@ -64,8 +65,7 @@ class HistoryController extends Controller
                 $presensi->whereBetween('created_at', [$tgl_awal, $tgl_akhir]);
             }
 
-            $data['table'] = $presensi->where('user_id', auth()->user()->id)->latest()->paginate();
-
+            $data['table'] = $presensi->where('user_id', auth()->user()->id)->latest()->paginate(15);
             return view('users.history._data_table_print', $data);
         }
 
