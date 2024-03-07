@@ -83,11 +83,5 @@ class DatabaseSeeder extends Seeder
             'status'     => 'active',
             'password'  => bcrypt('devkh123'),
         ]);
-
-        \App\Models\Opd::where('id', 20)->update([
-            'nama_opd'  => 'Dinas Komunikasi dan Informatika',
-            'lat'       => '-4.5381729',
-            'long'      => '105.2213224'
-        ]);
     }
 }
