@@ -10,6 +10,7 @@ use App\Services\PresensiService;
 use App\Http\Controllers\Controller;
 use App\Jobs\PresensiupdateJob;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class PersensiController extends Controller
@@ -161,7 +162,12 @@ class PersensiController extends Controller
                 saveLogs($e->getPrevious()->getMessage() . ' ' . 'presensi pagi', 'error');
                 return $this->error($e->getMessage());
             }
+
+            //hitung jumlah user
             Presensicount();
+
+            //clear cache
+            Cache::forget('table_dashboard_' . Auth::user()->id);
             return $this->success('presensi_pagi', 'Anda Berhasil Mengisi Presensi Pagi');
         }
     }
