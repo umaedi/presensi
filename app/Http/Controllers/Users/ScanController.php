@@ -16,7 +16,6 @@ class ScanController extends Controller
      */
     public function __invoke(Request $request)
     {
-        dd(Cache::get('web_token'));
         return view('users.qr.index');
     }
 }

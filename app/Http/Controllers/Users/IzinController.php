@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Services\IzinService;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use App\Models\Izin;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class IzinController extends Controller
@@ -19,15 +21,19 @@ class IzinController extends Controller
     public function index()
     {
         if (\request()->ajax()) {
-            $izin = $this->izin->Query();
+            $minutes = 720;
 
             if (\request()->tanggal_awal && \request()->tanggal_akhir) {
+                $izin = $this->izin->Query();
                 $tgl_awal = Carbon::parse(\request()->tanggal_awal)->toDateTimeString();
                 $tgl_akhir = Carbon::parse(\request()->tanggal_akhir)->toDateTimeString();
-                $izin->whereBetween('created_at', [$tgl_awal, $tgl_akhir])->get();
+                $data['table'] = $izin->whereBetween('created_at', [$tgl_awal, $tgl_akhir])->paginate(6);
+                return view('users.izin._data_table_cuty', $data);
             }
 
-            $data['table']  = $izin->where('user_id', auth()->user()->id)->paginate(6);
+            $data['table']  = Cache::remember('cuty_' . Auth::user()->id, $minutes, function () {
+                return Izin::where('user_id', auth()->user()->id)->paginate(6);
+            });
             return view('users.izin._data_table_cuty', $data);
         }
 
