@@ -74,9 +74,9 @@ class PersensiController extends Controller
 
             $hari = $currentTime->format('l');
             if ($hari === 'Friday') {
-                $waktuPulang =  Carbon::createFromTime(16, 30, 0);
+                $waktuPulang =  Carbon::createFromTime(15, 30, 0);
             } else {
-                $waktuPulang = Carbon::createFromTime(16, 00, 0);
+                $waktuPulang = Carbon::createFromTime(15, 00, 0);
             }
             // Membuat objek Carbon untuk pukul 15:30:00
             $batasWaktu = $waktuPulang;
@@ -99,8 +99,8 @@ class PersensiController extends Controller
             $data['status_pulang']     = $statusPulang;
 
             try {
-                dispatch(new PresensiupdateJob($presensiUpdate, $data));
-                // $this->presensi->update($presensiUpdate, $data);
+                // dispatch(new PresensiupdateJob($presensiUpdate, $data));
+                $this->presensi->update($presensiUpdate, $data);
             } catch (Throwable $e) {
                 saveLogs($e->getMessage() . ' ' . 'presensi sore', 'error');
                 return $this->error($e->getMessage());
@@ -168,6 +168,7 @@ class PersensiController extends Controller
 
             //clear cache
             Cache::forget('table_dashboard_' . Auth::user()->id);
+            Cache::forget('hadir_' . Auth::user()->id);
             return $this->success('presensi_pagi', 'Anda Berhasil Mengisi Presensi Pagi');
         }
     }
