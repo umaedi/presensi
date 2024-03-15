@@ -21,6 +21,7 @@ class CutiController extends Controller
             $data['table'] = $this->cuti->Query()->where('opd_id', Auth::user()->opd_id)->paginate();
             return view('oprator.cuti._data_cuti', $data);
         }
+
         $data['title'] = 'Data cuti';
         return view('oprator.cuti.index', $data);
     }
