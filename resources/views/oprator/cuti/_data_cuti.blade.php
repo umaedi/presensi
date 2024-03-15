@@ -14,14 +14,14 @@
             <td>{{ $table->firstItem() + $key }}</td>
             <td>{{ $tb->user->nama ?? '-' }}</td>
             @if (strtotime($tb->tanggal_awal) !== false)
-            <td>{{  \Carbon\Carbon::parse($tb->tanggal_awal)->isoFormat('D MMMM Y')  ?? ''}}</td>
-            @else
             <td>{{ $tb->tanggal_awal }}</td>
+            @else
+            <td>{{  \Carbon\Carbon::parse($tb->tanggal_awal)->isoFormat('D MMMM Y')  ?? ''}}</td>
             @endif
             @if (($tb->tanggal_akhir) !== false)
-            <td>{{ \Carbon\Carbon::parse($tb->tanggal_akhir)->isoFormat('D MMMM Y') ?? ''}}</td>
-            @else
             <td>{{ $tb->tanggal_akhir }}</td>
+            @else
+            <td>{{ \Carbon\Carbon::parse($tb->tanggal_akhir)->isoFormat('D MMMM Y') ?? ''}}</td>
             @endif
             <td><a href="/oprator/cuti/show/{{ $tb->id }}" class="btn btn-primary btn-sm">Lihat</a></td>
         </tr>
