@@ -13,8 +13,8 @@
         <tr>
             <td>{{ $table->firstItem() + $key }}</td>
             <td>{{ $tb->user->nama ?? '-' }}</td>
-            <td>{{  \Carbon\Carbon::parse($tb->tanggal_awal)->isoFormat('D MMMM Y') }}</td>
-            <td>{{ \Carbon\Carbon::parse($tb->tanggal_akhir)->isoFormat('D MMMM Y') }}</td>
+            <td>{{ \Carbon\Carbon::createFromFormat('d F Y', $tb->tanggal_awal)->isoFormat('D MMMM Y') }}</td>
+            <td>{{ \Carbon\Carbon::createFromFormat('d F Y', $tb->tanggal_akhir)->isoFormat('D MMMM Y') }}</td>
             <td><a href="/oprator/cuti/show/{{ $tb->id }}" class="btn btn-primary btn-sm">Lihat</a></td>
         </tr>
         @empty
