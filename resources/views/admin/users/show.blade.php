@@ -142,6 +142,53 @@
       </div>
     </div>
   </div>
+
+<!-- Modal -->
+<div class="modal fade modalbox" id="modal-show" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel1">Detail Presensi</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+            <div class="modal-body">
+              <div class="row g-2">
+                <div class="col-12 col-md-4 mb-0">
+                  <img id="photoAbsen" class="img-fluid rounded" src="" alt="">
+                </div>
+                <div class="col-12 col-md-8 mb-0">
+                  <div class="form-group mb-3">
+                    <label for="dobExLarge" class="form-label">Nama</label>
+                    <input type="text" id="dobExLarge" class="form-control" name="nama" />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="dobExLarge" class="form-label">Tanggal</label>
+                    <input type="text" id="dobExLarge" class="form-control" name="tanggal" />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="dobExLarge" class="form-label">Waktu Presensi</label>
+                    <input type="text" id="dobExLarge" class="form-control" name="jam_masuk" />
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="dobExLarge" class="form-label">Lokasi Saat Presensi</label>
+                    <input type="text" id="dobExLarge" class="form-control" name="latlong" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                  <div id="map" style="height: 390px"></div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @push('js')
     <script type="text/javascript">
