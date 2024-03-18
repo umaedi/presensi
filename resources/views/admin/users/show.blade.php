@@ -264,5 +264,52 @@
             $('#'+spinner).addClass('d-none');
           }
         }
+
+        function showPresensi(data, waktu)
+        {
+            if(waktu === 1) {
+                $('.modal-title').html('Detail Presensi Pagi');
+                $('#photoAbsen').attr('src', "{{ asset('storage/users/img') }}/"+ data.photo_masuk);
+                $('input[name=nama]').val(data.user.nama);
+                $('input[name=tanggal]').val(data.tanggal);
+                $('input[name=jam_masuk]').val(data.jam_masuk);
+                $('input[name=latlong]').val(data.lat_long_masuk);
+            }else {
+                $('.modal-title').html('Detail Presensi Sore');
+                $('#photoAbsen').attr('src', "{{ asset('storage/users/img') }}/"+ data.photo_pulang);
+                $('input[name=nama]').val(data.user.nama);
+                $('input[name=tanggal]').val(data.tanggal);
+                $('input[name=jam_masuk]').val(data.jam_pulang);
+                $('input[name=latlong]').val(data.lat_long_pulang);
+            };
+
+            const lat = data.lat_long_masuk.substring(10, '');
+            const long = data.lat_long_masuk.substring(11);
+
+            let mapOptions, map, marker;
+            infoWindow = '';
+
+            element = document.getElementById('map');
+
+            mapOptions = {
+                zoom: 16,
+                center: {
+                    lat: parseFloat(lat),
+                    lng: parseFloat(long),
+                },
+                disableDefaultUI: false,
+                scrollWheel: true, 
+                draggable: false, 
+            };
+
+            map = new google.maps.Map(element, mapOptions);
+
+            marker = new google.maps.Marker({
+            position: mapOptions.center,
+            map: map,
+            // icon: 'http://pngimages.net/sites/default/files/google-maps-png-image-70164.png',
+            draggable: true
+            });
+        }
     </script>
 @endpush
