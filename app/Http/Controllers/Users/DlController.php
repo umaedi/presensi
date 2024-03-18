@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Services\PresensiService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class DlController extends Controller
@@ -114,6 +115,9 @@ class DlController extends Controller
                 return $this->error($e->getMessage());
             }
             Presensicount();
+            //clear cache
+            Cache::forget('table_dashboard_' . Auth::user()->id);
+            Cache::forget('hadir_' . Auth::user()->id);
             return $this->success($data, 'Anda Berhasil Mengisi Presensi Pagi');
         }
     }
