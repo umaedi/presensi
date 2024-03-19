@@ -36,7 +36,7 @@
                 
             </div>
                 <a href="https://play.google.com/store/apps/details?id=com.tulangbawangkab.siaptuba" class="btn btn-primary my-2">Download aplikasi di google play store</a>
-                <a href="/user/dashboard" class="btn btn-danger">Presensi disini</a>
+                {{-- <a href="/user/dashboard" class="btn btn-danger">Presensi disini</a> --}}
         </div>
     </div>
 @endsection
