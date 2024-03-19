@@ -356,7 +356,7 @@
                     <div class="modal-body">
                         <div class="text-dark">
                             <div class="font-weight-bold">Penutupan Total Akses Website Presensi Siap Tuba Mulai Tanggal 20 Maret 2024</div>
-                            <br><br>
+                            <br>
                             <div class="font-weight-bold">Tulang Bawang, 19 Maret 2024</div>
                             <br>
                             Berdasarkan hasil rapat Evaluasi Pelaksanaan Aplikasi Absensi SIAP TUBA,
