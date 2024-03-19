@@ -21,7 +21,7 @@ class NotifikasiController extends Controller
         //     'title' => 'Notifikasi',
         // ]);
 
-        return view('pages.notifikasi', [
+        return view('pages.notifikasi2', [
             'title' => 'Notifikasi',
         ]);
 
