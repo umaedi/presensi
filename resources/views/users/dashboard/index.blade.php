@@ -355,9 +355,9 @@
                     </div>
                     <div class="modal-body">
                         <p class="text-dark">
-                            <b>Penutupan Total Akses Website Presensi Siap Tuba Mulai Tanggal 20 Maret 2024</b>
+                            <div class="font-weight-bold">Penutupan Total Akses Website Presensi Siap Tuba Mulai Tanggal 20 Maret 2024</div>
                             <br><br>
-                            Tulang Bawang, 19 Maret 2024
+                            <div class="font-weight-bold">Tulang Bawang, 19 Maret 2024</div>
                             <br><br>
                             Berdasarkan hasil rapat Evaluasi Pelaksanaan Aplikasi Absensi SIAP TUBA,
                             Dinas Komunikasi dan Informatika (Diskominfo) Kabupaten Tulang Bawang memberitahukan kepada seluruh
@@ -369,7 +369,7 @@
                             <b>Safari</b>
                             <br><br>
 
-                            <b>Hormat kami,</b>
+                            <div class="font-weight-bold">Hormat kami,</div>
                             <br>
                             Tim Pengembang Dinas Komunikasi dan Informatika
                             Kabupaten Tulang Bawang
