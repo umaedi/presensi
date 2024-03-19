@@ -344,41 +344,6 @@
         </div>
         <!-- * DialogIconedInfo -->
 
-        {{-- penutupan aplikasi web --}}
-          <!-- Modal Basic -->
-          <div class="modal fade modalbox" id="ModalBasic" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">PENTING</h5>
-                        <a href="javascript:;" data-dismiss="modal">Tutup</a>
-                    </div>
-                    <div class="modal-body">
-                        <div class="text-dark">
-                            <div class="font-weight-bold">Penutupan Total Akses Website Presensi Siap Tuba Mulai Tanggal 20 Maret 2024</div>
-                            <br>
-                            <div class="font-weight-bold">Tulang Bawang, 19 Maret 2024</div>
-                            <br>
-                            Berdasarkan hasil rapat Evaluasi Pelaksanaan Aplikasi Absensi SIAP TUBA,
-                            Dinas Komunikasi dan Informatika (Diskominfo) Kabupaten Tulang Bawang memberitahukan kepada seluruh
-                            pegawai kabupaten tulang bawang bahwa mulai tanggal 20 Maret 2024, akses ke website presensi Siap
-                            Tuba
-                            akan ditutup secara total. dan aktifitas presensi dialihkan menggunakan <b>Aplikasi SIAP TUBA</b>
-                            yang dapat diunduh di Play Store. <br> <br>
-                            Bagi pengguna iPhone tetap melakukan presensi menggunakan
-                            <b>Safari</b>
-                            <br><br>
-                            <div class="font-weight-bold">Hormat kami,</div>
-                            <br>
-                            Tim Pengembang Dinas Komunikasi dan Informatika
-                            Kabupaten Tulang Bawang
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- * Modal Basic -->
-
         {{-- modal selfi --}}
         @include('layouts.modal._modal')
     
@@ -386,7 +351,6 @@
 @endsection
 @push('js')
     <script type="text/javascript">
-        $('#ModalBasic').modal();
         $('#dataTable').html(make_skeleton());
         var bulan = '';
         $(document).ready(function() {

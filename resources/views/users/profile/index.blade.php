@@ -141,9 +141,9 @@
                 @elseif(auth()->user()->role == 'oprator')
                 <button onclick="redirect('/oprator')" class="btn-submit btn btn-primary mr-1 btn-lg btn-block">Kelola Pegawai</button>
                 @endif
-                <form action="/logout" method="POST" data-turbolinks="false">
+                <form action="/logout" method="POST">
                     @csrf
-                    <button id="btn_password" type="submit" class="btn-submit btn btn-warning mr-1 btn-lg btn-block mt-2">Keluar</button>
+                    <button id="btn_password" type="submit" data-turbolinks="false" class="btn-submit btn btn-warning mr-1 btn-lg btn-block mt-2">Keluar</button>
                 </form>
             </div>
         </div>
