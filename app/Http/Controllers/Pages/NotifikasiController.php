@@ -21,17 +21,17 @@ class NotifikasiController extends Controller
         //     'title' => 'Notifikasi',
         // ]);
 
-        return view('pages.notifikasi2', [
-            'title' => 'Notifikasi',
-        ]);
+        // return view('pages.notifikasi2', [
+        //     'title' => 'Notifikasi',
+        // ]);
 
-        // $userAgent = $request->header('User-Agent');
-        // if (strpos($userAgent, 'wv') !== false || (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false)) {
-        //     return redirect('/user/dashboard');
-        // } else {
-        //     return view('pages.notifikasi', [
-        //         'title' => 'Notifikasi',
-        //     ]);
-        // }
+        $userAgent = $request->header('User-Agent');
+        if (strpos($userAgent, 'wv') !== false || (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false)) {
+            return redirect('/user/dashboard');
+        } else {
+            return view('pages.notifikasi2', [
+                'title' => 'Notifikasi',
+            ]);
+        }
     }
 }
