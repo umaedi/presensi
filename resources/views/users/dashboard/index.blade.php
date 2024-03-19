@@ -345,16 +345,13 @@
         <!-- * DialogIconedInfo -->
 
         {{-- penutupan aplikasi web --}}
-        <!-- Modal -->
-        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl w-100">
+          <!-- Modal Basic -->
+          <div class="modal fade modalbox" id="ModalBasic" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title" id="staticBackdropLabel">PENTING!</h1>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <h5 class="modal-title">PENTING</h5>
+                        <a href="javascript:;" data-dismiss="modal">Tutup</a>
                     </div>
                     <div class="modal-body">
                         <p class="text-dark">
@@ -381,6 +378,7 @@
                 </div>
             </div>
         </div>
+        <!-- * Modal Basic -->
 
         {{-- modal selfi --}}
         @include('layouts.modal._modal')
@@ -389,7 +387,7 @@
 @endsection
 @push('js')
     <script type="text/javascript">
-        $('#staticBackdrop').modal();
+        $('#ModalBasic').modal();
         $('#dataTable').html(make_skeleton());
         var bulan = '';
         $(document).ready(function() {
