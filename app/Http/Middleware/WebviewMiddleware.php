@@ -31,7 +31,7 @@ class WebviewMiddleware
                 return $next($request);
             }
         } else {
-            return redirect()->route('notifikasi');
+            return redirect('/login');;
         }
     }
 }
