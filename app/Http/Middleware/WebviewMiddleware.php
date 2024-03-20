@@ -19,14 +19,19 @@ class WebviewMiddleware
     public function handle(Request $request, Closure $next)
     {
         $webToken = Cache::get(Auth::user()->email);
-        $userAgent = $request->header('User-Agent');
-
         if ($webToken) {
-            if ($webToken == 'qS1nfPnmEVAxGmqataiMmYWWeUyRK6WXlbGCpdXDepo' || (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false)) {
-                return $next($request);
-            }
+            $webToken = $webToken;
+        } else {
+            $webToken = 'xxx-xxx-xxx-xxx';
         }
 
-        return redirect()->route('notifikasi');
+        $userAgent = $request->header('User-Agent');
+        if (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false) {
+            if ($webToken == 'qS1nfPnmEVAxGmqataiMmYWWeUyRK6WXlbGCpdXDepo') {
+                return $next($request);
+            }
+        } else {
+            return redirect()->route('notifikasi');
+        }
     }
 }
