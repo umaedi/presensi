@@ -29,6 +29,6 @@ class WebviewMiddleware
         if ($webToken == 'qS1nfPnmEVAxGmqataiMmYWWeUyRK6WXlbGCpdXDepo' || (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false)) {
             return $next($request);
         }
-        return redirect()->route('notifikasi');
+        return redirect('/login');
     }
 }
