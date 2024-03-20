@@ -29,6 +29,8 @@ class WebviewMiddleware
         if ($webToken == 'qS1nfPnmEVAxGmqataiMmYWWeUyRK6WXlbGCpdXDepo' || (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false)) {
             return $next($request);
         }
-        dd('okee');
+
+        Auth::logout();
+        return redirect('/');
     }
 }
