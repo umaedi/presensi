@@ -21,9 +21,12 @@ class WebviewMiddleware
         $webToken = Cache::get(Auth::user()->email);
         $userAgent = $request->header('User-Agent');
 
-        if ($webToken == 'qS1nfPnmEVAxGmqataiMmYWWeUyRK6WXlbGCpdXDepo' || (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false)) {
-            return $next($request);
+        if ($webToken) {
+            if ($webToken == 'qS1nfPnmEVAxGmqataiMmYWWeUyRK6WXlbGCpdXDepo' || (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false)) {
+                return $next($request);
+            }
         }
+
         return redirect()->route('notifikasi');
     }
 }
