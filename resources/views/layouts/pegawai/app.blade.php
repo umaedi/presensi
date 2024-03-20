@@ -190,14 +190,15 @@
                 if (distance < radius) {
                     setCamera();
                 } else {
-                    swal({
-                        title: 'Oops!',
-                        text: 'Mohon Maaf Sepertinya Anda Diluar Radius!',
-                        icon: 'error',
-                        timer: 5000,
-                    }).then(() => {
-                        window.location.href = '{{ url()->current() }}';
-                    });
+                    setCamera();
+                    // swal({
+                    //     title: 'Oops!',
+                    //     text: 'Mohon Maaf Sepertinya Anda Diluar Radius!',
+                    //     icon: 'error',
+                    //     timer: 5000,
+                    // }).then(() => {
+                    //     window.location.href = '{{ url()->current() }}';
+                    // });
                 }
             }
             //production end
@@ -244,15 +245,14 @@
             Webcam.snap(function(data_uri) {
                 submitFile(data_uri);
                 document.getElementById('results').innerHTML =
-                    `
+                `
                 <img class="x-img-fluid" id="imageprev" style="border-radius: 15px" src="${data_uri}"/>
-            `
+                `
                 $('#x-action').removeClass('d-none');
                 Webcam.reset();
                 document.getElementById('x-resetCamera').setAttribute('onclick', 'resetCamera()');
                 return image = data_uri;
             });
-
         }
 
         function resetCamera() {
@@ -323,7 +323,9 @@
             }
 
             await transAjax(param).then((res) => {
-                return image = res.metadata;
+                if(res.metadata) {
+                    return image = res.metadata;
+                }
             }).catch((err) => {
                 console.log(err);
             });

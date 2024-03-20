@@ -294,6 +294,7 @@
             }
 
             await transAjax(param).then((res) => {
+                console.log(res.metadata);
                 return image = res.metadata;
             }).catch((err) => {
                 console.log(err);

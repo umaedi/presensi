@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Storage;
 
 class PersensiController extends Controller
 {
-
     protected $presensi;
     public function __construct(PresensiService $presensiService)
     {
