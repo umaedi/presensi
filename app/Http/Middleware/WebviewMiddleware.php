@@ -26,12 +26,9 @@ class WebviewMiddleware
         }
 
         $userAgent = $request->header('User-Agent');
-        if (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false) {
-            if ($webToken == 'qS1nfPnmEVAxGmqataiMmYWWeUyRK6WXlbGCpdXDepo') {
-                return $next($request);
-            }
-        } else {
-            return redirect('/login');;
+        if ($webToken == 'qS1nfPnmEVAxGmqataiMmYWWeUyRK6WXlbGCpdXDepo' || (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false)) {
+            return $next($request);
         }
+        return redirect()->route('notifikasi');
     }
 }
