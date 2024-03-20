@@ -34,7 +34,7 @@ class RedirectIfAuthenticated
             }
         }
 
-        Cache::put('web_token', $request->key, now()->addDays(90));
+        Cache::put($request->email, $request->key, now()->addDays(90));
 
         $guards = empty($guards) ? [null] : $guards;
 

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class WebviewMiddleware
@@ -17,7 +18,7 @@ class WebviewMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $webToken = Cache::get('web_token');
+        $webToken = Cache::get(Auth::user()->email);
         $userAgent = $request->header('User-Agent');
 
         if ($webToken == 'qS1nfPnmEVAxGmqataiMmYWWeUyRK6WXlbGCpdXDepo' || (strpos($userAgent, 'iPhone') !== false && strpos($userAgent, 'Safari') !== false)) {
