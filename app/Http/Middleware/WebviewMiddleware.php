@@ -34,6 +34,14 @@ class WebviewMiddleware
             return $next($request);
         }
 
+        if (Auth::user()->role == 'oprator') {
+            return redirect('/oprator/dashboard');
+        }
+
+        if (Auth::user()->role == 'admin') {
+            return redirect('/admin/dashboard');
+        }
+
         Auth::logout();
         return redirect('/');
     }
