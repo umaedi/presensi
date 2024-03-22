@@ -42,6 +42,7 @@ class WebviewMiddleware
             return redirect('/admin/dashboard');
         }
 
+        Cache::forget(Auth::user()->email);
         Auth::logout();
         return redirect('/');
     }
