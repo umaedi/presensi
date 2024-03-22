@@ -46,7 +46,6 @@
         $('#btn_login').hide();
         $('#loadingSubmit').removeClass('d-none');
       });
-      window.location.href = '/';
     </script>
 @endpush
 
