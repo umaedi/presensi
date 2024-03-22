@@ -21,6 +21,7 @@ class OpratorMiddlewawre
         if (Auth::user()->role == 'oprator') {
             return $next($request);
         }
-        return redirect(RouteServiceProvider::HOME);
+        Auth::logout();
+        return redirect('/');
     }
 }

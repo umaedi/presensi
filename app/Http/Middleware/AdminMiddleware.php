@@ -21,6 +21,7 @@ class AdminMiddleware
         if (Auth::user()->role == 'admin') {
             return $next($request);
         }
-        return redirect(RouteServiceProvider::HOME);
+        Auth::logout();
+        return redirect('/');
     }
 }
