@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Users;
 use Throwable;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Services\PresensiService;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class RsudController extends Controller
@@ -172,6 +173,11 @@ class RsudController extends Controller
                 return $this->error($e->getMessage());
             }
             Presensicount();
+
+            //clear cache
+            Cache::forget('table_dashboard_' . Auth::user()->id);
+            Cache::forget('hadir_' . Auth::user()->id);
+
             return $this->success($data, 'Anda Berhasil Mengisi Presensi Masuk');
         }
     }
