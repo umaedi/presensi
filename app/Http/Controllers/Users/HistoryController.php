@@ -32,7 +32,7 @@ class HistoryController extends Controller
                 $presensi = $this->presensi->Query();
                 $tgl_awal = Carbon::parse(\request()->tanggal_awal)->toDateTimeString();
                 $tgl_akhir = Carbon::parse(\request()->tanggal_akhir)->toDateTimeString();
-                $data['table'] = $presensi->whereBetween('created_at', [$tgl_awal, $tgl_akhir])->latest()->paginate(15);
+                $data['table'] = $presensi->where('user_id', Auth::user()->id)->whereBetween('created_at', [$tgl_awal, $tgl_akhir])->latest()->paginate(15);
                 return view('users.history._data_table_history', $data);
             }
             $data['table'] = Cache::remember('history_' . Auth::user()->id, $minutes, function () {
