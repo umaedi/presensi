@@ -20,8 +20,11 @@ class Kernel extends ConsoleKernel
         // Backing up database
         $schedule->command('backup:run')->daily()->at('01:30');
 
+        $schedule->command('backup:run --only-db')->daily()->at('12.30');
+        $schedule->command('backup:run --only-db')->daily()->at('18.30');
+
         //move backup to root
-        $schedule->command('cp')->daily()->at('03:30');
+        // $schedule->command('cp')->daily()->at('03:30');
     }
 
     /**
