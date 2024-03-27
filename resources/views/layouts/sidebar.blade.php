@@ -113,9 +113,9 @@
                     <div data-i18n="Boxicons">Master Pegawai</div>
                 </a>
             </li>
-            <li class="menu-item {{ Request::is('oprator/status_pegawai*') ? 'active' : '' }}">
-                <a href="/oprator/status_pegawai" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-user"></i>
+            <li class="menu-item {{ Request::is('oprator/statuspegawai*') ? 'active' : '' }}">
+                <a href="/oprator/statuspegawai" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user-pin"></i>
                     <div data-i18n="Boxicons">Status Pegawai</div>
                 </a>
             </li>

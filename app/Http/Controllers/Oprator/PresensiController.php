@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Oprator;
 
 use App\Http\Controllers\Controller;
+use App\Models\Statuspegawai;
 use App\Services\PresensiService;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -39,6 +40,7 @@ class PresensiController extends Controller
         }
 
         $data['title'] = 'Master Presensi';
+        $data['status'] = Statuspegawai::where('opd_id', Auth::user()->opd_id)->get();
         return view('oprator.presensi.index', $data);
     }
 }

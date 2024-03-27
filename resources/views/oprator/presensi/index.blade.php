@@ -17,19 +17,27 @@
                                     <input id="tanggalAkhir" type="text" name="tanggal_akhir" placeholder="Tanggal Akhir"
                                         class="form-control datepicker end_date">
                                 </div>
-                                <div class="col-12 col-md-2">
+                                <div class="col-12 col-md-3">
+                                    <select id="statusPegawai" class="form-select" aria-label="Default select example">
+                                        <option value="">Status Pegawai</option>
+                                        @foreach ($status as $st)
+                                        <option value="{{ $st->id }}">{{ $st->status }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-12 col-md-3">
                                     <select id="status" class="form-select" aria-label="Default select example">
-                                        <option value="">Status</option>
+                                        <option value="">Status Presensi</option>
                                         <option value="Tepat waktu">Tepat Waktu</option>
                                         <option value="Terlambat">Terlambat</option>
                                         <option value="Apel">Apel</option>
                                         <option value="DL">DL</option>
                                     </select>
                                 </div>
-                                <div class="col-12 col-md-2">
+                                <div class="col-12 col-md-3 mt-3">
                                     <button id="tampilkan" class="form-control btn-primary">TAMPILKAN</button>
                                 </div>
-                                <div class="col-12 col-md-2">
+                                <div class="col-12 col-md-3 mt-3">
                                     <button id="export" class="form-control btn-primary">EXPORT</button>
                                 </div>
                             </div>
