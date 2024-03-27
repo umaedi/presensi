@@ -57,8 +57,6 @@ Route::middleware(['auth', 'oprator'])->prefix('oprator')->group(function () {
     Route::get('/pegawai/show/{id}', [Oprator\PegawaiController::class, 'show']);
     Route::put('/pegawai/update/{id}', [Oprator\PegawaiController::class, 'update']);
 
-    Route::get('/status_pegawai', [Oprator\StatuspegawaiController::class, 'index']);
-
     Route::get('/cuti', [Oprator\CutiController::class, 'index']);
     Route::get('/cuti/show/{id}', [Oprator\CutiController::class, 'show']);
 

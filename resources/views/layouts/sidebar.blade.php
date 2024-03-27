@@ -113,12 +113,12 @@
                     <div data-i18n="Boxicons">Master Pegawai</div>
                 </a>
             </li>
-            {{-- <li class="menu-item {{ Request::is('oprator/status_pegawai*') ? 'active' : '' }}">
-                <a href="/oprator/pegawai" class="menu-link">
+            <li class="menu-item {{ Request::is('oprator/status_pegawai*') ? 'active' : '' }}">
+                <a href="/oprator/status_pegawai" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-user"></i>
                     <div data-i18n="Boxicons">Status Pegawai</div>
                 </a>
-            </li> --}}
+            </li>
             <li class="menu-item {{ Request::is('oprator/presensi*') ? 'active' : '' }}">
                 <a href="/oprator/presensi" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-spreadsheet"></i>

@@ -129,8 +129,8 @@
                                 <div class="input-wrapper">
                                     <label class="label">Mulai Cuti</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control datepicker" id="cutystart"
-                                            name="tanggal_awal" placeholder="Pilih" value="" readonly>
+                                        <input type="date" class="form-control" id="cutystart"
+                                            name="tanggal_awal" placeholder="Pilih" value="">
                                     </div>
                                 </div>
                             </div>
@@ -138,8 +138,8 @@
                                 <div class="input-wrapper">
                                     <label class="label">Berakhir Cuti</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control datepicker" id="cutyend"
-                                            name="tanggal_akhir" placeholder="Pilh" value="" readonly>
+                                        <input type="date" class="form-control" id="cutyend"
+                                            name="tanggal_akhir" placeholder="Pilh" value="">
                                     </div>
                                 </div>
                             </div>
@@ -147,8 +147,8 @@
                                 <div class="input-wrapper">
                                     <label class="label">Tanggal Masuk Kerja</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control datepicker" name="tanggal_masuk"
-                                            placeholder="Pilih" value="" readonly>
+                                        <input type="date" class="form-control" name="tanggal_masuk"
+                                            placeholder="Pilih" value="">
                                     </div>
                                 </div>
                             </div>
@@ -454,5 +454,15 @@
             var tanggalAkhir = $('#tanggalAkhir').val();
             window.location.href = "/user/izin/print?tanggal_awal=" + tanggalAwal + "&tanggal_akhir=" + tanggalAkhir;
         }
+
+        $('#awal-cuty').click(function() {
+            $('#awal-cuty').attr('type', 'date');
+        });
+        $('#akhir-cuty').click(function() {
+            $('#akhir-cuty').attr('type', 'date');
+        });
+        $('#tanggal-masuk').click(function() {
+            $('#tanggal-masuk').attr('type', 'date');
+        });
     </script>
 @endpush
