@@ -18,7 +18,7 @@
             <td>{{ $tb->opd->nama_opd }}</td>
             <td><a href="/oprator/pegawai/show/{{ $tb->id }}" class="btn btn-primary btn-sm">Lihat</a></td>
             <td>
-                <select class="form-select" style="width: 100px" onchange="update(this.value, '{{ $tb->id }}')" name="status" aria-label="status">
+                <select class="form-select" onchange="update(this.value, '{{ $tb->id }}')" name="status" aria-label="status">
                     <option value="">pilih</option>
                     @foreach ($status as $st)
                     <option value="{{ $st->id }}" {{ $st->id == $tb->status_pegawai ? 'selected' : '' }}>{{ $st->status }}</option>

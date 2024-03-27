@@ -24,6 +24,7 @@ class StatuspegawaiController extends Controller
     {
         if (request()->ajax()) {
             $data['table'] = $this->statuspegawai->Query()->where('opd_id', Auth::user()->opd_id)->get();
+            $data['status'] = $this->statuspegawai->Query()->where('opd_id', Auth::user()->opd_id)->get();
             return view('oprator.statuspegawai._data_status', $data);
         }
         return view('oprator.statuspegawai.index');
@@ -32,7 +33,7 @@ class StatuspegawaiController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'status'    => 'required|string|max:50|unique:statuspegawais,opd_id,' . Auth::user()->opd_id,
+            'status'    => 'required|string|max:50',
         ]);
 
         if ($validator->fails()) {
@@ -53,7 +54,13 @@ class StatuspegawaiController extends Controller
     public function show($id)
     {
         if (\request()->ajax()) {
-            dd('ok');
+            $user = $this->user->Query();
+            if (\request()->search) {
+                $user->where('nama', 'like', '%' . \request()->search . '%');
+            }
+            $data['table'] = $user->where('opd_id', Auth::user()->opd_id)->where('status_pegawai', $id)->paginate();
+            $data['status'] = $this->statuspegawai->Query()->where('opd_id', Auth::user()->opd_id)->get();
+            return view('oprator.statuspegawai._data_table', $data);
         }
         $data['title'] = 'Status Pegawai';
         $data['status'] = $this->statuspegawai->find($id);

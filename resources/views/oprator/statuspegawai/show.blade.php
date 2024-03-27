@@ -7,8 +7,6 @@
             <div class="row mb-4">
                 <!-- Basic Alerts -->
                 <div class="col-md mb-4 mb-md-0">
-                    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#statusModal">Tambah Status
-                        Pegawai</button>
                     <div class="card">
                         <h5 class="card-header">{{ $status->status }}</h5>
                         <div class="card-body">
