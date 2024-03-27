@@ -22,4 +22,9 @@ class StatuspegawaiService
     {
         return $this->statuspegawai->create($data);
     }
+
+    public function find($id)
+    {
+        return $this->statuspegawai->find($id);
+    }
 }

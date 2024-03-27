@@ -27,6 +27,13 @@ class PresensiController extends Controller
                 $presensi->whereBetween('created_at', [$tgl_awal, $tgl_akhir]);
             }
 
+            if (isset(request()->status_pegawai)) {
+                $presensi->whereHas('user', function ($query) {
+                    $query->where('status_pegawai', \request()->status_pegawai);
+                });
+                // $presensi->where('status_pegawai', \request()->status_pegawai);
+            }
+
             if (isset(request()->status)) {
                 if (request()->status !== 'Terlambat') {
                     $presensi->where('status', \request()->status);

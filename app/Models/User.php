@@ -33,7 +33,8 @@ class User extends Authenticatable
         'no_hp',
         'photo',
         'role',
-        'web_token'
+        'web_token',
+        'status_pegawai',
     ];
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Oprator;
 
 use App\Http\Controllers\Controller;
+use App\Models\Statuspegawai;
 use App\Services\PresensiService;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,7 @@ class PegawaiController extends Controller
                 $users->where('nama', 'like', '%' . \request()->search . '%');
             }
             $data['table'] = $users->where('opd_id', Auth::user()->opd_id)->paginate();
+            $data['status'] = Statuspegawai::where('opd_id', Auth::user()->opd_id)->get();
             return view('oprator.users._data_user', $data);
         }
         return view('oprator.users.index');

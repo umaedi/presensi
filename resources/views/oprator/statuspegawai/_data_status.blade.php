@@ -12,7 +12,7 @@
             <td>{{ $key + 1}}</td>
             <td>{{ $tb->status }}</td>
             <td>
-                <button class="btn btn-primary btn-sm">Lihat</button>
+                <a href="/oprator/statuspegawai/show/{{ $tb->id }}" class="btn btn-primary btn-sm">Lihat</a>
                 <button class="btn btn-warning btn-sm">Edit</button>
                 <button class="btn btn-danger btn-sm">Hapus</button>
             </td>

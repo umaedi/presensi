@@ -18,7 +18,7 @@
                                         class="form-control datepicker end_date">
                                 </div>
                                 <div class="col-12 col-md-3">
-                                    <select id="statusPegawai" class="form-select" aria-label="Default select example">
+                                    <select id="statusPegawai" name="status_pegawai" class="form-select" aria-label="Default select example">
                                         <option value="">Status Pegawai</option>
                                         @foreach ($status as $st)
                                         <option value="{{ $st->id }}">{{ $st->status }}</option>
@@ -112,6 +112,7 @@
         var search = '';
         var tanggalAwal = '';
         var tanggalAkhir = '';
+        var status_pegawai = '';
         var status = '';
         var page = 1;
         $(document).ready(function() {
@@ -141,6 +142,7 @@
             search = $('#search').val();
             tanggalAwal = $('#tanggalAwal').val();
             tanggalAkhir = $('#tanggalAkhir').val();
+            status_pegawai = $('#statusPegawai').val();
             status = $('#status').val();
             loadTable();
         }
@@ -154,6 +156,7 @@
                     search: search,
                     tanggal_awal: tanggalAwal,
                     tanggal_akhir: tanggalAkhir,
+                    status_pegawai: status_pegawai,
                     status: status,
                     page: page,
                 }

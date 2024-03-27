@@ -257,5 +257,25 @@
                 $('#btn_submit').removeClass('d-none');
             }
         }
+
+        async function update(value, id)
+        {
+            var param = {
+                url: '/oprator/statuspegawai/update?status='+value+'&user_id='+id,
+                method: 'POST',
+            }
+
+            await transAjax(param).then((result) => {
+                loadTable();
+            }).catch((err) => {
+                console.log(err);
+                // swal({
+                //     title: 'Oops!',
+                //     text: err.responseJSON.message,
+                //     icon: 'error',
+                //     timer: 3000,
+                // });
+            });
+        }
     </script>
 @endpush
