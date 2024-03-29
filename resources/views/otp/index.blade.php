@@ -26,7 +26,7 @@
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Tunggu sebentar yah...
                     </button>
                 </div>
-              <button type="submit" id="btn_login" class="btn btn-block btn-lg" style="background-color: #076759; color: #fff">KIRIM</button>
+              <button type="submit" id="btnSubmit" class="btn btn-block btn-lg" style="background-color: #076759; color: #fff">KIRIM</button>
             </div>
           </form>
         </div>
