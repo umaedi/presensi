@@ -185,10 +185,10 @@
         $('#export').click(function() {
             tanggalAwal = $('#tanggalAwal').val();
             tanggalAkhir = $('#tanggalAkhir').val();
+            status_pegawai = $('#statusPegawai').val();
             status = $('#status').val();
-
             window.location.href = '/oprator/presensi/export?tanggal_awal=' + tanggalAwal + '&tanggal_akhir=' +
-                tanggalAkhir + '&status=' + status;
+                tanggalAkhir + '&status_pegawai='+status_pegawai + '&status=' + status;
         });
 
         function showPresensi(data, waktu) {

@@ -122,10 +122,3 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     //log
     Route::get('/log', Admin\LogController::class);
 });
-
-Route::get('/verifikasi-otp', function () {
-    return view('otp.index');
-});
-
-Route::post('/send-otp/{phone}', [OtpController::class, 'store']);
-Route::get('/verifikasi', [OtpController::class, 'verif']);
