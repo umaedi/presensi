@@ -11,7 +11,7 @@ class OtpController extends Controller
     public function store(Request $request)
     {
         $bearer = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjA2MDk2MGJhNTFkMDJkNTgwYjYwM2UiLCJmdWxsTmFtZSI6IlVtYWVkaSIsImZpcnN0TmFtZSI6IlVtYWVkaSIsIm1pZGRsZU5hbWUiOiIiLCJsYXN0TmFtZSI6IlVtYWVkaSIsIm1vYmlsZXBob25lIjoiNjI4NTc0MTQ5MjA0NSIsImNvdW50cnlDb2RlIjoiIiwicm9sZSI6ImNsaWVudCIsImV4cCI6MTcxMTkyOTU5OTAwMCwiaWF0IjoxNzExNjc1NDAzLCJpc3MiOiJraXJpbXBlc2FuLnJpc3Rla211c2xpbS5jb20ifQ.NSySJE05G6rQP7LrSoqEwRpnMKU2cNuIe10ROJs7Do4';
-        $otp = Str::random(4);
+        $otp = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
         $response = Http::withToken($bearer)
             ->post('https://apiks.ristekmuslim.com/client/v1/message/send-text', [
                 'instanceID' => '66060960c302c5956a9ac401',
