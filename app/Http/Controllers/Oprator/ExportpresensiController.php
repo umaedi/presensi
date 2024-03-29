@@ -46,7 +46,33 @@ class ExportpresensiController extends Controller
             }
         }
 
-        $presensi = $presensi->where('opd_id', Auth::user()->opd_id)->orderBy('created_at', 'asc')->get();
-        return Excel::download(new PresensiExport($presensi), Carbon::now() . '.presensi.xlsx');
+        // Mengelompokkan data berdasarkan user_id
+        $presensiGrouped = $presensi->groupBy('user_id');
+
+        // Melakukan perulangan untuk setiap kelompok data
+        foreach ($presensiGrouped as $userId => $presensiPerUser) {
+            // Filter data yang sesuai dengan opd_id saat ini (menggunakan kondisi tambahan)
+            $presensiPerUser = $presensiPerUser->where('opd_id', Auth::user()->opd_id)->orderBy('created_at', 'asc')->get();
+
+            // Sekarang, Anda dapat melakukan sesuatu dengan $presensiPerUser, misalnya mengekspor ke Excel
+            // Pastikan untuk memanipulasi data atau mengekspor sesuai dengan kebutuhan Anda.
+            // Sebagai contoh, saya menggunakan presensiPerUser untuk mengekspor ke file Excel.
+            return Excel::download(new PresensiExport($presensiPerUser), Carbon::now() . ".presensi_user_$userId.xlsx");
+        }
+
+
+        // // Mengelompokkan data berdasarkan user_id
+        // $presensiGrouped = $presensi->groupBy('user_id');
+
+        // // Melakukan perulangan untuk setiap kelompok data
+        // foreach ($presensiGrouped as $presensiPerUser) {
+        //     foreach ($presensiPerUser as $presensi) {
+        //         $presensi = $presensi;
+        //     }
+        // }
+
+
+        // $presensi = $presensi->where('opd_id', Auth::user()->opd_id)->orderBy('created_at', 'asc')->get();
+        // return Excel::download(new PresensiExport($presensi), Carbon::now() . '.presensi.xlsx');
     }
 }
