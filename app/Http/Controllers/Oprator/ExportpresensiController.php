@@ -46,7 +46,7 @@ class ExportpresensiController extends Controller
             }
         }
 
-        $presensi = $presensi->where('opd_id', Auth::user()->opd_id)->get();
+        $presensi = $presensi->where('opd_id', Auth::user()->opd_id)->orderBy('created_at', 'desc')->get();
         return Excel::download(new PresensiExport($presensi), Carbon::now() . '.presensi.xlsx');
     }
 }
