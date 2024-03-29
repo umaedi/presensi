@@ -32,6 +32,20 @@
             console.log("Service worker has been registered for scope: " + reg.scope);
         });
     }
+
+    async function transAjax(data) {
+        html = null;
+        data.headers = {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        await $.ajax(data).done(function(res) {
+                html = res;
+            })
+            .fail(function() {
+                return false;
+            })
+        return html
+    }
 </script>
 @stack('js')
 </html>
