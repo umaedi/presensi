@@ -365,7 +365,7 @@
                         Partisipasi Anda sudah berarti</span>
                 </div>
                 <div class="modal-footer">
-                <a href="https://forms.gle/xoeBhaQzQ1gmD56C6" class="btn btn-primary" id="survey">ISI SURVEY</a>
+                <a target="_blank" href="https://forms.gle/xoeBhaQzQ1gmD56C6" class="btn btn-primary" id="survey">ISI SURVEY</a>
                 </div>
             </div>
             </div>
@@ -385,9 +385,9 @@
             loadData();
 
             let survey = localStorage.getItem('survey');
-            // if(survey === null) {
-            //     $('#staticBackdrop').modal('show');
-            // }
+            if(survey === null) {
+                $('#staticBackdrop').modal('show');
+            }
 
             $('#getBulan').change(function() {
                 filterData();
