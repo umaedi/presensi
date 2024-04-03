@@ -385,10 +385,9 @@
             loadData();
 
             let survey = localStorage.getItem('survey');
-            console.log(survey);
-            if(survey === null) {
-                $('#staticBackdrop').modal('show');
-            }
+            // if(survey === null) {
+            //     $('#staticBackdrop').modal('show');
+            // }
 
             $('#getBulan').change(function() {
                 filterData();
