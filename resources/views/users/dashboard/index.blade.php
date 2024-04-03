@@ -355,8 +355,14 @@
                 <h5 class="modal-title" id="staticBackdropLabel">Isi Survey</h5>
                 </div>
                 <div class="modal-body">
-                <b>Izin ibu/bapak </b><br>
-                Mohon kiranya meluangkan waktu sebentar untuk mengisi <b class="fw-bold">Survei Media Yang Dibaca Pegawai Pemerintah Daerah Kabupaten Tulang Bawang</b>
+                <b>Assalamu'alaikum Bapak/Ibu sekalian,<br>
+                    Tabik Pun..🙏🏻</b><br><br>
+                    Untuk melihat posisi surat kabar cetak di lingkungan Pemerintah Kabupaten Tulang Bawang, Dinas Komunikasi dan Informatika Kabupaten Tulang Bawang mengajak Bapak / Ibu sekalian untuk mengikuti survei dengan mengklik tombol ISI SURVEY. </b><br><br>
+                    <b>Estimasi waktu yang dibutuhkan untuk pengisian +/- 1 menit saja.</b><br><br>
+                    <span class="font-italic">Ketemu gadis pribadinya genit<br>
+                        Boleh dilihat jangan masuk hati<br>
+                        Cukup luangkan waktu satu menit<br>
+                        Partisipasi Anda sudah berarti</span>
                 </div>
                 <div class="modal-footer">
                 <a href="https://forms.gle/xoeBhaQzQ1gmD56C6" class="btn btn-primary" id="survey">ISI SURVEY</a>
