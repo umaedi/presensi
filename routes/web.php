@@ -47,6 +47,9 @@ Route::middleware(['auth', 'webview'])->prefix('user')->group(function () {
 
     //web push notification
     Route::post('sent_token_to_server', Users\WebpushController::class);
+
+    //survey
+    Route::get('/survey', Users\SurveyController::class);
 });
 
 //route for oprator
