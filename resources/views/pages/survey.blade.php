@@ -6,21 +6,10 @@
         </div>
     </div>
     <script>
-        var iframe = document.getElementById('myIframe');
-        var urlSpan = document.getElementById('url_iframe');
-    
-        // Menambahkan event listener untuk event 'load'
-        iframe.addEventListener('load', function() {
-            // Mendapatkan URL saat ini dari <iframe>
-            var currentURL = iframe.contentWindow.location.href;
-    
-            // Mengecek apakah URL mengandung teks "formResponse?embedded=true"
-            if (currentURL.includes("formResponse")) {
-                window.location.href = '/user/dashboard';
-            } else {
-                // Menampilkan URL saat ini di dalam elemen <span>
-                urlSpan.textContent = currentURL;
-            }
+         let btn = document.querySelector('.l4V7wb');
+         btn.addEventListener('click', function() {
+            // Mengarahkan pengguna ke '/user/dashboard' saat tombol diklik
+            window.location.href = '/user/dashboard';
         });
     </script>
 @endsection
