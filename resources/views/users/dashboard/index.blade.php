@@ -365,7 +365,7 @@
                         Partisipasi Anda sudah berarti</span>
                 </div>
                 <div class="modal-footer">
-                <a target="_blank" href="https://forms.gle/xoeBhaQzQ1gmD56C6" class="btn btn-primary" id="survey">ISI SURVEY</a>
+                <a href="/user/survey" class="btn btn-primary" id="survey">ISI SURVEY</a>
                 </div>
             </div>
             </div>
