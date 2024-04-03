@@ -365,7 +365,7 @@
                         Partisipasi Anda sudah berarti</span>
                 </div>
                 <div class="modal-footer">
-                <a href="/user/survey" class="btn btn-primary" id="survey">ISI SURVEY</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKodnZwD4Nr5vlICNu2UBCyS0dbvMo37AEMJD3EIvHG4aEtQ/viewform?usp=sf_link" class="btn btn-primary" id="survey">ISI SURVEY</a>
                 </div>
             </div>
             </div>
@@ -384,7 +384,7 @@
         $(document).ready(function() {
             loadData();
 
-            localStorage.removeItem("survey");
+            // localStorage.removeItem("survey");
             let survey = localStorage.getItem('survey');
             if(survey === null) {
                 $('#staticBackdrop').modal('show');
