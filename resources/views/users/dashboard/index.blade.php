@@ -384,7 +384,7 @@
         $(document).ready(function() {
             loadData();
 
-            localStorage.removeItem("survey");
+            // localStorage.removeItem("survey");
             let survey = localStorage.getItem('survey');
             if(survey === null) {
                 $('#staticBackdrop').modal('show');
