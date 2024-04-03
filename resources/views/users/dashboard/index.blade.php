@@ -344,6 +344,28 @@
         </div>
         <!-- * DialogIconedInfo -->
 
+        {{-- survery modal --}}
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Isi Survey</h5>
+                </div>
+                <div class="modal-body">
+                <b>Izin ibu/bapak </b><br>
+                Mohon kiranya meluangkan waktu sebentar untuk mengisi <b class="fw-bold">Survei Media Yang Dibaca Pegawai Pemerintah Daerah Kabupaten Tulang Bawang</b>
+                </div>
+                <div class="modal-footer">
+                <a href="https://forms.gle/xoeBhaQzQ1gmD56C6" class="btn btn-primary" id="survey">ISI SURVEY</a>
+                </div>
+            </div>
+            </div>
+        </div>
+        {{-- end modal survey --}}
+
         {{-- modal selfi --}}
         @include('layouts.modal._modal')
     
@@ -356,9 +378,20 @@
         $(document).ready(function() {
             loadData();
 
+            let survey = localStorage.getItem('survey');
+            console.log(survey);
+            if(survey === null) {
+                $('#staticBackdrop').modal('show');
+            }
+
             $('#getBulan').change(function() {
                 filterData();
             });
+        });
+
+        //suervery
+        $('#survey').click(function() {
+            localStorage.setItem('survey', true);
         });
 
         function filterData() {
