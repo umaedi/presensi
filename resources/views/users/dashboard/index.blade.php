@@ -387,7 +387,7 @@
             localStorage.removeItem("survey");
             let survey = localStorage.getItem('survey');
             if(survey === null) {
-                // $('#staticBackdrop').modal('show');
+                $('#staticBackdrop').modal('show');
             }
 
             $('#getBulan').change(function() {
