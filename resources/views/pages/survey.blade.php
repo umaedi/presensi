@@ -11,8 +11,7 @@
           const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
           const submitButton = iframeDocument.querySelector('.freebirdFormviewerViewNavigationSubmitButton');
           submitButton.addEventListener('click', function() {
-            console.log('Submit button clicked!');
-            // Lakukan sesuatu ketika tombol submit ditekan
+            window.location.href = '/user/dashboard';
           });
         };
       </script>
