@@ -9,6 +9,7 @@
             <div class="col-md mb-4 mb-md-0">
                 <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#opratorModal">Tambah Pegawai</button>
                 <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#importPegawai">Import Pegawai</button>
+                <a href="/admin/export/user" class="btn btn-primary mb-3">Export Pegawai</a>
               <div class="card">
                   <h5 class="card-header">Pegawai</h5>
                   <div class="card-body">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Admin\ExportController;
 use Illuminate\Support\Facades\Route;
 
 //route login
@@ -118,6 +119,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     //import pegawai
     Route::post('/importuser', ImportuserController::class);
+    Route::get('/export/user', ExportController::class);
+
 
     //report
     Route::get('/presensi', [Admin\PresensiController::class, 'index']);
