@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Admin\ExportController;
 use Illuminate\Support\Facades\Route;
 
 //route login
@@ -11,7 +12,7 @@ Route::get('/privacy-policy', PrivacyController::class);
 Route::get('/notifikasi', Pages\NotifikasiController::class)->name('notifikasi');
 
 //route user
-Route::middleware(['auth', 'webview'])->prefix('user')->group(function () {
+Route::middleware(['auth'])->prefix('user')->group(function () {
     Route::get('/dashboard', Users\DashboardController::class);
 
     Route::get('/presensi', [Users\PersensiController::class, 'index']);
@@ -47,6 +48,9 @@ Route::middleware(['auth', 'webview'])->prefix('user')->group(function () {
 
     //web push notification
     Route::post('sent_token_to_server', Users\WebpushController::class);
+
+    //survey
+    Route::get('/survey', Users\SurveyController::class);
 });
 
 //route for oprator
@@ -115,6 +119,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     //import pegawai
     Route::post('/importuser', ImportuserController::class);
+    Route::get('/export/user', ExportController::class);
+
 
     //report
     Route::get('/presensi', [Admin\PresensiController::class, 'index']);

@@ -26,24 +26,18 @@ class UsersExport implements FromCollection, WithMapping, WithHeadings
     public function map($grades): array
     {
         return [
-            $grades->exam->title,
-            $grades->exam_session->title,
-            $grades->student->name,
-            $grades->exam->classroom->title,
-            $grades->exam->lesson->title,
-            $grades->grade,
+            $grades->nama,
+            $grades->email,
+            $grades->no_hp,
         ];
     }
 
     public function headings(): array
     {
         return [
-            'Ujian',
-            'Sesi',
-            'Nama Siswa',
-            'Kelas',
-            'Pelajaran',
-            'Nilai'
+            'NAMA',
+            'EMAIL',
+            'NO HP',
         ];
     }
 }
