@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Opd;
 
+use App\Models\Opd;
 use App\Models\Cuty;
 use App\Models\Absent;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Opd;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 
 class PegawaiController extends Controller
