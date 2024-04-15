@@ -385,10 +385,10 @@
             loadData();
 
             // localStorage.removeItem("survey");
-            let survey = localStorage.getItem('survey');
-            if(survey === null) {
-                $('#staticBackdrop').modal('show');
-            }
+            // let survey = localStorage.getItem('survey');
+            // if(survey === null) {
+            //     $('#staticBackdrop').modal('show');
+            // }
 
             $('#getBulan').change(function() {
                 filterData();
