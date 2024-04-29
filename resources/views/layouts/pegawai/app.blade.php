@@ -89,6 +89,24 @@
         var shutter = new Audio();
 
         function openCamera(status, lat, long) {
+            var waktu = new Date();
+            var device = localStorage.get('device');
+
+            waktu.setHours(14);
+            waktu.setMinutes(0);
+            waktu.setSeconds(0);
+
+            if(device === 1) {
+                if(waktu.getHours() < 14) {
+                    swal({
+                    title: 'Oops!',
+                    text: 'Mohon maaf satu device satu akun!',
+                    icon: 'error',
+                    });
+                return;
+                }
+            }
+
             //productoion
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
@@ -280,8 +298,10 @@
 
                 if(res.metadata == 'presensi_pagi') {
                     localStorage.removeItem('info_proses');
+                    localStorage.setItem('device' 1);
                 }else {
                     localStorage.setItem('info_proses', 'presensi sore sedang diproses');
+                    localStorage.setItem('device' 0);
                 }
 
                 swal({

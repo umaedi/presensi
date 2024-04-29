@@ -138,13 +138,22 @@
             <div class="card-body">
                 @if (auth()->user()->role == 'admin')
                 <button onclick="redirect('/admin')" class="btn-submit btn btn-primary mr-1 btn-lg btn-block">Kelola Pegawai</button>
-                @elseif(auth()->user()->role == 'oprator')
-                <button onclick="redirect('/oprator')" class="btn-submit btn btn-primary mr-1 btn-lg btn-block">Kelola Pegawai</button>
-                @endif
-                <form action="/logout" method="POST">
+                <form action="/admin/logout" method="POST">
                     @csrf
                     <button id="btn_password" type="submit" class="btn-submit btn btn-warning mr-1 btn-lg btn-block mt-2">Keluar</button>
                 </form>
+                @elseif(auth()->user()->role == 'oprator')
+                <button onclick="redirect('/oprator')" class="btn-submit btn btn-primary mr-1 btn-lg btn-block">Kelola Pegawai</button>
+                <form action="/oprator/logout" method="POST">
+                    @csrf
+                    <button id="btn_password" type="submit" class="btn-submit btn btn-warning mr-1 btn-lg btn-block mt-2">Keluar</button>
+                </form>
+                @else 
+                <form action="/user/logout" method="POST">
+                    @csrf
+                    <button id="btn_password" type="submit" class="btn-submit btn btn-warning mr-1 btn-lg btn-block mt-2">Keluar</button>
+                </form>
+                @endif
             </div>
         </div>
     </div>

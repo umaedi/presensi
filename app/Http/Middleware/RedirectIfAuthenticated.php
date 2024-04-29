@@ -21,18 +21,18 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        if (!isset($request->webview)) {
-            $user = Auth::user();
-            if ($user) {
-                $data = [
-                    'nip'   => $user->nip,
-                    'nama'  => $user->nama,
-                    'opd'   => $user->opd->nama_opd,
-                    'jabatan'   => $user->jabatan,
-                ];
-                Webview::create($data);
-            }
-        }
+        // if (!isset($request->webview)) {
+        //     $user = Auth::user();
+        //     if ($user) {
+        //         $data = [
+        //             'nip'   => $user->nip,
+        //             'nama'  => $user->nama,
+        //             'opd'   => $user->opd->nama_opd,
+        //             'jabatan'   => $user->jabatan,
+        //         ];
+        //         Webview::create($data);
+        //     }
+        // }
 
         Cache::put($request->email, $request->key, now()->addDays(90));
 

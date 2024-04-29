@@ -12,7 +12,7 @@ Route::get('/privacy-policy', PrivacyController::class);
 Route::get('/notifikasi', Pages\NotifikasiController::class)->name('notifikasi');
 
 //route user
-Route::middleware(['auth'])->prefix('user')->group(function () {
+Route::middleware(['auth', 'webview'])->prefix('user')->group(function () {
     Route::get('/dashboard', Users\DashboardController::class);
 
     Route::get('/presensi', [Users\PersensiController::class, 'index']);
@@ -127,4 +127,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     //log
     Route::get('/log', Admin\LogController::class);
+
+    //logout
+    Route::post('/admin/logout', Auth\LogoutController::class);
 });
