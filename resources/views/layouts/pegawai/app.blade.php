@@ -89,21 +89,17 @@
         var shutter = new Audio();
 
         function openCamera(status, lat, long) {
-            var waktu = new Date();
-            var device = localStorage.get('device');
+            var device = localStorage.getItem('device');
+            var waktu = new Date().getHours();
 
-            waktu.setHours(14);
-            waktu.setMinutes(0);
-            waktu.setSeconds(0);
-
-            if(device === 1) {
-                if(waktu.getHours() < 14) {
+            if(device == 1) {
+                if(waktu < 14) {
                     swal({
                     title: 'Oops!',
-                    text: 'Mohon maaf satu device satu akun!',
+                    text: 'Satu HP hanya bisa digunakan satu akun!',
                     icon: 'error',
                     });
-                return;
+                    return;
                 }
             }
 
@@ -298,10 +294,10 @@
 
                 if(res.metadata == 'presensi_pagi') {
                     localStorage.removeItem('info_proses');
-                    localStorage.setItem('device' 1);
+                    localStorage.setItem('device', 1);
                 }else {
                     localStorage.setItem('info_proses', 'presensi sore sedang diproses');
-                    localStorage.setItem('device' 0);
+                    localStorage.setItem('device', 0);
                 }
 
                 swal({
