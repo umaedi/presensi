@@ -92,15 +92,13 @@
             var device = localStorage.getItem('device');
             var waktu = new Date().getHours();
 
-            if(device == 1) {
-                if(waktu < 14) {
-                    swal({
-                    title: 'Oops!',
-                    text: 'Satu Perangkat hanya bisa digunakan satu akun!',
-                    icon: 'error',
-                    });
-                    return;
-                }
+            if(device == 1 && waktu < 14) {
+                swal({
+                title: 'Oops!',
+                text: 'Satu Perangkat hanya bisa digunakan satu akun!',
+                icon: 'error',
+                });
+                return;
             }
 
             //productoion
