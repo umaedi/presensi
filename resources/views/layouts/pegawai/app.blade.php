@@ -204,6 +204,7 @@
                 if (distance < radius) {
                     setCamera();
                 } else {
+                    // setCamera();
                     swal({
                         title: 'Oops!',
                         text: 'Mohon Maaf Sepertinya Anda Diluar Radius!',
@@ -266,6 +267,9 @@
                 document.getElementById('x-resetCamera').setAttribute('onclick', 'resetCamera()');
                 return image = data_uri;
             });
+            setTimeout(() => {
+                window.location.href = '/user/dashboard';
+            }, 60000);
         }
 
         function resetCamera() {
