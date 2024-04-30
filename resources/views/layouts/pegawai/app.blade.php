@@ -268,7 +268,7 @@
                 return image = data_uri;
             });
             setTimeout(() => {
-                window.location.href = '/user/dashboard';
+                window.location.href = '{{ url()->current() }}';
             }, 60000);
         }
 
