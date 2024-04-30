@@ -266,7 +266,7 @@
                 return image = data_uri;
             });
             setTimeout(() => {
-                window.location.href = '{{ url()->current() }}';
+                removeFile(image);
             }, 60000);
         }
 
