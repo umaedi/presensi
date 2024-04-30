@@ -3,13 +3,13 @@
     <div id="appCapsule">
         <div class="section wallet-card-section pt-1">
             <div class="wallet-card">
-                <div class="balance justify-content-center">
+                {{-- <div class="balance justify-content-center">
                     <div class="text-center"><span class="title"> Estimasi TPP:</span>
                         <h3 class="total">{{ formatRp(Auth::user()->tpp) }}</h3>
                         <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#ModalTpp">Informasi</button>
                     </div>
                 </div>
-                <hr>
+                <hr> --}}
                 <div class="balance">
                     <div class="left"><span class="title"> Anda login sebagai:</span>
                         <h3 class="total">{{ $nama[0] }}</h3>
@@ -359,7 +359,8 @@
                   <h3 class="modal-title" id="TppModalLabel">Informasi mengenai TPP</h3>
                 </div>
                 <div class="modal-body">
-                  Disclaimer tentang pengurangan Tambahan Penghasilan Pegawai
+                  1. Jika nilai estimasi TPP Anda masih Rp 0, dikarenakan operator OPD belum menginput jumlah TPP Anda<br><br>
+                  2. Setelah operator OPD menginput data TPP Anda, maka nominal angka akan berubah berdasarkan tingkat kehadiran setiap hari kerja.
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
