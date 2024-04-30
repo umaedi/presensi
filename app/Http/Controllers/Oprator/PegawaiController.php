@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Oprator;
 use App\Http\Controllers\Controller;
 use App\Models\Statuspegawai;
 use App\Services\PresensiService;
+use App\Services\StatuspegawaiService;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -13,10 +14,12 @@ class PegawaiController extends Controller
 {
     protected $user;
     protected $presensi;
-    public function __construct(UserService $userService, PresensiService $presensiService)
+    protected $status;
+    public function __construct(UserService $userService, PresensiService $presensiService, StatuspegawaiService $status)
     {
         $this->user = $userService;
         $this->presensi = $presensiService;
+        $this->status = $status;
     }
 
     public function index()
@@ -72,6 +75,7 @@ class PegawaiController extends Controller
 
         $data['title'] = 'Detail data pegawai';
         $data['pegawai'] = $this->user->show($id);
+        $data['status'] = $this->status->Query()->where('opd_id', Auth::user()->opd_id)->get();
         return view('oprator.users.show', $data);
     }
 
@@ -86,6 +90,7 @@ class PegawaiController extends Controller
             'email' => 'required|string|max:255|unique:users,email,' . $user->id,
             'password' => 'max:255',
             'no_hp' => 'required|string|max:100',
+            'tpp'   => 'string|max:100'
         ]);
 
         if ($validator->fails()) {
@@ -93,6 +98,9 @@ class PegawaiController extends Controller
         }
 
         $data = \request()->except('_token', '_method');
+        $tpp = preg_replace('/[^0-9]/', '', $data['tpp']);
+        $data['tpp'] = $tpp;
+
         $data['opd_id'] = $user->opd_id;
         if (\request()->password) {
             $data['password'] =  bcrypt(request()->password);

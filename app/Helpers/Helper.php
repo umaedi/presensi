@@ -17,6 +17,13 @@ if (!function_exists('saveLogs')) {
     }
 }
 
+if (!function_exists('formatRp')) {
+    function formatRp($number)
+    {
+        return 'Rp ' . number_format($number, 0, ',', '.');
+    }
+}
+
 if (!function_exists('Usercount')) {
     function Usercount()
     {

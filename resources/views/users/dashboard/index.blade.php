@@ -3,6 +3,13 @@
     <div id="appCapsule">
         <div class="section wallet-card-section pt-1">
             <div class="wallet-card">
+                <div class="balance justify-content-center">
+                    <div class="text-center"><span class="title"> Estimasi TPP:</span>
+                        <h3 class="total">{{ formatRp(Auth::user()->tpp) }}</h3>
+                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#ModalTpp">Informasi</button>
+                    </div>
+                </div>
+                <hr>
                 <div class="balance">
                     <div class="left"><span class="title"> Anda login sebagai:</span>
                         <h3 class="total">{{ $nama[0] }}</h3>
@@ -344,33 +351,23 @@
         </div>
         <!-- * DialogIconedInfo -->
 
-        {{-- survery modal --}}
-
-
-        <!-- Modal -->
-        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <!-- Modal informasi TPP-->
+        <div class="modal fade" id="ModalTpp" tabindex="-1" aria-labelledby="TppModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+              <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Isi Survey</h5>
+                  <h3 class="modal-title" id="TppModalLabel">Informasi mengenai TPP</h3>
                 </div>
                 <div class="modal-body">
-                <b>Assalamu'alaikum Bapak/Ibu sekalian,<br>
-                    Tabik Pun..🙏🏻</b><br><br>
-                    Untuk melihat posisi surat kabar cetak di lingkungan Pemerintah Kabupaten Tulang Bawang, Dinas Komunikasi dan Informatika Kabupaten Tulang Bawang mengajak Bapak / Ibu sekalian untuk mengikuti survei dengan mengklik tombol ISI SURVEY. </b><br><br>
-                    <b>Estimasi waktu yang dibutuhkan untuk pengisian +/- 1 menit saja.</b><br><br>
-                    <span class="font-italic">Ketemu gadis pribadinya genit<br>
-                        Boleh dilihat jangan masuk hati<br>
-                        Cukup luangkan waktu satu menit<br>
-                        Partisipasi Anda sudah berarti</span>
+                  Disclaimer tentang pengurangan Tambahan Penghasilan Pegawai
                 </div>
                 <div class="modal-footer">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKodnZwD4Nr5vlICNu2UBCyS0dbvMo37AEMJD3EIvHG4aEtQ/viewform?usp=sf_link" class="btn btn-primary" id="survey">ISI SURVEY</a>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                 </div>
+              </div>
             </div>
-            </div>
-        </div>
-        {{-- end modal survey --}}
+          </div>
+        {{-- end modal informasi TPP --}}
 
         {{-- modal selfi --}}
         @include('layouts.modal._modal')

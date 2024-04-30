@@ -96,7 +96,7 @@
                 if(waktu < 14) {
                     swal({
                     title: 'Oops!',
-                    text: 'Satu HP hanya bisa digunakan satu akun!',
+                    text: 'Satu Perangkat hanya bisa digunakan satu akun!',
                     icon: 'error',
                     });
                     return;
