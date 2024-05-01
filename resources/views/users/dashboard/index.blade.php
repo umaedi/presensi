@@ -3,13 +3,13 @@
     <div id="appCapsule">
         <div class="section wallet-card-section pt-1">
             <div class="wallet-card">
-                {{-- <div class="balance justify-content-center">
+                <div class="balance justify-content-center">
                     <div class="text-center"><span class="title"> Estimasi TPP:</span>
                         <h3 class="total">{{ formatRp(Auth::user()->tpp) }}</h3>
                         <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#ModalTpp">Informasi</button>
                     </div>
                 </div>
-                <hr> --}}
+                <hr>
                 <div class="balance">
                     <div class="left"><span class="title"> Anda login sebagai:</span>
                         <h3 class="total">{{ $nama[0] }}</h3>

@@ -118,8 +118,29 @@ class PersensiController extends Controller
 
             if ($currentTime > $jamMasuk) {
                 $telat = $currentTime->diff($jamMasuk);
-                //
-                $status = 'Terlambat ' . $telat->format('%H:%I:%S');
+
+            //hitung tpp
+            $tpp_pegawai = Auth::user()->tpp;
+            if ($tpp_pegawai !== '0') {
+                // Mendapatkan total keterlambatan dalam menit
+                $terlambat = Carbon::createFromTimeString(env('JAM_MASUK'));
+                $total_terlambat = $currentTime->diffInMinutes($terlambat);
+
+                // Menghitung potongan berdasarkan rentang keterlambatan
+                if ($total_terlambat >= 1 && $total_terlambat <= 30) {
+                    $potongan_tambahan = 0.005 * $tpp_pegawai; // 0.50% potongan
+                } elseif ($total_terlambat >= 31 && $total_terlambat <= 60) {
+                    $potongan_tambahan = 0.01 * $tpp_pegawai; // 1% potongan
+                } elseif ($total_terlambat >= 61 && $total_terlambat <= 90) {
+                    $potongan_tambahan = 0.0125 * $tpp_pegawai; // 1.25% potongan
+                } elseif ($total_terlambat >= 91 && $total_terlambat <= 120) {
+                    $potongan_tambahan = 0.015 * $tpp_pegawai; // 1.50% potongan
+                }
+            }
+            
+            // Kurangi total potongan dari TPP untuk mendapatkan TPP akhir setelah potongan
+            $tpp_akhir = $tpp_pegawai - $potongan_tambahan;
+            $status = 'Terlambat ' . $telat->format('%H:%I:%S');
             } else {
                 $status = 'Tepat waktu';
             }
@@ -154,6 +175,7 @@ class PersensiController extends Controller
             $data['jam_masuk']  = date('H:i:s');
             $data['lat_long_masuk']  = $request->latLong;
             $data['photo_masuk']     = $photo_masuk;
+            $data['tpp'] = $tpp_akhir;
 
             try {
                 // dispatch(new PresensiJob($data));
