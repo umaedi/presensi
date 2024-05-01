@@ -119,7 +119,7 @@
                     @endisset
                 </div>
             </div>
-            @if (Auth::user()->opd_id == '20')
+            @if (Auth::user()->opd_id == '1')
             <div class="wallet-card mt-2">
                 <div class="balance justify-content-center">
                     <div class="text-center"><span class="title"> Estimasi TPP:</span>
@@ -364,6 +364,9 @@
                 <div class="modal-body">
                   1. Jika nilai estimasi TPP Anda masih Rp 0, dikarenakan operator OPD belum menginput jumlah TPP Anda<br><br>
                   2. Setelah operator OPD menginput data TPP Anda, maka nominal angka akan berubah berdasarkan tingkat kehadiran setiap hari kerja.
+                  <br><br>
+                  <b class="fw-bold">Catatan:</b><br>
+                  Jika terdapat ketidak sesuaian pengurangan TPP oleh sistem, silakan menghubungi Fadry Secondaru
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

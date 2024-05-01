@@ -83,6 +83,28 @@ class PersensiController extends Controller
             // Memeriksa apakah waktu saat ini lebih kecil dari $batasWaktu
             if ($currentTime->lessThan($batasWaktu)) {
                 // Kondisi jika waktu saat ini lebih kecil dari 15:30:00
+
+                //hitung tpp
+                $tpp_pegawai = Auth::user()->tpp;
+                if ($tpp_pegawai !== '0') {
+                    // Mendapatkan total keterlambatan dalam menit
+                    $pulangLebihhAwal = $currentTime->diffInMinutes($batasWaktu);
+
+                // Menghitung potongan berdasarkan rentang keterlambatan
+                if ($pulangLebihhAwal >= 1 && $pulangLebihhAwal <= 30) {
+                    $potongan_tambahan = 0.005 * $tpp_pegawai; // 0.50% potongan
+                } elseif ($pulangLebihhAwal >= 31 && $pulangLebihhAwal <= 60) {
+                    $potongan_tambahan = 0.01 * $tpp_pegawai; // 1% potongan
+                } elseif ($pulangLebihhAwal >= 61 && $pulangLebihhAwal <= 90) {
+                    $potongan_tambahan = 0.0125 * $tpp_pegawai; // 1.25% potongan
+                } elseif ($pulangLebihhAwal >= 91 && $pulangLebihhAwal <= 120) {
+                    $potongan_tambahan = 0.015 * $tpp_pegawai; // 1.50% potongan
+                }
+            }
+            
+            // Kurangi total potongan dari TPP untuk mendapatkan TPP akhir setelah potongan
+            $tpp_akhir = $tpp_pegawai - $potongan_tambahan;
+
                 $statusPulang = 'Lebih awal ' . date('H:i:s');
             } else {
                 // Kondisi jika waktu saat ini sama atau lebih besar dari 15:30:00
@@ -96,6 +118,7 @@ class PersensiController extends Controller
             $data['lat_long_pulang']  = $request->latLong;
             $data['photo_pulang']     = $photo_pulang;
             $data['status_pulang']     = $statusPulang;
+            $data['tpp'] = $tpp_akhir;
 
             try {
                 // dispatch(new PresensiupdateJob($presensiUpdate, $data));
