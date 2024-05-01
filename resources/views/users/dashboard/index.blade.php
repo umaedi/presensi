@@ -3,6 +3,7 @@
     <div id="appCapsule">
         <div class="section wallet-card-section pt-1">
             <div class="wallet-card">
+                @if (Auth::user()->opd_id == '20')
                 <div class="balance justify-content-center">
                     <div class="text-center"><span class="title"> Estimasi TPP:</span>
                         <h3 class="total">{{ formatRp(Auth::user()->tpp) }}</h3>
@@ -10,6 +11,7 @@
                     </div>
                 </div>
                 <hr>
+                @endif
                 <div class="balance">
                     <div class="left"><span class="title"> Anda login sebagai:</span>
                         <h3 class="total">{{ $nama[0] }}</h3>
