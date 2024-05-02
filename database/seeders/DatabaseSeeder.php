@@ -72,14 +72,27 @@ class DatabaseSeeder extends Seeder
         }
 
         \App\Models\User::create([
-            'opd_id'    => 1,
+            'opd_id'    => 20,
             'nama'      => 'dev',
             'nip'       => '12345678910111213141516',
             'jabatan'   => 'Kepala Pengembang',
             'unit_organisasi'   => 'Bidang Pengembangan Teknologi',
             'email'     => 'devkh@gmail.com',
             'no_hp'     => '085741492045',
-            'role'      => 'user',
+            'role'      => 'oprator',
+            'status'     => 'active',
+            'password'  => bcrypt('devkh123'),
+        ]);
+
+        \App\Models\User::create([
+            'opd_id'    => 20,
+            'nama'      => 'dev',
+            'nip'       => '12345678910111213141516',
+            'jabatan'   => 'Kepala Pengembang',
+            'unit_organisasi'   => 'Bidang Pengembangan Teknologi',
+            'email'     => 'dev@gmail.com',
+            'no_hp'     => '085741492045',
+            'role'      => 'oprator',
             'status'     => 'active',
             'password'  => bcrypt('devkh123'),
         ]);

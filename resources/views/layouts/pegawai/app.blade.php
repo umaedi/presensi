@@ -87,18 +87,23 @@
         var image = "";
         var status = "";
         var shutter = new Audio();
+        var cureentDate = new Date();
+        var userId = "{{ auth()->user()->id }}"
+
 
         function openCamera(status, lat, long) {
-            var device = localStorage.getItem('device');
-            var waktu = new Date().getHours();
+            var perangkatId = localStorage.getItem('perangkatId');
+            var presensiDate = localStorage.getItem('presensiDate');
 
-            if(device == 1 && waktu < 14) {
-                swal({
-                title: 'Oops!',
-                text: 'Satu Perangkat hanya bisa digunakan satu akun!',
-                icon: 'error',
-                });
+            if(presensiDate !== "" && presensiDate == cureentDate.getDate()) {
+                if(perangkatId !== userId) {
+                    swal({
+                    title: 'Oops!',
+                    text: 'Satu Perangkat hanya bisa digunakan satu akun!',
+                    icon: 'error',
+                    });
                 return;
+                }
             }
 
             //productoion
@@ -294,12 +299,12 @@
             await transAjax(param).then((res) => {
                 loadingsubmit(false);
 
-                if(res.metadata == 'presensi_pagi') {
+                if(res.metadata.presensi_pagi == true) {
                     localStorage.removeItem('info_proses');
-                    localStorage.setItem('device', 1);
+                    localStorage.setItem('perangkatId', res.metadata.perangkatId);
+                    localStorage.setItem('presensiDate', cureentDate.getDate())
                 }else {
                     localStorage.setItem('info_proses', 'presensi sore sedang diproses');
-                    localStorage.setItem('device', 0);
                 }
 
                 swal({

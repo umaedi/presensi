@@ -94,15 +94,15 @@ class PersensiController extends Controller
 
                     // Menghitung potongan berdasarkan rentang keterlambatan
                     if ($pulangLebihhAwal >= 1 && $pulangLebihhAwal <= 30) {
-                        $potongan_tambahan = 0.005 * $tpp_pegawai; // 0.50% potongan
+                        $potongan_tpp = 0.5 /100 * $tpp_pegawai; // 0.50% potongan
                     } elseif ($pulangLebihhAwal >= 31 && $pulangLebihhAwal <= 60) {
-                        $potongan_tambahan = 0.01 * $tpp_pegawai; // 1% potongan
+                        $potongan_tpp = 1 / 100 * $tpp_pegawai; // 1% potongan
                     } elseif ($pulangLebihhAwal >= 61 && $pulangLebihhAwal <= 90) {
-                        $potongan_tambahan = 0.0125 * $tpp_pegawai; // 1.25% potongan
+                        $potongan_tpp = 1.25 / 100 * $tpp_pegawai; // 1.25% potongan
                     } elseif ($pulangLebihhAwal >= 91 && $pulangLebihhAwal <= 120) {
-                        $potongan_tambahan = 0.015 * $tpp_pegawai; // 1.50% potongan
+                        $potongan_tpp = 1.5 / 100 * $tpp_pegawai; // 1.50% potongan
                     }
-                    $tpp_akhir = $tpp_pegawai - $potongan_tambahan;
+                    $tpp_akhir = $tpp_pegawai - $potongan_tpp;
                 }else {
                     $tpp_akhir = '0';
                 }
@@ -121,7 +121,9 @@ class PersensiController extends Controller
             $data['lat_long_pulang']  = $request->latLong;
             $data['photo_pulang']     = $photo_pulang;
             $data['status_pulang']     = $statusPulang;
-            $data['tpp'] = $tpp_akhir;
+
+            //update tpp
+            $user->update(['tpp' => $tpp_akhir]);
 
             try {
                 // dispatch(new PresensiupdateJob($presensiUpdate, $data));
@@ -155,16 +157,18 @@ class PersensiController extends Controller
 
                     // Menghitung potongan berdasarkan rentang keterlambatan
                     if ($total_terlambat >= 1 && $total_terlambat <= 30) {
-                        $potongan_tambahan = 0.005 * $tpp_pegawai; // 0.50% potongan
+                        $potongan_tpp = 0.5 / 100 * $tpp_pegawai; // 0.50% potongan
                     } elseif ($total_terlambat >= 31 && $total_terlambat <= 60) {
-                        $potongan_tambahan = 0.01 * $tpp_pegawai; // 1% potongan
+                        $potongan_tpp = 1 / 100 * $tpp_pegawai; // 1% potongan
                     } elseif ($total_terlambat >= 61 && $total_terlambat <= 90) {
-                        $potongan_tambahan = 0.0125 * $tpp_pegawai; // 1.25% potongan
+                        $potongan_tpp = 1.25 / 100 * $tpp_pegawai; // 1.25% potongan
                     } elseif ($total_terlambat >= 91 && $total_terlambat <= 120) {
-                        $potongan_tambahan = 0.015 * $tpp_pegawai; // 1.50% potongan
+                        $potongan_tpp = 1.5 / 100 * $tpp_pegawai; // 1.50% potongan
+                    }else {
+                        $potongan_tpp = 1.5 / 100 * $tpp_pegawai;
                     }
                     // Kurangi total potongan dari TPP untuk mendapatkan TPP akhir setelah potongan
-                    $tpp_akhir = $tpp_pegawai - $potongan_tambahan;
+                    $tpp_akhir = $tpp_pegawai - $potongan_tpp;
                 }else {
                     $tpp_akhir = '0';
                 }
@@ -209,7 +213,9 @@ class PersensiController extends Controller
             $data['jam_masuk']  = date('H:i:s');
             $data['lat_long_masuk']  = $request->latLong;
             $data['photo_masuk']     = $photo_masuk;
-            $data['tpp'] = $tpp_akhir;
+            
+            //update tpp
+            $user->update(['tpp' => $tpp_akhir]);
 
             try {
                 // dispatch(new PresensiJob($data));
@@ -225,7 +231,11 @@ class PersensiController extends Controller
             //clear cache
             Cache::forget('table_dashboard_' . Auth::user()->id);
             Cache::forget('hadir_' . Auth::user()->id);
-            return $this->success(Auth::user()->id, 'Anda Berhasil Mengisi Presensi Pagi');
+            $data = [
+                'presensi_pagi' => true,
+                'perangkatId'   => $user->id
+            ];
+            return $this->success($data, 'Anda Berhasil Mengisi Presensi Pagi');
         }
     }
 
