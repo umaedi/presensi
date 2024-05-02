@@ -119,7 +119,7 @@
                     @endisset
                 </div>
             </div>
-            @if (Auth::user()->opd_id == '1')
+            @if (Auth::user()->opd_id == '20')
             <div class="wallet-card mt-2">
                 <div class="balance justify-content-center">
                     <div class="text-center"><span class="title"> Estimasi TPP:</span>
