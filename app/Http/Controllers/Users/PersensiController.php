@@ -109,6 +109,7 @@ class PersensiController extends Controller
             } else {
                 // Kondisi jika waktu saat ini sama atau lebih besar dari 15:30:00
                 $statusPulang = 'Tepat waktu';
+                $tpp_akhir = Auth::user()->tpp;
             }
 
             $data['opd_id']     = $user->opd_id;
@@ -166,6 +167,7 @@ class PersensiController extends Controller
             $status = 'Terlambat ' . $telat->format('%H:%I:%S');
             } else {
                 $status = 'Tepat waktu';
+                $tpp_akhir = Auth::user()->tpp;
             }
 
             $data = $request->except('_token');
