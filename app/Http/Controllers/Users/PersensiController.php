@@ -32,6 +32,11 @@ class PersensiController extends Controller
 
     public function store(Request $request)
     {
+        //cek device
+        if(Auth::user()->id !== $request->device) {
+            return $this->error('Satu Perangkat hanya bisa digunakan satu akun!');
+        }
+
         $user = Auth::user();
         $presensi = $this->presensi->Query()->where('user_id', $user->id)->latest()->first();
 
@@ -162,14 +167,14 @@ class PersensiController extends Controller
                     } elseif ($total_terlambat >= 91 && $total_terlambat <= 120) {
                         $potongan_tambahan = 0.015 * $tpp_pegawai; // 1.50% potongan
                     }
+                    // Kurangi total potongan dari TPP untuk mendapatkan TPP akhir setelah potongan
+                    $tpp_akhir = $tpp_pegawai - $potongan_tambahan;
                 }
                 
-                // Kurangi total potongan dari TPP untuk mendapatkan TPP akhir setelah potongan
-                $tpp_akhir = $tpp_pegawai - $potongan_tambahan;
             }else {
                 $tpp_akhir = Auth::user()->tpp;
             }
-            
+
             $status = 'Terlambat ' . $telat->format('%H:%I:%S');
             } else {
                 $status = 'Tepat waktu';
@@ -222,7 +227,7 @@ class PersensiController extends Controller
             //clear cache
             Cache::forget('table_dashboard_' . Auth::user()->id);
             Cache::forget('hadir_' . Auth::user()->id);
-            return $this->success('presensi_pagi', 'Anda Berhasil Mengisi Presensi Pagi');
+            return $this->success(Auth::user()->id, 'Anda Berhasil Mengisi Presensi Pagi');
         }
     }
 

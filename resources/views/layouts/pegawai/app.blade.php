@@ -90,9 +90,10 @@
 
         function openCamera(status, lat, long) {
             var device = localStorage.getItem('device');
+            var deviceId = "{{ Auth::user()->id }}";
             var waktu = new Date().getHours();
 
-            if(device == 1 && waktu < 14) {
+            if(device !== deviceId && waktu < 14) {
                 swal({
                 title: 'Oops!',
                 text: 'Satu Perangkat hanya bisa digunakan satu akun!',
@@ -281,25 +282,26 @@
         }
         async function absenStore() {
             $('#x-action').addClass('d-none');
+            var device = localStorage.getItem('device');
             var param = {
                 method: 'POST',
                 url: _url,
                 data: {
                     latLong: latLong,
                     file: image,
+                    device: device
                 }
             }
 
             loadingsubmit(true);
             await transAjax(param).then((res) => {
                 loadingsubmit(false);
-
                 if(res.metadata == 'presensi_pagi') {
                     localStorage.removeItem('info_proses');
-                    localStorage.setItem('device', 1);
+                    localStorage.setItem('device', res.metadata);
                 }else {
                     localStorage.setItem('info_proses', 'presensi sore sedang diproses');
-                    localStorage.setItem('device', 0);
+                    localStorage.setItem('device', res.metadata);
                 }
 
                 swal({
