@@ -101,6 +101,8 @@ class PersensiController extends Controller
                         $potongan_tpp = 1.25 / 100 * $tpp_pegawai; // 1.25% potongan
                     } elseif ($pulangLebihhAwal >= 91 && $pulangLebihhAwal <= 120) {
                         $potongan_tpp = 1.5 / 100 * $tpp_pegawai; // 1.50% potongan
+                    }else {
+                        $potongan_tpp = 0;
                     }
                     $tpp_akhir = $tpp_pegawai - $potongan_tpp;
                 }else {
