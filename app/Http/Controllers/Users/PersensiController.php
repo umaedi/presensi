@@ -108,6 +108,7 @@ class PersensiController extends Controller
                 }
             }
                 $statusPulang = 'Lebih awal ' . date('H:i:s');
+                $tpp_akhir = Auth::user()->tpp;
             } else {
                 // Kondisi jika waktu saat ini sama atau lebih besar dari 15:30:00
                 $statusPulang = 'Tepat waktu';
