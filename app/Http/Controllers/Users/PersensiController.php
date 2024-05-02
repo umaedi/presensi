@@ -84,27 +84,28 @@ class PersensiController extends Controller
             if ($currentTime->lessThan($batasWaktu)) {
                 // Kondisi jika waktu saat ini lebih kecil dari 15:30:00
 
-                //hitung tpp
-                $tpp_pegawai = Auth::user()->tpp;
-                if ($tpp_pegawai !== '0') {
-                    // Mendapatkan total keterlambatan dalam menit
-                    $pulangLebihhAwal = $currentTime->diffInMinutes($batasWaktu);
+                if(Auth::user()->opd_id == '20') {
+                    //hitung tpp
+                    $tpp_pegawai = Auth::user()->tpp;
+                    if ($tpp_pegawai !== '0') {
+                        // Mendapatkan total keterlambatan dalam menit
+                        $pulangLebihhAwal = $currentTime->diffInMinutes($batasWaktu);
 
-                // Menghitung potongan berdasarkan rentang keterlambatan
-                if ($pulangLebihhAwal >= 1 && $pulangLebihhAwal <= 30) {
-                    $potongan_tambahan = 0.005 * $tpp_pegawai; // 0.50% potongan
-                } elseif ($pulangLebihhAwal >= 31 && $pulangLebihhAwal <= 60) {
-                    $potongan_tambahan = 0.01 * $tpp_pegawai; // 1% potongan
-                } elseif ($pulangLebihhAwal >= 61 && $pulangLebihhAwal <= 90) {
-                    $potongan_tambahan = 0.0125 * $tpp_pegawai; // 1.25% potongan
-                } elseif ($pulangLebihhAwal >= 91 && $pulangLebihhAwal <= 120) {
-                    $potongan_tambahan = 0.015 * $tpp_pegawai; // 1.50% potongan
+                    // Menghitung potongan berdasarkan rentang keterlambatan
+                    if ($pulangLebihhAwal >= 1 && $pulangLebihhAwal <= 30) {
+                        $potongan_tambahan = 0.005 * $tpp_pegawai; // 0.50% potongan
+                    } elseif ($pulangLebihhAwal >= 31 && $pulangLebihhAwal <= 60) {
+                        $potongan_tambahan = 0.01 * $tpp_pegawai; // 1% potongan
+                    } elseif ($pulangLebihhAwal >= 61 && $pulangLebihhAwal <= 90) {
+                        $potongan_tambahan = 0.0125 * $tpp_pegawai; // 1.25% potongan
+                    } elseif ($pulangLebihhAwal >= 91 && $pulangLebihhAwal <= 120) {
+                        $potongan_tambahan = 0.015 * $tpp_pegawai; // 1.50% potongan
+                    }
+                    $tpp_akhir = $tpp_pegawai - $potongan_tambahan;
+                }else {
+                    $tpp_akhir = Auth::user()->tpp;
                 }
             }
-            
-            // Kurangi total potongan dari TPP untuk mendapatkan TPP akhir setelah potongan
-            $tpp_akhir = $tpp_pegawai - $potongan_tambahan;
-
                 $statusPulang = 'Lebih awal ' . date('H:i:s');
             } else {
                 // Kondisi jika waktu saat ini sama atau lebih besar dari 15:30:00
@@ -143,27 +144,32 @@ class PersensiController extends Controller
             if ($currentTime > $jamMasuk) {
                 $telat = $currentTime->diff($jamMasuk);
 
-            //hitung tpp
-            $tpp_pegawai = Auth::user()->tpp;
-            if ($tpp_pegawai !== '0') {
-                // Mendapatkan total keterlambatan dalam menit
-                $terlambat = Carbon::createFromTimeString(env('JAM_MASUK'));
-                $total_terlambat = $currentTime->diffInMinutes($terlambat);
+            if(Auth::user()->opd_id == '20') {
+                //hitung tpp
+                $tpp_pegawai = Auth::user()->tpp;
+                if ($tpp_pegawai !== '0') {
+                    // Mendapatkan total keterlambatan dalam menit
+                    $terlambat = Carbon::createFromTimeString(env('JAM_MASUK'));
+                    $total_terlambat = $currentTime->diffInMinutes($terlambat);
 
-                // Menghitung potongan berdasarkan rentang keterlambatan
-                if ($total_terlambat >= 1 && $total_terlambat <= 30) {
-                    $potongan_tambahan = 0.005 * $tpp_pegawai; // 0.50% potongan
-                } elseif ($total_terlambat >= 31 && $total_terlambat <= 60) {
-                    $potongan_tambahan = 0.01 * $tpp_pegawai; // 1% potongan
-                } elseif ($total_terlambat >= 61 && $total_terlambat <= 90) {
-                    $potongan_tambahan = 0.0125 * $tpp_pegawai; // 1.25% potongan
-                } elseif ($total_terlambat >= 91 && $total_terlambat <= 120) {
-                    $potongan_tambahan = 0.015 * $tpp_pegawai; // 1.50% potongan
+                    // Menghitung potongan berdasarkan rentang keterlambatan
+                    if ($total_terlambat >= 1 && $total_terlambat <= 30) {
+                        $potongan_tambahan = 0.005 * $tpp_pegawai; // 0.50% potongan
+                    } elseif ($total_terlambat >= 31 && $total_terlambat <= 60) {
+                        $potongan_tambahan = 0.01 * $tpp_pegawai; // 1% potongan
+                    } elseif ($total_terlambat >= 61 && $total_terlambat <= 90) {
+                        $potongan_tambahan = 0.0125 * $tpp_pegawai; // 1.25% potongan
+                    } elseif ($total_terlambat >= 91 && $total_terlambat <= 120) {
+                        $potongan_tambahan = 0.015 * $tpp_pegawai; // 1.50% potongan
+                    }
                 }
+                
+                // Kurangi total potongan dari TPP untuk mendapatkan TPP akhir setelah potongan
+                $tpp_akhir = $tpp_pegawai - $potongan_tambahan;
+            }else {
+                $tpp_akhir = Auth::user()->tpp;
             }
             
-            // Kurangi total potongan dari TPP untuk mendapatkan TPP akhir setelah potongan
-            $tpp_akhir = $tpp_pegawai - $potongan_tambahan;
             $status = 'Terlambat ' . $telat->format('%H:%I:%S');
             } else {
                 $status = 'Tepat waktu';
