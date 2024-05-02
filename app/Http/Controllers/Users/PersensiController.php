@@ -165,6 +165,8 @@ class PersensiController extends Controller
                     }
                     // Kurangi total potongan dari TPP untuk mendapatkan TPP akhir setelah potongan
                     $tpp_akhir = $tpp_pegawai - $potongan_tambahan;
+                }else {
+                    $tpp_akhir = Auth::user()->tpp;
                 }
                 
             }else {
