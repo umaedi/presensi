@@ -32,11 +32,6 @@ class PersensiController extends Controller
 
     public function store(Request $request)
     {
-        //cek device
-        if(Auth::user()->id !== $request->device) {
-            return $this->error('Satu Perangkat hanya bisa digunakan satu akun!');
-        }
-
         $user = Auth::user();
         $presensi = $this->presensi->Query()->where('user_id', $user->id)->latest()->first();
 
