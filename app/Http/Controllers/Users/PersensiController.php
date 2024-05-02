@@ -104,7 +104,7 @@ class PersensiController extends Controller
                     }
                     $tpp_akhir = $tpp_pegawai - $potongan_tambahan;
                 }else {
-                    $tpp_akhir = Auth::user()->tpp;
+                    $tpp_akhir = '0';
                 }
             }
                 $statusPulang = 'Lebih awal ' . date('H:i:s');
@@ -166,7 +166,7 @@ class PersensiController extends Controller
                     // Kurangi total potongan dari TPP untuk mendapatkan TPP akhir setelah potongan
                     $tpp_akhir = $tpp_pegawai - $potongan_tambahan;
                 }else {
-                    $tpp_akhir = Auth::user()->tpp;
+                    $tpp_akhir = '0';
                 }
                 
             }else {
