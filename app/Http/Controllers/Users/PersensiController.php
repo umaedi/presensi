@@ -32,6 +32,7 @@ class PersensiController extends Controller
 
     public function store(Request $request)
     {
+        //cek device
         $user = Auth::user();
         $presensi = $this->presensi->Query()->where('user_id', $user->id)->latest()->first();
 
