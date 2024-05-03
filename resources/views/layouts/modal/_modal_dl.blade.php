@@ -37,6 +37,15 @@
                                     </i>
                                 </div>
                             </div>
+                            {{-- <div class="form-group boxed">
+                                <div class="input-wrapper">
+                                    <label class="label" for="jumlah_dl">Jumlah Dinas Luar (Hari)</label>
+                                    <input type="number" required class="form-control" id="jumlah_dl" name="jumlah_dl">
+                                    <i class="clear-input">
+                                        <ion-icon name="close-circle"></ion-icon>
+                                    </i>
+                                </div>
+                            </div> --}}
                             <div class="form-group boxed">
                                 <div class="input-wrapper">
                                     <label class="label" for="keterangan">Keterangan</label>
