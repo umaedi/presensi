@@ -88,33 +88,62 @@ class PersensiController extends Controller
                 if(Auth::user()->opd_id == '20') {
                     //hitung tpp
                     $tpp_pegawai = Auth::user()->tpp;
+                    $tpp_akhir = Auth::user()->tpp_akhir;
+
                     if ($tpp_pegawai !== '0') {
                         // Mendapatkan total keterlambatan dalam menit
                         $pulangLebihhAwal = $currentTime->diffInMinutes($batasWaktu);
+                        
+                        // Menghitung potongan berdasarkan rentang keterlambatan
+                        if ($pulangLebihhAwal >= 1 && $pulangLebihhAwal <= 30) {
+                            $potongan_tpp = 0.5 /100 * $tpp_pegawai; // 0.50% potongan
+                        } elseif ($pulangLebihhAwal >= 31 && $pulangLebihhAwal <= 60) {
+                            $potongan_tpp = 1 / 100 * $tpp_pegawai; // 1% potongan
+                        } elseif ($pulangLebihhAwal >= 61 && $pulangLebihhAwal <= 90) {
+                            $potongan_tpp = 1.25 / 100 * $tpp_pegawai; // 1.25% potongan
+                        } elseif ($pulangLebihhAwal >= 91 && $pulangLebihhAwal <= 120) {
+                            $potongan_tpp = 1.5 / 100 * $tpp_pegawai; // 1.50% potongan
+                        }else {
+                            $potongan_tpp = 0;
+                        }
 
-                    // Menghitung potongan berdasarkan rentang keterlambatan
-                    if ($pulangLebihhAwal >= 1 && $pulangLebihhAwal <= 30) {
-                        $potongan_tpp = 0.5 /100 * $tpp_pegawai; // 0.50% potongan
-                    } elseif ($pulangLebihhAwal >= 31 && $pulangLebihhAwal <= 60) {
-                        $potongan_tpp = 1 / 100 * $tpp_pegawai; // 1% potongan
-                    } elseif ($pulangLebihhAwal >= 61 && $pulangLebihhAwal <= 90) {
-                        $potongan_tpp = 1.25 / 100 * $tpp_pegawai; // 1.25% potongan
-                    } elseif ($pulangLebihhAwal >= 91 && $pulangLebihhAwal <= 120) {
-                        $potongan_tpp = 1.5 / 100 * $tpp_pegawai; // 1.50% potongan
-                    }else {
-                        $potongan_tpp = 0;
+                        if($tpp_akhir > 0) {
+                            $tpp_hasil_pengurangan = $tpp_akhir - $potongan_tpp;
+                        }else {
+                            $tpp_hasil_pengurangan = $tpp_pegawai - $potongan_tpp;
+                        }
                     }
-                    $tpp_akhir = $tpp_pegawai - $potongan_tpp;
+                    $statusPulang = 'Lebih awal ' . date('H:i:s');
+
                 }else {
-                    $tpp_akhir = '0';
+                    $tpp_hasil_pengurangan = Auth::user()->tpp;
+                    $statusPulang = 'Lebih awal ' . date('H:i:s');
+                    if(Auth::user()->opd_id == '20') {
+                        $tpp_akhir = Auth::user()->tpp_akhir;
+                        if($tpp_akhir > 0) {
+                            $tpp_hasil_pengurangan = $tpp_akhir;
+                        }else {
+                            $tpp_hasil_pengurangan = Auth::user()->tpp;
+                        }
+                    }else {
+                        $tpp_hasil_pengurangan = Auth::user()->tpp;
+                    }
                 }
-            }
-                $statusPulang = 'Lebih awal ' . date('H:i:s');
-                $tpp_akhir = Auth::user()->tpp;
+                
             } else {
                 // Kondisi jika waktu saat ini sama atau lebih besar dari 15:30:00
                 $statusPulang = 'Tepat waktu';
-                $tpp_akhir = Auth::user()->tpp;
+
+                if(Auth::user()->opd_id == '20') {
+                    $tpp_akhir = Auth::user()->tpp_akhir;
+                    if($tpp_akhir > 0) {
+                        $tpp_hasil_pengurangan = $tpp_akhir;
+                    }else {
+                        $tpp_hasil_pengurangan = Auth::user()->tpp;
+                    }
+                }else {
+                    $tpp_hasil_pengurangan = Auth::user()->tpp;
+                }
             }
 
             $data['opd_id']     = $user->opd_id;
@@ -126,7 +155,7 @@ class PersensiController extends Controller
             $data['status_pulang']     = $statusPulang;
 
             //update tpp
-            $user->update(['tpp' => $tpp_akhir]);
+            $user->update(['tpp_akhir' => $tpp_hasil_pengurangan]);
 
             try {
                 // dispatch(new PresensiupdateJob($presensiUpdate, $data));
@@ -153,6 +182,7 @@ class PersensiController extends Controller
             if(Auth::user()->opd_id == '20') {
                 //hitung tpp
                 $tpp_pegawai = Auth::user()->tpp;
+                $tpp_akhir = Auth::user()->tpp_akhir;
                 if ($tpp_pegawai !== '0') {
                     // Mendapatkan total keterlambatan dalam menit
                     $terlambat = Carbon::createFromTimeString(env('JAM_MASUK'));
@@ -171,19 +201,24 @@ class PersensiController extends Controller
                         $potongan_tpp = 1.5 / 100 * $tpp_pegawai;
                     }
                     // Kurangi total potongan dari TPP untuk mendapatkan TPP akhir setelah potongan
-                    $tpp_akhir = $tpp_pegawai - $potongan_tpp;
+                    if($tpp_akhir > 0) {
+                        $tpp_hasil_pengurangan = $tpp_akhir - $potongan_tpp;
+                    }else {
+                        $tpp_hasil_pengurangan = $tpp_pegawai - $potongan_tpp;
+                    }
+
                 }else {
-                    $tpp_akhir = '0';
+                    $tpp_hasil_pengurangan = '0';
                 }
                 
             }else {
-                $tpp_akhir = Auth::user()->tpp;
+                $tpp_hasil_pengurangan = Auth::user()->tpp;
             }
 
             $status = 'Terlambat ' . $telat->format('%H:%I:%S');
             } else {
                 $status = 'Tepat waktu';
-                $tpp_akhir = Auth::user()->tpp;
+                $tpp_hasil_pengurangan = Auth::user()->tpp;
             }
 
             $data = $request->except('_token');
@@ -218,7 +253,7 @@ class PersensiController extends Controller
             $data['photo_masuk']     = $photo_masuk;
             
             //update tpp
-            $user->update(['tpp' => $tpp_akhir]);
+            $user->update(['tpp_akhir' => $tpp_hasil_pengurangan]);
 
             try {
                 // dispatch(new PresensiJob($data));

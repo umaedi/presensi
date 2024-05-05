@@ -35,7 +35,8 @@ class User extends Authenticatable
         'role',
         'web_token',
         'status_pegawai',
-        'tpp'
+        'tpp',
+        'tpp_akhir'
     ];
 
     /**

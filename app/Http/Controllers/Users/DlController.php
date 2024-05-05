@@ -99,7 +99,6 @@ class DlController extends Controller
         //clear cache
         Cache::forget('table_dashboard_' . Auth::user()->id);
         Cache::forget('hadir_' . Auth::user()->id);
-        Cache::forget('dl_' . auth()->user()->id);
         return $this->success($data, 'Anda Berhasil Mengisi Presensi DL');
     }
 }
