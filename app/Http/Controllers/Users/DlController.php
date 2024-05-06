@@ -28,7 +28,7 @@ class DlController extends Controller
         $user = Auth::user();
         $presensi = $this->presensi->Query()->where('user_id', $user->id)->latest()->first();
 
-        if (isset($presensi->jam_pulang)) {
+        if($presensi &&  $presensi->tanggal == date('Y-m-d')) {
             return $this->error('Anda sudah melakukan presensi dinas luar!');
         }
 
