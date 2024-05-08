@@ -365,8 +365,7 @@
                     });
                 }
             }).catch((err) => {
-                const errResponseData = JSON.parse(res.data);
-                const errMessage = errResponseData.message;
+                const errMessage = JSON.parse(res.message);
                 swal({
                     text: errMessage,
                     icon: 'error',
