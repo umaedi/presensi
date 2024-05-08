@@ -123,7 +123,7 @@
             <div class="wallet-card mt-2">
                 <div class="balance justify-content-center">
                     <div class="text-center"><span class="title"> Estimasi TPP:</span>
-                        <h3 class="total">{{ formatRp(Auth::user()->tpp) }}</h3>
+                        <h3 class="total">{{ formatRp(Auth::user()->tpp_akhir) }}</h3>
                         <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#ModalTpp">Informasi</button>
                     </div>
                 </div>

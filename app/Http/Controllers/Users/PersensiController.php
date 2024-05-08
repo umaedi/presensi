@@ -172,9 +172,9 @@ class PersensiController extends Controller
             $jamMulai = Carbon::createFromTime(6, 0, 0); // Jam 6 pagi
             $jamSelesai = Carbon::createFromTime(12, 0, 0); // Jam 12 siang
 
-            if (!$currentTime->between($jamMulai, $jamSelesai)) {
-                return $this->error('Presensi pagi dimulai dari jam 6.00 sampai jam 12.00 Siang!');
-            }
+            // if (!$currentTime->between($jamMulai, $jamSelesai)) {
+            //     return $this->error('Presensi pagi dimulai dari jam 6.00 sampai jam 12.00 Siang!');
+            // }
 
             if ($currentTime > $jamMasuk) {
                 $telat = $currentTime->diff($jamMasuk);
@@ -190,15 +190,15 @@ class PersensiController extends Controller
 
                     // Menghitung potongan berdasarkan rentang keterlambatan
                     if ($total_terlambat >= 1 && $total_terlambat <= 30) {
-                        $potongan_tpp = 0.5 / 100 * $tpp_pegawai; // 0.50% potongan
+                        $potongan_tpp = 0.2 / 100 * $tpp_pegawai; // 0.50% potongan
                     } elseif ($total_terlambat >= 31 && $total_terlambat <= 60) {
-                        $potongan_tpp = 1 / 100 * $tpp_pegawai; // 1% potongan
+                        $potongan_tpp = 0.4 / 100 * $tpp_pegawai; // 1% potongan
                     } elseif ($total_terlambat >= 61 && $total_terlambat <= 90) {
-                        $potongan_tpp = 1.25 / 100 * $tpp_pegawai; // 1.25% potongan
+                        $potongan_tpp = 0.5 / 100 * $tpp_pegawai; // 1.25% potongan
                     } elseif ($total_terlambat >= 91 && $total_terlambat <= 120) {
-                        $potongan_tpp = 1.5 / 100 * $tpp_pegawai; // 1.50% potongan
+                        $potongan_tpp = 0.6 / 100 * $tpp_pegawai; // 1.50% potongan
                     }else {
-                        $potongan_tpp = 1.5 / 100 * $tpp_pegawai;
+                        $potongan_tpp = 0.6 / 100 * $tpp_pegawai;
                     }
                     // Kurangi total potongan dari TPP untuk mendapatkan TPP akhir setelah potongan
                     if($tpp_akhir > 0) {
