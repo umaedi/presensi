@@ -366,8 +366,10 @@
                 }
             }).catch((err) => {
                 swal({
-                    text: "Lalulintas Server Sedang Padat!",
+                    text: ,message
                     icon: 'error',
+                }).then(() => {
+                    window.location.href = "/user/dashboard";
                 });
             });
         }
