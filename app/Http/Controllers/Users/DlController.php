@@ -18,6 +18,7 @@ class DlController extends Controller
     {
         $this->presensi = $presensiService;
     }
+    
     public function index()
     {
         return view('users.dl.index');

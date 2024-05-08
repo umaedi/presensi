@@ -4,10 +4,11 @@ namespace App\Actions\Fortify;
 
 use App\Models\User;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 
 class UpdateUserProfileInformation implements UpdatesUserProfileInformation
@@ -33,11 +34,18 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'max:255',
                 Rule::unique('users')->ignore($user->id),
             ],
-        ])->validateWithBag('updateProfileInformation');
+        ]);
 
         if (isset($input['photo'])) {
             $photo = Storage::putFile('public/img', $input['photo']);
-            if ($user->photo !== 'avatar.png') {
+            //regster face
+            Http::attach(
+                'face', file_get_contents($input['photo']), $photo, ['Content-Type' => 'image/jpeg']
+            )->put('http://36.91.91.234:3333/api/register', [
+                'userId' => Auth::user()->id,
+            ]);
+
+            if ($user->photo !== 'public/img/avatar.png') {
                 Storage::delete($user->photo);
             }
         } else {

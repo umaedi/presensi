@@ -51,6 +51,9 @@ Route::middleware(['auth', 'webview'])->prefix('user')->group(function () {
 
     //survey
     Route::get('/survey', Users\SurveyController::class);
+
+    //route for face check
+    Route::post('/presensi/face_check', Users\FacecheckController::class);
 });
 
 //route for oprator
