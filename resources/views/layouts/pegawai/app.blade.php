@@ -365,9 +365,8 @@
                     });
                 }
             }).catch((err) => {
-                const errMessage = JSON.parse(res.message);
                 swal({
-                    text: errMessage,
+                    text: err.message,
                     icon: 'error',
                 }).then(() => {
                     window.location.href = "/user/dashboard";

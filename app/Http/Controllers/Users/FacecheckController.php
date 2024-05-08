@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,7 +37,7 @@ class FacecheckController extends Controller
         $response = Http::attach(
             'face', file_get_contents($file), $fileName, ['Content-Type' => 'image/jpeg']
         )->put('http://36.91.91.234:3333/api/check', [
-            'userId' => Auth::user()->id
+            'userId' => 'f81d9073-141f-419e-9473-2346785d1239',
         ]);
 
         // Delete the temporary file after sending
