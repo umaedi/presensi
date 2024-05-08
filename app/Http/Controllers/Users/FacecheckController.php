@@ -43,10 +43,15 @@ class FacecheckController extends Controller
         // Delete the temporary file after sending
         unlink($file);
 
+        if($response->successful()){
+            dd($response->body());
+        }else {
+            dd($response->body());
+        }
         // Handle response
-        return response()->json([
-            "sucess"    => true,
-            "data"      => $response->body(),
-        ]);
+        // return response()->json([
+        //     "sucess"    => true,
+        //     "data"      => $response->body(),
+        // ]);
     }
 }
