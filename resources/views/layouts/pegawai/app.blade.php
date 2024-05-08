@@ -350,21 +350,28 @@
 
             // submitFile(file);
             await transAjax(param).then((res) => {
-                const responseData = JSON.parse(res.data);
-                const message = responseData.message;
+                console.log(res);
+                // const responseData = JSON.parse(res.data);
+                // const message = responseData.message;
 
-                if(message == "Face verification successful!") {
-                    submitFile(file);
-                    $('#btnIsiPresensi').removeClass('d-none');
-                    $('#faceCheck').addClass('d-none');
-                }else {
-                    swal({
-                    text: message,
-                    icon: 'error',
+                // if(message == "Face verification successful!") {
+                //     submitFile(file);
+                //     $('#btnIsiPresensi').removeClass('d-none');
+                //     $('#faceCheck').addClass('d-none');
+                // }else {
+                //     swal({
+                //     text: message,
+                //     icon: 'error',
+                // }).then(() => {
+                //     window.location.href = "/user/dashboard";
+                //     });
+                // }
+                swal({
+                    text: 'test',
+                    icon: 'success',
                 }).then(() => {
                     window.location.href = "/user/dashboard";
-                    });
-                }
+                });
             }).catch((err) => {
                 swal({
                     text: err.message,
