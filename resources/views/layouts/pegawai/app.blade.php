@@ -365,8 +365,10 @@
                     });
                 }
             }).catch((err) => {
+                const errResponseData = JSON.parse(res.data);
+                const errMessage = errResponseData.message;
                 swal({
-                    text: err.message,
+                    text: errMessage,
                     icon: 'error',
                 }).then(() => {
                     window.location.href = "/user/dashboard";
