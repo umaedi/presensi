@@ -366,7 +366,7 @@
                 }
             }).catch((err) => {
                 swal({
-                    text: message,
+                    text: err.message,
                     icon: 'error',
                 }).then(() => {
                     window.location.href = "/user/dashboard";
