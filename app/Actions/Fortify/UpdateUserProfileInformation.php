@@ -41,7 +41,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             //regster face
             Http::attach(
                 'face', file_get_contents($input['photo']), $photo, ['Content-Type' => 'image/jpeg']
-            )->put('https://api-facerecognation.tulangbawangkab.go.id/api/register', [
+            )->put('http://36.91.91.234:3333/api/register', [
                 'userId' => Auth::user()->id,
             ]);
 
