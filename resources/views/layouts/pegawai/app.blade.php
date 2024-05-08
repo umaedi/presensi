@@ -369,15 +369,12 @@
                 swal({
                     text: 'test',
                     icon: 'success',
-                }).then(() => {
-                    window.location.href = "/user/dashboard";
                 });
             }).catch((err) => {
+                console.log(err);
                 swal({
                     text: err.message,
                     icon: 'error',
-                }).then(() => {
-                    window.location.href = "/user/dashboard";
                 });
             });
         }
