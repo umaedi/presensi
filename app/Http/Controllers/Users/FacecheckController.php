@@ -37,7 +37,7 @@ class FacecheckController extends Controller
         // Use Http::attach to attach the image file
         $response = Http::attach(
             'face', file_get_contents($file), $fileName, ['Content-Type' => 'image/jpeg']
-        )->put('http://36.91.91.238/api/check', [
+        )->put('http://localhost:3333/api/check', [
             'userId' => Auth::user()->id,
         ]);
 
