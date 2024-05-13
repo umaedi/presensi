@@ -15,22 +15,25 @@ class RagisterfaceController extends Controller
     {
         $user = Auth::user();
         $img =  $request->face;
-        $folderPath = "public/img";
+        $folderPath = "storage/img/";
 
+        // Decode base64 string
         $image_parts = explode(";base64,", $img);
         $image_type_aux = explode("image/", $image_parts[0]);
         $image_type = $image_type_aux[1];
-
         $image_base64 = base64_decode($image_parts[1]);
-        $fileName = uniqid() . '.jpeg';
 
+        // Generate a unique filename
+        $fileName = uniqid() . '.jpg';
         $file = $folderPath . $fileName;
-        $face = Storage::putFile($file, $image_base64);
 
-        //regster face
+        // Save the decoded base64 string as an image file
+        file_put_contents($file, $image_base64);
+
+        // Use Http::attach to attach the image file
         $response = Http::attach(
-            'face', file_get_contents($face), $fileName, ['Content-Type' => 'image/jpeg']
-        )->put('http://localhost:3333/api/register', [
+            'face', file_get_contents($file), $fileName, ['Content-Type' => 'image/jpeg']
+        )->put('http://localhost:3333/api/check', [
             'userId' => $user->id,
         ]);
 
