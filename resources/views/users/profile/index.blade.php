@@ -276,16 +276,21 @@ function openWebcame() {
             }
         }
 
+        loading(true);
         await transAjax(param).then((result) => {
         const responseData = JSON.parse(result.data);
         const message = responseData.message;
+        loading(false);
         swal({
             title: 'Berhasil',
             text: message,
             icon: 'success',
             timer: 3000,
+        }).then(() => {
+            window.location.href = "/user/dashboard";
         });
         }).catch((err) => {
+            loading(false);
             swal({
                 title: 'Oops!',
                 text: "Internal Server Error!",
@@ -294,6 +299,16 @@ function openWebcame() {
             });
         });
     });
+
+    function loading(state) {
+        if(state) {
+            $('#btnRegisterface').addClass('d-none');
+            $('#faceCheck').removeClass('d-none');
+        }else {
+            $('#btnRegisterface').removeClass('d-none');
+            $('#faceCheck').addClass('d-none');
+        }
+    }
 
     $('#btn_profile').click(function() {
         $('#btn_profile').hide();

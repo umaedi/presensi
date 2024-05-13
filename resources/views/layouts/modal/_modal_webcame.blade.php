@@ -23,12 +23,12 @@
                             @include('layouts.pegawai._loading_submit')
                             <div id="registerFace" class="row d-none">
                                 <div class="col-md-6">
-                                    {{-- <button id="faceCheck" class="btn btn-primary btn-lg btn-block d-none mb-3" type="button" disabled>
+                                    <button id="faceCheck" class="btn btn-primary btn-lg btn-block d-none mb-3" type="button" disabled>
                                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                         Mencocokan Wajah
-                                      </button> --}}
+                                         Mencocokan Wajah...
+                                      </button>
                                       <form id="formRegisterFace">
-                                          <button type="submit" class="btn btn-primary btn-lg btn-block mb-3">Daftarkan Wajah</button>
+                                          <button id="btnRegisterface" type="submit" class="btn btn-primary btn-lg btn-block mb-3">Daftarkan Wajah</button>
                                       </form>
                                 </div>
                                 <div class="col-md-6">
