@@ -31,7 +31,9 @@ class RagisterfaceController extends Controller
         file_put_contents($file, $image_base64);
 
         if ($user->photo !== 'avatar.png') {
-            unlink($folderPath . $user->photo);
+            if(file_exists($folderPath . $user->photo)) {
+                unlink($folderPath . $user->photo);
+            }
         }
 
         $user->update([
