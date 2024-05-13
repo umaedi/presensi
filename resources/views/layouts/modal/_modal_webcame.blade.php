@@ -7,7 +7,6 @@
                 <div class="row justify-content-center">
                     <div class="wallet-footer">
                         <div class="col-md-12">
-                            <input id="x-src" type="hidden" name="image">
                             <div id="webcameResult" class="webcam-capture-body text-center mb-3">
                                 <div class="xwebcam-capture img-fluid">
                                     <div class="x-selfie-img container">
@@ -15,7 +14,7 @@
                                     </div>
                                 </div>
                                     <div class="basic form-button-group transparent">
-                                        <button  class="btn btn-primary btn-block btn-lg" onclick="captureimage()">
+                                        <button  class="btn btn-primary btn-block btn-lg" onclick="captureFace()">
                                             Ambil photo selfi Anda
                                     </button>
                                 </div>
@@ -23,7 +22,7 @@
                             @include('layouts.pegawai._loading_submit')
                             <div id="registerFace" class="row d-none">
                                 <div class="col-md-6">
-                                    <button id="faceCheck" class="btn btn-primary btn-lg btn-block d-none mb-3" type="button" disabled>
+                                    <button id="faceRegister" class="btn btn-primary btn-lg btn-block d-none mb-3" type="button" disabled>
                                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                          Mencocokan Wajah...
                                       </button>

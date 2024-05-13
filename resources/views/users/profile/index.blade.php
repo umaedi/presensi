@@ -246,11 +246,10 @@ function openWebcame() {
         Webcam.attach('.xwebcam-capture');
         shutter.autoplay = false;
         shutter.src = navigator.userAgent.match(/Firefox/) ? 'shutter.ogg' : '/assets/pegawai/shutter.mp3';
-        document.getElementById('x-absent').setAttribute('onclick', 'captureimage()');
         }
     }
 
-    function captureimage() {
+    function captureFace() {
         shutter.play();
         Webcam.snap(function(data_uri) {
             document.getElementById('webcameResult').innerHTML =
@@ -303,10 +302,10 @@ function openWebcame() {
     function loading(state) {
         if(state) {
             $('#btnRegisterface').addClass('d-none');
-            $('#faceCheck').removeClass('d-none');
+            $('#faceRegister').removeClass('d-none');
         }else {
             $('#btnRegisterface').removeClass('d-none');
-            $('#faceCheck').addClass('d-none');
+            $('#faceRegister').addClass('d-none');
         }
     }
 
