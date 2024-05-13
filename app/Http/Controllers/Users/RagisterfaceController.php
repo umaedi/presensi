@@ -47,7 +47,10 @@ class RagisterfaceController extends Controller
         ]);
 
         if($response->successful()) {
-            return $response->body();
+            return response()->json([
+                "sucess"    => true,
+                "data"      => $response->body(),
+            ]);
         }else {
             return $this->error('Internal Server Error!');
         }

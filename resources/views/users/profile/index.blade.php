@@ -277,9 +277,11 @@ function openWebcame() {
         }
 
         await transAjax(param).then((result) => {
+        const responseData = JSON.parse(result.data);
+        const message = responseData.message;
         swal({
             title: 'Berhasil',
-            text: result.message,
+            text: message,
             icon: 'success',
             timer: 3000,
         });
