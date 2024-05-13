@@ -277,15 +277,12 @@ function openWebcame() {
         }
 
         await transAjax(param).then((result) => {
-            console.log(result.success);
-            if(result.success == true) {
-            swal({
-                title: 'Berhasil',
-                text: result.message,
-                icon: 'success',
-                timer: 3000,
-            });
-            }
+        swal({
+            title: 'Berhasil',
+            text: result.message,
+            icon: 'success',
+            timer: 3000,
+        });
         }).catch((err) => {
             swal({
                 title: 'Oops!',
