@@ -41,7 +41,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             //regster face
             Http::attach(
                 'face', file_get_contents($input['photo']), $photo, ['Content-Type' => 'image/jpeg']
-            )->put('http://36.91.91.234:3333/api/register', [
+            )->put('http://localhost:3333/api/register', [
                 'userId' => Auth::user()->id,
             ]);
 

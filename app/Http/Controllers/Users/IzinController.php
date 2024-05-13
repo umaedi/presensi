@@ -72,7 +72,7 @@ class IzinController extends Controller
             saveLogs($th->getMessage() . '-error ketika membuat surat izin-' . Auth::user()->nama, 'error');
             return $this->error($th->getMessage());
         }
-
+        Cache::forget('cuty_' . Auth::user()->id);
         return $this->success($data, 'Permohonan berhasil dibuat');
     }
 

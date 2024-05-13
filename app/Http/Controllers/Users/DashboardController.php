@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Izin;
 use App\Models\Persensi;
 use App\Services\PresensiService;
 use Illuminate\Http\Request;
@@ -27,6 +28,40 @@ class DashboardController extends Controller
     public function __invoke(Request $request)
     {
         if (request()->ajax()) {
+            //cek presensi
+            $weekend = $yesterday = Carbon::yesterday();
+            if(!$weekend->isWeekend()) {
+                $yesterday = Carbon::now()->subDays(1)->format('Y-m-d');
+                $presensiYesterday = $this->presensi->Query()->where('opd_id', Auth::user()->opd_id)->where('tanggal', $yesterday)->count();
+                if($presensiYesterday > 7) {
+                    $presensiUser = $this->presensi->Query()->where('user_id', Auth::user()->id)->where('tanggal', $yesterday)->count();
+                    if($presensiUser == 0) {
+                        //cek cuty
+                        $cuty = Izin::where('user_id', Auth::user()->id)->latest()->first();
+                        $tanggal_tentu = Carbon::createFromDate($cuty->tanggal_masuk);
+                        // Periksa apakah tanggal tersebut sudah lewat dari hari ini
+                        if ($tanggal_tentu->isPast()) {
+                            $data = [
+                                'opd_id' => Auth::user()->opd_id,
+                                'user_id'   => Auth::user()->id,
+                                'tanggal'   => $yesterday,
+                                'jam_masuk' => '0',
+                                'jam_pulang'    => '0',
+                                'lat_long_masuk'    => '0',
+                                'lat_long_pulang'   => '0',
+                                'photo_masuk'       => "no_image.png",
+                                'status'            => 'Tidak Masuk',
+                            ];
+                            try {
+                                $this->presensi->store($data);
+                            } catch (\Throwable $th) {
+                                throw $th;
+                            };
+                        };
+                    };
+                };
+            };
+
             $minutes = 720;
             if (request()->bulan) {
                 $presensi = $this->presensi->Query();
