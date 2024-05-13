@@ -6,8 +6,8 @@
     @csrf
     <div class="section mt-3 text-center">
         <div class="avatar-section">
-            <input type="file" onchange="previewImg()" id="image"  class="upload" name="photo" id="avatar" accept=".jpeg, .jpg, .png">
-            <img  id="imgPrev" src="{{ \Illuminate\Support\Facades\Storage::url(auth()->user()->photo) }}" alt="image" class="imaged w100">
+            {{-- <input type="file" onclick="openWebcame(0)" id="image"  class="upload" name="photo" id="avatar" accept=".jpeg, .jpg, .png"> --}}
+            <img onclick="openWebcame(0)" id="imgPrev" src="{{ \Illuminate\Support\Facades\Storage::url(auth()->user()->photo) }}" alt="image" class="imaged w100">
         </div>
     </div>
     <div class="section mt-2 mb-2">
@@ -158,16 +158,128 @@
         </div>
     </div>
     @include('layouts.modal._modal')
+    @include('layouts.modal._modal_webcame')
 </div>
 @endsection
 @push('js')
 <script type="text/javascript">
-function previewImg(){
-        const imgPreview = document.querySelector('#imgPrev');
-        const image = document.querySelector('#image');
-        const blob = URL.createObjectURL(image.files[0]);
-        imgPreview.src = blob; 
+var image = "";
+function openWebcame() {
+    //productoion
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+    } else {
+        swal({
+            title: 'Oops!',
+            text: 'Maaf, browser Anda tidak mendukung geolokasi HTML5.',
+            icon: 'error',
+            timer: 3000,
+        });
     }
+
+    function successCallback(position) {
+        setWebcame();
+    }
+
+    function errorCallback(error) {
+        if (error.code == 1) {
+            swal({
+                title: 'Oops!',
+                text: 'Mohon untuk mengaktifkan lokasi Anda',
+                icon: 'error',
+                timer: 3000,
+            });
+        } else if (error.code == 2) {
+            swal({
+                title: 'Oops!',
+                text: 'Jaringan tidak aktif atau layanan penentuan posisi tidak dapat dijangkau.',
+                icon: 'error',
+                timer: 3000,
+            });
+        } else if (error.code == 3) {
+            swal({
+                title: 'Oops!',
+                text: 'Waktu percobaan habis sebelum bisa mendapatkan data lokasi.',
+                icon: 'error',
+                timer: 3000,
+            });
+        } else {
+            swal({
+                title: 'Oops!',
+                text: 'Waktu percobaan habis sebelum bisa mendapatkan data lokasi.',
+                icon: 'error',
+                timer: 3000,
+            });
+        }
+    }
+
+    //set camera
+    function setWebcame() {
+        $('#modalWebcame').modal('show');
+        Webcam.set({
+            width: 490,
+            height: 450,
+            image_format: 'jpeg',
+            jpeg_quality: 90,
+        });
+
+        var cameras = new Array();
+        navigator.mediaDevices.enumerateDevices()
+            .then(function(devices) {
+                devices.forEach(function(device) {
+                    var i = 0;
+                    if (device.kind === "videoinput") {
+                        cameras[i] = device.deviceId;
+                        i++;
+                    }
+                });
+            })
+
+        Webcam.set('constraints', {
+            width: 490,
+            height: 450,
+            image_format: 'jpeg',
+            jpeg_quality: 90,
+            sourceId: cameras[0]
+        });
+
+        Webcam.attach('.xwebcam-capture');
+        shutter.autoplay = false;
+        shutter.src = navigator.userAgent.match(/Firefox/) ? 'shutter.ogg' : '/assets/pegawai/shutter.mp3';
+        document.getElementById('x-absent').setAttribute('onclick', 'captureimage()');
+        }
+    }
+
+    function captureimage() {
+        shutter.play();
+        Webcam.snap(function(data_uri) {
+            document.getElementById('webcameResult').innerHTML =
+            `
+            <img class="x-img-fluid" id="imageprev" style="border-radius: 15px" src="${data_uri}"/>
+            `
+            $('#registerFace').removeClass('d-none');
+            Webcam.reset();
+            return image = data_uri;
+        });
+        setTimeout(() => {
+            removeFile(image);
+        }, 60000);
+    };
+
+    $('#formRegisterFace').submit(async function(e) {
+        e.preventDefault();
+        var param = {
+            method: 'POST',
+            url: '/user/register-face',
+            data: {
+                face: image,
+            }
+        }
+
+        await transAjax(param).then((result) => {
+            console.log(result);
+        });
+    });
 
     $('#btn_profile').click(function() {
         $('#btn_profile').hide();

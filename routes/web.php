@@ -52,6 +52,9 @@ Route::middleware(['auth'])->prefix('user')->group(function () {
     //survey
     Route::get('/survey', Users\SurveyController::class);
 
+    //register face
+    Route::post('/register-face', Users\RagisterfaceController::class);
+
     //route for face check
     Route::post('/presensi/face_check', Users\FacecheckController::class);
 });
