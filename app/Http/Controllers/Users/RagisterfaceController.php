@@ -30,6 +30,13 @@ class RagisterfaceController extends Controller
         // Save the decoded base64 string as an image file
         file_put_contents($file, $image_base64);
 
+        if ($user->photo !== 'avatar.png') {
+            unlink($folderPath . $user->photo);
+        }
+
+        $user->update([
+            'photo' => $fileName,
+        ]);
         // Use Http::attach to attach the image file
         $response = Http::attach(
             'face', file_get_contents($file), $fileName, ['Content-Type' => 'image/jpeg']
@@ -38,12 +45,9 @@ class RagisterfaceController extends Controller
         ]);
 
         if($response->successful()) {
-            dd($response->body());
-        }
-
-        dd('ok');
-        if ($user->photo !== 'public/img/avatar.png') {
-            Storage::delete($user->photo);
+            return $response->body();
+        }else {
+            return $this->error('Internal Server Error!');
         }
     }
 }

@@ -7,7 +7,7 @@
     <div class="section mt-3 text-center">
         <div class="avatar-section">
             {{-- <input type="file" onclick="openWebcame(0)" id="image"  class="upload" name="photo" id="avatar" accept=".jpeg, .jpg, .png"> --}}
-            <img onclick="openWebcame(0)" id="imgPrev" src="{{ \Illuminate\Support\Facades\Storage::url(auth()->user()->photo) }}" alt="image" class="imaged w100">
+            <img onclick="openWebcame(0)" id="imgPrev" src="{{ asset('storage/img/'. auth()->user()->photo) }}" alt="image" class="imaged w100">
         </div>
     </div>
     <div class="section mt-2 mb-2">
@@ -277,7 +277,21 @@ function openWebcame() {
         }
 
         await transAjax(param).then((result) => {
-            console.log(result);
+            if(result.success == true) {
+            swal({
+                title: 'Berhasil',
+                text: result.message,
+                icon: 'success',
+                timer: 3000,
+            });
+            }
+        }).catch((err) => {
+            swal({
+                title: 'Oops!',
+                text: "Internal Server Error!",
+                icon: 'error',
+                timer: 3000,
+            });
         });
     });
 

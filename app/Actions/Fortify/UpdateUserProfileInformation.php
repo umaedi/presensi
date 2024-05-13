@@ -26,7 +26,6 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'jabatan' =>  ['required', 'string', 'max:255'],
             'unit_organisasi' =>  ['required', 'string', 'max:255'],
             'no_hp' =>  ['required', 'string', 'max:255'],
-            'photo' => ['image', 'max:3048', 'mimes:jpg,jpeg,png'],
             'email' => [
                 'required',
                 'string',
@@ -35,22 +34,6 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 Rule::unique('users')->ignore($user->id),
             ],
         ]);
-
-        if (isset($input['photo'])) {
-            $photo = Storage::putFile('public/img', $input['photo']);
-            //regster face
-            Http::attach(
-                'face', file_get_contents($input['photo']), $photo, ['Content-Type' => 'image/jpeg']
-            )->put('http://localhost:3333/api/register', [
-                'userId' => Auth::user()->id,
-            ]);
-
-            if ($user->photo !== 'public/img/avatar.png') {
-                Storage::delete($user->photo);
-            }
-        } else {
-            $photo = $user->photo;
-        }
 
         if (
             $input['email'] !== $user->email &&
@@ -65,7 +48,6 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'unit_organisasi' => $input['unit_organisasi'],
                 'no_hp' => $input['no_hp'],
                 'email' => $input['email'],
-                'photo' => $photo,
             ])->save();
         }
     }
