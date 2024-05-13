@@ -277,6 +277,7 @@ function openWebcame() {
         }
 
         await transAjax(param).then((result) => {
+            console.log(result);
             if(result.success == true) {
             swal({
                 title: 'Berhasil',
