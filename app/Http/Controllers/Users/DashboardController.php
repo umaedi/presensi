@@ -33,7 +33,7 @@ class DashboardController extends Controller
             if(!$weekend->isWeekend()) {
                 $yesterday = Carbon::now()->subDays(1)->format('Y-m-d');
                 $presensiYesterday = $this->presensi->Query()->where('opd_id', Auth::user()->opd_id)->where('tanggal', $yesterday)->count();
-                if($presensiYesterday > 7) {
+                // if($presensiYesterday > 7) {
                     $presensiUser = $this->presensi->Query()->where('user_id', Auth::user()->id)->where('tanggal', $yesterday)->count();
                     if($presensiUser == 0) {
                         //cek cuty
@@ -59,7 +59,7 @@ class DashboardController extends Controller
                             };
                         };
                     };
-                };
+                // };
             };
 
             $minutes = 720;
