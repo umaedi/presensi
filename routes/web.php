@@ -103,6 +103,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/subopd/store', [Admin\SubOpdController::class, 'store']);
     Route::get('/subopd/show/{id}', [Admin\SubOpdController::class, 'show']);
     Route::put('/subopd/update/{id}', [Admin\SubOpdController::class, 'update']);
+    Route::get('/subopd/delete/{id}', [Admin\SubOpdController::class, 'destroy']);
 
     Route::get('/presensi/opd/show/{id}', [Admin\PresensiopdController::class, 'show']);
 
