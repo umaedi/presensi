@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
+
 class DlController extends Controller
 {
     protected $presensi;
@@ -27,14 +28,13 @@ class DlController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        $presensi = $this->presensi->Query()->where('user_id', $user->id)->latest()->first();
-
-        if($presensi &&  $presensi->tanggal == date('Y-m-d')) {
-            return $this->error('Anda sudah melakukan presensi dinas luar!');
+        $presensi = $this->presensi->Query()->where('user_id', $user->id)->where('tanggal', date('Y-m-d'))->first();
+        if($presensi && $presensi->status == "DL") {
+            return $this->error('Anda sudah melakukan presensi dinas luar!'); 
         }
 
         $data = $request->except('_token');
-        $data['status'] = 'DL';
+        $data['status'] = 'Dinas Luar (DL)';
 
         $file = $request->img;
         if (strlen($file) > 30) {
@@ -60,7 +60,6 @@ class DlController extends Controller
         if ($request->hasFile('spt')) {
             $data['spt'] = $request->file('spt')->store('public/spt');
         }
-
         
         $data['opd_id']    = $user->opd_id;
         $data['user_id']    = $user->id;
@@ -74,30 +73,24 @@ class DlController extends Controller
         $data['lat_long_pulang']  = $request->latLong;
         $data['photo_pulang']     = $photo_masuk;
         $data['status_pulang']     = 'DL ' . date('H:i:s');
-        
-        // $tangglDl = Carbon::parse(date('Y-m-d'));
-        // $jumlahDl = $request->jumlah_dl;
 
-
-    
-        try {
-            // dispatch(new PresensiJob($data));
-            // if($jumlahDl > 1) {
-            //     for($i = 0; $i < $jumlahDl; $i++) {
-            //         $data['tanggal'] = $tangglDl->copy()->addDays($i);
-            //         $this->presensi->store($data);
-            //     }
-            // }else {
-            //     $this->presensi->store($data);
-            // }
-            
-        $this->presensi->store($data);
-        } catch (Throwable $e) {
-            saveLogs($e->getMessage() . ' ' . 'presensi pagi', 'error');
-            return $this->error($e->getMessage());
+        if($presensi) {
+            try {
+                $this->presensi->update($presensi, $data);
+            } catch (Throwable $e) {
+                saveLogs($e->getMessage() . ' ' . 'presensi pagi', 'error');
+                return $this->error($e->getMessage());
+            }
+        }else {
+            try {
+                $this->presensi->store($data);
+            } catch (Throwable $e) {
+                saveLogs($e->getMessage() . ' ' . 'presensi pagi', 'error');
+                return $this->error($e->getMessage());
+            }
         }
+        
         Presensicount();
-        //clear cache
         Cache::forget('table_dashboard_' . Auth::user()->id);
         Cache::forget('hadir_' . Auth::user()->id);
         return $this->success($data, 'Anda Berhasil Mengisi Presensi DL');

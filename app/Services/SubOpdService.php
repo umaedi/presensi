@@ -33,6 +33,11 @@ class SubOpdService
         return $subopd;
     }
 
+    public function find($id)
+    {
+        return $this->subopd->find($id);
+    }
+    
     public function update($id, $data)
     {
         $subopd =  $this->subopd->where('id', $id)->update($data);

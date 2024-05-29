@@ -38,9 +38,28 @@ class DashboardController extends Controller
                     if($presensiUser == 0) {
                         //cek cuty
                         $cuty = Izin::where('user_id', Auth::user()->id)->latest()->first();
-                        $tanggal_tentu = Carbon::createFromDate($cuty->tanggal_masuk);
-                        // Periksa apakah tanggal tersebut sudah lewat dari hari ini
-                        if ($tanggal_tentu->isPast()) {
+                        if($cuty) {
+                            $tanggal_tentu = Carbon::createFromDate($cuty->tanggal_masuk);
+                            // Periksa apakah tanggal tersebut sudah lewat dari hari ini
+                            if ($tanggal_tentu->isPast()) {
+                                $data = [
+                                    'opd_id' => Auth::user()->opd_id,
+                                    'user_id'   => Auth::user()->id,
+                                    'tanggal'   => $yesterday,
+                                    'jam_masuk' => '0',
+                                    'jam_pulang'    => '0',
+                                    'lat_long_masuk'    => '0',
+                                    'lat_long_pulang'   => '0',
+                                    'photo_masuk'       => "no_image.png",
+                                    'status'            => 'Tidak Masuk',
+                                ];
+                                try {
+                                    $this->presensi->store($data);
+                                } catch (\Throwable $th) {
+                                    throw $th;
+                                };
+                            };
+                        }else {
                             $data = [
                                 'opd_id' => Auth::user()->opd_id,
                                 'user_id'   => Auth::user()->id,
@@ -57,7 +76,7 @@ class DashboardController extends Controller
                             } catch (\Throwable $th) {
                                 throw $th;
                             };
-                        };
+                        }
                     };
                 // };
             };
@@ -75,13 +94,6 @@ class DashboardController extends Controller
             });
             return view('users.dashboard._data_table_absensi', $data);
         }
-
-        // $data['nama'] = explode(" ", auth()->user()->nama);
-        // $data['absen'] = Persensi::where('user_id', auth()->user()->id)->where('tanggal', date('Y-m-d'))->first();
-        // $data['cuti'] = Persensi::where('user_id', auth()->user()->id)->where('status', 'cuti')->count();
-        // $data['hadir'] = Persensi::where('user_id', auth()->user()->id)->whereMonth('tanggal', date('m'))->count();
-        // $data['terlambat'] = $this->presensi->Query()->where('user_id', Auth::user()->id)->whereMonth('tanggal', date('m'))->where('status', 'like', '%' . 'Terlambat' . '%')->count();
-        // $data['dl'] = Persensi::where('user_id', auth()->user()->id)->where('status', 'DL')->count();
 
         //save cache
         $minutes = 720;

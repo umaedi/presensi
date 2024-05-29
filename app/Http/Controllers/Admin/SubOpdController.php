@@ -64,7 +64,7 @@ class SubOpdController extends Controller
         $data['title'] = 'Detail OPD';
         $data['subopd'] = $this->subopd->show($id);
         $data['opd'] = $this->opd->getAll();
-        return view('admin.opd.show', $data);
+        return view('admin.subopd.show', $data);
     }
 
     public function update($id)
@@ -86,5 +86,12 @@ class SubOpdController extends Controller
             return $this->error($th->getMessage());
         }
         return $this->success($data, 'Data berhasil diperbaharui');
+    }
+
+    public function destroy($id)
+    {
+        $subopd = $this->subopd->find($id);
+        $subopd->delete();
+        return redirect('/admin/subopd')->with('msg_delete_subopd','Data berhasil dihapus!');
     }
 }

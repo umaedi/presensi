@@ -46,6 +46,7 @@
                         </div>
                         @include('layouts._button')
                         <button id="btn_submit" type="submit" class="btn btn-primary">Simpan</button>
+                        <a href="/admin/subopd/delete/{{ $subopd->id }}" onclick="return confirm('Hapus data ini!')" class="btn btn-danger">Hapus</a>
             </form>
             <div class="card mt-3">
                 <div class="card-body">

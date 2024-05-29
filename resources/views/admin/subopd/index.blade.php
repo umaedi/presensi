@@ -9,6 +9,9 @@
                 <div class="col-md mb-4 mb-md-0">
                     <a href="/admin/subopd/create/" class="btn btn-primary mb-3">Tambah Sub OPD</a>
                     <div class="card">
+                        @if (session('msg_delete_subopd'))
+                        <div class="alert alert-danger">{{ session('msg_delete_subopd') }}</div>
+                        @endif
                         <h5 class="card-header">Data Sub OPD </h5>
                         <div class="card-body">
                             @include('layouts._loading')

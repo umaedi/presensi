@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use Throwable;
+use App\Models\Izin;
 use App\Jobs\PresensiJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -36,7 +37,16 @@ class PersensiController extends Controller
         $user = Auth::user();
         $presensi = $this->presensi->Query()->where('user_id', $user->id)->latest()->first();
 
-        if ($presensi && $presensi->tanggal == date('Y-m-d')) {
+        $cuti = Izin::where('user_id', Auth::user()->id)->latest()->first();
+        if($cuti) {
+             $tanggalMasukCuti = Carbon::createFromDate($cuti->tanggal_masuk);
+            // Periksa apakah tanggal tersebut sudah lewat dari hari ini
+            if (!$tanggalMasukCuti->isPast()) {
+                return $this->error("Anda masih dalam masa cuti");
+            }
+        }
+
+        if($presensi && $presensi->tanggal == date('Y-m-d')) {
 
             if (isset($presensi->jam_pulang)) {
                 return $this->error('Hari Ini Anda Sudah Mengisi Presensi 2X!');
@@ -112,6 +122,8 @@ class PersensiController extends Controller
                         }else {
                             $tpp_hasil_pengurangan = $tpp_pegawai - $potongan_tpp;
                         }
+                    }else {
+                        $tpp_hasil_pengurangan = Auth::user()->tpp;
                     }
                     $statusPulang = 'Lebih awal ' . date('H:i:s');
 
