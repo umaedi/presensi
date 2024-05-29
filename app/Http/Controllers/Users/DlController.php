@@ -29,7 +29,7 @@ class DlController extends Controller
     {
         $user = Auth::user();
         $presensi = $this->presensi->Query()->where('user_id', $user->id)->where('tanggal', date('Y-m-d'))->first();
-        if($presensi && $presensi->status == "DL") {
+        if($presensi && $presensi->status == "Dinas Luar (DL)") {
             return $this->error('Anda sudah melakukan presensi dinas luar!'); 
         }
 
