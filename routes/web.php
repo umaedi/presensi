@@ -83,6 +83,9 @@ Route::middleware(['auth', 'oprator'])->prefix('oprator')->group(function () {
 
     //export presensi
     Route::get('/presensi/export', Oprator\ExportpresensiController::class);
+
+    //export presensi pegawai
+    Route::get('/presensi/pegawai/export', Oprator\ExportpresensipegawaiController::class);
     Route::get('/export/cuti', Oprator\ExportcutiController::class);
 
     Route::get('profile', Oprator\ProfileController::class);

@@ -160,11 +160,40 @@
               </div>
           </div>
       </div>
-        <form id="formPassword">
-        @method('PUT')
-        @csrf
+
+        <div class="card mb-3">
+          <h5 class="card-header">Report Presensi Pegawai</h5>
+          <div class="card-body">
+              <div class="row text-center g-2">
+                  <div class="col-12 col-md-3">
+                      <input id="tanggalAwal" type="text" class="form-control datepicker start_date"
+                          name="tanggal_awal" placeholder="Tanggal Awal">
+                  </div>
+                  <div class="col-12 col-md-3">
+                      <input id="tanggalAkhir" type="text" name="tanggal_akhir" placeholder="Tanggal Akhir"
+                          class="form-control datepicker end_date">
+                  </div>
+                  <div class="col-12 col-md-2">
+                      <select id="status" class="form-select" aria-label="Default select example">
+                          <option value="">Status Presensi</option>
+                          <option value="Tepat waktu">Tepat Waktu</option>
+                          <option value="Terlambat">Terlambat</option>
+                          {{-- <option value="Tidak Masuk">Tidak Masuk</option> --}}
+                          <option value="Apel">Apel</option>
+                          <option value="DL">DL</option>
+                      </select>
+                  </div>
+                  <div class="col-12 col-md-2">
+                      <button id="tampilkan" class="form-control btn-primary">TAMPILKAN</button>
+                  </div>
+                  <div class="col-12 col-md-2">
+                      <button id="export" class="form-control btn-primary">EXPORT</button>
+                  </div>
+              </div>
+          </div>
+      </div>
         <div class="card">
-          <h5 class="card-header">Riwayat Presensi</h5>
+            <h5 class="card-header">Riwayat Presensi</h5>
           <div class="table-responsive text-nowrap">
             <div class="card-body">
               @include('layouts._loading')
@@ -174,26 +203,47 @@
             </div>
           </div>
         </div>
-      </form>
       </div>
     </div>
   </div>
 @endsection
 @push('js')
+<script type="text/javascript" src="{{ asset('assets/pegawai') }}/js/plugins/datepicker/bootstrap-datepicker.js">
+</script>
     <script type="text/javascript">
-    var page = 1;
+        var tanggalAwal = '';
+        var tanggalAkhir = '';
+        var status_pegawai = '';
+        var status = '';
+        var page = 1;
         $(document).ready(function() {
-          loadLaporan();
+          loadTable();
         });
 
-        async function loadLaporan()
+        $('#tampilkan').click(function() {
+                filterTable();
+        });
+
+        function filterTable() {
+            tanggalAwal = $('#tanggalAwal').val();
+            tanggalAkhir = $('#tanggalAkhir').val();
+            status_pegawai = $('#statusPegawai').val();
+            status = $('#status').val();
+            loadTable();
+        }
+
+        async function loadTable()
         {
           var param = {
             url: '{{ url()->current() }}',
             method: 'GET',
             data: {
               load: 'table',
-              page: page
+              tanggal_awal: tanggalAwal,
+              tanggal_akhir: tanggalAkhir,
+              status_pegawai: status_pegawai,
+              status: status,
+              page: page,
             }
           }
           loading(true);
@@ -291,5 +341,21 @@
           const value = input.value.replace(/\D/g, "");
           input.value = rupiah(value);
         }
+
+
+        $(".datepicker").datepicker({
+            format: "dd-mm-yyyy",
+            "autoclose": true
+        });
+
+        $('#export').click(function() {
+            var user_id = "{{ $pegawai->id }}"
+            var tanggalAwal = $('#tanggalAwal').val();
+            var tanggalAkhir = $('#tanggalAkhir').val();
+            var status_pegawai = $('#statusPegawai').val();
+            var status = $('#status').val();
+            window.location.href = '/oprator/presensi/pegawai/export?user_id=' + user_id + '&tanggal_awal=' + tanggalAwal + '&tanggal_akhir=' +
+                tanggalAkhir + '&status_pegawai='+status_pegawai + '&status=' + status;
+        });
     </script>
 @endpush
