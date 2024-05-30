@@ -27,7 +27,7 @@ class DlController extends Controller
 
     public function store(Request $request)
     {
-        //cek apakah 
+        //cek apakah user sudah presnsi atau belum
         $user = Auth::user();
         $presensi = $this->presensi->Query()->where('user_id', $user->id)->where('tanggal', date('Y-m-d'))->first();
         if($presensi && $presensi->status == "Dinas Luar (DL)") {
