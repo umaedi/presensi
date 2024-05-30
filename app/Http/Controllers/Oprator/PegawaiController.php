@@ -9,6 +9,7 @@ use App\Services\StatuspegawaiService;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class PegawaiController extends Controller
 {
@@ -69,6 +70,25 @@ class PegawaiController extends Controller
     {
         if (\request()->ajax()) {
             $presensi = $this->presensi->Query();
+            if (\request()->tanggal_awal && \request()->tanggal_akhir) {
+                $tgl_awal = Carbon::parse(\request()->tanggal_awal)->toDateTimeString();
+                $tgl_akhir = Carbon::parse(\request()->tanggal_akhir)->toDateTimeString();
+                $presensi->whereBetween('created_at', [$tgl_awal, $tgl_akhir]);
+            }
+
+            if (isset(request()->status_pegawai)) {
+                $presensi->whereHas('user', function ($query) {
+                    $query->where('status_pegawai', \request()->status_pegawai);
+                });
+            }
+
+            if (isset(request()->status)) {
+                if (request()->status !== 'Terlambat') {
+                    $presensi->where('status', \request()->status);
+                } else {
+                    $presensi->where('status', 'like', '%' . 'Terlambat' . '%');
+                }
+            }
             $data['table'] = $presensi->where('user_id', $id)->latest()->paginate();
             return view('oprator.presensi._data_presensi', $data);
         }
