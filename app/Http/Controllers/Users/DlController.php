@@ -93,6 +93,6 @@ class DlController extends Controller
         Presensicount();
         Cache::forget('table_dashboard_' . Auth::user()->id);
         Cache::forget('hadir_' . Auth::user()->id);
-        return $this->success($data, 'Anda Berhasil Mengisi Presensi DL');
+        return $this->success($data, 'Anda Berhasil Mengisi Presensi Dinas Luar (DL)');
     }
 }

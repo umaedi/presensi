@@ -112,7 +112,7 @@ class DashboardController extends Controller
             return $this->presensi->Query()->where('user_id', Auth::user()->id)->whereMonth('tanggal', date('m'))->where('status', 'like', '%' . 'Terlambat' . '%')->count();
         });
         $data['dl'] = Cache::remember('dl_' . auth()->user()->id, $minutes, function () {
-            return Persensi::where('user_id', auth()->user()->id)->where('status', 'DL')->count();
+            return Persensi::where('user_id', auth()->user()->id)->where('status', 'Dinas Luar (DL)')->count();
         });
 
         return view('users.dashboard.index', $data);

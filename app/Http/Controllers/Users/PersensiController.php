@@ -176,6 +176,8 @@ class PersensiController extends Controller
                 saveLogs($e->getMessage() . ' ' . 'presensi sore', 'error');
                 return $this->error($e->getMessage());
             }
+            //clear cache
+            Cache::forget('table_dashboard_' . Auth::user()->id);
             return $this->success('presensi_sore', 'Anda Berhasil Mengisi Presensi Sore');
         } else {
             $currentTime = Carbon::now();
