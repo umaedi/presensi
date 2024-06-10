@@ -46,8 +46,9 @@
                         </div>
                         @include('layouts._button')
                         <button id="btn_submit" type="submit" class="btn btn-primary">Simpan</button>
-                        <a href="/admin/subopd/delete/{{ $subopd->id }}" onclick="return confirm('Hapus data ini!')" class="btn btn-danger">Hapus</a>
-            </form>
+                        {{-- <a href="/admin/subopd/delete/{{ $subopd->id }}" onclick="return confirm('Hapus data ini!')" class="btn btn-danger">Hapus</a> --}}
+                    </form>
+                    <button class="btn btn-danger" type="button" id="btnHapus">Hapus</button>
             <div class="card mt-3">
                 <div class="card-body">
                     <div class="mb-3">
@@ -63,6 +64,7 @@
 @push('js')
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdrcR4AiS_NF-9lL3I0_wBqZ8VroWpA50&libraries=places">
     </script>
+    <script src="{{ asset('assets/pegawai') }}/js/sweetalert.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             initialize();
@@ -262,5 +264,39 @@
                 $('#btn_submit').removeClass('d-none');
             }
         }
+
+    $('#btnHapus').click(async function() {
+        var param = {
+            url: "/admin/subopd/delete/{{ $subopd->id }}",
+            method: "GET",
+        }
+
+        // Pertama, minta konfirmasi penghapusan
+        const willDelete = await swal({
+            title: "Hapus data ini?",
+            text: "Apakah Anda yakin ingin mengapus data ini?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        });
+
+        // Jika user tidak konfirmasi (willDelete adalah null atau false), hentikan eksekusi
+        if (!willDelete) {
+            return;
+        }
+
+        // Jika user mengkonfirmasi, lanjutkan dengan permintaan penghapusan
+        await transAjax(param).then((result) => {
+            swal("Data berhasil dihapus", {
+                icon: "success",
+                timer: 3000,
+            }).then(() => {
+                window.location.href = '/admin/subopd'
+            });
+        }).catch((err) => {
+            alert('Internal Server Error!');
+        });
+    });
+
     </script>
 @endpush
