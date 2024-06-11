@@ -92,6 +92,6 @@ class SubOpdController extends Controller
     {
         $subopd = $this->subopd->find($id);
         $subopd->delete();
-        return redirect('/admin/subopd')->with('msg_delete_subopd','Data berhasil dihapus!');
+        return $this->success('Data berhasil dihapus!');
     }
 }
