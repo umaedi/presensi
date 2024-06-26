@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use App\Models\Izin;
 use App\Models\Persensi;
+use App\Models\User;
 use App\Services\PresensiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,17 +32,38 @@ class DashboardController extends Controller
             //cek presensi
             $weekend = $yesterday = Carbon::yesterday();
             if(!$weekend->isWeekend()) {
+
+                //tanggal kemaren
                 $yesterday = Carbon::now()->subDays(1)->format('Y-m-d');
-                $presensiYesterday = $this->presensi->Query()->where('opd_id', Auth::user()->opd_id)->where('tanggal', $yesterday)->count();
-                // if($presensiYesterday > 7) {
-                    $presensiUser = $this->presensi->Query()->where('user_id', Auth::user()->id)->where('tanggal', $yesterday)->count();
-                    if($presensiUser == 0) {
-                        //cek cuty
-                        $cuty = Izin::where('user_id', Auth::user()->id)->latest()->first();
-                        if($cuty) {
-                            $tanggal_tentu = Carbon::createFromDate($cuty->tanggal_masuk);
+
+                // Ambil OPD ID dari user yang sedang login
+                $userId = Auth::user()->id;
+
+                // Ambil OPD ID dari user yang sedang login
+                $opdId = Auth::user()->opd_id;
+
+                // Hitung jumlah user di OPD
+                $userByOpdId = User::where('opd_id', $opdId)->count();
+
+                // Hitung jumlah presensi kemarin berdasarkan opd_id
+                $presensiYesterday = $this->presensi->Query()->where('opd_id', $opdId)
+                ->where('tanggal', $yesterday)
+                ->count();
+
+                //cek apakah user yang sedang login kemaren presensi atau tidak
+                $presensiUserYesterday = $this->presensi->Query()->where('user_id', $userId)
+                ->where('tanggal', $yesterday)
+                ->count();
+                // Bandingkan jumlah presensi dengan setengah dari jumlah user
+                // if ($presensiYesterday >= $userByOpdId / 2) {
+                    if($presensiUserYesterday === 0) {
+                        //cek apakah user yang login sedang cuti atau tidak
+                        $cuti = Izin::where('user_id', $userId)->latest()->first();
+                        if($cuti) {
+                            //jika ada cuti cek apakah tanggal masuk sudah lewat/belum
+                            $tanggalMasukCuti = Carbon::createFromDate($cuti->tanggal_masuk);
                             // Periksa apakah tanggal tersebut sudah lewat dari hari ini
-                            if ($tanggal_tentu->isPast()) {
+                            if ($tanggalMasukCuti->isPast()) {
                                 $data = [
                                     'opd_id' => Auth::user()->opd_id,
                                     'user_id'   => Auth::user()->id,
@@ -51,15 +73,17 @@ class DashboardController extends Controller
                                     'lat_long_masuk'    => '0',
                                     'lat_long_pulang'   => '0',
                                     'photo_masuk'       => "no_image.png",
-                                    'status'            => 'Tidak Masuk',
+                                    'status'            => 'Tidak Presensi',
                                 ];
                                 try {
                                     $this->presensi->store($data);
                                 } catch (\Throwable $th) {
                                     throw $th;
                                 };
+                                //kurangi TPP karena user tdk masuk
                             };
                         }else {
+                            //user tdk sedang cuti
                             $data = [
                                 'opd_id' => Auth::user()->opd_id,
                                 'user_id'   => Auth::user()->id,
@@ -69,16 +93,17 @@ class DashboardController extends Controller
                                 'lat_long_masuk'    => '0',
                                 'lat_long_pulang'   => '0',
                                 'photo_masuk'       => "no_image.png",
-                                'status'            => 'Tidak Masuk',
+                                'status'            => 'Tidak Presensi',
                             ];
                             try {
                                 $this->presensi->store($data);
                             } catch (\Throwable $th) {
                                 throw $th;
                             };
+                            //kurangi TPP karena user tdk masuk
                         }
-                    };
-                // };
+                    }
+                // }
             };
 
             $minutes = 720;

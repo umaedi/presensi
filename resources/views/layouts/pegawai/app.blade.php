@@ -207,15 +207,15 @@
                 if (distance < radius) {
                     setCamera();
                 } else {
-                    setCamera();
-                    // swal({
-                    //     title: 'Oops!',
-                    //     text: 'Mohon Maaf Sepertinya Anda Diluar Radius!',
-                    //     icon: 'error',
-                    //     timer: 5000,
-                    // }).then(() => {
-                    //     window.location.href = '{{ url()->current() }}';
-                    // });
+                    // setCamera();
+                    swal({
+                        title: 'Oops!',
+                        text: 'Mohon Maaf Sepertinya Anda Diluar Radius!',
+                        icon: 'error',
+                        timer: 5000,
+                    }).then(() => {
+                        window.location.href = '{{ url()->current() }}';
+                    });
                 }
             }
             //production end
@@ -260,8 +260,8 @@
         function captureimage() {
             shutter.play();
             Webcam.snap(function(data_uri) {
-                faceCheck(data_uri);
-                // submitFile(data_uri);
+                // faceCheck(data_uri);
+                submitFile(data_uri);
                 document.getElementById('results').innerHTML =
                 `
                 <img class="x-img-fluid" id="imageprev" style="border-radius: 15px" src="${data_uri}"/>

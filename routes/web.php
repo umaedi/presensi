@@ -100,6 +100,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/opd/store', [Admin\OpdController::class, 'store']);
     Route::get('/opd/show/{id}', [Admin\OpdController::class, 'show']);
     Route::put('/opd/update/{id}', [Admin\OpdController::class, 'update']);
+    Route::get('/opd/delete/{id}', [Admin\OpdController::class, 'destroy']);
 
     Route::get('/subopd', [Admin\SubOpdController::class, 'index']);
     Route::get('/subopd/create', [Admin\SubOpdController::class, 'create']);

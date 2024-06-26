@@ -46,7 +46,7 @@
                                         d="M464 160H48" />
                                 </svg>
                             </div>
-                            <strong>Cuti</strong>
+                            <strong>Apel</strong>
                         </a></div>
                     <div class="item"><a href="/user/dl">
                             <div class="icon-wrapper bg-success">
@@ -119,6 +119,13 @@
                     @endisset
                 </div>
             </div>
+            {{-- notif --}}
+            {{-- <div class="card mt-2">
+                <div class="card-body text-center">
+                    <h3 class="title" style="color: red">Anda harus mengganti keterlambatan 15 menit</h3>
+                </div>
+            </div> --}}
+            {{-- end notif --}}
             @if (Auth::user()->opd_id == '20')
             <div class="wallet-card mt-2">
                 <div class="balance justify-content-center">

@@ -27,6 +27,11 @@ class OpdService
         return $this->opd->query();
     }
 
+    public function find($id)
+    {
+        $opd = $this->opd->find($id);
+        return $opd;
+    }
     public function show($id)
     {
         $opd = $this->opd->find($id);

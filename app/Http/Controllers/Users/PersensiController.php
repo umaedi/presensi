@@ -33,9 +33,12 @@ class PersensiController extends Controller
 
     public function store(Request $request)
     {
-        //cek device
         $user = Auth::user();
-        $presensi = $this->presensi->Query()->where('user_id', $user->id)->latest()->first();
+        $presensi = $this->presensi->Query()
+        ->where('user_id', $user->id)
+        ->where('tanggal',  date('Y-m-d'))
+        ->latest()
+        ->first();
 
         $cuti = Izin::where('user_id', Auth::user()->id)->latest()->first();
         if($cuti) {
@@ -46,8 +49,8 @@ class PersensiController extends Controller
             }
         }
 
-        if($presensi && $presensi->tanggal == date('Y-m-d')) {
-
+        if($presensi) {
+            //cek apakah sudah mengisi presensi pulang
             if (isset($presensi->jam_pulang)) {
                 return $this->error('Hari Ini Anda Sudah Mengisi Presensi 2X!');
             }
@@ -60,7 +63,7 @@ class PersensiController extends Controller
                 return $this->error('Presensi sore dimulai dari jam 14.00 sampai jam 18.00 sore!');
             }
 
-            $presensiUpdate = $presensi->where('tanggal', $presensi->tanggal)->where('user_id', $user->id)->first();
+            // $presensiUpdate = $presensi->where('tanggal', $presensi->tanggal)->where('user_id', $user->id)->first();
             $file = $request->file;
             if (strlen($file) > 30) {
                 if (pathinfo($file, PATHINFO_EXTENSION) !== 'jpeg') {
@@ -125,6 +128,11 @@ class PersensiController extends Controller
                     }else {
                         $tpp_hasil_pengurangan = Auth::user()->tpp;
                     }
+
+                    //cek apakah ada keterlamabatan jam masuk kerja
+                    if($presensi->jam_masuk) {
+                        //
+                    }
                     $statusPulang = 'Lebih awal ' . date('H:i:s');
 
                 }else {
@@ -143,8 +151,28 @@ class PersensiController extends Controller
                 }
                 
             } else {
-                // Kondisi jika waktu saat ini sama atau lebih besar dari 15:30:00
+                // Kondisi jika waktu saat ini sama atau lebih besar dari 16:00:00
                 $statusPulang = 'Tepat waktu';
+
+                //cek apakah user pulang lebih dari jam 16:00:00
+                if($currentTime > $waktuPulang) {
+                    $lembur = $currentTime->diff($waktuPulang);
+                }
+
+                // cek apakah ada keterlambatan jam masuk kerja
+                $presensiStart = Carbon::createFromTimeString('07:30:00');
+                $jamMasuk = Carbon::createFromTimeString($presensi->jam_masuk);
+
+                if ($jamMasuk->gt($presensiStart)) {
+                    // atau hitung keterlambatan dalam jam dan menit
+                    $late = $presensiStart->diff($jamMasuk);
+                    
+                    // contoh penggunaan $late
+                    $hours = $late->h; // jumlah jam keterlambatan
+                    $minutes = $late->i; // jumlah menit keterlambatan
+                    
+                    echo "Keterlambatan: $hours jam $minutes menit";
+                }
 
                 if(Auth::user()->opd_id == '20') {
                     $tpp_akhir = Auth::user()->tpp_akhir;
@@ -170,8 +198,7 @@ class PersensiController extends Controller
             $user->update(['tpp_akhir' => $tpp_hasil_pengurangan]);
 
             try {
-                // dispatch(new PresensiupdateJob($presensiUpdate, $data));
-                $this->presensi->update($presensiUpdate, $data);
+                $this->presensi->update($presensi, $data);
             } catch (Throwable $e) {
                 saveLogs($e->getMessage() . ' ' . 'presensi sore', 'error');
                 return $this->error($e->getMessage());
@@ -179,7 +206,9 @@ class PersensiController extends Controller
             //clear cache
             Cache::forget('table_dashboard_' . Auth::user()->id);
             return $this->success('presensi_sore', 'Anda Berhasil Mengisi Presensi Sore');
+            //prensi pulang end
         } else {
+            //presensi masuk start
             $currentTime = Carbon::now();
             $jamMasuk = Carbon::parse(env('JAM_MASUK'));
 
@@ -193,7 +222,7 @@ class PersensiController extends Controller
             if ($currentTime > $jamMasuk) {
                 $telat = $currentTime->diff($jamMasuk);
 
-            if(Auth::user()->opd_id == '20') {
+                if(Auth::user()->opd_id == '20') {
                 //hitung tpp
                 $tpp_pegawai = Auth::user()->tpp;
                 $tpp_akhir = Auth::user()->tpp_akhir;
@@ -229,7 +258,7 @@ class PersensiController extends Controller
                 $tpp_hasil_pengurangan = Auth::user()->tpp;
             }
 
-            $status = 'Terlambat ' . $telat->format('%H:%I:%S');
+            $status =  $telat->format('%H:%I:%S'); //catat keterlambatan
             } else {
                 $status = 'Tepat waktu';
                 $tpp_hasil_pengurangan = Auth::user()->tpp;

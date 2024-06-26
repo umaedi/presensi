@@ -82,4 +82,11 @@ class OpdController extends Controller
         }
         return $this->success($data, 'Data berhasil diperbaharui');
     }
+
+    public function destroy($id)
+    {
+        $opd = $this->opd->find($id);
+        $opd->delete();
+        return $this->success('Data berhasil dihapus!');
+    }
 }
