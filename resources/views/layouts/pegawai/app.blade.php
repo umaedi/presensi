@@ -260,8 +260,8 @@
         function captureimage() {
             shutter.play();
             Webcam.snap(function(data_uri) {
-                // faceCheck(data_uri);
-                submitFile(data_uri);
+                faceCheck(data_uri);
+                // submitFile(data_uri);
                 document.getElementById('results').innerHTML =
                 `
                 <img class="x-img-fluid" id="imageprev" style="border-radius: 15px" src="${data_uri}"/>
