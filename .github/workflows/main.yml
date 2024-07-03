@@ -17,6 +17,6 @@ jobs:
         run: sudo apt-get install openssh-client -y
 
       - name: Git Pull to Server
-        run: ssh kominf0@36.91.91.238 --port=1798 'cd /var/www/html/dev-presensi && git pull'
+        run: ssh -p 1798 kominf0@36.91.91.238 'cd /var/www/html/dev-presensi && git pull'
 
       # Tambahkan langkah-langkah lain sesuai kebutuhan Anda
