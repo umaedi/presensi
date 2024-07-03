@@ -1,0 +1,24 @@
+/* resources/css/custom.css */
+.balance {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left,
+.right {
+    flex: 1;
+    padding: 0 10px;
+}
+
+.left {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.total {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

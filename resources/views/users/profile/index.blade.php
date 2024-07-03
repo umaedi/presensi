@@ -7,7 +7,7 @@
     <div class="section mt-3 text-center">
         <div class="avatar-section">
             {{-- <input type="file" onclick="openWebcame(0)" id="image"  class="upload" name="photo" id="avatar" accept=".jpeg, .jpg, .png"> --}}
-            <img onclick="openWebcame(0)" id="imgPrev" src="{{ asset('storage/img/'. auth()->user()->photo) }}" alt="image" class="imaged w100">
+            <img onclick="setWebcame(0)" id="imgPrev" src="{{ asset('storage/img/'. auth()->user()->photo) }}" alt="image" class="imaged w100">
         </div>
     </div>
     <div class="section mt-2 mb-2">
@@ -164,122 +164,75 @@
 @push('js')
 <script type="text/javascript">
 var image = "";
-function openWebcame() {
-    //productoion
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-    } else {
-        swal({
-            title: 'Oops!',
-            text: 'Maaf, browser Anda tidak mendukung geolokasi HTML5.',
-            icon: 'error',
-            timer: 3000,
-        });
+//set camera
+function setWebcame() {
+    $('#modalWebcame').modal('show');
+    Webcam.set({
+        width: 490,
+        height: 450,
+        image_format: 'jpeg',
+        jpeg_quality: 90,
+    });
+
+    var cameras = new Array();
+    navigator.mediaDevices.enumerateDevices()
+        .then(function(devices) {
+            devices.forEach(function(device) {
+                var i = 0;
+                if (device.kind === "videoinput") {
+                    cameras[i] = device.deviceId;
+                    i++;
+                }
+            });
+        })
+
+    Webcam.set('constraints', {
+        width: 490,
+        height: 450,
+        image_format: 'jpeg',
+        jpeg_quality: 90,
+        sourceId: cameras[0]
+    });
+
+    Webcam.attach('.xwebcam-capture');
+    shutter.autoplay = false;
+    shutter.src = navigator.userAgent.match(/Firefox/) ? 'shutter.ogg' : '/assets/pegawai/shutter.mp3';
     }
 
-    function successCallback(position) {
-        setWebcame();
-    }
+function captureFace() {
+    shutter.play();
+    Webcam.snap(function(data_uri) {
+        document.getElementById('webcameResult').innerHTML =
+        `
+        <img class="x-img-fluid" id="imageprev" style="border-radius: 15px; object-fit: cover;" src="${data_uri}"/>
+        `
+        $('#registerFace').removeClass('d-none');
+        Webcam.reset();
+        document.getElementById('x-resetCamera').setAttribute('onclick', 'resetCamera()');
+        return image = data_uri;
+    });
+    setTimeout(() => {
+        removeFile(image);
+    }, 60000);
+};
 
-    function errorCallback(error) {
-        if (error.code == 1) {
-            swal({
-                title: 'Oops!',
-                text: 'Mohon untuk mengaktifkan lokasi Anda',
-                icon: 'error',
-                timer: 3000,
-            });
-        } else if (error.code == 2) {
-            swal({
-                title: 'Oops!',
-                text: 'Jaringan tidak aktif atau layanan penentuan posisi tidak dapat dijangkau.',
-                icon: 'error',
-                timer: 3000,
-            });
-        } else if (error.code == 3) {
-            swal({
-                title: 'Oops!',
-                text: 'Waktu percobaan habis sebelum bisa mendapatkan data lokasi.',
-                icon: 'error',
-                timer: 3000,
-            });
-        } else {
-            swal({
-                title: 'Oops!',
-                text: 'Waktu percobaan habis sebelum bisa mendapatkan data lokasi.',
-                icon: 'error',
-                timer: 3000,
-            });
+$('#formRegisterFace').submit(async function(e) {
+    e.preventDefault();
+    var param = {
+        method: 'POST',
+        url: '/user/register-face',
+        data: {
+            face: image,
         }
     }
 
-    //set camera
-    function setWebcame() {
-        $('#modalWebcame').modal('show');
-        Webcam.set({
-            width: 490,
-            height: 450,
-            image_format: 'jpeg',
-            jpeg_quality: 90,
-        });
+    loading(true);
+    await transAjax(param).then((result) => {
+    const responseData = JSON.parse(result.data);
+    const message = responseData.message;
+    loading(false);
 
-        var cameras = new Array();
-        navigator.mediaDevices.enumerateDevices()
-            .then(function(devices) {
-                devices.forEach(function(device) {
-                    var i = 0;
-                    if (device.kind === "videoinput") {
-                        cameras[i] = device.deviceId;
-                        i++;
-                    }
-                });
-            })
-
-        Webcam.set('constraints', {
-            width: 490,
-            height: 450,
-            image_format: 'jpeg',
-            jpeg_quality: 90,
-            sourceId: cameras[0]
-        });
-
-        Webcam.attach('.xwebcam-capture');
-        shutter.autoplay = false;
-        shutter.src = navigator.userAgent.match(/Firefox/) ? 'shutter.ogg' : '/assets/pegawai/shutter.mp3';
-        }
-    }
-
-    function captureFace() {
-        shutter.play();
-        Webcam.snap(function(data_uri) {
-            document.getElementById('webcameResult').innerHTML =
-            `
-            <img class="x-img-fluid" id="imageprev" style="border-radius: 15px" src="${data_uri}"/>
-            `
-            $('#registerFace').removeClass('d-none');
-            Webcam.reset();
-            return image = data_uri;
-        });
-        setTimeout(() => {
-            removeFile(image);
-        }, 60000);
-    };
-
-    $('#formRegisterFace').submit(async function(e) {
-        e.preventDefault();
-        var param = {
-            method: 'POST',
-            url: '/user/register-face',
-            data: {
-                face: image,
-            }
-        }
-
-        loading(true);
-        await transAjax(param).then((result) => {
-        const responseData = JSON.parse(result.data);
-        const message = responseData.message;
-        loading(false);
+    if(result.success == true) {
         swal({
             title: 'Berhasil',
             text: message,
@@ -288,39 +241,46 @@ function openWebcame() {
         }).then(() => {
             window.location.href = "/user/dashboard";
         });
-        }).catch((err) => {
-            loading(false);
-            swal({
-                title: 'Oops!',
-                text: "Internal Server Error!",
-                icon: 'error',
-                timer: 3000,
-            });
+    }else {
+        swal({
+            title: 'Gagal',
+            text: message,
+            icon: 'error',
+        });
+    }
+    }).catch((err) => {
+        loading(false);
+        swal({
+            title: 'Oops!',
+            text: "Internal Server Error!",
+            icon: 'error',
+            timer: 3000,
         });
     });
+});
 
-    function loading(state) {
-        if(state) {
-            $('#btnRegisterface').addClass('d-none');
-            $('#faceRegister').removeClass('d-none');
-        }else {
-            $('#btnRegisterface').removeClass('d-none');
-            $('#faceRegister').addClass('d-none');
-        }
+function loading(state) {
+    if(state) {
+        $('#btnRegisterface').addClass('d-none');
+        $('#faceRegister').removeClass('d-none');
+    }else {
+        $('#btnRegisterface').removeClass('d-none');
+        $('#faceRegister').addClass('d-none');
     }
+}
 
-    $('#btn_profile').click(function() {
-        $('#btn_profile').hide();
-        $('#btn_loading_profile').removeClass('d-none');
-    });
+$('#btn_profile').click(function() {
+    $('#btn_profile').hide();
+    $('#btn_loading_profile').removeClass('d-none');
+});
 
-    $('#btn_password').click(function() {
-        $('#btn_password').hide();
-        $('#btn_loading_password').removeClass('d-none');
-    });
+$('#btn_password').click(function() {
+    $('#btn_password').hide();
+    $('#btn_loading_password').removeClass('d-none');
+});
 
-    function redirect(url) {
-        window.location.href = url+'/dashboard'
-    }
+function redirect(url) {
+    window.location.href = url+'/dashboard'
+}
 </script>
 @endpush

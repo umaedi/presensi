@@ -24,7 +24,7 @@
                                 <div class="col-md-6">
                                     <button id="faceRegister" class="btn btn-primary btn-lg btn-block d-none mb-3" type="button" disabled>
                                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                         Mencocokan Wajah...
+                                         Mendaftarkan Wajah...
                                       </button>
                                       <form id="formRegisterFace">
                                           <button id="btnRegisterface" type="submit" class="btn btn-primary btn-lg btn-block mb-3">Daftarkan Wajah</button>

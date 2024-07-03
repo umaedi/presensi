@@ -38,7 +38,7 @@ class FacecheckController extends Controller
         // http://localhost:3333/api/check
         $response = Http::attach(
             'face', file_get_contents($file), $fileName, ['Content-Type' => 'image/jpeg']
-        )->put(env('API_FACE') .'/check', [
+        )->put('http://36.91.91.238:3333/api/check', [
             'userId' => Auth::user()->id,
         ]);
 

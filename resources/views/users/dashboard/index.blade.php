@@ -126,7 +126,9 @@
                 </div>
             </div> --}}
             {{-- end notif --}}
-            @if (Auth::user()->opd_id == '20')
+
+            {{-- baris untuk menampilkan TPP --}}
+            {{-- @if (Auth::user()->opd_id == '20')
             <div class="wallet-card mt-2">
                 <div class="balance justify-content-center">
                     <div class="text-center"><span class="title"> Estimasi TPP:</span>
@@ -135,7 +137,9 @@
                     </div>
                 </div>
             </div>
-            @endif
+            @endif --}}
+            {{-- baris akhir untuk menampilkan TPP --}}
+
         </div>
         <div class="section">
             <div class="transactions">
