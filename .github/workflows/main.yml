@@ -1,0 +1,22 @@
+name: Auto Pull to Server
+
+on:
+  push:
+    branches:
+      - main  # Ganti dengan nama branch yang Anda inginkan
+
+jobs:
+  pull-to-server:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install SSH Client
+        run: sudo apt-get install openssh-client -y
+
+      - name: Git Pull to Server
+        run: ssh kominf0@36.91.91.238 port=1798 'cd /var/www/html/dev-presensi && git pull'
+
+      # Tambahkan langkah-langkah lain sesuai kebutuhan Anda
