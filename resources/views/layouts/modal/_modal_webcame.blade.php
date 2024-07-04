@@ -31,7 +31,7 @@
                                       </form>
                                 </div>
                                 <div class="col-md-6">
-                                    <button id="x-resetCamera" class="btn btn-warning btn-lg btn-block">Ganti Photo</button>
+                                    <button id="changeImage" class="btn btn-warning btn-lg btn-block">Ganti Photo</button>
                                 </div>
                             </div>
                         </div>

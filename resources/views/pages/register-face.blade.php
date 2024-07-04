@@ -19,7 +19,7 @@
                <figure>
                     <img src="{{ asset('img/tutorial/gambar4.jpeg') }}" alt="image" class="imaged img-fluid">
                 </figure>
-                <p>3. Klik <span class="font-weight-bold">photo profil</span></p>
+                <p>3. Klik <span class="font-weight-bold">photo profil,</span> lihat gambar dibawah ini</p>
                 <figure>
                     <img src="{{ asset('img/tutorial/gambar1.jpeg') }}" alt="image" class="imaged img-fluid">
                 </figure>

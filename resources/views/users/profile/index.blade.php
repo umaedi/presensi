@@ -208,7 +208,7 @@ function captureFace() {
         `
         $('#registerFace').removeClass('d-none');
         Webcam.reset();
-        document.getElementById('x-resetCamera').setAttribute('onclick', 'resetCamera()');
+        document.getElementById('changeImage').setAttribute('onclick', 'resetCamera()');
         return image = data_uri;
     });
     setTimeout(() => {

@@ -357,6 +357,13 @@
                     submitFile(file);
                     $('#btnIsiPresensi').removeClass('d-none');
                     $('#faceCheck').addClass('d-none');
+                }else if(message == "Wajah tidak terdeteksi"){
+                    swal({
+                    text: message,
+                    icon: 'error',
+                }).then(() => {
+                    window.location.href = "{{ url()->current() }}";
+                    });
                 }else {
                     swal({
                     text: message,
@@ -365,7 +372,8 @@
                     window.location.href = "/user/page/register-face";
                     });
                 }
-            }).catch((err) => {
+
+                }).catch((err) => {
                 console.log(err);
                 swal({
                     text: err.message,
