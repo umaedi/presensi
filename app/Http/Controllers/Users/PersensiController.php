@@ -63,7 +63,7 @@ class PersensiController extends Controller
                 return $this->error('Presensi sore dimulai dari jam 14.00 sampai jam 18.00 sore!');
             }
 
-            // $presensiUpdate = $presensi->where('tanggal', $presensi->tanggal)->where('user_id', $user->id)->first();
+            $presensiUpdate = $presensi->where('tanggal', $presensi->tanggal)->where('user_id', $user->id)->first();
             $file = $request->file;
             if (strlen($file) > 30) {
                 if (pathinfo($file, PATHINFO_EXTENSION) !== 'jpeg') {
@@ -299,7 +299,6 @@ class PersensiController extends Controller
             $user->update(['tpp_akhir' => $tpp_hasil_pengurangan]);
 
             try {
-                // dispatch(new PresensiJob($data));
                 $this->presensi->store($data);
             } catch (Throwable $e) {
                 saveLogs($e->getPrevious()->getMessage() . ' ' . 'presensi pagi', 'error');

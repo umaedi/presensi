@@ -362,7 +362,7 @@
                     text: message,
                     icon: 'error',
                 }).then(() => {
-                    window.location.href = "/user/dashboard";
+                    window.location.href = "/user/page/register-face";
                     });
                 }
             }).catch((err) => {

@@ -57,6 +57,9 @@ Route::middleware(['auth'])->prefix('user')->group(function () {
 
     //route for face check
     Route::post('/presensi/face_check', Users\FacecheckController::class);
+
+    //route page
+    Route::get('/page/register-face', Users\PageController::class);
 });
 
 //route for oprator
