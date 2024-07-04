@@ -349,7 +349,6 @@
 
             // submitFile(file);
             await transAjax(param).then((res) => {
-                console.log(res);
                 const responseData = JSON.parse(res.data);
                 const message = responseData.message;
 
@@ -357,22 +356,21 @@
                     submitFile(file);
                     $('#btnIsiPresensi').removeClass('d-none');
                     $('#faceCheck').addClass('d-none');
-                }else if(message == "Wajah tidak terdeteksi"){
+                }else if(message == "Wajah belum didaftarkan") {
                     swal({
                     text: message,
                     icon: 'error',
-                }).then(() => {
-                    window.location.href = "{{ url()->current() }}";
+                    }).then(() => {
+                        window.location.href = "/user/page/register-face";
                     });
                 }else {
                     swal({
                     text: message,
                     icon: 'error',
                 }).then(() => {
-                    window.location.href = "/user/page/register-face";
+                    window.location.href = "{{ url()->current() }}";
                     });
                 }
-
                 }).catch((err) => {
                 console.log(err);
                 swal({
