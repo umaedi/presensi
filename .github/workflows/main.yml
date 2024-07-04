@@ -1,22 +1,30 @@
-name: Auto Pull to Server
+name: Deploy to Server
 
 on:
   push:
     branches:
-      - main  # Ganti dengan nama branch yang Anda inginkan
+      - main
 
 jobs:
-  pull-to-server:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
 
-      - name: Install SSH Client
-        run: sudo apt-get install openssh-client -y
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        ssh-keyscan 36.91.91.238 >> ~/.ssh/known_hosts
 
-      - name: Git Pull to Server
-        run: ssh -p 1798 kominf0@36.91.91.238 'cd /var/www/html/dev-presensi && git pull'
-
-      # Tambahkan langkah-langkah lain sesuai kebutuhan Anda
+    - name: Deploy to server
+      run: |
+        ssh -p 1798 kominf0@36.91.91.238 'cd /var/www/html/dev-presensi && git pull'
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
