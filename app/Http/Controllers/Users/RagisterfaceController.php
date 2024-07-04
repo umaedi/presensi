@@ -15,7 +15,7 @@ class RagisterfaceController extends Controller
     {
         $user = Auth::user();
         $img =  $request->face;
-        $folderPath = "storage/img/";
+        $folderPath = "storage/users/img/face";
 
         // Decode base64 string
         $image_parts = explode(";base64,", $img);

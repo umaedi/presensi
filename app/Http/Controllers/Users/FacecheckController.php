@@ -19,7 +19,7 @@ class FacecheckController extends Controller
     public function __invoke(Request $request)
     {
         $img =  $request->image;
-        $folderPath = "storage/users/img/";
+        $folderPath = "storage/users/img/face";
 
         // Decode base64 string
         $image_parts = explode(";base64,", $img);
