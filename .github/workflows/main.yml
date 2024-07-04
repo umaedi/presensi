@@ -23,8 +23,15 @@ jobs:
         ssh-keyscan github.com >> ~/.ssh/known_hosts
         ssh-keyscan -p 1798 36.91.91.238 >> ~/.ssh/known_hosts
 
+    - name: Debug SSH
+      run: |
+        ls -la ~/.ssh
+        cat ~/.ssh/known_hosts
+        ssh-keyscan github.com
+        ssh-keyscan -p 1798 36.91.91.238
+
     - name: Deploy to server
       run: |
-        ssh -i ~/.ssh/id_ed25519 -p 1798 kominf0@36.91.91.238 'cd /var/www/html/dev-presensi && git pull'
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 -p 1798 kominf0@36.91.91.238 'cd /var/www/html/dev-presensi && git pull'
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
