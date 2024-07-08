@@ -17,7 +17,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
     'jam_masuk' => env('JAM_MASUK', '07:30:00'),
-    'api_face'  => env('API_FACE', 'http://36.91.91.238:3333/api'),
+    'api_face'  => env('API_FACE', 'http://localhost:3333/api'),
     'chat_id'   => env('CHAT_ID', '1480722754'),
 
     /*

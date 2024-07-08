@@ -33,7 +33,7 @@ class RagisterfaceController extends Controller
         // Use Http::attach to attach the image file
         $response = Http::attach(
             'face', file_get_contents($file), $fileName, ['Content-Type' => 'image/jpeg']
-        )->put(env('API_FACE') .'/register', [
+        )->put(config('app.api_face') .'/register', [
             'userId' => $user->id,
         ]);
 
