@@ -17,6 +17,16 @@ if (!function_exists('saveLogs')) {
     }
 }
 
+if (!function_exists('telegramNotification')) {
+    function telegramNotification($status, $description)
+    {
+        $response = Http::post('https://api.telegram.org/bot6903681474:AAF3llrIatSkUcsKI5KIVAxziwqNrlvXvJk/sendMessage', [
+            'chat_id'   => config('app.chat_id'),
+            'text'    => $status . ', ' . $description,
+        ]);
+    }
+}
+
 if (!function_exists('formatRp')) {
     function formatRp($number)
     {

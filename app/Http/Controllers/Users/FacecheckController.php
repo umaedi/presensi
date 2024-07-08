@@ -32,7 +32,7 @@ class FacecheckController extends Controller
         // http://localhost:3333/api/check
         $response = Http::attach(
             'face', file_get_contents($file), $fileName, ['Content-Type' => 'image/jpeg']
-        )->put(env('API_FACE') .'/check', [
+        )->put(config('app.api_face') .'/check', [
             'userId' => Auth::user()->id,
         ]);
 
@@ -40,9 +40,18 @@ class FacecheckController extends Controller
         unlink($file);
 
         // Handle response
-        return response()->json([
-            "sucess"    => true,
-            "data"      => $response->body(),
-        ]);
+        if ($response->successful()) {
+            return response()->json([
+                "sucess"    => true,
+                "data"      => $response->body(),
+            ]);
+        }else {
+            telegramNotification('Internal Server Error', 'API Face check error!');
+            return response()->json([
+                "sucess"    => false,
+                "message"   => "Internal Server Error!",
+            ]);
+        }
+ 
     }
 }

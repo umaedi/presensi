@@ -27,7 +27,7 @@
                                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                          Mencocokan Wajah
                                       </button>
-                                    <button id="btnIsiPresensi" class="btn btn-primary btn-lg btn-block mb-3" onclick="absenStore()">Isi Presensi</button>
+                                    <button id="btnCheckIn" class="btn btn-primary btn-lg btn-block mb-3" onclick="absenStore()">Isi Presensi</button>
                                 </div>
                                 <div class="col-md-6">
                                     <button id="x-resetCamera" class="btn btn-warning btn-lg btn-block">Ganti Photo</button>

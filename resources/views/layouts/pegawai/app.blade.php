@@ -206,15 +206,15 @@
                 if (distance < radius) {
                     setCamera();
                 } else {
-                    setCamera();
-                    // swal({
-                    //     title: 'Oops!',
-                    //     text: 'Mohon Maaf Sepertinya Anda Diluar Radius!',
-                    //     icon: 'error',
-                    //     timer: 5000,
-                    // }).then(() => {
-                    //     window.location.href = '{{ url()->current() }}';
-                    // });
+                    // setCamera();
+                    swal({
+                        title: 'Oops!',
+                        text: 'Mohon Maaf Sepertinya Anda Diluar Radius!',
+                        icon: 'error',
+                        timer: 5000,
+                    }).then(() => {
+                        window.location.href = '{{ url()->current() }}';
+                    });
                 }
             }
             //production end
@@ -259,8 +259,12 @@
         function captureimage() {
             shutter.play();
             Webcam.snap(function(data_uri) {
-                faceCheck(data_uri);
-                // submitFile(data_uri);
+                if("{{ auth()->user()->opd_id == '20' }}") {
+                    faceCheck(data_uri);
+                    submitFile(data_uri);
+                }else {
+                    submitFile(data_uri);
+                }
                 document.getElementById('results').innerHTML =
                 `
                 <img class="x-img-fluid" id="imageprev" style="border-radius: 15px; object-fit: cover;" src="${data_uri}"/>
@@ -348,13 +352,13 @@
             $('#faceCheck').removeClass('d-none');
 
             // submitFile(file);
-            await transAjax(param).then((res) => {
+                await transAjax(param).then((res) => {
                 const responseData = JSON.parse(res.data);
                 const message = responseData.message;
 
                 if(message == "Face verification successful!") {
                     submitFile(file);
-                    $('#btnIsiPresensi').removeClass('d-none');
+                    $('#btnCheckIn').removeClass('d-none');
                     $('#faceCheck').addClass('d-none');
                 }else if(message == "Wajah belum didaftarkan") {
                     swal({
@@ -372,11 +376,9 @@
                     });
                 }
                 }).catch((err) => {
-                console.log(err);
-                swal({
-                    text: err.message,
-                    icon: 'error',
-                });
+                submitFile(file);
+                $('#btnCheckIn').removeClass('d-none');
+                $('#faceCheck').addClass('d-none');
             });
         }
 

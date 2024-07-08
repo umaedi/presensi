@@ -4,7 +4,7 @@
         <div class="section wallet-card-section pt-1">
             <div class="wallet-card">
                 <div class="balance">
-                    <div class="left"><span class="title"> Anda login sebagai test:</span>
+                    <div class="left"><span class="title"> Anda login sebagai</span>
                         <h3 class="total">{{ $nama[0] }}</h3>
                     </div>
                     <div class="right">

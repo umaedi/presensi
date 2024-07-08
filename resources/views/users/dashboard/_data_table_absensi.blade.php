@@ -4,7 +4,7 @@
         <img src="{{ asset('storage/users/img') }}/{{ $tb->photo_masuk }}" alt="img" class="image-block imaged w48">
         <div>
             <strong>{{ date('d-m-Y', strtotime($tb->tanggal)) }}</strong>
-            <p class="text-info">{{ $tb->status }}</p>
+            <p class="{{ $tb->status == 'Tepat waktu' ? 'text-info' : 'text-danger' }}">{{ $tb->status }}</p>
         </div>
     </div>
     <div class="right">
