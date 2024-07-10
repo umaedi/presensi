@@ -19,7 +19,7 @@
                 <input type="hidden" name="key" value="{{ request()->key }}">
                 <div class="form-group">
                   <label for="email">{{ __('Email') }}</label>
-                  <input id="email" type="email" class="form-control x-email" name="email" tabindex="1" required autofocus>
+                  <input id="email" type="email" class="form-control x-email" name="email" value="{{ old('email') }}" tabindex="1" required autofocus>
                 </div>
                 <label for="password">{{ __('Password') }}</label>
                 <div class="input-group mb-3">

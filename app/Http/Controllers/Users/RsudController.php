@@ -105,10 +105,15 @@ class RsudController extends Controller
                 saveLogs($e->getMessage() . ' ' . 'presensi sore', 'error');
                 return $this->error($e->getMessage());
             }
+
+            //clear cache
+            Cache::forget('table_dashboard_' . Auth::user()->id);
+            Cache::forget('hadir_' . Auth::user()->id);
+
             return $this->success('OK', 'Anda Berhasil Mengisi Presensi Pulang');
         } else {
             $currentTime = Carbon::now();
-            $waktuMasuk = Carbon::parse(env('JAM_MASUK'));
+            $waktuMasuk = Carbon::parse(config('app.jam_masuk'));
 
             $masukShiftPagi = Carbon::createFromTime(8, 00, 0);
             $pulangShiftPagi = Carbon::createFromTime(14, 00, 0);
@@ -120,10 +125,19 @@ class RsudController extends Controller
             $pulangShiftMalam = Carbon::createFromTime(8, 00, 0);
 
             if ($currentTime->between($masukShiftPagi, $pulangShiftPagi)) {
+                if($presensi && isset($presensi->jam_pulang)) {
+                    return $this->error('Hari Ini Anda Sudah Mengisi Presensi 2X!');
+                }
                 $jamMasuk = $masukShiftPagi;
             } elseif ($currentTime->between($masukShiftSiang, $pulangShiftSiang)) {
+                if($presensi && isset($presensi->jam_pulang)) {
+                    return $this->error('Hari Ini Anda Sudah Mengisi Presensi 2X!');
+                }
                 $jamMasuk =  $masukShiftSiang;
             } elseif ($currentTime->between($masukShiftMalam, $pulangShiftMalam)) {
+                if($presensi && isset($presensi->jam_pulang)) {
+                    return $this->error('Hari Ini Anda Sudah Mengisi Presensi 2X!');
+                }
                 $jamMasuk =  $masukShiftMalam;
             } else {
                 $jamMasuk = $waktuMasuk;
@@ -131,7 +145,7 @@ class RsudController extends Controller
 
             if ($currentTime > $jamMasuk) {
                 $telat = $currentTime->diff($jamMasuk);
-                $status = 'Terlambat ' . $telat->format('%H:%I:%S');
+                $status = 'Telat ' . $telat->format('%H:%I:%S');
             } else {
                 $status = 'Tepat waktu';
             }

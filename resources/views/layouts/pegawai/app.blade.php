@@ -265,6 +265,7 @@
                 }else {
                     submitFile(data_uri);
                 }
+                // submitFile(data_uri);
                 document.getElementById('results').innerHTML =
                 `
                 <img class="x-img-fluid" id="imageprev" style="border-radius: 15px; object-fit: cover;" src="${data_uri}"/>

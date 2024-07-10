@@ -4,15 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\OpdService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class OpdController extends Controller
 {
     protected $opd;
-    public function __construct(OpdService $opdService)
+    public function __construct(OpdService $opdService, UserService $userService)
     {
         $this->opd = $opdService;
+        $this->user = $userService;
     }
     public function index()
     {
@@ -59,6 +61,8 @@ class OpdController extends Controller
     {
         $data['title'] = 'Detail OPD';
         $data['opd'] = $this->opd->show($id);
+        $data['operator'] = $this->user->Query()->where('opd_id', $id)->where('role', 'oprator')->get();
+        $data['pegawai'] = $this->user->Query()->where('opd_id', $id)->get();
         return view('admin.opd.show', $data);
     }
 

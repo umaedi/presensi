@@ -24,8 +24,8 @@
             <form id="formAccountSettings" onsubmit="return false">
                 @method('PUT')
                 @csrf
-                <div class="row g-2">
-                    <div class="col mb-3">
+                <div class="row">
+                    <div class="col-12 col-md-6 mb-3">
                       <label for="nameWithTitle" class="form-label">Nama</label>
                       <input
                         name="nama"
@@ -35,7 +35,7 @@
                         value="{{ $pegawai->nama }}"
                       />
                     </div>
-                    <div class="col mb-3">
+                    <div class="col-12 col-md-6 mb-3">
                       <label for="nameWithTitle" class="form-label">NIP</label>
                       <input
                         name="nip"
@@ -47,7 +47,7 @@
                     </div>
                   </div>
                   <div class="row g-2">
-                    <div class="col mb-3">
+                    <div class="col-12 col-md-6 mb-3">
                       <label for="nameWithTitle" class="form-label">Jabatan</label>
                       <input
                         name="jabatan"
@@ -57,7 +57,7 @@
                         value="{{ $pegawai->jabatan }}"
                       />
                     </div>
-                    <div class="col mb-3">
+                    <div class="col-12 col-md-6 mb-3">
                       <label for="nameWithTitle" class="form-label">Organisasi</label>
                       <select class="form-select" name="opd_id" aria-label="Default select example">
                         <option value="{{ $pegawai->opd->id }}">{{ $pegawai->opd->nama_opd }}</option>
@@ -68,7 +68,7 @@
                     </div>
                   </div>
                   <div class="row g-2">
-                    <div class="col mb-3">
+                    <div class="col-12 col-md-6 mb-3">
                       <label for="nameWithTitle" class="form-label">Unit Organisasi</label>
                       <input
                         name="unit_organisasi"
@@ -78,7 +78,7 @@
                         value="{{ $pegawai->unit_organisasi }}"
                       />
                     </div>
-                    <div class="col mb-3">
+                    <div class="col-12 col-md-6 mb-3">
                       <label for="nameWithTitle" class="form-label">No Tlp/WhatsApp</label>
                       <input
                         name="no_hp"
@@ -90,7 +90,7 @@
                     </div>
                   </div>
                   <div class="row g-2">
-                    <div class="col mb-3">
+                    <div class="col-12 col-md-6 mb-3">
                       <label for="email" class="form-label">Email</label>
                       <input
                         name="email"
@@ -100,7 +100,7 @@
                         value="{{ $pegawai->email }}"
                       />
                     </div>
-                    <div class="col mb-3">
+                    <div class="col-12 col-md-6 mb-3">
                       <label for="password" class="form-label">Password</label>
                       <input
                         name="password"
@@ -116,8 +116,8 @@
                   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   Loading...
                 </button>
-                <button id="btn_update" type="submit" class="btn btn-primary me-2">Simpan Perubahan</button>
-                <a href="/admin/user/destroy/{{ $pegawai->id }}" onclick="return confirm('Yakin hapus pegawai ini')" type="submit" class="btn btn-warning me-2">Hapus Pegawai</a>
+                <button id="btn_update" type="submit" class="btn btn-primary me-2 mb-3">Simpan Perubahan</button>
+                <a href="/admin/user/destroy/{{ $pegawai->id }}" onclick="return confirm('Yakin hapus pegawai ini')" type="submit" class="btn btn-warning me-2 mb-3">Hapus Pegawai</a>
               </div>
             </form>
           </div>
