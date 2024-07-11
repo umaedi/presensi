@@ -56,7 +56,7 @@ class DashboardController extends Controller
                 ->count();
                 // Bandingkan jumlah presensi dengan setengah dari jumlah user
                 if ($presensiYesterday >= $userByOpdId / 2) {
-                    if($presensiUserYesterday === 0) {
+                    if($presensiUserYesterday == 0) {
                         //cek apakah user yang login sedang cuti atau tidak
                         $cuti = Izin::where('user_id', $userId)->latest()->first();
                         if($cuti) {
