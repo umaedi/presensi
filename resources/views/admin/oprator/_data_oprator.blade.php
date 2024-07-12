@@ -15,7 +15,10 @@
             <td>{{ $tb->nama }}</td>
             <td>{{ $tb->email }}</td>
             <td>{{ $tb->opd->nama_opd }}</td>
-            <td><a href="/admin/pegawai/show/{{ $tb->id }}" class="btn btn-primary btn-sm">Lihat</a></td>
+            <td>
+                <a href="/admin/pegawai/show/{{ $tb->id }}" class="btn btn-primary btn-sm">Lihat</a>
+                <a href="/admin/oprator/role/{{ $tb->id }}" class="btn btn-warning btn-sm">Ganti role</a>
+            </td>
         </tr>
         @empty
         <div class="col text-center">

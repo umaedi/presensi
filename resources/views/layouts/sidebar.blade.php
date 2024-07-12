@@ -69,7 +69,7 @@
                     <div data-i18n="Boxicons">Master OPD</div>
                 </a>
             </li>
-            <li class="menu-item {{ Request::is('admin/oprator') ? 'active' : '' }}">
+            <li class="menu-item {{ Request::is('admin/oprator*') ? 'active' : '' }}">
                 <a href="/admin/oprator" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-user-voice"></i>
                     <box-icon name='user-voice'></box-icon>

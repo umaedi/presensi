@@ -131,6 +131,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::put('/titik_kumpul/update/{id}', [Admin\TitikkumpulController::class, 'update']);
     Route::put('/titik_kumpul/update_status/{id}', [Admin\TitikkumpulController::class, 'updateStatus']);
 
+    //set role
+    Route::get('/oprator/role/{id}', [Admin\RoleController::class, 'index']);
+    Route::post('/oprator/set-role', [Admin\RoleController::class, 'setRole']);
+
     //import pegawai
     Route::post('/importuser', ImportuserController::class);
     Route::get('/export/user', ExportController::class);

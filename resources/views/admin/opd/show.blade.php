@@ -13,75 +13,42 @@
         <div class="row mb-4">
             <!-- Basic Alerts -->
             <div class="col-md mb-4 mb-md-0">
-                <div class="card mb-3">
                 <span id="notif"></span>
-                <div class="card-body">
-                    <div class="row">
-                        @foreach ($operator as $index => $item)
-                        <div class="col-md-6 col-12">
-                            <div class="mb-3">
-                                <div class="row no-gutters">
-                                  <div class="col-12 col-md-4 mb-3">
-                                    <img src="{{ asset('storage/users/img/face'. $item->photo) }}" alt="photo" width="100%" class="rounded">
-                                  </div>
-                                  <div class="col-12 col-md-8">
-                                    <span class="badge bg-primary w-100">Operator</span>
-                                    <ul class="list-group">
-                                        <li class="list-group-item">{{ $item->nama }}</li>
-                                        <li class="list-group-item">{{ $item->nip }}</li>
-                                        <li class="list-group-item">{{ $item->email }}</li>
-                                        <li class="list-group-item" id="role-{{ $index }}">Role: {{ $item->role }}</li>
-                                      </ul>
-                                  </div>
-                                </div>
-                                <label for="" class="mt-3">SET ROLE</label>
-                                <select name="set_role" class="form-control" onchange="setRole(this.value, {{ $index }})">>
-                                    @foreach ($pegawai as $pg)
-                                    <option value="{{ $pg->id }}">{{ $pg->nama }}</option>
-                                    @endforeach
-                                </select>
-                              </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-                </div>
-                <div class="col-md mb-4 mb-md-0">
                 <div class="card mb-3">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="nama_opd" class="form-label">Nama OPD</label>
-                            <input
-                              name="nama_opd"
-                              type="text"
-                              id="nama_opd"
-                              class="form-control"
-                              value="{{ $opd->nama_opd }}"
-                            />
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="lat" class="form-label">Lat</label>
-                            <input
-                              name="lat"
-                              type="text"
-                              id="lat"
-                              class="form-control latitude"
-                              value="{{ $opd->lat }}"
-                            />
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="long" class="form-label">Long</label>
-                            <input
-                              name="long"
-                              type="text"
-                              id="long"
-                              class="form-control longitude"
-                              value="{{ $opd->long }}"
-                            />
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="nama_opd" class="form-label">Nama OPD</label>
+                                <input
+                                name="nama_opd"
+                                type="text"
+                                id="nama_opd"
+                                class="form-control"
+                                value="{{ $opd->nama_opd }}"
+                                />
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="lat" class="form-label">Lat</label>
+                                <input
+                                name="lat"
+                                type="text"
+                                id="lat"
+                                class="form-control latitude"
+                                value="{{ $opd->lat }}"
+                                />
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="long" class="form-label">Long</label>
+                                <input
+                                name="long"
+                                type="text"
+                                id="long"
+                                class="form-control longitude"
+                                value="{{ $opd->long }}"
+                                />
+                            </div>
                         </div>
                     </div>
-                </div>
             </div>
             @include('layouts._button')
             <button id="btn_submit" type="submit" class="btn btn-primary">Simpan</button>
