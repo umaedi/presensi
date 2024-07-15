@@ -12,6 +12,9 @@
         <div class="alert alert-danger mb-2">Email atau Password Salah!</div>
         @endif
         <div class="card card-primary">
+          @if (session('msg_authgoogle'))
+          <div class="alert bg-danger">{{ session('msg_authgoogle') }}</div>
+          @endif
           <div class="card-header"><h4>{{ __('Silakan Masuk') }}</h4></div>
           <form action="/login" method="POST">
           <div class="card-body">
@@ -19,16 +22,19 @@
                 <input type="hidden" name="key" value="{{ request()->key }}">
                 <div class="form-group">
                   <label for="email">{{ __('Email') }}</label>
-                  <input id="email" type="email" class="form-control x-email" name="email" value="{{ old('email') }}" tabindex="1" required autofocus>
+                  <input id="email" type="email" class="form-control x-email" name="email" value="{{ old('email') }}" tabindex="1" required>
                 </div>
                 <label for="password">{{ __('Password') }}</label>
                 <div class="input-group mb-3">
                   <input type="password" class="form-control x-password" id="password" name="password" required>
               </div>
-            </div>
-            <div class="form-button-group  transparent">
-              @include('layouts.pegawai._loading_submit')
-              <button type="submit" id="btn_login" class="btn btn-primary btn-block btn-lg">Masuk</button>
+              <div class="input-group mb-3">
+                @include('layouts.pegawai._loading_submit')
+                <button type="submit" id="btn_login" class="btn btn-outline-primary btn-block">Masuk</button>
+              </div>
+                <div class="input-group mb-3">
+                  <a href="{{ route('auth-redirect') }}" class="btn btn btn-outline-primary btn-block"><span><img src="https://globalinnetwork.com/images/Google__G__logo.svg" alt="" > Login dengan google</span></a>
+              </div>
             </div>
           </form>
         </div>

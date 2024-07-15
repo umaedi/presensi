@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Route;
 //route login
 Route::get('/', Users\LoginController::class)->middleware('guest');
 
+//login google
+Route::middleware('guest')->group(function() {
+    Route::get('auth/redirect', [Auth\Authgoogle::class, 'redirect'])->name('auth-redirect');
+    Route::get('auth/callback', [Auth\Authgoogle::class, 'callback'])->name('auth-callback');
+});
+Route::get('/user/logout', Auth\LogoutController::class)->middleware('auth');
+
 Route::get('/privacy-policy', PrivacyController::class);
 Route::get('/notifikasi', Pages\NotifikasiController::class)->name('notifikasi');
 

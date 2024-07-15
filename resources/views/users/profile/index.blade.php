@@ -138,21 +138,12 @@
             <div class="card-body">
                 @if (auth()->user()->role == 'admin')
                 <button onclick="redirect('/admin')" class="btn-submit btn btn-primary mr-1 btn-lg btn-block">Kelola Pegawai</button>
-                <form action="/logout" method="POST">
-                    @csrf
-                    <button id="btn_password" type="submit" class="btn-submit btn btn-warning mr-1 btn-lg btn-block mt-2">Keluar</button>
-                </form>
+                <button onclick="btnKeluar()" class="btn-submit btn btn-warning mr-1 btn-lg btn-block mt-2">Keluar</button>
                 @elseif(auth()->user()->role == 'oprator')
                 <button onclick="redirect('/oprator')" class="btn-submit btn btn-primary mr-1 btn-lg btn-block">Kelola Pegawai</button>
-                <form action="/logout" method="POST">
-                    @csrf
-                    <button id="btn_password" type="submit" class="btn-submit btn btn-warning mr-1 btn-lg btn-block mt-2">Keluar</button>
-                </form>
+                <button onclick="btnKeluar()" class="btn-submit btn btn-warning mr-1 btn-lg btn-block mt-2">Keluar</button>
                 @else 
-                <form action="/logout" method="POST">
-                    @csrf
-                    <button id="btn_password" type="submit" class="btn-submit btn btn-warning mr-1 btn-lg btn-block mt-2">Keluar</button>
-                </form>
+                <button onclick="btnKeluar()" class="btn-submit btn btn-warning mr-1 btn-lg btn-block mt-2">Keluar</button>
                 @endif
             </div>
         </div>
@@ -281,6 +272,11 @@ $('#btn_password').click(function() {
 
 function redirect(url) {
     window.location.href = url+'/dashboard'
+}
+
+function btnKeluar()
+{
+     window.location.href = '/user/logout'
 }
 </script>
 @endpush
