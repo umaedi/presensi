@@ -349,7 +349,7 @@
                 }
             }
 
-            $('#btnIsiPresensi').addClass('d-none');
+            $('#btnCheckIn').addClass('d-none');
             $('#faceCheck').removeClass('d-none');
 
             // submitFile(file);
