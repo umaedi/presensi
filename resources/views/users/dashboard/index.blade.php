@@ -134,7 +134,7 @@
                         </symbol>
                       </svg>
                       <svg class="bi flex-shrink-0 me-2" style="color: red" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>                      
-                    <p class="section-title">Sehubungan dengan akan diberlakukannya <span class="font-weight-bold" style="color: red">Face Recogantion</span>, diharapkan ibu/bapak memperbaharui photo profile pada menu profile ibu/bapak paling lambat tanggal 1 Agustus 2024 <br><a href="/user/page/register-face" class="btn btn-sm btn-primary">Cara update photo profile</a></p>
+                    <p class="section-title">Sehubungan dengan akan diberlakukannya <span class="font-weight-bold" style="color: red">Face Recogantion</span>, diharapkan ibu/bapak memperbaharui photo profile pada menu profile ibu/bapak paling lambat tanggal 31 Juli 2024 <br><a href="/user/page/register-face" class="btn btn-sm btn-primary">Cara update photo profile</a></p>
                 </div>
             </div>
             {{-- end notif --}}
