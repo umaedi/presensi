@@ -10,7 +10,7 @@
           <div class="card-body">
             <div class="d-flex align-items-start align-items-sm-center gap-4">
               <img
-                src="{{ \Illuminate\Support\Facades\Storage::url($pegawai->photo) }}"
+                src="{{ asset('storage/users/img/face'.$pegawai->photo)}}"
                 alt="user-avatar"
                 class="d-block rounded"
                 height="100"
