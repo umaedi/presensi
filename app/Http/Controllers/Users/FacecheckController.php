@@ -41,6 +41,10 @@ class FacecheckController extends Controller
 
         // Handle response
         if ($response->successful()) {
+            $responseData = json_decode($response->body(), true);
+            if($responseData['message'] == "Wajah tidak cocok") {
+                telegramNotification('Face check', 'Wajah tidak cocok!');
+            }
             return response()->json([
                 "sucess"    => true,
                 "data"      => $response->body(),

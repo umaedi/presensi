@@ -22,9 +22,13 @@ class RsudController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        $presensi = $this->presensi->Query()->where('user_id', $user->id)->latest()->first();
+        $presensi = $this->presensi->Query()
+        ->where('user_id', $user->id)
+        ->where('tanggal',  date('Y-m-d'))
+        ->latest()
+        ->first();
 
-        if (empty($presensi->jam_pulang)) {
+        if ($presensi && empty($presensi->jam_pulang)) {
             $presensiUpdate = $presensi->where('tanggal', $presensi->tanggal)->where('user_id', $user->id);
             $file = $request->file;
             if (strlen($file) > 30) {
@@ -53,7 +57,7 @@ class RsudController extends Controller
             $data['jam_pulang']  = date('H:i:s');
             $data['lat_long_pulang']  = $request->latLong;
             $data['photo_pulang']     = $photo_pulang;
-            $data['status_pulang']     = 'Jam pulang ' . date('H:i:s');
+            $data['status_pulang']     = date('H:i:s');
 
             try {
                 $this->presensi->update($presensiUpdate, $data);
@@ -95,7 +99,7 @@ class RsudController extends Controller
             $data['jam_masuk']  = date('H:i:s');
             $data['lat_long_masuk']  = $request->latLong;
             $data['photo_masuk']     = $photo_masuk;
-            $data['status'] = 'Jam masuk ' . date('H:i:s');
+            $data['status'] = date('H:i:s');
 
             try {
                 $this->presensi->store($data);
