@@ -261,7 +261,7 @@
             Webcam.snap(function(data_uri) {
                 if("{{ auth()->user()->opd_id == '20' }}") {
                     faceCheck(data_uri);
-                    submitFile(data_uri);
+                    // submitFile(data_uri);
                 }else {
                     submitFile(data_uri);
                 }
