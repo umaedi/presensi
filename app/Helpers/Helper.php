@@ -22,7 +22,7 @@ if (!function_exists('telegramNotification')) {
     {
         $response = Http::post('https://api.telegram.org/bot6903681474:AAF3llrIatSkUcsKI5KIVAxziwqNrlvXvJk/sendMessage', [
             'chat_id'   => config('app.chat_id'),
-            'text'    => $status . ', ' . $description,
+            'text'    => $status . ', ' . $description . '-' . Auth::user()->nama,
         ]);
     }
 }
