@@ -259,12 +259,13 @@
         function captureimage() {
             shutter.play();
             Webcam.snap(function(data_uri) {
-                if("{{ auth()->user()->opd_id == '20' }}") {
-                    faceCheck(data_uri);
-                    // submitFile(data_uri);
-                }else {
-                    submitFile(data_uri);
-                }
+                // if("{{ auth()->user()->opd_id == '20' }}") {
+                //     faceCheck(data_uri);
+                //     // submitFile(data_uri);
+                // }else {
+                //     submitFile(data_uri);
+                // }
+                faceCheck(data_uri);
                 // submitFile(data_uri);
                 document.getElementById('results').innerHTML =
                 `
