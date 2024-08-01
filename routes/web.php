@@ -155,4 +155,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     //logout
     Route::post('/admin/logout', Auth\LogoutController::class);
+
+    //log face check
+    Route::get('/logfacecheck', [Admin\LogfacecheckController::class, 'index']);
+    Route::get('/logfacecheck/show/{id}', [Admin\LogfacecheckController::class, 'show']);
 });

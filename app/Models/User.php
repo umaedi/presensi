@@ -87,4 +87,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Izin::class);
     }
+
+    public function logfacecheck()
+    {
+        return $this->hasMany(Logfacecheck::class);
+    }
 }

@@ -38,4 +38,9 @@ class Opd extends Model
     {
         return $this->hasMany(Presensicount::class);
     }
+
+    public function logfacecheck()
+    {
+        return $this->hasMany(Logfacecheck::class);
+    } 
 }
