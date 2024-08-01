@@ -100,8 +100,8 @@
                     <div data-i18n="Boxicons">Titik Tugas</div>
                 </a>
             </li>
-            <li class="menu-item {{ Request::is('admin/subopd*') ? 'active' : '' }}">
-                <a href="/admin/subopd" class="menu-link">
+            <li class="menu-item {{ Request::is('admin/logfacecheck*') ? 'active' : '' }}">
+                <a href="/admin/logfacecheck" class="menu-link">
                     <i class='menu-icon bx bx-error'></i>
                     <div data-i18n="Boxicons">Log face check</div>
                 </a>
