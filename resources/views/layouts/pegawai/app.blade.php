@@ -259,13 +259,19 @@
         function captureimage() {
             shutter.play();
             Webcam.snap(function(data_uri) {
-                // if("{{ auth()->user()->opd_id == '20' }}") {
-                //     faceCheck(data_uri);
-                //     // submitFile(data_uri);
-                // }else {
-                //     submitFile(data_uri);
-                // }
-                faceCheck(data_uri);
+                if("{{ auth()->user()->opd_id == '20' }}") {
+                    faceCheck(data_uri);
+                    // submitFile(data_uri);
+                }else {
+                    submitFile(data_uri);
+                    $('#btnCheckIn').addClass('d-none');
+                    $('#faceCheck').removeClass('d-none');
+                    setTimeout(() => {
+                        $('#btnCheckIn').removeClass('d-none');
+                        $('#faceCheck').addClass('d-none');
+                    }, 3000);
+                }
+                // faceCheck(data_uri);
                 // submitFile(data_uri);
                 document.getElementById('results').innerHTML =
                 `
