@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
-
+use App\Models\Logfacecheck;
 class FacecheckController extends Controller
 {
     public function __invoke(Request $request)
@@ -26,7 +26,7 @@ class FacecheckController extends Controller
         $file = $folderPath . $fileName;
 
         // Save the decoded base64 string as an image file
-        file_put_contents($file, $image_base64);
+        $face = file_put_contents($file, $image_base64);
 
         // Use Http::attach to attach the image file
         // http://localhost:3333/api/check
@@ -36,20 +36,31 @@ class FacecheckController extends Controller
             'userId' => Auth::user()->id,
         ]);
 
-        // Delete the temporary file after sending
-        unlink($file);
-
         // Handle response
         if ($response->successful()) {
             $responseData = json_decode($response->body(), true);
+            return response()->json([
+                "sucess"    => true,
+                "data"      => $response->body(),
+            ]);
             if($responseData['message'] == "Wajah tidak cocok") {
                 telegramNotification('Face check', 'Wajah tidak cocok!');
+                Logfacecheck::create([
+                    'user_id'   => Auth::user()->id,
+                    'log_type'  => $responseData['message'],
+                    'face'      => $face
+                ]);
             }
+
+             // Delete the temporary file after sending
+            // unlink($file);
             return response()->json([
                 "sucess"    => true,
                 "data"      => $response->body(),
             ]);
         }else {
+             // Delete the temporary file after sending
+            // unlink($file);
             telegramNotification('Internal Server Error', 'API Face check error!');
             return response()->json([
                 "sucess"    => false,
