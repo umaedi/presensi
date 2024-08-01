@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Logfacecheck extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'user_id',
+        'log_type',
+        'face'
+    ];
 }

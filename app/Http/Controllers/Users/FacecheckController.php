@@ -26,7 +26,7 @@ class FacecheckController extends Controller
         $file = $folderPath . $fileName;
 
         // Save the decoded base64 string as an image file
-        $face = file_put_contents($file, $image_base64);
+        file_put_contents($file, $image_base64);
 
         // Use Http::attach to attach the image file
         // http://localhost:3333/api/check
@@ -39,16 +39,12 @@ class FacecheckController extends Controller
         // Handle response
         if ($response->successful()) {
             $responseData = json_decode($response->body(), true);
-            return response()->json([
-                "sucess"    => true,
-                "data"      => $response->body(),
-            ]);
             if($responseData['message'] == "Wajah tidak cocok") {
                 telegramNotification('Face check', 'Wajah tidak cocok!');
                 Logfacecheck::create([
                     'user_id'   => Auth::user()->id,
                     'log_type'  => $responseData['message'],
-                    'face'      => $face
+                    'face'      => $file
                 ]);
             }
 
